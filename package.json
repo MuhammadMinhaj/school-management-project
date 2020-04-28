@@ -1,0 +1,34 @@
+{
+  "name": "JASA-Edu-Project",
+  "version": "1.0.0",
+  "description": "This is my first website for JASA.",
+  "main": "app.js",
+  "scripts": {
+    "start":"node app.js",
+    "dev":"nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muhammad-minhaj/JASA-Edu-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/muhammad-minhaj/JASA-Edu-Project/issues"
+  },
+  "homepage": "https://github.com/muhammad-minhaj/JASA-Edu-Project#readme",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "config": "^3.3.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "gitignore": "^0.6.0",
+    "mongoose": "^5.9.10"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.3"
+  }
+}
