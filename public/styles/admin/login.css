@@ -1,0 +1,47 @@
+@font-face {
+	font-family: 'Georgia';
+	src: url('/fonts/Georgia/Georgia.woff') format('woff'); /* Modern Browsers */
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'myfont';
+	src: url('/fonts/baskerville/BaskervilleBT.woff') format('woff'); /* Modern Browsers */
+	font-weight: normal;
+	font-style: normal;
+}
+
+.login-container{
+    border-radius:4rem;
+}
+.admin-login-title{
+    font-family:myfont;
+    color:#000000;
+    font-size:3rem
+}
+.admin-login-title>span{
+    color:#04dc04;
+    font-size:4rem
+}
+.admin-login-text{
+    font-family:Georgia;
+    font-size:20px;
+}
+.admin-login-card{
+    border-radius:2rem;
+    /* animation-name:loginAnimated;
+    animation-duration:1s; */
+    box-shadow:0px 2px 3px 2px  #007bff4f;
+}
+.admin-login-card:hover{
+   
+}
+
+/* @keyframes loginAnimated {
+    from{
+        transform:translateY(-50rem)
+    }
+    to{
+        transform:translateY(0rem);
+    }
+} */

@@ -1,0 +1,149 @@
+<%-include('../../partials/admin/adminHead.ejs')%>
+
+
+<div class="container-luid">
+    <div class="row">
+
+        <!-- Admin Brand and Dashboard Menu -->
+        <%-include('../../partials/admin/adminSidebar.ejs')%>
+        <!-- Dashboard Content -->
+        <div class="col-sm-10">
+            <!-- Admin Navbar Content -->
+            <%-include('../../partials/admin/adminNavbar.ejs')%>
+
+            <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-10">
+                    <div class="container"> <%-include('../../partials/Error/alert.ejs')%></div>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+
+            <div class="row py-3 scroll-style administrator-account">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-10">
+                    <div class="card p-4">
+                        <div class="card-body">
+                            <h4 class="card-title">Account Update</h4>
+                            <form action="/administrator/account" method="POST">
+                                <div class="form-row">
+
+                                    <div class="col-md-12 mb-3">
+                                        <h6>Name:</h6>
+                                        <div class="input-group">
+
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user-edit"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control <%=error.name?'is-invalid':''%>"
+                                                name="name" value="<%=data.name?data.name:'Name'%>" />
+                                            <div class="invalid-feedback">
+                                                <%=error.name%>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <h6>Username:</h6>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user-edit"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control <%=error.username?'is-invalid':''%>"
+                                                name="username" value="<%-data.username?data.username:'Username'%>" />
+                                            <div class="invalid-feedback">
+                                                <%=error.username%>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <h6>Email:</h6>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control <%=error.email?'is-invalid':''%>"
+                                                name="email" value="<%=data.email?data.email:'default@defaul.com'%>" />
+                                            <div class="invalid-feedback">
+                                                <%=error.email%>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <h6>Phone:</h6>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="fas fa-blender-phone"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control <%=error.phone?'is-invalid':''%>"
+                                                name="phone" value="<%=data.phone?data.phone:'018****'%>" />
+                                            <div class="invalid-feedback">
+                                                <%=error.phone%>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12 mb-3">
+                                        <h6>Date Of Birthday:</h6>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="fas fa-birthday-cake"></i></span>
+                                            </div>
+                                            <input class="form-control <%=error.dateOfBirthday?'is-invalid':''%>"
+                                                type="date" value="<%=data.dateOfBirthday?data.dateOfBirthday:''%>"
+                                                name="dateOfBirthday" id="example-date-input">
+                                            <div class="invalid-feedback">
+                                                <%=error.dateOfBirthday%>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <h6>Gender:</h6>
+                                        <div class="form-check <%=error.gender?'is-invalid':''%>">
+                                            <input class="form-check-input" type="radio" name="gender" id="mail"
+                                                value="mail" <%=data.gender==='mail'?'checked':''%>>
+                                            <label class="form-check-label mr-5" for="mail">
+                                                Mail
+                                            </label>
+                                            <input class="form-check-input" type="radio" name="gender" id="mail"
+                                                value="femail" <%=data.gender==='femail'?'checked':''%>>
+                                            <label class="form-check-label mr-5" for="mail">
+                                                Femail
+                                            </label>
+                                            <input class="form-check-input" type="radio" name="gender" id="mail"
+                                                value="others" <%=data.gender==='others'?'checked':''%>>
+                                            <label class="form-check-label mr-5" for="mail">
+                                                Others
+                                            </label>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            <%=error.gender%>
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                            <div class="col-md-12 mb-2">
+                                <a href="/auth/change-password">Change Password</a>
+                            </div>
+                        <input type="submit" class="btn btn-primary" value="Update" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+</div>
+</div>
+<%-include('../../partials/admin/adminFooter.ejs')%>
+</body>
+
+</html>

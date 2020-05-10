@@ -8,22 +8,29 @@ const setRoutes = require('./routes/routes')
 // All Middlewares Registared
 const setMiddlewares = require('./middlewares/middlewares')
 
-const BASE_URL = `mongodb+srv://${config.get('db-username')}:${config.get('db-password')}@cluster0-dyvoa.mongodb.net/Jasa-Edu?retryWrites=true&w=majority`
+const BASE_URL = `mongodb+srv://${config.get('db-username')}:${config.get('db-password')}@dream-softwares-dyvoa.mongodb.net/jasa-edu?retryWrites=true&w=majority`
 
 const app = express()
 
 // Set Views Engine
 app.set('view engine','ejs')
 app.set('views','views')
-// Set Bootstrap as a Public
+
+// Public Path for Use Libray
+const publicLibrayPath = [
+    express.static(__dirname+'/node_modules/bootstrap/dist'),
+    express.static(__dirname+'/node_modules/@fortawesome/fontawesome-free'),
+    express.static(__dirname+'/node_modules/jquery/dist')
+]
 app.use(
-    express.static(__dirname+'/node_modules/bootstrap/dist')
+    publicLibrayPath
 )
 
-// Set All Routes
-setRoutes(app)
 // Set All Middlewares
 setMiddlewares(app)
+// Set All Routes
+setRoutes(app)
+
 
 
 app.get('*',(req,res,next)=>{

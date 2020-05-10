@@ -1,0 +1,40 @@
+@font-face {
+	font-family: 'Georgia';
+	src: url('/fonts/Georgia/Georgia.woff') format('woff'); /* Modern Browsers */
+	font-weight: normal;
+	font-style: normal;
+}
+.setting-menu{
+    left:25%;
+    min-width:7rem!important;
+}
+.setting-account{
+    padding:5px;
+    border-bottom:1px solid #00000029;
+    font-size:13px;
+    text-align:center
+}
+.account-name{
+    font-weight: bold;
+    
+}
+.setting-item{
+    margin-bottom:2px;
+    padding:2px;
+    text-align: center;
+   
+}
+.setting-application{
+    border-top:1px solid #00000029;
+}
+.setting-item>a{
+    color:black;
+    text-decoration: none;
+    font-size:14px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+.setting-item:hover{
+    /* transform:translateX(10px);
+    transition: transform 1s; */
+    background:#00000026;
+}

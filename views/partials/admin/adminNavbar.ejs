@@ -1,0 +1,65 @@
+<!-- Admin Navbar Content -->
+<!-- <div class="setting-menu">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                dark
+            </div>
+            <div class="col-sm-12">
+                setting
+            </div>
+            <div class="col-sm-12">
+                security
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="row admin-content-head bg-dark">
+    <div class="col-sm-2">
+        <div class="d-flex align-items-center admin-content-head-administrator">
+            <a href="/administrator/account">
+                <button type="submit" class="btn btn-dark btn-sm"><i class="fas fa-user-shield"></i>
+                    Administrator
+                </button>
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-6 text-center admin-head-search">
+        <form action="/search" method="GET" class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-secondary btn-sm my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    <div class="col-sm-4 ">
+        <div class="admin-head-icon">
+            <button class="btn btn-dark btn-sm"><i class="fas fa-bell"></i></button>
+            <button class="btn btn-dark btn-sm"><i class="fas fa-comment-dots"></i></button>
+            <button class="btn btn-dark btn-sm"><i class="fas fa-envelope"></i></button>
+            <button class="btn btn-dark btn-sm setting"><i class="fas fa-cog"></i></button>
+            <div class="dropdown-menu  setting-menu">
+
+                <div class="setting-account">
+                    <span>Signed as</span>
+                    <br>
+                    <span class="account-name px-2"><%=data.name?data.name:'Administrator'%></span>
+                </div>
+                <div class="setting-item"><a href="/administrator/account">Your Profile</a></div>
+                <div class="setting-item"><a href="/auth/change-password">Change Password</a></div>
+                <div class="setting-item"><a href="/administrator/security-password">Security Password</a></div>
+                <div class="setting-application">
+                    <div class="setting-item"><a href="">Future Preview</a></div>
+                    <div class="setting-item"><a href="">Help</a></div>
+
+                    <div class="setting-item"><a href="/administrator/setting">Setting</a></div>
+
+                    <div class="setting-item"><a href="/auth/logout">Singout</a></div>
+                </div>
+            </div>
+            <form action="/auth/logout" method="GET">
+                <button class="btn btn-dark btn-sm" type="submit"><i class="fas fa-sign-out-alt"></i>
+                    LOGOUT
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

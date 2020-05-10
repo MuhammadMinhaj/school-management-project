@@ -4,8 +4,8 @@
   "description": "This is my first website for JASA.",
   "main": "app.js",
   "scripts": {
-    "start":"node app.js",
-    "dev":"nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -19,13 +19,22 @@
   },
   "homepage": "https://github.com/muhammad-minhaj/JASA-Edu-Project#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "axios": "^0.19.2",
+    "bcrypt": "^4.0.1",
     "bootstrap": "^4.4.1",
     "config": "^3.3.1",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^2.3.1",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.2",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.4.1",
     "gitignore": "^0.6.0",
-    "mongoose": "^5.9.10"
+    "jquery": "^3.5.0",
+    "mongoose": "^5.9.10",
+    "validator": "^13.0.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0",

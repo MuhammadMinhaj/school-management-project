@@ -1,0 +1,29 @@
+
+@import './login.css';
+@import './navbar.css';
+@import './dashboard.css';
+@import './administratorAccount.css';
+
+/* Defaullt Scroll Style */
+@media (min-width:576px){
+    html{
+        overflow-y: hidden;
+    }
+    .scroll-style{
+        height:563px;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        margin-right:1px;
+    }
+    .scroll-style::-webkit-scrollbar{
+        width:5px; 
+    }
+    .scroll-style::-webkit-scrollbar-track{
+        background:#263238;
+        border-radius: 25px
+    }
+    .scroll-style::-webkit-scrollbar-thumb{
+        background:linear-gradient(#6200ea,#4a148c,#6200ea);
+        border-radius: 25px
+    }
+};

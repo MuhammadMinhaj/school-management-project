@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Title</title>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+		<!-- Personal CSS -->
+		<link rel="stylesheet" href="/styles/style.css" />
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="/css/bootstrap.css" />
+		<!-- Font -->
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet" />
+		<!-- Font-Awesome -->
+		<link rel="stylesheet" href="/css/all.css" />
+	</head>
+	<body>
+		<div class="container-fluid bg-dark main-head-container">
+			<div class="row">
+				<div class="container bg-light head-container">
+					<div class="row">
+						<div class="col-md-2 text-center text-dark">
+							<img src="/uploads/jasa-logo.svg" style="max-width: 90px;" alt="" />
+						</div>
+						<div class="col-md-8 head-name">
+							<h4 class="text-center web-name">الجامعة الاحمدية السنية العالية (الكامل)</h4>
+							<h4 class="text-center web-name">JAMEA AHMADIA SUNNIA KAMIL MADRASAH</h4>
+						</div>
+						<div class="col-md-2 head-social-links">
+							<a class="head-twitter">
+								<i class="fab fa-twitter m-1"></i>
+							</a>
+							<a class="head-youtube">
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a class="head-facebook">
+								<i class="fab fa-facebook m-1"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row braking-news py-2">
+				<marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();">
+					Jamea Ahamadia Sunnia Alia Kamil Madrasah
+				</marquee>
+			</div>
+		</div>
+
+		<!-- Navigation -->
+		<%-include('./navigation.ejs')%>
+		<!-- Footer Section -->
+		<%-include('./footer.ejs')%>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<%-include('../../partials/admin/adminHead.ejs')%>
+<div class="container"><%-include('../../partials/Error/alert.ejs')%></div>
+<div class="container bg-secondary mt-5 pb-5 pt-3 login-container">
+	<h1 class="text-center admin-login-title"><span>J</span>ASA</h1>
+	<div class="card m-auto admin-login-card p-5" style="max-width: 30rem;">
+		<h4 class="admin-login-text">LOGIN</h4>
+		<form action="/auth/login" method="POST">
+			<div class="form-row">
+				<div class="col-md-12 mb-3">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-users-cog"></i></span>
+						</div>
+						<input 
+						type="text" 
+						class="form-control <%=error.email?'is-invalid':''%>" 
+						name="email"
+						placeholder="Email"  />
+						<div class="invalid-feedback">
+							<%=error.email%>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 mb-3">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input 
+						type="password" 
+						name="password"
+						class="form-control <%=error.password?'is-invalid':''%>" 
+						placeholder="Password"  />
+						<div class="invalid-feedback">
+							<%=error.password%>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="submit" class="btn btn-primary" value="Login" />
+		</form>
+	</div>
+</div>
+<!-- Bootstrap JS Links -->
+<%-include('../../partials/admin/adminFooter.ejs')%>
+<body>
+</html>

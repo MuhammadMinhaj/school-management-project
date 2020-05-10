@@ -1,0 +1,153 @@
+@font-face {
+	font-family: 'Georgia';
+	src: url('/fonts/Georgia/Georgia.woff') format('woff'); /* Modern Browsers */
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'myfont';
+	src: url('/fonts/baskerville/BaskervilleBT.woff') format('woff'); /* Modern Browsers */
+	font-weight: normal;
+	font-style: normal;
+}
+body{
+    overflow-x: hidden;
+}
+body::-webkit-scrollbar{
+    width:10px;
+   
+
+}
+body::-webkit-scrollbar-track{
+    border:2px solid rgb(201, 58, 32);
+}
+body::-webkit-scrollbar-thumb{
+    background:linear-gradient(blue,#1f9411,blue);
+    width:5px;
+    border:1px solid rgb(201, 58, 32);
+    border-radius:5px;
+}
+html{
+    scroll-behavior: smooth;
+}
+/* Admin Dashboard Sidebar Head Content */
+.admin-head-brand-container{
+    /* border-bottom:1px solid #ffffff33; */
+    border-bottom:1px dashed #ffffff2b;
+    border-right:1px dashed #ffffff2b
+}
+.admin-head-brand{
+    border-bottom:1px solid red;
+    border-bottom-left-radius:20px;
+    border-bottom-right-radius:20px;
+  
+}
+.admin-head-brand>h1{
+    color:green;
+    font-family:Georgia;
+}
+/* Admin Sidebar Scroll Designed */
+@media (min-width:576px){
+    .sidebar{
+        height:562px;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+    }
+    .sidebar::-webkit-scrollbar{
+        width:3px; 
+    }
+    .sidebar::-webkit-scrollbar-track{
+        background:black;
+    }
+    .sidebar::-webkit-scrollbar-thumb{
+        background:linear-gradient(#6200ea,#ff6f00,#6200ea);
+        border-radius: 8px;
+    }
+}
+/* Admin Sidebar Menu Content */
+.sidebar-menu-item{
+ 
+    display:flex;
+    justify-content:space-around;
+    cursor:pointer;
+    border-bottom:1px dashed orange;
+    border-bottom-right-radius:20px;
+    margin:6px 0px;
+    
+}
+.sidebar-menu-item>a{
+    text-decoration: none;
+    color:white;
+    font-family:Georgia;
+    font-size:15px;
+}
+.sidebar-menu-item:hover{
+    transform:translateX(15px);
+    transition:transform 0.5s;
+    border-right:1px dashed orange;
+    border-top:1px dashed orange;
+    border-bottom:1px dashed orange;
+}
+
+/* Admin Dashboard Content Head */
+.admin-content-head{
+    padding:21px 0px;
+}
+.admin-content-head-administrator{
+    font-family:Georgia
+}
+/* .admin-content-head-administrator>form>button{
+    border:1px solid black;
+    
+} */
+.admin-content-head-administrator>button{
+    border:1px solid black;
+    
+}
+
+/* .admin-content-head-toggler{
+    width:30px;
+    flex-direction: column;
+    border-radius:5px;
+    border:1px dashed #ffffff2b;
+    padding:2px;
+}
+.admin-content-head-toggler>div{
+    width:15px;
+    height:2px;
+    background:white;
+    border-radius:5px;
+    margin:2.5px 0px;
+    
+} */
+.admin-head-search>form>input{
+    width:16rem!important;
+    height:30px!important;
+    border-radius:15px;
+    background:transparent;
+    border:1px dashed orange
+}
+.admin-head-search>form>button{
+    border-radius:50%;
+    background:transparent;
+    border:1px dashed orange;
+    color:#ffffff94;
+}
+.admin-head-icon{
+    font-family:Georgia;
+}
+.admin-head-icon>button{
+    border:1px solid black
+}
+
+.admin-head-icon>button>i{
+    font-size:17px;
+}
+.admin-head-icon>form{
+    display:inline-block;
+}
+.admin-head-icon>form>button{
+    border:1px solid black
+}
+
+/* Admin Dashboard Content Body */
