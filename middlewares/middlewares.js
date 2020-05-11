@@ -20,6 +20,7 @@ const store = new MongoDbStore({
     uri:MONGO_DB_URI,
     collection:'sessions',
     expires:60*60*2*1000
+    
 })
 
 const middlewares = [
