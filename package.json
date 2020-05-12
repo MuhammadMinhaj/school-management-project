@@ -33,7 +33,9 @@
     "express-validator": "^6.4.1",
     "gitignore": "^0.6.0",
     "jquery": "^3.5.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.10",
+    "nodemailer": "^6.4.6",
     "validator": "^13.0.0"
   },
   "devDependencies": {

@@ -14,7 +14,7 @@ const router = [
 		path: '/test',
 		handler: (req, res, next) => {
 			// res.send('It\'s only project test')
-			res.render('partials/head.ejs')
+			res.render('pages/explorer/explorer.ejs')
 		},
 	},
 	{
