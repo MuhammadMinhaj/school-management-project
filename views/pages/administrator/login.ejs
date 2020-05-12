@@ -1,15 +1,24 @@
-<%-include('../../partials/admin/adminHead.ejs')%>
-<div class="container"><%-include('../../partials/Error/alert.ejs')%></div>
-<div class="container bg-secondary mt-5 pb-5 pt-3 login-container">
-	<h1 class="text-center admin-login-title"><span>J</span>ASA</h1>
-	<div class="card m-auto admin-login-card p-5" style="max-width: 30rem;">
-		<h4 class="admin-login-text">LOGIN</h4>
-		<form action="/auth/login" method="POST">
+<%-include('../../partials/head.ejs')%>
+
+<div class="container-fluid bg-secondary pb-5 <%=flashMessage.success||flashMessage.fail?'pt-4':'pt-5'%> login-container">
+	<!-- <h1 class="text-center admin-login-title"><span>J</span>ASA</h1> -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
+				<%-include('../../partials/Error/alert.ejs')%>
+			</div>
+			<div class="col-sm-3"></div>
+		</div>
+	</div>
+	<div class="card m-auto admin-login-card py-4" style="max-width: 35rem;">
+		<form action="/auth/login" class="admin-login-form" method="POST">
+			<h4 class="admin-login-text">LOGIN</h4>
 			<div class="form-row">
 				<div class="col-md-12 mb-3">
 					<div class="input-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-users-cog"></i></span>
+						<div class="input-group-prepend ">
+							<span class="input-group-text"><i class="fas fa-envelope"></i></span>
 						</div>
 						<input 
 						type="text" 
@@ -45,7 +54,4 @@
 		</form>
 	</div>
 </div>
-<!-- Bootstrap JS Links -->
-<%-include('../../partials/admin/adminFooter.ejs')%>
-<body>
-</html>
+<%-include('../../partials/footer.ejs')%>

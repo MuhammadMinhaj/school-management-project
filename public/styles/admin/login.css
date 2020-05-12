@@ -12,7 +12,7 @@
 }
 
 .login-container{
-    border-radius:4rem;
+    background:#545b62!important;
 }
 .admin-login-title{
     font-family:myfont;
@@ -28,10 +28,13 @@
     font-size:20px;
 }
 .admin-login-card{
-    border-radius:2rem;
+    border-radius:1rem;
     /* animation-name:loginAnimated;
     animation-duration:1s; */
     box-shadow:0px 2px 3px 2px  #007bff4f;
+}
+.admin-login-form{
+    padding:0rem 6rem!important;
 }
 .admin-login-card:hover{
    

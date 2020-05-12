@@ -43,23 +43,38 @@
                     <br>
                     <span class="account-name px-2"><%=data.name?data.name:'Administrator'%></span>
                 </div>
-                <div class="setting-item"><a href="/administrator/account">Your Profile</a></div>
-                <div class="setting-item"><a href="/auth/change-password">Change Password</a></div>
-                <div class="setting-item"><a href="/administrator/security-password">Security Password</a></div>
                 <div class="setting-application">
-                    <div class="setting-item"><a href="">Future Preview</a></div>
-                    <div class="setting-item"><a href="">Help</a></div>
-
-                    <div class="setting-item"><a href="/administrator/setting">Setting</a></div>
-
-                    <div class="setting-item"><a href="/auth/logout">Singout</a></div>
-                </div>
+                    <a href="/administrator/account">
+                        <div class="setting-item">Your Profile</div>
+                    </a>
+                    <a href="/auth/change-password""><div class=" setting-item">Change Password</div></a>
+                <a href="/administrator/security-password">
+                    <div class="setting-item">Security Password</div>
+                </a>
             </div>
-            <form action="/auth/logout" method="GET">
-                <button class="btn btn-dark btn-sm" type="submit"><i class="fas fa-sign-out-alt"></i>
-                    LOGOUT
-                </button>
-            </form>
+
+            <div class="setting-application">
+                <a href="#">
+                    <div class="setting-item">Future Preview</div>
+                </a>
+                <a href="">
+                    <div class="setting-item">Help</div>
+                </a>
+
+                <a href="/administrator/setting">
+                    <div class="setting-item">Setting</div>
+                </a>
+
+                <a href="/auth/logout">
+                    <div class="setting-item">Singout</div>
+                </a>
+            </div>
         </div>
+        <form action="/auth/logout" method="GET">
+            <button class="btn btn-dark btn-sm" type="submit"><i class="fas fa-sign-out-alt"></i>
+                LOGOUT
+            </button>
+        </form>
     </div>
+</div>
 </div>
