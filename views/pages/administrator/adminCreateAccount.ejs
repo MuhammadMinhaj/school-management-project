@@ -1,0 +1,139 @@
+
+<%-include('../../partials/admin/adminHead.ejs')%>
+<div class="container-luid">
+    <div class="row">
+        <!-- Admin Brand and Dashboard Menu -->
+        <%- include('../../partials/admin/adminSidebar.ejs')%>
+        <!-- Dashboard Content -->
+        <div class="col-sm-10">
+            <!-- Admin Navbar Content -->
+            <%- include('../../partials/admin/adminNavbar.ejs')%>
+            <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+            <div class="row <%=flashMessage.success||flashMessage.fail?'mt-1':'mt-0'%>">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <%-include('../../partials/Error/alert.ejs')%>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="row scroll-style">
+                <div class="col-sm-12">
+                    <!-- ANCHOR Title -->
+                    <div class="row px-5 pt-2 text-center">
+                        <div class="col-sm-12 p-2 border rounded">
+                            <h4 class="admin-create-title">Administrator Management</h4>
+                        </div>
+                    </div>
+                    <!-- ANCHOR Body -->
+                    <div class="row px-5 py-2">
+                        <div class="col-sm-12 p-4 border rounded p-2">
+                            <!-- ANCHOR Middle Content Body -->
+                            <div class="row">
+                                <!-- ANCHOR  Create Admin -->
+                                <div class="col-sm-5">
+                                    <div class="card border-style">
+                                        <h5 class="text-center mt-3 admin-create-sub-title pb-1 border-bottom">
+                                            Create Administrator
+                                        </h5>
+                                        <div class="card-body">
+                                            <div class="row pb-3">
+                                                <div class="col-sm-4">Name: </div>
+                                                <div class="col-sm-8">
+                                                    <input class="input-style" type="text" placeholder="Enter a name">
+                                                </div>
+                                            </div>
+                                            <div class="row py-3">
+                                                <div class="col-sm-4">Username: </div>
+                                                <div class="col-sm-8">
+                                                    <input class="input-style" type="text" placeholder="Enter a username">
+                                                </div>
+                                            </div>
+                                            <div class="row py-3">
+                                                <div class="col-sm-4">Email: </div>
+                                                <div class="col-sm-8">
+                                                    <input class="input-style" type="text" placeholder="Enter a email">
+                                                </div>
+                                            </div>
+                                            <div class="row py-3">
+                                                <div class="col-sm-4">Phone: </div>
+                                                <div class="col-sm-8">
+                                                    <input class="input-style" type="text" placeholder="Enter a phone">
+                                                </div>
+                                            </div>
+                                            <div class="row py-3">
+                                                <div class="col-sm-4">Password: </div>
+                                                <div class="col-sm-8">
+                                                    <input class="input-style" type="text" placeholder="Enter a password">
+                                                </div>
+                                            </div>
+                                            <div class="row py-3">
+                                                <div class="col-sm-4">Birthday: </div>
+                                                <div class="col-sm-8">
+                                                    <input class="input-style" type="date" placeholder="Enter a password">
+                                                </div>
+                                            </div>
+                                            <div class="row py-3">
+                                                <div class="col-sm-4">Gender: </div>
+                                                <div class="col-sm-8">
+                                                    <input type="radio" name="gender" id="radio" value="mail">
+                                                    <label for="radio" class="text-style">Mail</label>
+                                                    <input type="radio" name="gender" id="radio" value="femail">
+                                                    <label for="radio" class="text-style">Femail</label>
+                                                    <input type="radio" name="gender" id="radio" value="others">
+                                                    <label for="radio" class="text-style">Others</label>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <input type="submit" value="Create" class="input-style btn btn-success">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ANCHOR Show All Admin List -->
+                                <div class="col-sm-7">
+                                    <div class="card admin-show-scroll-style admin-show-card">
+                                        <div class="card-body admin-show-card-body">
+                                            
+                                            <table class="table ">
+                                                <thead class="thead-dark">
+                                                  <tr class="text-center">
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Username</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Phone</th>
+                                                    <th scope="col">Gender</th>
+                                                    <th scope="col">Birthday</th>
+                                                    <th scope="col">Action</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <%for(let i = 1;i<=5;i++){%>
+                                                    <tr>
+                                                        <th scope="row"><%=i%></th>
+                                                        <td>Muhammad Minhaj</td>
+                                                        <td>mdminhajctg@gmail.com</td>
+                                                        <td>01831137771</td>
+                                                        <td>Mail</td>
+                                                        <td>02-02-2001</td>
+                                                        <td class="d-flex">
+                                                            <button class="btn btn-success btn-sm mr-1">Edit</button>
+                                                            <button class="btn btn-danger btn-sm">Delete</button>
+                                                        </td>
+                                                      </tr>
+                                                    <%}%>
+                                                </tbody>
+                                              </table>
+                                              
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%-include('../../partials/admin/adminFooter.ejs')%>

@@ -1,4 +1,10 @@
-// toggler
+import { Person } from '../../../utils/shortCode'
+// Short Selector By Js
+console.log(Person.print('Assalamu Alaikum'))
+
+function $(selector){
+    return document.querySelector(selector)
+}
 function toggler(btn,dropDown){
     if(btn){
         btn.addEventListener('click',function(){
@@ -11,11 +17,6 @@ function toggler(btn,dropDown){
         })
     }
 }
-// Short Selector By Js
-function $(selector){
-    return document.querySelector(selector)
-}
-
 
 // Setting Menu Toggler
 toggler($('.setting'),$('.setting-menu'))

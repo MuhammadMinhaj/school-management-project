@@ -24,10 +24,12 @@
             <div class="row py-3 scroll-style administrator-account">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10">
+                <form action="/administrator/account" method="POST">
                     <div class="card p-4">
                         <div class="card-body">
-                            <h4 class="card-title">Account Update</h4>
-                            <form action="/administrator/account" method="POST">
+                            <h4 class="card-title">Account Profile</h4>
+                            
+                                
                                 <div class="form-row">
 
                                     <div class="col-md-12 mb-3">
@@ -129,13 +131,15 @@
                                         </div>
                                     </div>
                                 </div>
-                             </div>
-                            <div class="col-md-12 mb-2">
-                                <a href="/auth/change-password">Change Password</a>
-                            </div>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <a href="/auth/change-password">Change Password</a>
+                        </div>
                         <input type="submit" class="btn btn-primary" value="Update" />
-                        </form>
+                    
+                       
                     </div>
+                </form>
                 </div>
             </div>
             <div class="col-sm-1"></div>

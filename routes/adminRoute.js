@@ -15,6 +15,8 @@ const {
 } = require('../middlewares/adminAuthMiddleware')
 
 const { adminDashboardGetController } = require('../controllers/adminControllers/dashboardController')
+
+// ANCHOR Administrator Some Functionality Controller
 const {
 	adminAccountGetController,
 	adminAccountPostController,
@@ -23,6 +25,12 @@ const {
 	loginAdminSecurityPasswordGetController,
 	loginAdminSecurityPasswordPostController,
 } = require('../controllers/adminControllers/adminController')
+// ANCHOR Administrator Create
+const {
+	adminCreateGetController,
+	adminCreatePostController
+} = require('../controllers/adminControllers/adminCreateController')
+
 
 router.get('/dashboard', isAuthenticatedAdmin, adminDashboardGetController)
 
@@ -34,5 +42,8 @@ router.post('/login-security-password', isAuthenticatedAdmin, loginSecurityPassw
 
 router.get('/account', isAuthenticatedAdmin, isAuthenticatedSecurity,adminAccountGetController)
 router.post('/account', isAuthenticatedAdmin, accountValidator, adminAccountPostController)
+
+router.get('/create',isAuthenticatedAdmin,adminCreateGetController)
+router.post('/create',isAuthenticatedAdmin,adminCreateGetController)
 
 module.exports = router

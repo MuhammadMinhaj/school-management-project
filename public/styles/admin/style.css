@@ -3,6 +3,7 @@
 @import './navbar.css';
 @import './dashboard.css';
 @import './administratorAccount.css';
+@import './adminCreate.css';
 
 /* Defaullt Scroll Style */
 @media (min-width:576px){

@@ -25,7 +25,7 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 			flashMessage: req.flash(),
 		})
 	}
-	// Cheked Is Email Found Or Not
+	// ANCHOR Cheked Is Email Found Or Not
 	try {
 		let admin = await Admin.findOne({ email: email })
 		if (!admin) {
@@ -41,7 +41,7 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 		let token = jwt.sign({ email: admin.email, id: admin._id }, 'minhajislam', {
 			expiresIn: '1h',
 		})
-		// Reset Password Confirmation Email Sent To Server in Clint
+		// ANCHOR Reset Password Confirmation Email Sent To Server in Clint
 		let transporter = nodemailer.createTransport({
 			service: 'gmail',
 			auth: {
@@ -52,16 +52,31 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 		let sendMailToClint = await transporter.sendMail({
 			from: 'test.projects24@gmail.com',
 			to: 'mdminhajctg24@gmail.com',
-			subject: 'Confirmation Reset Password From JASA',
+			subject: '[JASA] Confirmation Link Of Reset Password',
 
-			html: `Please Click To Reset Your Password <a href="http://localhost:8080/auth/reset_password/${token}">Change My Password</a>`,
+			html: `
+			<P>We heard that you lost your Administrator password. Sorry about that!</P>
+			<p>But don’t worry! You can use the following link to reset your password:</p>
+			<a href="http://localhost:8080/auth/reset_password/${token}">http://localhost:8080/auth/reset_password/${token}</a>
+			
+			<p>If you don’t use this link within 1 hours, it will expire. To get a new password reset link, visit <a href="http://localhost:8080/auth/forgot_password">http://localhost:8080/auth/forgot_password</a> </p>
+			<p>
+			Thanks,<br/>
+			The JASA Edu
+			</p>
+			`,
 		})
 		if (sendMailToClint.response) {
 			console.log('Success')
 		} else {
 			console.log('Fail')
 		}
-		res.send('Check Your Confirmation Mail For Reset Your Password')
+		res.render('pages/administrator/confirmationEmail.ejs', {
+			title: 'Confirmation Email',
+			style: 'bg-light',
+			error: {},
+			flashMessage: {},
+		})
 	} catch (e) {
 		next(e)
 	}

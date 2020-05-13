@@ -1,0 +1,68 @@
+@font-face {
+	font-family: 'Georgia';
+	src: url('/fonts/Georgia/Georgia.woff') format('woff'); /* Modern Browsers */
+	font-weight: normal;
+	font-style: normal;
+}
+.admin-create-title{
+    color:#440236;
+    font-family: 'Georgia';
+}
+.admin-create-sub-title{
+	font-family:Georgia;
+	color:#39a732;
+}
+.input-style{
+	border:1px solid #28a74552;
+	width:100%;
+	font-size:14px;
+	border-radius:5rem;
+	outline:none;
+	padding:5px 15px;
+}
+.input-style:focus {
+	/* box-shadow: 0 0 3pt 2pt green;  */
+	box-shadow: 0 0 3pt 0pt green; 
+}
+.text-style{
+	font-family:Georgia;
+	font-size:14px;
+	text-transform: lowercase;
+	margin-right:8px;
+	margin-left:4px;
+}
+.border-style{
+	border-radius:10px;
+	border:1px solid #00800054
+}
+
+.admin-show-scroll-style{
+
+	height:563px;
+	overflow: scroll;
+	scroll-behavior: smooth;
+	margin-right:1px;
+
+}
+.admin-show-scroll-style::-webkit-scrollbar{
+	width:3px; 
+	height:4px;
+}
+.admin-show-scroll-style::-webkit-scrollbar-track{
+	background:white;
+	border-radius: 25px
+}
+.admin-show-scroll-style::-webkit-scrollbar-thumb{
+	background:linear-gradient(#6200ea,#4a148c,#6200ea);
+	border-radius: 25px
+}
+table{
+	font-size: 12px;
+}
+
+.admin-show-card{
+	border-radius:10px;
+}
+.admin-show-card-body{
+	padding:0rem!important
+}

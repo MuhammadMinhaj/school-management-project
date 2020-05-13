@@ -25,9 +25,19 @@ exports.isUnauthenticatedAdmin = (req, res, next) => {
 	}
 	next()
 }
-exports.isAuthenticatedSecurity = (req, res, next) => {
+exports.isAuthenticatedSecurity = async(req, res, next) => {
 	if (!req.session.isSecurityLoggedIn) {
-		return res.redirect('/administrator/login-security-password')
+		try{
+			let admin = await Admin.findOne({_id:req.admin._id})
+			if(admin.securityPassword){
+				
+				return res.redirect('/administrator/login-security-password')
+			}else{
+				return next()
+			}
+		}catch(e){
+			return next(e)
+		}
 	}
 	next()
 }

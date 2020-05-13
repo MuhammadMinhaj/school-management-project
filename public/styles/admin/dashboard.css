@@ -79,7 +79,10 @@ html{
     text-decoration: none;
     color:white;
     font-family:Georgia;
-    font-size:15px;
+    font-size:15px
+}
+.sidebar-menu-item>i{
+    color:#ffffffc2;
 }
 .sidebar-menu-item:hover{
     transform:translateX(15px);
