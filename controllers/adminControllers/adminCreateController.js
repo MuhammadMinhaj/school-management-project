@@ -8,5 +8,5 @@ exports.adminCreateGetController = (async(req,res,next)=>{
  })
 })
 exports.adminCreatePostController = (async(req,res,next)=>{
-
+    console.log(req.body)
 })

@@ -44,6 +44,6 @@ router.get('/account', isAuthenticatedAdmin, isAuthenticatedSecurity,adminAccoun
 router.post('/account', isAuthenticatedAdmin, accountValidator, adminAccountPostController)
 
 router.get('/create',isAuthenticatedAdmin,adminCreateGetController)
-router.post('/create',isAuthenticatedAdmin,adminCreateGetController)
+router.post('/create',isAuthenticatedAdmin,adminCreatePostController)
 
 module.exports = router

@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "build":"webpack --mode production",
+    "starts":"webpack --mode development"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,9 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "axios": "^0.19.2",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
     "bcrypt": "^4.0.1",
     "bootstrap": "^4.4.1",
     "config": "^3.3.1",
@@ -36,7 +41,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.10",
     "nodemailer": "^6.4.6",
-    "validator": "^13.0.0"
+    "validator": "^13.0.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
