@@ -21,7 +21,8 @@ const publicLibrayPath = [
     express.static(__dirname+'/node_modules/bootstrap/dist'),
     express.static(__dirname+'/node_modules/@fortawesome/fontawesome-free'),
     express.static(__dirname+'/node_modules/jquery/dist'),
-    express.static(__dirname+'/node_modules/axios/dist')
+    express.static(__dirname+'/node_modules/axios/dist'),
+    express.static(__dirname+'/dist'),
 ]
 app.use(
     publicLibrayPath

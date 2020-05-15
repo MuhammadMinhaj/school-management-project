@@ -4,7 +4,6 @@ const schema = new Schema({
     name:{
         type:String,
         trim:true,
-        default:'Administrator',
        
     },
     username:{
@@ -25,9 +24,7 @@ const schema = new Schema({
     },
     password:{
         type:String,
-        minlength:5,
-        maxlength:16,
-        default:'admin',
+        minlength:5
     },
     dateOfBirthday:{
         type:String,

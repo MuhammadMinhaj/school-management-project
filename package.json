@@ -5,9 +5,10 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "startdev": "webpack-dev-server ./public/scripts/index.js",
     "dev": "nodemon app.js",
-    "build":"webpack --mode production",
-    "starts":"webpack --mode development"
+    "build": "webpack --mode production",
+    "starts": "webpack --mode development"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
   },
   "devDependencies": {
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "webpack-dev-server": "^3.11.0"
   }
 }

@@ -6,13 +6,18 @@ const accountValidator = require('../validators/admin/accountValidator')
 const securityPasswordValidator = require('../validators/admin/securityPasswordValidator')
 // Login Security Password Validator
 const loginSecurityPasswordValidator = require('../validators/admin/loginSecurityPasswordValidator')
+// Admin Create Validator
+const adminCreateValidator = require('../validators/admin/createAdminValidator')
+// created Admin Update Validator 
+const createdAdminUpdateValidator = require('../validators/admin/createdAdminUpdateValidator')
 
 // Import All Controller of Administrator
-const { 
-	isAuthenticatedAdmin,
-	isAuthenticatedSecurity,
-	isUnauthenticatedSecurity 
-} = require('../middlewares/adminAuthMiddleware')
+
+
+
+
+// Import Authentication
+const { isAuthenticatedAdmin, isAuthenticatedSecurity, isUnauthenticatedSecurity } = require('../middlewares/adminAuthMiddleware')
 
 const { adminDashboardGetController } = require('../controllers/adminControllers/dashboardController')
 
@@ -26,24 +31,28 @@ const {
 	loginAdminSecurityPasswordPostController,
 } = require('../controllers/adminControllers/adminController')
 // ANCHOR Administrator Create
-const {
-	adminCreateGetController,
-	adminCreatePostController
-} = require('../controllers/adminControllers/adminCreateController')
-
+const { 
+		createAdminGetController,
+		createAdminPostController, 
+		createdAdminDeleteController,
+		createdAdminUpdateGetController,
+		createdAdminUpdateController 
+	} = require('../controllers/adminControllers/createAccount')
 
 router.get('/dashboard', isAuthenticatedAdmin, adminDashboardGetController)
 
 router.get('/security-password', isAuthenticatedAdmin, createAdminSecurityPasswordGetController)
 router.post('/security-password', isAuthenticatedAdmin, securityPasswordValidator, createAdminSecurityPasswordPostController)
 
-router.get('/login-security-password', isAuthenticatedAdmin,isUnauthenticatedSecurity,loginAdminSecurityPasswordGetController)
-router.post('/login-security-password', isAuthenticatedAdmin, loginSecurityPasswordValidator,loginAdminSecurityPasswordPostController)
+router.get('/login-security-password', isAuthenticatedAdmin, isUnauthenticatedSecurity, loginAdminSecurityPasswordGetController)
+router.post('/login-security-password', isAuthenticatedAdmin, loginSecurityPasswordValidator, loginAdminSecurityPasswordPostController)
 
-router.get('/account', isAuthenticatedAdmin, isAuthenticatedSecurity,adminAccountGetController)
+router.get('/account', isAuthenticatedAdmin, isAuthenticatedSecurity, adminAccountGetController)
 router.post('/account', isAuthenticatedAdmin, accountValidator, adminAccountPostController)
 
-router.get('/create',isAuthenticatedAdmin,adminCreateGetController)
-router.post('/create',isAuthenticatedAdmin,adminCreatePostController)
-
+router.get('/create', isAuthenticatedAdmin, createAdminGetController)
+router.get('/delete/:id', isAuthenticatedAdmin, createdAdminDeleteController)
+router.post('/create', isAuthenticatedAdmin, adminCreateValidator, createAdminPostController)
+router.get('/update/:id',isAuthenticatedAdmin,createdAdminUpdateGetController)
+router.post('/update/:id',isAuthenticatedAdmin,createdAdminUpdateValidator,createdAdminUpdateController)
 module.exports = router

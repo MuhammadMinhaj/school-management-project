@@ -31,11 +31,15 @@
                             <div class="row">
 
                                 <!-- ANCHOR  Create Admin -->
-                                <div class="col-sm-5">
-                                    <form action="/administrator/create" method="POST">
+                                <div class="col-sm-2">
+                                    
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <form action="/administrator/update/<%=id%>" method="POST">
                                         <div class="card border-style">
                                             <h5 class="text-center mt-3 admin-create-sub-title pb-1 border-bottom">
-                                                Create Administrator
+                                                Update Admin
                                             </h5>
                                             <div class="card-body">
                                                 <div class="row pb-3">
@@ -47,15 +51,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row py-3">
-                                                    <div class="col-sm-4">Username: </div>
-                                                    <div class="col-sm-8">
-                                                        <input class="input-style <%=error.username?'is-invalid':''%>" name="username" id="adminUsername" value="<%=errorData.username?errorData.username:''%>"  type="text" placeholder="Enter a username">
-                                                        <div class="invalid-feedback">
-                                                            <%=error.username%>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                 
                                                 <div class="row py-3">
                                                     <div class="col-sm-4">Email: </div>
                                                     <div class="col-sm-8">
@@ -74,15 +70,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row py-3">
-                                                    <div class="col-sm-4">Password: </div>
-                                                    <div class="col-sm-8">
-                                                        <input class="input-style <%=error.password?'is-invalid':''%>" name="password" id="adminPassword" value="<%=errorData.password?errorData.password:''%>"  type="text" placeholder="Enter a password">
-                                                        <div class="invalid-feedback">
-                                                            <%=error.password%>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                              
                                                 <div class="row py-3">
                                                     <div class="col-sm-4">Birthday: </div>
                                                     <div class="col-sm-8">
@@ -106,55 +94,15 @@
                         
                                                 </div>
                                                 <div class="row">
-                                                    <input type="submit" id="createAdminBtn" value="Create" class="input-style btn btn-success">
+                                                    <input type="submit" id="createAdminBtn" value="Update" class="input-style btn btn-primary">
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                                 <!-- ANCHOR Show All Admin List -->
-                                <div class="col-sm-7">
-                                    <div class="card admin-show-scroll-style admin-show-card">
-                                        <div class="card-body admin-show-card-body">
-                                            <table class="table ">
-
-
-                                                 <!-- ANCHOR  Modal -->
-                                                
-                
-
-                                                <thead class="thead-dark">
-                                                  <tr class="text-center">
-                                                    <th scope="col">ID</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Email</th>
-                                                    <th scope="col">Phone</th>
-                                                    <th scope="col">Gender</th>
-                                                    <th scope="col">Birthday</th>
-                                                    <th scope="col">Action</th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody id="adminTable">
-                                                    <%for( contact of contacts){%>
-
-
-                                                            <tr>
-                                                                <th scope="row"><%=index++%></th>
-                                                                <td><%-contact.name%></td>
-                                                                <td><%-contact.email%></td>
-                                                                <td><%-contact.phone%></td>
-                                                                <td><%-contact.gender%></td>
-                                                                <td><%-contact.dateOfBirthday%></td>
-                                                                <td class="d-flex">
-                                                                    <a href="/administrator/update/<%=contact._id%>" class="btn btn-success btn-sm mr-1">Edit</a>
-                                                                    <a href="/administrator/delete/<%=contact._id%>" class="btn btn-danger btn-sm text-light">Delete</a>
-                                                                </td>
-                                                            </tr>
-                                                        <%}%>
-                                                </tbody>
-                                              </table>                               
-                                        </div>
-                                    </div>
+                                <div class="col-sm-2">
+                                    
                                 </div>
                             </div>
                         </div>  

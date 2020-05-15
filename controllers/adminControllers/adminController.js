@@ -4,9 +4,7 @@ const { validationResult } = require('express-validator')
 
 exports.adminAccountGetController = async (req, res, next) => {
 	try {
-		let admin = await Admin.findOne()
-
-		console.log(admin.gender)
+		let admin = await Admin.findOne({_id:req.admin._id})
 		res.render('pages/administrator/account.ejs', {
 			title: 'Administraotr Account',
 			style: 'bg-light',
