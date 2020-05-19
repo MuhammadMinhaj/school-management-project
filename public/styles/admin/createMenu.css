@@ -1,0 +1,73 @@
+@font-face {
+	font-family: 'Georgia';
+	src: url('/fonts/Georgia/Georgia.woff') format('woff'); /* Modern Browsers */
+	font-weight: normal;
+	font-style: normal;
+}
+.input-focus-style:focus{
+    box-shadow:0pt 0pt 2pt 1px #0072ff8f;
+}
+
+
+.menu-title{
+    border: 1px solid #00000021;
+    text-align: center;
+    font-family: Georgia;
+    border-radius: 20px;
+    background: #f8f9fa;
+    color: black;
+    box-shadow: 0pt 0pt 1pt 0px #00000063;
+
+
+}
+.menu-title>h5{
+    font-size: 20px;
+
+}
+.menu-header{
+    border-top: 8px solid #00000014;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background:#e7e6f2;
+/* ffb100  #00000073*/
+}
+.menu-seacrh-item{
+    max-width:200px;
+    background:#e7e6f2;
+    padding:5px;
+}
+.menu-search-item-input{
+    border-bottom:3px solid #00000082;
+    background:white;
+    border-radius:5px 0px 0px 5px
+    
+}
+.menu-search-item-input>input{
+    border:none;
+    font-size:12px;
+    padding:2px;
+    outline:none;
+}
+.menu-search-icon{
+    background:#00000082;
+    color:white;
+    padding:3px 8px;
+    font-size:12px;
+    border-radius:0px 5px 5px 0px;
+    cursor:pointer;
+}
+.fa-exchange-alt{
+    font-size:10px;
+    color:#0000007a;
+}
+.create_menu_style{
+    display:block;
+    width:100%;
+    border-radius:15px;
+    border:1px solid #00000026;
+    padding:5px 8px;
+    outline:none;
+}
+.create_menu_style:focus{
+    box-shadow: 0pt 0pt 3pt #007bff;
+}

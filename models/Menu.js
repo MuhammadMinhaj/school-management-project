@@ -1,18 +1,26 @@
 const { Schema,model } = require('mongoose')
-
 const schema = new Schema({
-    menu:[
+    name:String,
+    href:String,
+    pages:{
+        type:Schema.Types.ObjectId,
+        ref:'Page'
+    },
+    dropDown:[
         {
             name:String,
-            href:String
+            href:String,
+            pages:{
+                type:Schema.Types.ObjectId
+            }
         }
     ],
-    Page:[
-        {
-            type:Schema.Types.ObjectId,
-            ref:'Page'
-        }
-    ]
+    createdAt:{
+        type:Date,
+        default:Date.now
+    }
+  
+    
 })
 
 const Menu = new model('Menu',schema)

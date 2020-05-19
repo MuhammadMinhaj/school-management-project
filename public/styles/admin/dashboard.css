@@ -67,30 +67,106 @@ html{
 /* Admin Sidebar Menu Content */
 .sidebar-menu-item{
  
-    display:flex;
-    justify-content:space-around;
+    /* display:flex;
+    justify-content:space-around; */
     cursor:pointer;
     border-bottom:1px dashed orange;
     border-bottom-right-radius:20px;
     margin:6px 0px;
     
 }
-.sidebar-menu-item>a{
+.sidebar-menu-item>div>div>a{
     text-decoration: none;
     color:white;
     font-family:Georgia;
     font-size:15px
 }
-.sidebar-menu-item>i{
+.sidebar-menu-item>div>div>i{
     color:#ffffffc2;
+    transform:rotate(90deg)
 }
 .sidebar-menu-item:hover{
     transform:translateX(15px);
     transition:transform 0.5s;
     border-right:1px dashed orange;
     border-top:1px dashed orange;
-    border-bottom:1px dashed orange;
+    /* border-bottom:1px dashed orange; */
 }
+.clickToStyle{
+    border-right:1px dashed orange;
+    border-top:1px dashed orange;
+}
+
+
+/* ANCHOR  Sub Menu Of Page */
+.pages-menu-container{  
+    border-top:1px solid #ececec1f;
+    background:#0000001f;
+    border-bottom-right-radius:15px;
+    display:none;
+    transition: all 1s;
+}
+.pages-menu{
+    list-style:none;
+    
+}
+.pages-menu>li{
+    color:white;
+    font-family:Georgia;
+    font-size:15px;
+    margin:5px 0px;
+
+}
+.pages-menu>li:hover{
+    transform: translateX(-10px);
+    transition:transform 0.5s;
+}
+.pages-menu>li>button{
+    width:100%;
+    background:transparent;
+    color:white;
+    border:none;
+    padding:5px;
+    outline:none;
+    border-bottom:1px solid #ffffff2e;
+    border-left:1px solid #ffffff2e;
+    font-size:14px;
+
+}
+.pages-menu>li>button:hover{
+    box-shadow:1pt 0pt 0pt #07ad4aab;
+}
+.pages-menu>li>button:focus{
+    box-shadow:1pt 0pt 0pt #07ad4aab;
+}
+.page-create-btn {
+    border-radius:4px;
+    border: 1px solid #2cca6b3d;
+    background: transparent;
+    font-family:Georgia;
+    display:block;
+    text-align:center;
+    color:#29c4ff;
+    
+}
+.page-create-btn:hover{
+    text-decoration:none;
+    color:#29c4ffa8
+}
+.page-create-btn:focus{
+    box-shadow:0pt 0pt 6pt 0pt #10525d;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /* Admin Dashboard Content Head */
 .admin-content-head{
@@ -99,30 +175,14 @@ html{
 .admin-content-head-administrator{
     font-family:Georgia
 }
-/* .admin-content-head-administrator>form>button{
-    border:1px solid black;
-    
-} */
+
+
 .admin-content-head-administrator>button{
     border:1px solid black;
     
 }
 
-/* .admin-content-head-toggler{
-    width:30px;
-    flex-direction: column;
-    border-radius:5px;
-    border:1px dashed #ffffff2b;
-    padding:2px;
-}
-.admin-content-head-toggler>div{
-    width:15px;
-    height:2px;
-    background:white;
-    border-radius:5px;
-    margin:2.5px 0px;
-    
-} */
+
 .admin-head-search>form>input{
     width:16rem!important;
     height:30px!important;
