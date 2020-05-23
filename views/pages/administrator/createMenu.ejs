@@ -1,13 +1,19 @@
+
+
+
 <%-include('../../partials/admin/adminHead.ejs')%>
 <div class="container-luid">
     <div class="row">
         <!-- Admin Brand and Dashboard Menu -->
         <%- include('../../partials/admin/adminSidebar.ejs')%>
         <!-- Dashboard Content -->
-        <div class="col-sm-10">
+        <div class="col-sm-10 ">
             <!-- Admin Navbar Content -->
             <%- include('../../partials/admin/adminNavbar.ejs')%>
             <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+
+            
+
             <div class="row <%=flashMessage.success||flashMessage.fail?'mt-1':'mt-0'%>">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-8">
@@ -26,13 +32,13 @@
                         </div>
                     </div>
                     <div id="alert-menu-box">
-                        
+
                     </div>
                     <div class="row py-2">
                         <div class="col-sm-12">
                             <div class="card">
-                                <!-- Create Modal Start -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                <!-- Menu Create Modal Start -->
+                                <div class="modal fade" id="menuCreateModal" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -44,11 +50,12 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <div  id="create-menu-modal-box"></div>
+                                                <div id="create-menu-modal-box"></div>
                                                 <div class="row py-3">
                                                     <div class="col-sm-12 menu_name_container">
-                                                        <h6>Name</h6>
-                                                        <input type="text" name="name" class="form-control create_menu_style" id="menu_name">
+                                                        <h6 style="font-weight:bold">Name :</h6>
+                                                        <input type="text" name="name" placeholder="..."
+                                                            class="form-control create_menu_style" id="menu_name">
                                                         <div class="invalid-feedback">
                                                             Please Provied Menu Name
                                                         </div>
@@ -56,8 +63,9 @@
                                                 </div>
                                                 <div class="row py-3">
                                                     <div class="col-sm-12 menu_action_container">
-                                                        <h6>Action</h6>
-                                                        <input type="text" name="action" class="form-control create_menu_style"  id="menu_action">
+                                                        <h6 style="font-weight:bold">Action :</h6>
+                                                        <input type="text" name="action" placeholder="https://"
+                                                            class="form-control create_menu_style" id="menu_action">
                                                         <div class="invalid-feedback">
                                                             Please Provied Manu Action
                                                         </div>
@@ -67,19 +75,23 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">Close</button>
-                                                <button type="button" id="menu_create" class="btn btn-primary">Create</button>
+                                                <button type="button" id="menu_create"
+                                                    class="btn btn-primary">Create</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Create Modal End -->
+                                <!-- Menu Create Modal End -->
+                                
+
+
                                 <div class="row p-3">
                                     <!-- Menu Start -->
                                     <div class="col-sm-12">
                                         <div class="row">
-                                            
+
                                             <div class="col-sm-12">
-                                                
+
                                                 <div class="card menu-header">
                                                     <div class="row py-1">
                                                         <div class="col-sm-3 pt-2 text-center">
@@ -100,18 +112,17 @@
                                                         <div class="col-sm-2 text-right pt-1">
 
                                                             <button type="button" class="btn btn-success btn-sm mr-1"
-                                                                data-toggle="modal" data-target="#exampleModal"
+                                                                data-toggle="modal" data-target="#menuCreateModal"
                                                                 data-whatever="@mdo">Add</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card">
+                                        <div class="card" id="menu-empty-message-container">
                                             <table class="table">
                                                 <thead>
                                                     <tr class="text-center">
-
                                                         <th scope="col">Id</th>
 
                                                         <th>
@@ -142,21 +153,24 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="menu_tbody">
-                                                  
-                                            </tbody>
-                                          </table>
+                                                
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                                   <!-- Menu End -->
+                                    <!-- Menu End -->
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 <%-include('../../partials/admin/adminFooter.ejs')%>
+
+</body>
+</html>

@@ -41,20 +41,29 @@ let UPDATE_MENU_URL = 'http://localhost:8080/administrator/menu-update'
 
 let alertMenuBox = document.getElementById('alert-menu-box')
 let parentMenuElement = document.getElementById('menu_tbody')
+let emptyMenuMessageContainer = document.getElementById('menu-empty-message-container')
 
 // ANCHOR Start Show All Menu
 axios
 	.get(GET_ALL_MENU_URIL)
 	.then(res => {
-		res.data.forEach((data, index) => {
-			if (parentMenuElement) {
-				createMenuTable(parentMenuElement, data, index + 1)
-			}
-		})
+		console.log(res.data.length)
+		let textContainer = document.createElement('h5')
+		textContainer.innerText = 'There is nothing to show'
+		textContainer.className = 'text-center'
+		if (res.data.length === 0) {
+			console.log('There is nothing to show')
+			emptyMenuMessageContainer.appendChild(textContainer)
+		} else {
+			res.data.forEach((data, index) => {
+				if (parentMenuElement) {
+					createMenuTable(parentMenuElement, data, index + 1)
+				}
+			})
+		}
 	})
 	.catch(error => {
 		console.log(error)
-		console.log('Error Founded')
 	})
 // End Show All Menu
 
@@ -94,15 +103,13 @@ function createMenuHandler() {
 			menuName.classList.remove('is-invalid')
 			menuAction.classList.remove('is-invalid')
 		})
-		.catch(e => {
-			console.log(e)
-			console.log('Error Founded')
+		.catch(error => {
+			console.log(error)
 		})
 }
 // End Create Menu Request
 
 function editMenuHandler(TR, editBtnParent, editBtn, data, name, action) {
-	// editMenuHandler(TR,TD,data,name,action)
 	name.innerText = ''
 	let nameField = document.createElement('input')
 	nameField.setAttribute('type', 'text')
@@ -136,7 +143,6 @@ function editMenuHandler(TR, editBtnParent, editBtn, data, name, action) {
 	updateBtn.style.fontSize = '10px'
 	updateBtn.innerText = 'Update'
 	editBtnParent.appendChild(updateBtn)
-	// editBtn.remove() Prev
 	editBtn.style.display = 'none'
 
 	updateBtn.addEventListener('click', function () {
@@ -168,9 +174,7 @@ function updateBtnHandler(editBtn, updateBtn, nameField, actionField, data, name
 		})
 		.catch(error => {
 			console.log(error)
-			console.log('Error Founded On Updated Value')
 		})
-
 }
 // ANCHOR Start Delete Menu Handler
 function deleteMenuHandler(data, TR) {
@@ -178,11 +182,9 @@ function deleteMenuHandler(data, TR) {
 		.delete(`${DELETE_MENU_URL}/${data._id}`)
 		.then(res => {
 			let { data } = res
-			console.log(data)
-			console.log(data.message)
 			TR.remove()
 			alertMenuBox.className = 'w-50 m-auto'
-			alertMenuBox.appendChild(alertMessage('success', 'Successfully Deleted Menu', 1000, 'mt-1 py-1'))
+			alertMenuBox.appendChild(alertMessage('success', data.message, 1000, 'mt-1 py-1'))
 		})
 		.catch(error => {
 			console.log(error)
@@ -202,9 +204,7 @@ function createMenuTable(parentElement, data, index) {
 
 	let emptyIndex = document.createElement('td')
 	TR.appendChild(emptyIndex)
-
 	// Name
-
 	let name = document.createElement('td')
 	name.innerHTML = data.name ? data.name : 'N/A'
 	TR.appendChild(name)
@@ -220,7 +220,7 @@ function createMenuTable(parentElement, data, index) {
 	TR.appendChild(emptyAction)
 	// Create At
 	let createdAt = document.createElement('td')
-	createdAt.innerHTML = data.createdAt ? data.createdAt: 'N/A'
+	createdAt.innerHTML = data.createdAt ? data.createdAt : 'N/A'
 	createdAt.className = 'text-muted'
 	TR.appendChild(createdAt)
 
@@ -228,7 +228,7 @@ function createMenuTable(parentElement, data, index) {
 	TR.appendChild(emptyCreatedAt)
 	// DropDown
 	let dropDown = document.createElement('td')
-	dropDown.innerHTML = data.dropDown.length !== 0 ? 'Available' : 'N/A'
+	dropDown.innerHTML = data.dropDown.length === 0 ? 'N/A' : 'Available'
 	TR.appendChild(dropDown)
 
 	let emptyDrop = document.createElement('td')
@@ -276,29 +276,18 @@ function menuControlling(data, TR, name, action) {
 // End Menu Controlling Element
 
 // ANCHOR Start DropDown Controlling Element
+let GET_ALL_DROP_MENU_URI = 'http://localhost:8080/administrator/dropdown-create'
+
 function dropDownControlling(data) {
 	let TD = document.createElement('td')
-	TD.className = 'd-flex'
-
-	let showBtn = document.createElement('button')
+	let showBtn = document.createElement('a')
 	showBtn.className = 'btn btn-secondary btn-sm mr-1'
 	showBtn.innerHTML = 'Show'
 	showBtn.style.fontSize = '12px'
+	showBtn.setAttribute('href', `${GET_ALL_DROP_MENU_URI}/${data._id}`)
 	TD.appendChild(showBtn)
-
-	showBtn.addEventListener('click',function(){
-		alert(data.name)
-	})
-
-	let addBtn = document.createElement('button')
-	addBtn.className = 'btn btn-success btn-sm'
-	addBtn.innerHTML = 'Add'
-	addBtn.style.fontSize = '12px'
-	TD.appendChild(addBtn)
-
 	return TD
 }
-
 // End DropDown Controlling Element
 
 //ANCHOR Menu End

@@ -57,7 +57,6 @@ exports.menuDeleteDeleteController = async (req, res, next) => {
 		}
 		let { id } = req.params
 		let deleteMenu = await Menu.findOneAndRemove({ _id: id })
-		console.log(deleteMenu)
 		if (!deleteMenu) {
 			return res.json({
 				error: 'Internal Server Error',
@@ -125,4 +124,191 @@ exports.menuGetController = async (req, res, next) => {
 		next(e)
 	}
 }
-exports.menuPostController = async (req, res, next) => {}
+
+exports.dropDownCreateGetController = async (req, res, next) => {
+	try {
+		let hasAdminWithReq = await Admin.findOne({ _id: req.admin._id })
+		if (!hasAdminWithReq) {
+			return res.redirect('/auth/login')
+		}
+		let menu = await Menu.findOne({ _id: req.params.id })
+		if (!menu) {
+			req.flash('fail', 'Please Create New Menu')
+			return res.redirect('/administrator/menu-create')
+		}
+
+		res.render('pages/administrator/createDropDown.ejs', {
+			title: 'DropDown Menu',
+			style: 'bg-light',
+			error: {},
+			data: req.admin,
+			flashMessage: req.flash(),
+			menuName: menu.name,
+			id: menu._id,
+		})
+	} catch (e) {
+		next(e)
+	}
+}
+
+exports.dropDownCreatePostController = async (req, res, next) => {
+	try {
+		let hasAdminWithReq = await Admin.findOne({ _id: req.admin._id })
+		if (!hasAdminWithReq) {
+			return res.status(401).json({
+				message: "You're Not Authenticated User",
+			})
+		}
+		let { name, action } = req.body
+		if (name.length === 0 || action.length === 0) {
+			return res.json({
+				message: 'Invalid Creadentials',
+			})
+		}
+		let { id } = req.params
+		let hasMenu = await Menu.findOne({ _id: id })
+
+		let error = {}
+
+		hasMenu.dropDown.forEach(d => {
+			if (d.name === name || d.href === action) {
+				error.message = 'Already Used Name or Action'
+			}
+		})
+
+		if (Object.keys(error).length !== 0) {
+			return res.json({ message: 'Already Used Menu Name Or Action' })
+		}
+
+		let menu = await Menu.findOneAndUpdate(
+			{ _id: id },
+			{
+				$push: {
+					dropDown: {
+						name,
+						href: action,
+					},
+				},
+			},
+			{
+				new: true,
+			}
+		)
+		if (!menu) {
+			return res.status(500).json({ message: 'Internal Server Error' })
+		}
+		res.status(200).json(menu)
+	} catch (e) {
+		next(e)
+	}
+}
+exports.showAllDropDownGetController = async (req, res, next) => {
+	try {
+		let hasAdminWithReq = await Admin.findOne({ _id: req.admin._id })
+		if (!hasAdminWithReq) {
+			return res.json({
+				message: "You're Not Authenticated User",
+			})
+		}
+		let { id } = req.params
+		let menu = await Menu.findOne({ _id: id })
+		if (!menu) {
+			return res.json({
+				message: 'Menu Not Found',
+			})
+		}
+		res.json(menu)
+	} catch (e) {
+		next(e)
+	}
+}
+exports.dropDownDeletePostController = async (req, res, next) => {
+	try {
+		let hasAdminWithReq = await Admin.findOne({ _id: req.admin._id })
+		if (!hasAdminWithReq) {
+			return res.json({ message: "You're Not Authenticated User" })
+		}
+		let { id } = req.params
+		let { name, action } = req.body
+		let deletedMenu = await Menu.findOneAndUpdate(
+			{ _id: id },
+			{
+				$pull: {
+					dropDown: {
+						name,
+						href: action,
+					},
+				},
+			},
+			{
+				new: true,
+			}
+		)
+		if (!deletedMenu) {
+			return res.json({
+				message: 'Internal Server Error',
+			})
+		}
+		res.json(deletedMenu)
+	} catch (e) {
+		next(e)
+	}
+}
+exports.dropDownUpdatePutController = async (req, res, next) => {
+	try {
+		let { id } = req.params
+		let { name, action, ind } = req.body
+		let hasAdminWithReq = await Admin.findOne({ _id: req.admin._id })
+		if (!hasAdminWithReq) {
+			return res.json({
+				message: "You're Not Authenticated User",
+			})
+		}
+		if (name.length === 0 || action.length === 0) {
+			return res.json({
+				message: 'Cannot Be Empty Field',
+			})
+		}
+		let hasMenu = await Menu.findOne({ _id: id })
+		if (!hasMenu) {
+			return res.json({
+				message: 'Menu Not Found',
+			})
+		}
+
+		let error = {}
+		hasMenu.dropDown.forEach(d => {
+			if (d.name === name || d.href === action) {
+				error.message = 'Already Used Menu Name or Action'
+			}
+		})
+		if (Object.keys(error).length !== 0) {
+			return res.json({
+				message: 'Already Used Menu',
+			})
+		}
+
+		if (ind === null || undefined) {
+			return res.json({
+				message: 'Please Refresh Page',
+			})
+		}
+
+		let updatedElement = await Menu.findOne({ _id: id })
+
+		updatedElement.dropDown[ind].name = name
+		updatedElement.dropDown[ind].href = action
+
+		let updatedMenu = await Menu.findOneAndUpdate({ _id: id }, updatedElement, {
+			new: true,
+		})
+		if (!updatedMenu) {
+			return res.status(500).json({
+				message: 'Internal Server Error',
+			})
+		}
+		res.status(200).json(updatedMenu)
+	} catch (e) {
+		next(e)
+	}
+}

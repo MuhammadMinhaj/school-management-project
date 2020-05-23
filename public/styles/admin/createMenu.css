@@ -67,7 +67,33 @@
     border:1px solid #00000026;
     padding:5px 8px;
     outline:none;
+    font-weight: bold;
+    font-size:15px;
 }
 .create_menu_style:focus{
     box-shadow: 0pt 0pt 3pt #007bff;
+}
+.dropHeader{
+    background:#d8dadc;
+   
+}
+.droptitle{
+    font-weight: bold;
+    font-size:15px;
+    font-family:Arial, Helvetica, sans-serif
+}
+.dropInputStyle{
+    border:1px solid #00000038;
+    max-width:55%;
+    height:25px;
+    margin-top:3px;
+    border-radius:6px;
+    padding:10px;
+    font-size:15px;
+    font-weight: bold;
+    font-family:Arial;
+    outline:none
+}
+.dropInputStyle:focus{
+    box-shadow:0pt 0pt 3pt #007bff    
 }

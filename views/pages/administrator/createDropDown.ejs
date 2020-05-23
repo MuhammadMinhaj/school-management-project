@@ -1,0 +1,112 @@
+
+
+
+<%-include('../../partials/admin/adminHead.ejs')%>
+<div class="container-luid">
+    <div class="row">
+        <!-- Admin Brand and Dashboard Menu -->
+        <%- include('../../partials/admin/adminSidebar.ejs')%>
+        <!-- Dashboard Content -->
+        <div class="col-sm-10 ">
+            <!-- Admin Navbar Content -->
+            <%- include('../../partials/admin/adminNavbar.ejs')%>
+            <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+
+            
+
+            <div class="row <%=flashMessage.success||flashMessage.fail?'mt-1':'mt-0'%>">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <%-include('../../partials/Error/alert.ejs')%>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+
+            <div class="row scroll-style">
+                <div class="col-sm-12">
+                    <div id="alert-drop-menu-box" class="mt-1">
+
+                    </div>
+                    <div class="row py-2 px-5">
+                        <div class="col-sm-12">
+                            <div class="card p-3">
+                               <div class="row">
+                                   <div class="col-sm-12">
+                                       <!-- Header -->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="card py-1 px-3 dropHeader">
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <h5> <%=menuName.toUpperCase()%> </h5>
+                                                    </div>
+                                                    <div class="col-sm-4 d-flex justify-content-around">
+                                                        <h6 class="mt-1 droptitle">Name:</h6>
+                                                        <input type="text" placeholder="..." id="dropDownNameField" class="dropInputStyle">
+                                                    </div>
+                                                    <div class="col-sm-4 d-flex justify-content-around">
+                                                        <h6 class="mt-1 droptitle">Action:</h6>
+                                                        <input type="text" placeholder="https://" id="dropDownActionField"  class="dropInputStyle">
+                                                    </div>
+                                                    <div class="col-sm-2 text-right">
+                                                       
+                                                        <button type="button" id="createDropDownBtn" class="btn btn-success btn-sm">Add</button>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- End -->
+
+                                    <!-- Body -->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="card">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Id</th>
+    
+                                                            <th>
+                                                                <i class="fas fa-exchange-alt"></i>
+                                                            </th>
+    
+                                                            <th scope="col">Title</th>
+                                                            <th>
+                                                                <i class="fas fa-exchange-alt"></i>
+                                                            </th>
+                                                            <th scope="col">Action</th>
+                                                            <th>
+                                                                <i class="fas fa-exchange-alt"></i>
+                                                            </th>
+                                                            <th scope="col">Controlling</th>
+                                                           
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody data-id="<%=id%>" id="dropDownBody">
+                                                      
+                                                    
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End -->
+                                   </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%-include('../../partials/admin/adminFooter.ejs')%>
+
+</body>
+</html>

@@ -7,14 +7,18 @@ const schema = new Schema({
         ref:'Page'
     },
     dropDown:[
-        {
+        {   
             name:String,
             href:String,
             pages:{
                 type:Schema.Types.ObjectId
-            }
+            },
+            _id:false
         }
-    ],
+    ]
+        
+    
+    ,
     createdAt:{
         type:Date,
         default:Date.now
