@@ -10,6 +10,20 @@ function alertMessage(option, message, time, classNames) {
 	return alerts
 }
 
+let emptyMessageContainer = document.getElementById('dropDown-empty-message-container')
+let textContainer = document.createElement('h5')
+textContainer.innerText = 'There is nothing to show'
+textContainer.className = 'text-center text-muted'
+textContainer.style.fontWeight = 'bold'
+textContainer.style.height = '100px'
+textContainer.style.lineHeight = '100px'
+textContainer.style.fontFamily = 'Arial black'
+
+let loadingMessage = document.createElement('h5')
+loadingMessage.innerText = 'Loading...'
+loadingMessage.className = 'text-center text-muted'
+loadingMessage.style.fontWeight = 'bold'
+
 let GET_ALL_DROPDOWN_URI = 'http://localhost:8080/administrator/dropdown-all'
 let CREATE_DROPDOWN_URI = 'http://localhost:8080/administrator/dropdown-create'
 let DELETE_DROPDOWN_URI = 'http://localhost:8080/administrator/dropdown-delete'
@@ -17,6 +31,8 @@ let UPDATE_DROPDOWN_URI = 'http://localhost:8080/administrator/dropdown-update'
 let tbody = document.getElementById('dropDownBody')
 
 let id = undefined
+let allDataLength;
+let everyData;
 
 if (tbody) {
 	id = tbody.dataset.id
@@ -27,19 +43,32 @@ if (id) {
 		.get(`${GET_ALL_DROPDOWN_URI}/${id}`)
 		.then(res => {
 			let { data } = res
-
+			everyData = data
+			allDataLength = data.dropDown.length
 			if (data.dropDown) {
-				if (data.dropDown.length !== 0) {
+				if (data.dropDown.length === 0) {
+					emptyMessageContainer.appendChild(textContainer)
+				} else {
 					data.dropDown.forEach((menu, index) => {
 						tbody.appendChild(createDropDownModel(menu, index + 1))
 					})
 				}
 			}
+			loadingMessage.remove()
 		})
 		.catch(error => {
 			console.log(error)
 		})
 }
+
+// Loading Message 
+if(!everyData){
+	if(emptyMessageContainer){
+		emptyMessageContainer.appendChild(loadingMessage)
+	}
+}
+
+
 // Create DropDown
 let nameField = document.getElementById('dropDownNameField')
 let actionField = document.getElementById('dropDownActionField')
@@ -68,6 +97,7 @@ if (createBtn) {
 					}
 					tbody.appendChild(createDropDownModel(data, 'New'))
 					dropDownAlertBox.appendChild(alertMessage('success', 'Successfully Created Menu', 2000, 'w-50 py-1 m-auto'))
+					textContainer.remove()
 					nameField.value = ''
 					actionField.value = ''
 				}
@@ -219,6 +249,10 @@ function deletedDropDownMenuHandler(menu, parentElement) {
 			}
 			parentElement.remove()
 			dropDownAlertBox.appendChild(alertMessage('success', 'Successfully Deleted DropDown Menu', 2000, 'w-50 py-1 m-auto'))
+			allDataLength--
+			if (allDataLength === 0) {
+				emptyMessageContainer.appendChild(textContainer)
+			}
 		})
 		.catch(error => {
 			console.log(error)

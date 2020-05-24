@@ -43,16 +43,30 @@ let alertMenuBox = document.getElementById('alert-menu-box')
 let parentMenuElement = document.getElementById('menu_tbody')
 let emptyMenuMessageContainer = document.getElementById('menu-empty-message-container')
 
+let allDataLength
+
+// Empty Data Message
+let textContainer = document.createElement('h5')
+textContainer.innerText = 'There is nothing to show'
+textContainer.className = 'text-center text-muted'
+textContainer.style.fontWeight = 'bold'
+textContainer.style.height = '100px'
+textContainer.style.lineHeight = '100px'
+textContainer.style.fontFamily = 'Arial black'
+// Lodding Data Message
+let loadingMessage = document.createElement('h5')
+loadingMessage.innerText = 'Loading...'
+loadingMessage.className = 'text-center text-muted'
+loadingMessage.style.fontWeight = 'bold'
 // ANCHOR Start Show All Menu
+let everyData
 axios
 	.get(GET_ALL_MENU_URIL)
 	.then(res => {
-		console.log(res.data.length)
-		let textContainer = document.createElement('h5')
-		textContainer.innerText = 'There is nothing to show'
-		textContainer.className = 'text-center'
+		everyData = res.data
+
+		allDataLength = res.data.length
 		if (res.data.length === 0) {
-			console.log('There is nothing to show')
 			emptyMenuMessageContainer.appendChild(textContainer)
 		} else {
 			res.data.forEach((data, index) => {
@@ -61,12 +75,18 @@ axios
 				}
 			})
 		}
+		loadingMessage.remove()
 	})
 	.catch(error => {
 		console.log(error)
 	})
 // End Show All Menu
 
+if (!everyData) {
+	if (emptyMenuMessageContainer) {
+		emptyMenuMessageContainer.appendChild(loadingMessage)
+	}
+}
 // ANCHOR Start Create Menu Request
 let menuName = document.getElementById('menu_name')
 let menuAction = document.getElementById('menu_action')
@@ -102,6 +122,7 @@ function createMenuHandler() {
 			menuAction.value = ''
 			menuName.classList.remove('is-invalid')
 			menuAction.classList.remove('is-invalid')
+			textContainer.remove()
 		})
 		.catch(error => {
 			console.log(error)
@@ -178,6 +199,8 @@ function updateBtnHandler(editBtn, updateBtn, nameField, actionField, data, name
 }
 // ANCHOR Start Delete Menu Handler
 function deleteMenuHandler(data, TR) {
+	allDataLength--
+
 	axios
 		.delete(`${DELETE_MENU_URL}/${data._id}`)
 		.then(res => {
@@ -185,6 +208,9 @@ function deleteMenuHandler(data, TR) {
 			TR.remove()
 			alertMenuBox.className = 'w-50 m-auto'
 			alertMenuBox.appendChild(alertMessage('success', data.message, 1000, 'mt-1 py-1'))
+			if (allDataLength === 0) {
+				emptyMenuMessageContainer.appendChild(textContainer)
+			}
 		})
 		.catch(error => {
 			console.log(error)
