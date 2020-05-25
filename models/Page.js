@@ -10,10 +10,10 @@ const schema = new Schema({
     body:{
         type:String,
         trim:true,
-        maxlength:true,
         required:true
     },
-    picture:String
+    menu:String,
+    image:String
 })
 
 const Page = new model('Page',schema)

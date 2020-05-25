@@ -1,6 +1,7 @@
 let { validationResult } = require('express-validator')
 let bcrypt = require('bcrypt')
 let Admin = require('../../models/Admin')
+let Page = require('../../models/Page')
 exports.createAdminGetController = async (req, res, next) => {
 	try {
 		let hasAdmin = await Admin.findOne({ _id: req.admin._id, email: req.admin.email })
@@ -9,6 +10,7 @@ exports.createAdminGetController = async (req, res, next) => {
 			return res.redirect('/auth/login')
 		}
 		let contactsAdmin = await Admin.find()
+		let pages = await Page.find()
 		res.render('pages/administrator/adminCreateAccount.ejs', {
 			title: 'Create Admin',
 			error: {},
@@ -16,6 +18,8 @@ exports.createAdminGetController = async (req, res, next) => {
 			flashMessage: req.flash(),
 			data: req.admin,
 			errorData: {},
+			pages,
+			createdPage:{},
 			contacts: contactsAdmin.slice(1),
 			index: 1,
 		})
@@ -27,6 +31,7 @@ exports.createAdminPostController = async (req, res, next) => {
 	let error = validationResult(req).formatWith(err => err.msg)
 	try {
 		let contactsAdmin = await Admin.find()
+		let pages = await Page.find()
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Invalid Creadentials')
 			return res.render('pages/administrator/adminCreateAccount.ejs', {
@@ -36,6 +41,8 @@ exports.createAdminPostController = async (req, res, next) => {
 				flashMessage: req.flash(),
 				data: req.admin,
 				errorData: req.body,
+				pages,
+				createdPage:{},
 				contacts: contactsAdmin.slice(1),
 				index: 1,
 			})
@@ -67,6 +74,8 @@ exports.createAdminPostController = async (req, res, next) => {
 				flashMessage: req.flash(),
 				data: req.body,
 				errorData: {},
+				pages,
+				createdPage:{},
 				contacts: contactsAdmin.slice(1),
 				index: 1,
 			})
@@ -151,12 +160,15 @@ exports.createdAdminUpdateGetController = async (req, res, next) => {
 			gender: checkUpdateAdmin.gender,
 			birthday: checkUpdateAdmin.dateOfBirthday,
 		}
+		let pages = await Page.find()
 		res.render('pages/administrator/createdAdminUpdate.ejs', {
 			title: 'Update Admin',
 			style: 'bg-light',
 			error: {},
 			data: req.admin,
 			errorData: data,
+			pages,
+			createdPage:{},
 			flashMessage: req.flash(),
 			id,
 		})
@@ -174,6 +186,8 @@ exports.createdAdminUpdateController = async (req, res, next) => {
 		return res.redirect('/auth/login')
 	}
 	try {
+		let pages = await Page.find()
+
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Wrong Information')
@@ -183,6 +197,8 @@ exports.createdAdminUpdateController = async (req, res, next) => {
 				error: error.mapped(),
 				data: req.admin,
 				errorData: req.body,
+				pages,
+				createdPage:{},
 				flashMessage: req.flash(),
 				id,
 			})
@@ -196,6 +212,8 @@ exports.createdAdminUpdateController = async (req, res, next) => {
 				error: {},
 				data: req.admin,
 				errorData: req.body,
+				pages,
+				createdPage:{},
 				flashMessage: req.flash(),
 				id,
 			})
@@ -231,6 +249,8 @@ exports.createdAdminUpdateController = async (req, res, next) => {
 			error: {},
 			data: req.admin,
 			errorData: data,
+			pages,
+			createdPage:{},
 			flashMessage: req.flash(),
 			id,
 		})

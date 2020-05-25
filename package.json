@@ -41,7 +41,9 @@
     "jquery": "^3.5.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.10",
+    "multer": "^1.4.2",
     "nodemailer": "^6.4.6",
+    "summernote": "^0.8.18",
     "validator": "^13.0.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"

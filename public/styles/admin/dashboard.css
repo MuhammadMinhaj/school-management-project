@@ -121,7 +121,7 @@ html{
     transform: translateX(-10px);
     transition:transform 0.5s;
 }
-.pages-menu>li>button{
+.pages-menu>li>a{
     width:100%;
     background:transparent;
     color:white;
@@ -131,12 +131,15 @@ html{
     border-bottom:1px solid #ffffff2e;
     border-left:1px solid #ffffff2e;
     font-size:14px;
+    display:block;
+    text-decoration:none;
+    text-align:center
 
 }
-.pages-menu>li>button:hover{
+.pages-menu>li>a:hover{
     box-shadow:1pt 0pt 0pt #07ad4aab;
 }
-.pages-menu>li>button:focus{
+.pages-menu>li>a:focus{
     box-shadow:1pt 0pt 0pt #07ad4aab;
 }
 .page-create-btn {

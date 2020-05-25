@@ -1,0 +1,150 @@
+<%-include('../../partials/admin/adminHead.ejs')%>
+<div class="container-luid">
+    <div class="row">
+        <!-- Admin Brand and Dashboard Menu -->
+        <%- include('../../partials/admin/adminSidebar.ejs')%>
+        <!-- Dashboard Content -->
+        <div class="col-sm-10 ">
+            <!-- Admin Navbar Content -->
+            <%- include('../../partials/admin/adminNavbar.ejs')%>
+            <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+
+
+
+            <div class="row <%=flashMessage.success||flashMessage.fail?'mt-1':'mt-0'%>">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <%-include('../../partials/Error/alert.ejs')%>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+
+            <div class="row scroll-style">
+                <div class="col-sm-12">
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <div class="page-title border text-center p-1">
+                                <h5> Create Page </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="alert-page-box">
+
+                    </div>
+                    <div class="row py-2">
+                        <div class="col-sm-12">
+                            <form action="/administrator/page_create" method="POST">
+                                <div class="card p-5">
+                                    <div class="form-group">
+                                        <label for="#title">Select Menu</label>
+                                        <select name="menuName" class="custom-select <%=error.menuName?'is-invalid':''%>">
+                                            <option value="" style="font-weight:bold;">...</option>
+                                            <%for(let m of menu){%>
+                                            <optgroup label="<%=m.name.toUpperCase()%>">
+                                                <option value="<%=m.name%>"><%=m.name%></option>
+
+                                                <%if(m.dropDown.length!==0){%>
+                                                <option
+                                                    style="color:rgba(243, 91, 3, 0.671);font-weight:bold;font-size:15px"
+                                                    disabled>DROPDOWN LIST:</option>
+                                                <%}%>
+
+                                                    <%for(let d of m.dropDown){%>
+                                                <option class="mr-5" value="<%=d.name%>">** <%=d.name%></option>
+                                                <%}%>
+                                                </optgroup>
+                                                <%}%>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            <%=error.menuName%>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label for="#title">Upload Picture</label>
+                                        <div class="custom-file">
+                                            <input type="file" name="post-image" class="custom-file-input" id="customFile">
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                        </div>
+                                    </div> -->
+                                    
+                                    <div class="form-group">
+                                        <label for="#title">Title</label>
+                                        <input type="text" 
+                                        class="form-control <%=error.title?'is-invalid':''%>" 
+                                        name="title" 
+                                        id="title"
+                                        placeholder="Enter your page title...">
+                                        <div class="invalid-feedback"><%=error.title%></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Post</label>
+                                        <textarea name="body" id="summernotePageBody" class="<%=error.body?'is-invalid':''%>"></textarea>
+                                        <div class="invalid-feedback"><%=error.body%></div>
+                                    </div>
+                                    
+                                    <input type="submit" value="Create" class="btn btn-primary">
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%-include('../../partials/admin/adminFooter.ejs')%>
+
+<script>
+    var summernote = $('#summernotePageBody')
+summernote.summernote({
+	styleTags: [
+		'p',
+		{ title: 'Blockquote', tag: 'blockquote', className: 'blockquote', value: 'blockquote' },
+		'pre',
+		'h1',
+		'h2',
+		'h3',
+		'h4',
+		'h5',
+		'h6',
+	],
+	height:100,
+	focus: true,
+    tabsize: 2,
+    placeholder:'Enter anything here...'
+    ,
+	popover: {
+		link: [['link', ['linkDialogShow', 'unlink']]],
+		table: [
+			['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+			['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+		],
+		air: [
+			['color', ['color']],
+			['font', ['bold', 'underline', 'clear']],
+			['para', ['ul', 'paragraph']],
+			['table', ['table']],
+			['insert', ['link', 'picture']],
+		],
+	},
+	toolbar: [
+		['style', ['style']],
+		['font', ['bold', 'underline', 'clear']],
+		['fontsize', ['fontsize']],
+		['fontname', ['fontname']],
+		['color', ['color']],
+		['para', ['ul', 'ol', 'paragraph']],
+		['table', ['table']],
+		['insert', ['link']],
+		['view', ['codeview', 'help']],
+	],
+})
+</script>
+
+</body>
+
+</html>

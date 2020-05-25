@@ -23,6 +23,7 @@ const publicLibrayPath = [
     express.static(__dirname+'/node_modules/jquery/dist'),
     express.static(__dirname+'/node_modules/axios/dist'),
     express.static(__dirname+'/dist'),
+    express.static(__dirname+'/node_modules/summernote')
 ]
 app.use(
     publicLibrayPath

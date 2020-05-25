@@ -11,7 +11,8 @@ const schema = new Schema({
             name:String,
             href:String,
             pages:{
-                type:Schema.Types.ObjectId
+                type:Schema.Types.ObjectId,
+                ref:'Page'
             },
             _id:false
         }

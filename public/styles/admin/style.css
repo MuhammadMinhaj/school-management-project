@@ -5,6 +5,7 @@
 @import './createMenu.css';
 @import './administratorAccount.css';
 @import './adminCreate.css';
+@import './createPage.css';
 
 /* Defaullt Scroll Style */
 @media (min-width:576px){

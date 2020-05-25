@@ -31,20 +31,20 @@
 
                         <div class="col-sm-12">
                             <ul class="mt-2 pages-menu">
+                               <%for(let page of pages){%>
                                 <li>
-                                   <button>Home</button>
+                                    <a href="/administrator/page_update/<%=page._id%>"><%=page.menu%></a>
                                 </li>
-                                <li>
-                                    <button>About</button>
-                                </li>
-                                <li>
-                                    <button>Contact</button>
-                                </li>
-                                
+                                <%}%>
+                                <%if(Object.keys(createdPage).length!==0){%>
+                                    <li>
+                                        <a href="/administrator/page_update/<%=createdPage._id%>"><%=createdPage.menu%></a>
+                                    </li>
+                                    <%}%>
                             </ul>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <a href="#" class="page-create-btn"><i class="mr-2 fas fa-calendar-plus"></i>Create</a>
+                                    <a href="http://localhost:8080/administrator/page_create" class="page-create-btn"><i class="mr-2 fas fa-calendar-plus"></i>Create</a>
                                 </div>
                             </div>
                         </div>

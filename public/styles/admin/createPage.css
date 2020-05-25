@@ -1,0 +1,61 @@
+.panel-heading {
+    border-bottom:1px solid #0000002e;
+}
+.note-dropdown-menu{
+    padding:10px;
+    list-style:none!important;
+
+}
+
+.note-dropdown-menu>li>a{
+    text-decoration: none!important;
+    color:black;
+}
+
+.note-dropdown-menu>li:hover{
+    background:#0000001c;
+    border-radius:5px;
+}
+.note-dropdown-menu>li>a>p{
+    color:#00000082;
+    font-size:15px;
+    
+}
+
+.note-dropdown-menu>li>a>pre{
+    border:1px solid #0000001f;
+    border-radius:10px;
+}
+.note-dropdown-menu>li>a>blockquote{
+    border-left:4px solid #6d6e6f;
+    
+}
+
+.note-dropdown-menu>li>a>h1{
+    font-size:2rem!important;
+}
+.note-dropdown-menu>li>a>h2{
+    font-size:1.75rem!important;
+
+}
+.note-dropdown-menu>li>a>h3{
+    font-size:1.5rem!important;
+
+}
+.note-dropdown-menu>li>a>h4{
+    font-size:1.25rem!important;
+
+}
+.note-dropdown-menu>li>a>h5{
+    font-size:1rem!important;
+
+}
+.note-dropdown-menu>li>a>h6{
+    font-size:15px!important;
+ 
+}
+.note-btn{
+
+    border:1px solid #0000001f;
+    padding:5px 10px;
+}

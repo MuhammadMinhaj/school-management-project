@@ -1,14 +1,22 @@
 let Admin = require('../../models/Admin')
 let Menu = require('../../models/Menu')
+let Page = require('../../models/Page')
 
-exports.menuCreateGetController = (req, res, next) => {
-	res.render('pages/administrator/createMenu', {
-		title: 'Create Menu',
-		style: 'bg-light',
-		error: {},
-		data: req.admin,
-		flashMessage: req.flash(),
-	})
+exports.menuCreateGetController = async (req, res, next) => {
+	try {
+		let pages = await Page.find()
+		res.render('pages/administrator/createMenu', {
+			title: 'Create Menu',
+			style: 'bg-light',
+			error: {},
+			data: req.admin,
+			pages,
+			createdPage:{},
+			flashMessage: req.flash(),
+		})
+	} catch (e) {
+		next(e)
+	}
 }
 exports.menuCreatePostController = async (req, res, next) => {
 	try {
@@ -132,6 +140,7 @@ exports.dropDownCreateGetController = async (req, res, next) => {
 			return res.redirect('/auth/login')
 		}
 		let menu = await Menu.findOne({ _id: req.params.id })
+		let pages = await Page.find()
 		if (!menu) {
 			req.flash('fail', 'Please Create New Menu')
 			return res.redirect('/administrator/menu-create')
@@ -144,6 +153,8 @@ exports.dropDownCreateGetController = async (req, res, next) => {
 			data: req.admin,
 			flashMessage: req.flash(),
 			menuName: menu.name,
+			pages,
+			createdPage:{},
 			id: menu._id,
 		})
 	} catch (e) {

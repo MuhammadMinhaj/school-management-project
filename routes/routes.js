@@ -1,13 +1,15 @@
 const adminAuthRoute = require('./adminAuthRoute')
 const adminRoute = require('./adminRoute')
 const menuRoute = require('./menuRoute')
+const pageRoute = require('./pageRoute')
 const router = [
 	{
 		path: '/administrator',
 		handler: 
 		[
 			adminRoute,
-			menuRoute
+			menuRoute,
+			pageRoute
 		],
 	},
 	{

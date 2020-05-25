@@ -1,15 +1,19 @@
 const Admin = require('../../models/Admin')
 const bcrypt = require('bcrypt')
 const { validationResult } = require('express-validator')
+const Page = require('../../models/Page')
 
 exports.adminAccountGetController = async (req, res, next) => {
 	try {
-		let admin = await Admin.findOne({_id:req.admin._id})
+		let admin = await Admin.findOne({ _id: req.admin._id })
+		let pages = await Page.find()
 		res.render('pages/administrator/account.ejs', {
 			title: 'Administraotr Account',
 			style: 'bg-light',
 			flashMessage: {},
 			data: admin,
+			pages,
+			createdPage:{},
 			error: {},
 		})
 	} catch (e) {
@@ -17,27 +21,31 @@ exports.adminAccountGetController = async (req, res, next) => {
 	}
 }
 exports.adminAccountPostController = async (req, res, next) => {
-	let { name, username, email, phone, dateOfBirthday, gender } = req.body
-	let data = {
-		name,
-		username,
-		email,
-		phone,
-		dateOfBirthday,
-		gender,
-	}
-	let error = validationResult(req).formatWith(err => err.msg)
-	if (!error.isEmpty()) {
-		req.flash('fail', 'Wrong Information')
-		return res.render('pages/administrator/account.ejs', {
-			title: 'Administrator Account',
-			style: 'bg-light',
-			error: error.mapped(),
-			data: data,
-			flashMessage: req.flash(),
-		})
-	}
 	try {
+		let { name, username, email, phone, dateOfBirthday, gender } = req.body
+		let data = {
+			name,
+			username,
+			email,
+			phone,
+			dateOfBirthday,
+			gender,
+		}
+		let pages = await Page.find()
+		let error = validationResult(req).formatWith(err => err.msg)
+		if (!error.isEmpty()) {
+			req.flash('fail', 'Wrong Information')
+			return res.render('pages/administrator/account.ejs', {
+				title: 'Administrator Account',
+				style: 'bg-light',
+				error: error.mapped(),
+				data: data,
+				pages,
+				createdPage:{},
+				flashMessage: req.flash(),
+			})
+		}
+
 		let updatedAdmin = await Admin.findOneAndUpdate({ _id: req.admin._id }, data, {
 			new: true,
 		})
@@ -46,6 +54,8 @@ exports.adminAccountPostController = async (req, res, next) => {
 			title: 'Updated Account',
 			style: 'bg-light',
 			error: {},
+			pages,
+			createdPage:{},
 			data: updatedAdmin,
 			flashMessage: req.flash(),
 		})
@@ -57,13 +67,15 @@ exports.adminAccountPostController = async (req, res, next) => {
 exports.createAdminSecurityPasswordGetController = async (req, res, next) => {
 	try {
 		let admin = await Admin.findOne({ _id: req.admin._id })
-		console.log(admin)
+		let pages = await Page.find()
 		if (admin) {
 			res.render('pages/administrator/securityPassword.ejs', {
 				title: admin.securityPassword ? 'Update Security Password' : 'Create Security Password',
 				style: 'bg-light',
 				error: {},
 				data: admin,
+				pages,
+				createdPage:{},
 				flashMessage: req.flash(),
 			})
 		}
@@ -76,6 +88,8 @@ exports.createAdminSecurityPasswordPostController = async (req, res, next) => {
 	try {
 		// If Founded Any Error In Express Validator Then Work This Condition
 		let admin = await Admin.findOne({ _id: req.admin._id })
+		let pages = await Page.find()
+
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Wrong Information')
@@ -84,6 +98,8 @@ exports.createAdminSecurityPasswordPostController = async (req, res, next) => {
 				style: 'bg-light',
 				error: error.mapped(),
 				data: admin,
+				pages,
+				createdPage:{},
 				flashMessage: req.flash(),
 			})
 		}
@@ -108,6 +124,8 @@ exports.createAdminSecurityPasswordPostController = async (req, res, next) => {
 			style: 'bg-light',
 			error: error.mapped(),
 			data: admin,
+			pages,
+			createdPage:{},
 			flashMessage: req.flash(),
 		})
 	} catch (e) {
@@ -115,23 +133,30 @@ exports.createAdminSecurityPasswordPostController = async (req, res, next) => {
 	}
 }
 // Login Admin Security Password
-exports.loginAdminSecurityPasswordGetController = (req, res, next) => {
-	let admin = req.admin
-	if (admin) {
-		res.render('pages/administrator/loginSecurityPassword.ejs', {
-			title: 'Login Security Password',
-			style: 'bg-dark',
-			error: {},
-			flashMessage: req.flash(),
-			data: admin,
-		})
+exports.loginAdminSecurityPasswordGetController = async (req, res, next) => {
+	try {
+		let admin = req.admin
+		let pages = await Page.find()
+		if (admin) {
+			res.render('pages/administrator/loginSecurityPassword.ejs', {
+				title: 'Login Security Password',
+				style: 'bg-dark',
+				error: {},
+				pages,
+				createdPage:{},
+				flashMessage: req.flash(),
+				data: admin,
+			})
+		}
+	} catch (e) {
+		next(e)
 	}
 }
 exports.loginAdminSecurityPasswordPostController = async (req, res, next) => {
 	let { securityPassword } = req.body
 	try {
 		let admin = await Admin.findOne({ _id: req.admin._id })
-
+		let pages = await Page.find()
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
 			return res.render('pages/administrator/loginSecurityPassword.ejs', {
@@ -139,6 +164,8 @@ exports.loginAdminSecurityPasswordPostController = async (req, res, next) => {
 				style: 'bg-dark',
 				error: error.mapped(),
 				flashMessage: {},
+				pages,
+				createdPage:{},
 				data: admin,
 			})
 		}

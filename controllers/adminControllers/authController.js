@@ -1,6 +1,7 @@
 const Admin = require('../../models/Admin')
 const bcrypt = require('bcrypt')
 const { validationResult } = require('express-validator')
+const Page = require('../../models/Page')
 
 exports.adminLoginGetController = (req, res, next) => {
 	res.render('pages/administrator/login.ejs', {
@@ -86,12 +87,15 @@ exports.adminLoginPostController = async (req, res, next) => {
 // Change Password System Of Administrator
 exports.adminChangePasswordGetController = async (req, res, next) => {
 	try {
-		let admin = await Admin.findOne({_id:req.admin._id})
+		let admin = await Admin.findOne({ _id: req.admin._id })
+		let pages = await Page.find()
 		res.render('pages/administrator/changePassword.ejs', {
 			title: 'Change-Password',
 			style: 'bg-light',
 			error: {},
-			data:admin,
+			data: admin,
+			pages,
+			createdPage:{},
 			flashMessage: {},
 		})
 	} catch (e) {
@@ -103,6 +107,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 
 	try {
 		let admin = await Admin.findOne({ _id: req.admin._id })
+		let pages = await Page.find()
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Invalid Creadentials')
@@ -111,6 +116,8 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				style: 'bg-light',
 				error: error.mapped(),
 				data: admin,
+				pages,
+				createdPage:{},
 				flashMessage: req.flash(),
 			})
 		}
@@ -139,6 +146,8 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 						style: 'bg-light',
 						data: admin,
 						error: {},
+						pages,
+						createdPage:{},
 						flashMessage: req.flash(),
 					})
 				}
@@ -148,6 +157,8 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 					style: 'bg-light',
 					error: {},
 					data: admin,
+					pages,
+					createdPage:{},
 					flashMessage: req.flash(),
 				})
 			}
@@ -157,6 +168,8 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				style: 'bg-light',
 				error: {},
 				data: admin,
+				pages,
+				createdPage:{},
 				flashMessage: req.flash(),
 			})
 		}
@@ -167,6 +180,8 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				style: 'bg-light',
 				error: {},
 				data: admin,
+				pages,
+				createdPage:{},
 				flashMessage: req.flash(),
 			})
 		}
@@ -187,6 +202,8 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 					style: 'bg-light',
 					error: {},
 					data: admin,
+					pages,
+					createdPage:{},
 					flashMessage: req.flash(),
 				})
 			}
@@ -196,6 +213,8 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				style: 'bg-light',
 				error: {},
 				data: admin,
+				pages,
+				createdPage:{},
 				flashMessage: req.flash(),
 			})
 		}
@@ -205,6 +224,8 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 			style: 'bg-light',
 			error: {},
 			data: admin,
+			pages,
+			createdPage:{},
 			flashMessage: req.flash(),
 		})
 	} catch (e) {
