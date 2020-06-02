@@ -1,29 +1,44 @@
 const Admin = require('../../models/Admin')
+const Menu = require('../../models/Menu')
+const WebModel = require('../../models/WebModel')
 const bcrypt = require('bcrypt')
 const { validationResult } = require('express-validator')
 const Page = require('../../models/Page')
 
-exports.adminLoginGetController = (req, res, next) => {
-	res.render('pages/administrator/login.ejs', {
-		title: 'Administrator Login',
-		style: 'bg-dark',
-		error: {},
-		flashMessage: {},
-	})
+exports.adminLoginGetController = async (req, res, next) => {
+	try {
+		let menu = await Menu.find()
+		let webModel = await WebModel.findOne()
+		res.render('pages/administrator/login.ejs', {
+			title: 'Administrator Login',
+			style: 'bg-dark',
+			error: {},
+			menu,
+			flashMessage: {},
+			webModel
+		})
+	} catch (e) {
+		next(e)
+	}
 }
 exports.adminLoginPostController = async (req, res, next) => {
-	let { email, password } = req.body
-	let error = validationResult(req).formatWith(err => err.msg)
-	if (!error.isEmpty()) {
-		req.flash('fail', 'Wrong Information')
-		return res.render('pages/administrator/login.ejs', {
-			title: 'Wrong Info',
-			style: 'bg-dark',
-			error: error.mapped(),
-			flashMessage: req.flash(),
-		})
-	}
 	try {
+		let menu = await Menu.find()
+		let webModel = await WebModel.findOne()
+		let { email, password } = req.body
+		let error = validationResult(req).formatWith(err => err.msg)
+		if (!error.isEmpty()) {
+			req.flash('fail', 'Wrong Information')
+			return res.render('pages/administrator/login.ejs', {
+				title: 'Wrong Info',
+				style: 'bg-dark',
+				error: error.mapped(),
+				menu,
+				flashMessage: req.flash(),
+				webModel
+			})
+		}
+
 		let admin = await Admin.findOne({ email })
 		// If Admin Not Founded In Database Then Work This Condition
 		if (!admin) {
@@ -32,7 +47,9 @@ exports.adminLoginPostController = async (req, res, next) => {
 				title: 'Admin Not Founded',
 				style: 'bg-dark',
 				error: {},
+				menu,
 				flashMessage: req.flash(),
+				webModel
 			})
 		}
 
@@ -52,10 +69,12 @@ exports.adminLoginPostController = async (req, res, next) => {
 			}
 			req.flash('fail', 'Invalid Creadentials')
 			return res.render('pages/administrator/login.ejs', {
-				title: 'Bcrypt Pass And Em Not Macthed',
+				title: 'Invalid Creadentials',
 				style: 'bg-dark',
 				error: {},
+				menu,
 				flashMessage: req.flash(),
+				webModel
 			})
 		}
 
@@ -78,7 +97,9 @@ exports.adminLoginPostController = async (req, res, next) => {
 			title: 'Default Password Login Failed',
 			style: 'bg-dark',
 			error: {},
+			menu,
 			flashMessage: req.flash(),
+			webModel
 		})
 	} catch (e) {
 		next(e)
@@ -95,7 +116,7 @@ exports.adminChangePasswordGetController = async (req, res, next) => {
 			error: {},
 			data: admin,
 			pages,
-			createdPage:{},
+			createdPage: {},
 			flashMessage: {},
 		})
 	} catch (e) {
@@ -117,7 +138,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				error: error.mapped(),
 				data: admin,
 				pages,
-				createdPage:{},
+				createdPage: {},
 				flashMessage: req.flash(),
 			})
 		}
@@ -147,7 +168,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 						data: admin,
 						error: {},
 						pages,
-						createdPage:{},
+						createdPage: {},
 						flashMessage: req.flash(),
 					})
 				}
@@ -158,7 +179,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 					error: {},
 					data: admin,
 					pages,
-					createdPage:{},
+					createdPage: {},
 					flashMessage: req.flash(),
 				})
 			}
@@ -169,7 +190,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				error: {},
 				data: admin,
 				pages,
-				createdPage:{},
+				createdPage: {},
 				flashMessage: req.flash(),
 			})
 		}
@@ -181,7 +202,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				error: {},
 				data: admin,
 				pages,
-				createdPage:{},
+				createdPage: {},
 				flashMessage: req.flash(),
 			})
 		}
@@ -203,7 +224,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 					error: {},
 					data: admin,
 					pages,
-					createdPage:{},
+					createdPage: {},
 					flashMessage: req.flash(),
 				})
 			}
@@ -214,7 +235,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				error: {},
 				data: admin,
 				pages,
-				createdPage:{},
+				createdPage: {},
 				flashMessage: req.flash(),
 			})
 		}
@@ -225,7 +246,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 			error: {},
 			data: admin,
 			pages,
-			createdPage:{},
+			createdPage: {},
 			flashMessage: req.flash(),
 		})
 	} catch (e) {

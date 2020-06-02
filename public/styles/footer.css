@@ -1,0 +1,116 @@
+/* Footer Section */
+.footer-brand-title {
+	color: white;
+	font-family: Georgia;
+}
+.footer-brand-bottom-border {
+	width: 100px;
+	height: 4px;
+	background: linear-gradient(to right, red, green, orangered);
+	border-radius: 1px 1px 1px 1px;
+}
+
+.footer-title {
+	color: white;
+	font-size: 24px;
+	font-family: Georgia;
+}
+.footer-about-text {
+	color: white;
+	font-family: 'Raleway';
+	font-size: 14px;
+	max-width: 80%;
+}
+.footer-border {
+	max-width: 80%;
+	height: 1px;
+	background: green;
+}
+.footer-link-container {
+	list-style: none;
+}
+.footer-link-container > li > a {
+	font-family: 'Raleway';
+	font-size: 14px;
+}
+.footer-link-container > li:hover {
+	transform: translateX(10px);
+	transition: transform 0.5s;
+}
+
+.social-links > a > i {
+	font-size: 21px;
+	padding: 5px;
+	border-radius: 50%;
+	background: black;
+}
+.social-links > a > i:hover {
+	transform: rotate(360deg);
+	transition: transform 1s;
+	background: #007bff40;
+}
+.facebook > i {
+	color: #0980ec;
+}
+.youtube > i {
+	color: red;
+}
+.instragram > i {
+	color: red;
+}
+.twitter > i {
+	color: #2fa5ff;
+}
+/* Copyrgiht */
+.copyright {
+	display: flex;
+	justify-content: space-between;
+	background: #212529eb;
+	border-top: 1px solid #0080008c;
+}
+.copyright > p {
+	font-family: Georgia;
+	font-size: 14px;
+	color: #f8f9fad6;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+	/* Navigation */
+	.navigation > ul > li > a {
+		border-right: 0px;
+		display: inline-block;
+	}
+	/* Footer Section */
+	.social-container {
+		padding: 3rem !important;
+	}
+	.copyright {
+		display: block !important;
+		text-align: center;
+		padding-top: 15px;
+		padding-bottom: 10px;
+	}
+	.copyright > p {
+		padding: 0px !important;
+		line-height: 5px;
+		font-size: 12px;
+	}
+}
+@media (max-width: 575px) {
+	/* Header Section */
+	.main-head-container {
+		border-bottom: 1px solid green;
+	}
+	.head-container {
+		border-radius: 0px;
+	}
+	/* Navigation */
+	.navigation-container {
+		border-top: 0px;
+		border-top-right-radius: 0px;
+		border-top-left-radius: 0px;
+		margin-top: 0px;
+	}
+}

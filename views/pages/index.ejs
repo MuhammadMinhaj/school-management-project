@@ -1,0 +1,122 @@
+<!-- Header Section -->
+<%-include('../partials/head.ejs')%>
+
+<!-- Slider -->
+<!-- <div class="sub-img">
+  <img src="/uploads/syad-taher-sha-hozor.jpg" alt="">
+  <h6 class="sub-img-title">Syad Muhammad Tahir Shah</h6>
+</div> -->
+
+<div class="slider-container">
+  
+      <div class="swiper-container">
+          <!--     -->
+        <div class="swiper-wrapper">
+          <%if(webModel.slider.length===0){%>
+              <%for(let i = 0;i<3;i++){%>
+                <div class="swiper-slide" style="background-color: transparent;">
+           
+                  <div class="slider-container-text">
+                      <div class="slider-wrapper-text">
+                          <h2 class="ml3">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
+                      </div>
+                      
+                      <a href="#" class="slider-text-button">Lorem ipsum</a>
+                  </div>
+                  <div class="sliderOpacityStyleContainer">
+                    <div class="sliderOpacityStyle"></div> 
+                    <!-- <img src="/uploads/default-slider.svg" width='100%' height='100%' alt=""> -->
+                    <div class="defaultSliderImage">
+                        <h1>Slider Image</h1>
+                    </div>
+                  </div>
+                    
+                </div>
+                <%}%>
+            <%}else{%>
+                <%for(let slider of webModel.slider){%>
+                  <div class="swiper-slide" style="background-color: transparent;">
+                    <div class="slider-container-text">
+                      <%if(slider.text){%>
+                        <div class="slider-wrapper-text">
+                          <h2 class="ml3"><%=slider.text%></h2>
+                      </div>
+                        <%}%>
+
+                        <%if(slider.btnName && slider.action){%>
+                          <a href="<%=slider.action%>" class="slider-text-button"><%=slider.btnName%></a>
+                        <%}%>
+                    </div>
+                    <div class="sliderOpacityStyleContainer">
+                      <div class="sliderOpacityStyle"></div> 
+                      <img src="<%=slider.image%>" width='100%' height='100%' alt="">
+                    </div>
+                  </div>
+                  <%}%>
+              <%}%>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    
+</div>
+
+<!-- Slider End -->
+
+
+
+<a href="/auth/login" class="nav-link py-5">Login Admin</a>
+<!-- Footer Section -->
+<%-include('../partials/footer.ejs')%>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+      spaceBetween: 30,
+      centeredSlides: true,
+      // autoplay: {
+      //   delay: 7000,
+      //   disableOnInteraction: false,
+      // },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        renderBullet: function (index, className) {
+          return '<span class="' + className + '">' + (index + 1) + '</span>';
+        },
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    var textWrapper = document.querySelector('.ml3');
+textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+anime.timeline({loop: true})
+  .add({
+    targets: '.ml3 .letter',
+    opacity: [0,1],
+    easing: "easeInOutQuad",
+    duration: 2250,
+    delay: (el, i) => 150 * (i+1)
+  }).add({
+    targets: '.ml3',
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 1000
+  });
+</script>
+
+
+
+
+
+</body>
+</html>

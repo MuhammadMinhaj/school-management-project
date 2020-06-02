@@ -2,15 +2,9 @@
 	<div class="row">
 		<div class="container">
 			<nav class="navbar navbar-expand-md navigation-container">
-				<button
-					class="navbar-toggler ml-auto nav-btn"
-					type="button"
-					data-toggle="collapse"
-					data-target="#navbarNavAltMarkup"
-					aria-controls="navbarNavAltMarkup"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-				>
+				<button class="navbar-toggler ml-auto nav-btn" type="button" data-toggle="collapse"
+					data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+					aria-label="Toggle navigation">
 					<div class="nav-toggler">
 						<div class="nav-toggle-line"></div>
 						<div class="nav-toggle-line"></div>
@@ -19,28 +13,32 @@
 				</button>
 				<div class="collapse navbar-collapse navigation" id="navbarNavAltMarkup">
 					<ul class="navbar-nav mr-auto">
+
+						<%if(menu){%>
+						<%for(let m of menu){%>
+						<%if(m.dropDown.length===0){%>
+						<li class="nav-item left-Animation">
+							<a class="nav-link" href="<%=m.href%>"><%=m.name%></a>
+						</li>
+						<%}else{%>
+
 						<li class="nav-item">
-							<a class="nav-link" href="#">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">About</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Contact</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Services</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Pricing</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Libray</a>
-						</li>
-						<li>
-							<a class="nav-link" href="#">Menu</a>
-						</li>
-					</ul>
+							<a style="cursor:pointer" class="nav-link dropDownToggler dropdown-toggle"><%=m.name%></a>
+							<ul class="dropDown-style drop-hide">
+								<%for(let d of m.dropDown){%>
+								<li>
+									<a href="<%=d.href%>"><%=d.name%></a>
+								</li>
+								<%}%>
+								</ul>
+							</li>
+
+							<%}%>
+								<%}%>
+					<%}%>
+
+
+						</ul>
 				</div>
 			</nav>
 		</div>

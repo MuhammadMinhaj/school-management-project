@@ -1,20 +1,22 @@
 const { Schema, model } = require('mongoose')
 
 const schema = new Schema({
-	name: {
-		type: String,
-		trim: true,
-		maxlength: 150,
-		required: true,
-	},
+	name:[
+		{
+			lang:String,
+			name:String
+		}
+	],
 	logo: String,
-	slider: {
-		image1: String,
-		image2: String,
-		image3: String,
-		image4: String,
-		image5: String,
-	},
+	slider: [
+		{
+			name:String,
+			image:String,
+			btnName:String,
+			action:String,
+			text:String
+		}
+	],
 	menu: {
 		type: Schema.Types.ObjectId,
 		ref: 'Menu',
@@ -50,6 +52,6 @@ const schema = new Schema({
 	},
 })
 
-const Jasa = new model('Jasa', schema)
+const WebModel = new model('WebModel', schema)
 
-module.exports = Jasa
+module.exports = WebModel

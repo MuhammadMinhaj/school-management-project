@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Title</title>
+		<title><%=title%></title>
 		<!-- Required meta tags -->
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-		<!-- Personal CSS -->
-		<link rel="stylesheet" href="/styles/style.css" />
+		
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="/css/bootstrap.css" />
 		<!-- Font -->
@@ -16,8 +15,10 @@
 		<!-- Font-Awesome -->
 		<link rel="stylesheet" href="/css/all.css" />
 
+		<!-- Swifer JS -->
+		<link rel="stylesheet" href="/css/swiper.min.css">
 		<!-- CSS Links -->
-		<link rel="stylesheet" href="/styles/admin/login.css">
+		<link rel="stylesheet" href="/styles/style.css" />
 	</head>
 	<body>
 		<div class="container-fluid bg-dark main-head-container">
@@ -25,11 +26,18 @@
 				<div class="container bg-light head-container">
 					<div class="row">
 						<div class="col-md-2 text-center text-dark">
-							<img src="/uploads/jasa-logo.svg" style="max-width: 90px;" alt="" />
+							<img src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" style="max-width: 90px;" alt="" />
 						</div>
 						<div class="col-md-8 head-name">
-							<h4 class="text-center web-name">الجامعة الاحمدية السنية العالية (الكامل)</h4>
-							<h4 class="text-center web-name">JAMEA AHMADIA SUNNIA KAMIL MADRASAH</h4>
+							<!-- <h4 class="text-center web-name">الجامعة الاحمدية السنية العالية (الكامل)</h4>
+							<h4 class="text-center web-name">JAMEA AHMADIA SUNNIA KAMIL MADRASAH</h4> -->
+							<%if(webModel.name.length===0){%>
+								<h4 class="text-center web-name text-muted">YOUR WEBSITE TITLE HERE</h4>
+							<%}else{%>
+							<%for(let webName of webModel.name){%>
+								<h4 class="text-center web-name"><%=webName.name.toUpperCase()%></h4>
+								<%}%>
+							<%}%>
 						</div>
 						<div class="col-md-2 head-social-links">
 							<a class="head-twitter">
@@ -54,7 +62,5 @@
 
 		<!-- Navigation -->
 		<%-include('./navigation.ejs')%>
-		<!-- Footer Section -->
+
 		
-	</body>
-</html>

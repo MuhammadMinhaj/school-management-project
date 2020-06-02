@@ -1,0 +1,121 @@
+.mani-navigation-container {
+	border-bottom: 5px solid #6c757d;
+	position: relative;
+}
+.navigation-container {
+	border: 1px solid #56ff0052;
+	border-radius: 8px;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+/* Menu Style */
+.navigation > ul > li > a {
+	color: white !important;
+	border-right: 1px dashed green;
+	font-family: Georgia;
+	font-family: 14px;
+}
+/* Hover Effect Of Navigation  */
+.navigation > ul > li:hover {
+	border-bottom: 1px dashed orange;
+	box-shadow: 1px 0px 1px 0px #ffffff40;
+}
+.left-Animation:hover {
+	transform: translateX(5px);
+	transition: transform 0.5s;
+}
+/* DropDown Style */
+.navigation > ul > div > li > a {
+	color: white !important;
+	border-right: 1px dashed green;
+	font-family: Georgia;
+	font-family: 14px;
+}
+/* Hover Effect Of Navigation  */
+.navigation > ul > div > li:hover {
+	border-bottom: 1px dashed orange;
+	transform: translateX(5px);
+	transition: transform 0.5s;
+	box-shadow: 1px 0px 1px 0px #ffffff40;
+}
+
+.nav-toggler {
+	width: 35px;
+	height: 30px;
+	border: 1px solid #ffffffa8;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	border-radius: 6px;
+	box-shadow: 0px 0px 1px 1px #280c7dbd;
+}
+.nav-toggle-line {
+	width: 25px;
+	height: 3px;
+	background: #ffffffa8;
+}
+.nav-item {
+	z-index: 1000;
+}
+.dropDown-style {
+	background: #495057;
+	position: absolute;
+	top: 70px;
+	width: 170px;
+	padding: 5px;
+	list-style: none;
+	border-radius: 10px 5px 10px 10px;
+	border: 2px solid #ffffff21;
+}
+.drop-show {
+	display: block;
+}
+.drop-hide {
+	display: none;
+}
+
+.dropDown-style::after {
+	content: '';
+	display: block;
+	width: 35px;
+	height: 35px;
+	background: #495057;
+	position: absolute;
+	top: -18px;
+	left: 10px;
+	transform: rotate(45deg);
+	z-index: -1000;
+	border: 2px solid #ffffff21;
+}
+@media (max-width: 768px) {
+	.dropDown-style {
+		position: relative;
+		top:0px;
+		width:100%;
+	}
+	.dropDown-style::after {
+		display: none;
+	}
+}
+.dropDown-style > li {
+	border-bottom: 1px solid #0000002b;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+.dropDown-style > li:hover {
+	background: #0000002e;
+}
+
+.dropDown-style > li > a {
+	text-decoration: none;
+	color: #ffffffc7;
+	display: block;
+	font-family: Georgia;
+}
+.dropDown-style > li > a:hover {
+	text-decoration: none;
+	color: white;
+	transform: translateX(10px);
+	transition: transform 1s;
+}

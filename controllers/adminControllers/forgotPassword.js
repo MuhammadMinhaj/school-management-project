@@ -1,32 +1,46 @@
 const { validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
-const Admin = require('../../models/Admin')
 const nodemailer = require('nodemailer')
 const bcrypt = require('bcrypt')
 
-exports.forgotPasswordGetController = (req, res, next) => {
-	res.render('pages/administrator/forgotPassword.ejs', {
-		title: 'Forgot-Password',
-		style: 'bg-light',
-		error: {},
-		flashMessage: {},
-	})
-}
-exports.forgotPasswordPostController = async (req, res, next) => {
-	let { email } = req.body
-	let error = validationResult(req).formatWith(err => err.msg)
-	if (!error.isEmpty()) {
-		req.flash('fail', 'Invalid Creadentials')
-		return res.render('pages/administrator/forgotPassword.ejs', {
+const Admin = require('../../models/Admin')
+const Menu = require('../../models/Menu')
+const WebModel = require('../../models/WebModel')
+exports.forgotPasswordGetController = async (req, res, next) => {
+	try {
+		let menu = await Menu.find()
+		let webModel = await WebModel.findOne()
+		res.render('pages/administrator/forgotPassword.ejs', {
 			title: 'Forgot-Password',
 			style: 'bg-light',
-			error: error.mapped(),
-			data: email,
-			flashMessage: req.flash(),
+			error: {},
+			menu,
+			flashMessage: {},
+			webModel
 		})
+	} catch (e) {
+		next(e)
 	}
-	// ANCHOR Cheked Is Email Found Or Not
+}
+exports.forgotPasswordPostController = async (req, res, next) => {
 	try {
+		let menu = await Menu.find()
+		let webModel = await WebModel.findOne()
+		let { email } = req.body
+		let error = validationResult(req).formatWith(err => err.msg)
+		if (!error.isEmpty()) {
+			req.flash('fail', 'Invalid Creadentials')
+			return res.render('pages/administrator/forgotPassword.ejs', {
+				title: 'Forgot-Password',
+				style: 'bg-light',
+				error: error.mapped(),
+				data: email,
+				menu,
+				flashMessage: req.flash(),
+				webModel
+			})
+		}
+		// ANCHOR Cheked Is Email Found Or Not
 		let admin = await Admin.findOne({ email: email })
 		if (!admin) {
 			req.flash('fail', 'Invalid Creadentials')
@@ -35,6 +49,8 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 				style: 'bg-light',
 				error: {},
 				data: email,
+				menu,
+				webModel,
 				flashMessage: req.flash(),
 			})
 		}
@@ -66,6 +82,8 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 			</p>
 			`,
 		})
+		// Need to Handler this Error
+
 		if (sendMailToClint.response) {
 			console.log('Success')
 		} else {
@@ -75,34 +93,49 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 			title: 'Confirmation Email',
 			style: 'bg-light',
 			error: {},
+			menu,
+			webModel,
 			flashMessage: {},
 		})
 	} catch (e) {
 		next(e)
 	}
 }
-exports.resetPasswordGetController = (req, res, next) => {
-	res.render('pages/administrator/resetPassword.ejs', {
-		title: 'Reset Password',
-		style: 'bg-light',
-		error: {},
-		flashMessage: {},
-		url: req.originalURL,
-	})
-}
-exports.resetPasswordPostController = async (req, res, next) => {
-	let error = validationResult(req).formatWith(err => err.msg)
-	if (!error.isEmpty()) {
-		req.flash('fail', 'Invalid Creadentials')
-		return res.render('pages/administrator/resetPassword.ejs', {
+exports.resetPasswordGetController = async (req, res, next) => {
+	try {
+		let menu = await Menu.find()
+		let webModel = await WebModel.findOne()
+		res.render('pages/administrator/resetPassword.ejs', {
 			title: 'Reset Password',
 			style: 'bg-light',
-			error: error.mapped(),
-			flashMessage: req.flash(),
+			error: {},
+			menu,
+			webModel,
+			flashMessage: {},
 			url: req.originalURL,
 		})
+	} catch (e) {
+		next(e)
 	}
+}
+exports.resetPasswordPostController = async (req, res, next) => {
 	try {
+		let menu = await Menu.find()
+		let webModel = await WebModel.findOne()
+		let error = validationResult(req).formatWith(err => err.msg)
+		if (!error.isEmpty()) {
+			req.flash('fail', 'Invalid Creadentials')
+			return res.render('pages/administrator/resetPassword.ejs', {
+				title: 'Reset Password',
+				style: 'bg-light',
+				error: error.mapped(),
+				menu,
+				webModel,
+				flashMessage: req.flash(),
+				url: req.originalURL,
+			})
+		}
+
 		let { password } = req.body
 		let token = req.params.resetId
 		jwt.verify(token, 'minhajislam', async (err, info) => {
@@ -112,6 +145,8 @@ exports.resetPasswordPostController = async (req, res, next) => {
 					title: 'Reset Password',
 					style: 'bg-light',
 					error: {},
+					menu,
+					webModel,
 					flashMessage: req.flash(),
 					url: req.originalURL,
 				})
@@ -125,6 +160,8 @@ exports.resetPasswordPostController = async (req, res, next) => {
 						title: 'Reset Password',
 						style: 'bg-light',
 						error: {},
+						menu,
+						webModel,
 						flashMessage: req.flash(),
 						url: req.originalURL,
 					})
@@ -142,6 +179,8 @@ exports.resetPasswordPostController = async (req, res, next) => {
 						title: 'Reset Password',
 						style: 'bg-light',
 						error: {},
+						menu,
+						webModel,
 						flashMessage: req.flash(),
 						url: req.originalURL,
 					})

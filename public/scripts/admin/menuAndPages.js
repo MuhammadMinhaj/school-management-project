@@ -18,20 +18,22 @@ let pageBtn = document.getElementById('pageBtn')
 let pageContainer = document.getElementsByClassName('pages-menu-container')[0]
 let pageI = document.getElementsByClassName('pageSort')[0]
 
-pageBtn.addEventListener('click', () => {
-	let checkPageCss = getComputedStyle(pageContainer)
-	if (checkPageCss.display === 'none') {
-		pageContainer.style.display = 'block'
-		pages.style.transform = 'translateX(15px)'
-		pages.classList.add('clickToStyle')
-		pageI.style.transform = 'rotate(0deg)'
-	} else {
-		pageContainer.style.display = 'none'
-		pages.style.transform = 'translateX(0px)'
-		pages.classList.remove('clickToStyle')
-		pageI.style.transform = 'rotate(90deg)'
-	}
-})
+if(pageBtn){
+	pageBtn.addEventListener('click', () => {
+		let checkPageCss = getComputedStyle(pageContainer)
+		if (checkPageCss.display === 'none') {
+			pageContainer.style.display = 'block'
+			pages.style.transform = 'translateX(15px)'
+			pages.classList.add('clickToStyle')
+			pageI.style.transform = 'rotate(0deg)'
+		} else {
+			pageContainer.style.display = 'none'
+			pages.style.transform = 'translateX(0px)'
+			pages.classList.remove('clickToStyle')
+			pageI.style.transform = 'rotate(90deg)'
+		}
+	})
+}
 
 // ANCHOR Menu Start
 let MENU_CREATE_URL = 'http://localhost:8080/administrator/menu-create'

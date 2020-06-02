@@ -1,0 +1,70 @@
+table { 
+    border-collapse: separate; 
+    border-spacing: 0 10px; 
+    margin-top: -10px; /* correct offset on first border spacing if desired */
+}
+td {
+    border: solid 1px #0003;
+    border-style: solid none;
+    padding: 10px;
+    background-color: #49505717;
+}
+td:first-child {
+    border-left-style: solid;
+    border-top-left-radius: 10px; 
+    border-bottom-left-radius: 10px;
+}
+td:last-child {
+    border-right-style: solid;
+    border-bottom-right-radius: 10px; 
+    border-top-right-radius: 10px; 
+}
+
+.setting-title{
+    /* background: #343a40; */
+    color: black;
+    padding: 5px;
+    margin: 3px 10px 0px 0px;
+    /* border-radius: 8px; */
+    font-family: roboto;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    box-shadow:0pt 1pt 0pt 0px #fd9801;
+}
+.setting-title-radius{
+    border-radius: 10px 10px 0px 0px;
+}
+.slider-title{
+    background: #343a40;
+    color: #fafcffe0;
+    padding: 5px;
+    /* border-radius:5px 5px 0px 0px; */
+    font-family: roboto;
+    text-align:center
+}
+.btn-upload{
+    border: 1px solid #343a4059;
+    border-radius: 10px;
+}
+.btn-upload:hover{
+    background:black;
+    color:white;
+    transition:all 1s;
+}
+.btn-upload:focus{
+    box-shadow:0pt 0pt 4pt #0da02d
+}
+.btn-upload>i{
+   font-size:18px
+}
+.editInputStyle{
+    border-radius: 10px;
+    border: 1px solid #00000033;
+    outline: none;
+    width: 100%;
+    padding: 5px;
+    color:#007bff;
+}
+.editInputStyle:focus{
+    box-shadow: 0pt 0pt 4pt #9a9598
+}

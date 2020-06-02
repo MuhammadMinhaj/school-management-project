@@ -2,6 +2,10 @@ const adminAuthRoute = require('./adminAuthRoute')
 const adminRoute = require('./adminRoute')
 const menuRoute = require('./menuRoute')
 const pageRoute = require('./pageRoute')
+const settingRoute = require('./settingRoute')
+// Web Explorer Related Routes
+const webRoute = require('./webRoute')
+
 const router = [
 	{
 		path: '/administrator',
@@ -9,7 +13,8 @@ const router = [
 		[
 			adminRoute,
 			menuRoute,
-			pageRoute
+			pageRoute,
+			settingRoute
 		],
 	},
 	{
@@ -25,9 +30,7 @@ const router = [
 	},
 	{
 		path: '/',
-		handler: (req, res, next) => {
-			res.json({ message: 'Assalamu Alaikum' })
-		},
+		handler: webRoute
 	},
 ]
 module.exports = app => {

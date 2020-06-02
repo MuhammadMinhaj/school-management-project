@@ -1,9 +1,12 @@
 const path = require('path')
 const config = {
-    entry:'./public/scripts/index.js',
+    entry:{
+        admin:'./public/scripts/admin/index.js',
+        web:'./public/scripts/index.js'
+    },
     output:{
         path:path.resolve(__dirname,'dist'),
-        filename:'bundle.js',
+        filename:'[name].bundle.js',
         publicPath:'/dist'
     },
    module:{

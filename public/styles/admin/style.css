@@ -1,12 +1,12 @@
 
-@import './login.css';
+/* @import './login.css'; */
 @import './navbar.css';
 @import './dashboard.css';
 @import './createMenu.css';
 @import './administratorAccount.css';
 @import './adminCreate.css';
 @import './createPage.css';
-
+@import './setting.css';
 /* Defaullt Scroll Style */
 @media (min-width:576px){
     html{
