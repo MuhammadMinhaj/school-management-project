@@ -84,4 +84,40 @@ td:last-child {
 .socialIconsStyle>i{
     font-size:20px; 
 }
+.aboutInputStyle{
+    display: block;
+    width: 100%;
+    background: #21252917;
+    border-radius: 8px;
+    border: none;
+    border-bottom: 1px solid #00000024;
+    outline: none;
+    padding:10px 10px;
+    font-size:16px;
+}
+.aboutInputStyle:focus{
+    border-bottom: 1px solid #d39e00;
+}
+.futuredLinkInputStyle{
+    display: block;
+    width: 100%;
+    background: #2125290f;
+    border: none;
+    border-bottom: 1px solid #0000001f;
+    outline: none;
+    padding:3px;
+    font-size:16px;
+}
+.futuredLinkInputStyle:focus{
+    border-bottom: 1px solid #d39e00;
+}
+textarea {
+    border: none;
+    overflow: hidden;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 
+    resize: none; /*remove the resize handle on the bottom right*/
+}

@@ -329,8 +329,8 @@
 
                                    <div class="row mt-2">
                                     <div class="col-sm-12">
-                                       <%if(webModel.links){%>
-                                        <%if(webModel.links.length===0){%>
+                                       <%if(webModel.socialLinks){%>
+                                        <%if(webModel.socialLinks.length===0){%>
                                             <h6 class="text-muted text-center">There is nothing to show</h6>
                                             <%}else{%>
                                             <table class="table table-sm">
@@ -344,7 +344,7 @@
                                                </thead>
                                                <tbody>
                                                   
-                                                <%webModel.links.forEach((link,ind)=>{%>
+                                                <%webModel.socialLinks.forEach((link,ind)=>{%>
                                                        <!-- Social Links Modal -->
                                                    
 
@@ -395,12 +395,8 @@
                                                 </form>
                                                 </div>
                                              </div>
-                                             </div>
+                                          </div>
                                                     <!-- Social Links Modal End -->
-   
-   
-   
-   
                                                        <tr class="text-center" style="line-height:250%;">
                                                            <td><%=link.name%></td>
                                                            <td><%=link.icon%></td>
@@ -421,8 +417,6 @@
                                                            </td>
                                                         </tr>
                                                 <%})%>
-                                                 
-                                               
                                                   <%}%>
                                                </tbody>
                                             </table>
@@ -431,9 +425,152 @@
                                    </div>
                                </div>
                             </div>
-                         </div>
+                           </div>
                            <!-- Website Social Links End -->
                         </div>
+                        <div class="row p-3">
+                           <!-- About Text -->
+                           <div class="col-sm-6 mb-5">
+                              <div class="card setting-title-radius">
+                                 <h6 class="slider-title setting-title-radius">About Us</h6>
+                                 <div class="card-body">
+                                   <form action="/administrator/setting/about/text/add" method="POST">
+                                      <div class="form-row">    
+                                          <div class="col-sm-12">
+                                             <strong>Name</strong> 
+                                          </div>
+                                          <div class="col-sm-12">
+                                                <input type="text" value="<%=webModel.about.title||''%>" style="font-weight:bold;" name="title" class="aboutInputStyle">
+                                          </div>
+                                        
+                                          <div class="col-sm-12 mt-2">
+                                             <strong>Text</strong> 
+                                          </div>
+                                          <div class="col-sm-12">
+                                                <textarea name="body" class="aboutInputStyle"><%=webModel.about.body||''%></textarea>
+                                          </div>
+                                         
+                                         <div class="col-sm-2 mt-2">
+                                            <button class="btn <%=webModel.about.title?'btn-primary':'btn-success'%>"><%=webModel.about.title?'Update':'Add'%></button>
+                                         </div>
+                                      </div>
+                                   </form>
+
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Futured Links -->
+                           <div class="col-sm-6">
+                              <div class="card setting-title-radius">
+                                 <h6 class="slider-title setting-title-radius">Futured Links Setting</h6>
+                                 <div class="card-body">
+                                    <form action="/administrator/setting/futured/links/create" method="POST">
+                                       <div class="form-row">    
+                                           <div class="col-sm-12">
+                                              <strong>Name</strong> 
+                                           </div>
+                                           <div class="col-sm-12">
+                                                 <input type="text" placeholder="Example" name="name" class="futuredLinkInputStyle">
+                                           </div>
+                                         
+                                           <div class="col-sm-12 mt-2">
+                                              <strong>URL</strong> 
+                                           </div>
+                                           <div class="col-sm-12">
+                                             <input type="text"  placeholder="https://example.com/" name="url" class="futuredLinkInputStyle">
+                                          </div>
+                                          
+                                          <div class="col-sm-2 mt-2">
+                                             <input type="submit" value="Add" class="btn btn-success">
+                                          </div>
+                                       </div>
+                                    </form>
+                                    <div class="row mt-2">
+                                       <div class="col-sm-12">
+                                         
+                                          <!-- <h6 class="text-muted text-center">There is nothing to show</h6> -->
+                                          
+                                          <table class="table table-sm">
+                                             <thead>
+                                                <tr class="text-center">
+                                                   <th scope="col">Name</th>
+                                                   <th scope="col">URL</th>
+                                                   <th scope="col">CONTROLLING</th>
+                                                </tr>
+                                             </thead>
+                                             
+                                                <%if(webModel.futuredLinks){%>
+                                                   <%if(webModel.futuredLinks.length===0){%>
+                                                      <h6>There is nothig to show</h6>
+                                                      <%}else{%>
+                                                      <tbody>
+
+                                                      <%webModel.futuredLinks.forEach((link,ind)=>{%>
+                                                                                                   <!-- Modal -->
+                                             <div class="modal fade" id="futuredLinks<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                   <div class="modal-content">
+                                                      <div class="modal-header">
+                                                      <h5 class="modal-title text-muted" style="font-weight:bold;" id="exampleModalLabel"><%=link.name.toUpperCase()%></h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                         <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                      </div>
+                                                      <form action="/administrator/setting/futured/links/update/<%=link._id%>" method="POST">
+                                                      <div class="modal-body">
+                                                            <div class="form-row">    
+                                                               <div class="col-sm-12">
+                                                                  <strong>Name</strong> 
+                                                               </div>
+                                                               <div class="col-sm-12">
+                                                                     <input type="text" placeholder="Example" value="<%=link.name%>" name="name" class="futuredLinkInputStyle">
+                                                               </div>
+                                                            
+                                                               <div class="col-sm-12 mt-2">
+                                                                  <strong>URL</strong> 
+                                                               </div>
+                                                               <div class="col-sm-12">
+                                                                  <input type="text"  placeholder="https://example.com/" value="<%=link.url%>" name="url" class="futuredLinkInputStyle">
+                                                               </div>
+                                                            </div>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                      <input type="submit" value="Update" class="btn btn-primary">
+                                                      </div>
+                                                   </form>
+                                                   </div>
+                                                </div>
+                                             </div>
+
+                     
+                                                            <!-- Modal End -->
+                                                            <tr class="text-center" style="line-height:250%">
+                                                               <td><%=link.name%></td>
+                                                               <td class="text-muted"><%=link.url%></td>
+                                                               <td>
+                                                                  <a href="/administrator/setting/futured/links/delete/<%=link._id%>">
+                                                                     <i class="fas fa-trash-alt text-danger"></i>
+                                                                  </a>
+                                                                  <button class="btn btn-sm" data-toggle="modal" data-target="#futuredLinks<%=ind%>" data-whatever="@mdo">
+                                                                     <i class="fas fa-edit text-info"></i>
+                                                                    </button>
+                                                               </td>
+                                                            </tr>
+                                                         <%})%>
+                                                      </tbody>
+                                                      <%}%>
+                                                   <%}%>
+                                                
+                                             
+                                          </table>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>   
+
                      </div>
                   </div>
                </div>

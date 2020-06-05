@@ -25,7 +25,7 @@ const schema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Gallery',
 	},
-	links: [
+	socialLinks: [
 		{
 			name:String,
 			action:String,
@@ -33,25 +33,22 @@ const schema = new Schema({
 			color:String
 		}
 	],
-	footer: {
-		brand: {
-			title: String,
-			body: String,
+	futuredLinks:[
+		{
+			name:String,
+			url:String
+		}
+	],
+	about:{
+		title:{
+			type:String,
+			trim:true
 		},
-		featured: {
-			type: Schema.Types.ObjectId,
-			ref: 'Featured',
-		},
-		about: {
-			title: String,
-			body: String,
-		},
-		contact: {
-			location: String,
-			phone: String,
-			email: String,
-		},
-	},
+		body:{
+			type:String,
+			trim:true
+		}
+	}
 })
 
 const WebModel = new model('WebModel', schema)

@@ -40,9 +40,9 @@
 							<%}%>
 						</div>
 						<div class="col-md-2 head-social-links">
-							<%if(webModel.links){%>
+							<%if(webModel.socialLinks){%>
 								
-									<%webModel.links.forEach((link,ind)=>{%>
+									<%webModel.socialLinks.forEach((link,ind)=>{%>
 										<a href="<%=link.action%>">
 											<i style="color:<%=link.color%>" class="<%=link.icon%> m-1"></i>
 										</a>

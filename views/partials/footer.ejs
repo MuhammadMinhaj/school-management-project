@@ -9,14 +9,12 @@
 		</div>
 		<div class="col-md-4">
 			<div class="p-5">
-				<h3 class="footer-title">ABOUT JASA</h3>
+				<h3 class="footer-title">
+					<%=webModel.about.title?webModel.about.title:'No Title'%>
+				</h3>
 				<div class="footer-border mt-4"></div>
 				<p class="footer-about-text mt-1">
-					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic ex alias ab! Beatae tempora ullam
-					quibusdam suscipit eos rerum, odit corporis
-					culpa, minus adipisci consectetur explicabo unde optio. Totam, sint corrupti. Ad, mollitia
-					reiciendis minus deserunt voluptatem doloremque
-					sit exercitationem?
+					<%=webModel.about.body?webModel.about.body:'There is nothing to show'%>
 				</p>
 			</div>
 		</div>
@@ -25,21 +23,20 @@
 				<h3 class="footer-title">FEATURED LINKS</h3>
 				<div class="footer-border mt-4"></div>
 				<ul class="footer-link-container">
-					<li class="mt-1">
-						<a href="#" class="text-info">Links One</a>
-					</li>
-					<li class="mt-1">
-						<a href="#" class="text-info">Link Two</a>
-					</li>
-					<li class="mt-1">
-						<a href="#" class="text-info">Link Tree</a>
-					</li>
-					<li class="mt-1">
-						<a href="#" class="text-info">Link Four</a>
-					</li>
-					<li class="mt-1">
-						<a href="#" class="text-info">Link Five</a>
-					</li>
+					<%if(webModel.futuredLinks){%>
+						<%for(let link of webModel.futuredLinks){%>
+							<li class="mt-1">
+								<a href="<%=link.url%>" class="text-info"><%=link.name%></a>
+							</li>
+						<%}%>
+						<%}else{%>
+							<%for(let i = 1;i<=5;i++){%>
+								<li class="mt-1">
+									<a href="#" class="text-info"><%=i%> Link</a>
+								</li>
+							<%}%>
+						<%}%>
+						
 				</ul>
 			</div>
 		</div>
@@ -48,8 +45,8 @@
 				<h3 class="footer-title">SOCIAL LINKS</h3>
 				<div class="footer-border mt-4"></div>
 				<div class="social-links mt-2">
-					<%if(webModel.links){%>
-					<%webModel.links.forEach((link,ind)=>{%>
+					<%if(webModel.socialLinks){%>
+					<%webModel.socialLinks.forEach((link,ind)=>{%>
 					<a href="<%=link.action%>">
 						<i style="color:<%=link.color%>" class="<%=link.icon%> m-1"></i>
 					</a>

@@ -540,9 +540,9 @@ exports.socialLinksCreatePostController = async(req,res,next)=>{
 		}
 		let uniqError = {}
 		
-		if(webModel.links){
-			if(webModel.links.length!==0){
-				webModel.links.forEach(link=>{
+		if(webModel.socialLinks){
+			if(webModel.socialLinks.length!==0){
+				webModel.socialLinks.forEach(link=>{
 					if(link.action===action||link.name===name||link.icon===icon){
 						uniqError.message = 'Already Used Link'
 						return false
@@ -557,7 +557,7 @@ exports.socialLinksCreatePostController = async(req,res,next)=>{
 
 		let createdLink = await WebModel.findOneAndUpdate({_id:webModel._id},{
 			$push:{
-				links:{
+				socialLinks:{
 					name,
 					action,
 					icon,
@@ -600,7 +600,7 @@ exports.socialLinksDeleteGetController = async(req,res,next)=>{
 
 
 		let hasDeletedId = false 
-		webModel.links.forEach(link=>{
+		webModel.socialLinks.forEach(link=>{
 			
 			if(link._id.toString()===id.toString()){
 				hasDeletedId = true 
@@ -614,7 +614,7 @@ exports.socialLinksDeleteGetController = async(req,res,next)=>{
 
 		let deletedLink = await WebModel.findOneAndUpdate({_id:webModel._id},{
 			$pull:{
-				links:{
+				socialLinks:{
 					_id:id
 				}
 			}
@@ -656,9 +656,9 @@ exports.socialLinksUpdatePostController = async(req,res,next)=>{
 		}
 		let uniqError = {}
 		
-		if(webModel.links){
-			if(webModel.links.length!==0){
-				webModel.links.forEach(link=>{
+		if(webModel.socialLinks){
+			if(webModel.socialLinks.length!==0){
+				webModel.socialLinks.forEach(link=>{
 					if(link._id.toString()!==id.toString()){
 						if(link.action===action||link.name===name||link.icon===icon){
 							uniqError.message = 'Already Used Link'
@@ -671,7 +671,7 @@ exports.socialLinksUpdatePostController = async(req,res,next)=>{
 		if(uniqError.message){
 			return pageRenderHandler('fail',uniqError.message,webModel)
 		}
-		webModel.links.forEach(link=>{
+		webModel.socialLinks.forEach(link=>{
 			if(link._id.toString()===id.toString()){
 				link.name = name
 				link.icon = icon 
@@ -686,6 +686,232 @@ exports.socialLinksUpdatePostController = async(req,res,next)=>{
 			return pageRenderHandler('fail','Internal Server Error',webModel)
 		}
 		pageRenderHandler('success','Successfully Updated Social Links',updatedLinks)
+
+	}catch(e){
+		next(e)
+	}
+}
+exports.aboutTextCreatePostController = async(req,res,next)=>{
+	try{
+	
+		let admin = await Admin.findOne({ _id: req.admin._id })
+		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
+		let { title,body } = req.body
+
+		function pageRenderHandler(msgOpt, msg,webModel) {
+			if (msg) req.flash(msgOpt, msg)
+			return res.render('pages/administrator/setting.ejs', {
+				style: 'bg-light',
+				title: 'Administrator Setting',
+				data: admin,
+				flashMessage: req.flash(),
+				pages,
+				createdPage: {},
+				upSliderImgErr: {},
+				webNameError: {},
+				webNameList:webModel.name,
+				webModel:webModel
+			})
+		}
+
+		let msg;
+		if(!webModel.about.title){
+			msg = 'Successfully Added About Text'
+		}
+		if(title.length===0||body.length===0){
+			return pageRenderHandler('fail','Cannot Be Empty Field',webModel)
+		}
+
+		let addedAboutText = await WebModel.findOneAndUpdate({_id:webModel._id},{
+			about:{
+				title,
+				body
+			}
+		},{
+			new:true
+		})
+		if(!addedAboutText){
+			return pageRenderHandler('fail','Internal Server Error',webModel)
+		}
+		 pageRenderHandler('success',msg||'Successfully Updated About Text',addedAboutText)
+	}catch(e){
+		next(e)
+	}
+}
+exports.futuredLinksCreatePostController = async(req,res,next)=>{
+	try{
+		let admin = await Admin.findOne({ _id: req.admin._id })
+		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
+		let { name,url } = req.body
+
+		function pageRenderHandler(msgOpt, msg,webModel) {
+			if (msg) req.flash(msgOpt, msg)
+			return res.render('pages/administrator/setting.ejs', {
+				style: 'bg-light',
+				title: 'Administrator Setting',
+				data: admin,
+				flashMessage: req.flash(),
+				pages,
+				createdPage: {},
+				upSliderImgErr: {},
+				webNameError: {},
+				webNameList:webModel.name,
+				webModel:webModel
+			})
+		}
+		if(name.length===0||url.length===0){
+			return pageRenderHandler('fail','Cannot Be Empty Field',webModel)
+		}
+		let uniqError = {}
+		
+		if(webModel.futuredLinks){
+			if(webModel.futuredLinks.length!==0){
+				webModel.futuredLinks.forEach(link=>{
+					if(link.name===name||link.url===url){
+						uniqError.message = 'Already Used Link'
+						return false
+					}
+				})
+			}
+		}
+
+		if(uniqError.message){
+			return pageRenderHandler('fail',uniqError.message,webModel)
+		}
+		let createdLinks = await WebModel.findOneAndUpdate({_id:webModel._id},{
+			$push:{
+				futuredLinks:{
+					name,
+					url
+				}
+			}
+		},{new:true})
+
+		if(!createdLinks){
+			return pageRenderHandler('fail','Internal Server Error',webModel)
+		}
+		
+		pageRenderHandler('success','Successfully Created Futured Links',createdLinks)
+
+	}catch(e){
+		next(e)
+	}
+}
+exports.futuredLinksDeleteGetController = async(req,res,next)=>{
+	try{
+		
+		let { id } = req.params
+		let admin = await Admin.findOne({ _id: req.admin._id })
+		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
+
+		function pageRenderHandler(msgOpt, msg,webModel) {
+			if (msg) req.flash(msgOpt, msg)
+			return res.render('pages/administrator/setting.ejs', {
+				style: 'bg-light',
+				title: 'Administrator Setting',
+				data: admin,
+				flashMessage: req.flash(),
+				pages,
+				createdPage: {},
+				upSliderImgErr: {},
+				webNameError: {},
+				webNameList:webModel.name,
+				webModel:webModel
+			})
+		}
+
+
+		let hasDeletedId = false 
+		webModel.futuredLinks.forEach(link=>{
+			
+			if(link._id.toString()===id.toString()){
+				hasDeletedId = true 
+				
+			}
+		})
+		if(!hasDeletedId){
+			return res.redirect('/administrator/setting')
+		}
+		
+
+		let deletedLink = await WebModel.findOneAndUpdate({_id:webModel._id},{
+			$pull:{
+				futuredLinks:{
+					_id:id
+				}
+			}
+		},{new:true})
+
+		if(!deletedLink){
+			return pageRenderHandler('fail','Internal Server Error',webModel)
+		}
+		return res.redirect('/administrator/setting')
+	}catch(e){
+		next(e)
+	}
+}
+exports.futuredLinksUpdatePostController = async(req,res,next)=>{
+	try{
+		
+	
+		let admin = await Admin.findOne({ _id: req.admin._id })
+		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
+		let { name,url } = req.body
+		let { id } = req.params
+		function pageRenderHandler(msgOpt, msg,webModel) {
+			if (msg) req.flash(msgOpt, msg)
+			return res.render('pages/administrator/setting.ejs', {
+				style: 'bg-light',
+				title: 'Administrator Setting',
+				data: admin,
+				flashMessage: req.flash(),
+				pages,
+				createdPage: {},
+				upSliderImgErr: {},
+				webNameError: {},
+				webNameList:webModel.name,
+				webModel:webModel
+			})
+		}
+
+		if(name.length===0||url.length===0){
+			return pageRenderHandler('fail','Cannot Be Empty Field',webModel)
+		}
+		let uniqError = {}
+		
+		if(webModel.futuredLinks){
+			if(webModel.futuredLinks.length!==0){
+				webModel.futuredLinks.forEach(link=>{
+					if(link._id.toString()!==id.toString()){
+						if(link.name===name||link.url===url){
+							uniqError.message = 'Already Used Link'
+							return false
+						}
+					}
+				})
+			}
+		}
+		if(uniqError.message){
+			return pageRenderHandler('fail',uniqError.message,webModel)
+		}
+		webModel.futuredLinks.forEach(link=>{
+			if(link._id.toString()===id.toString()){
+				link.name = name
+				link.url = url 
+				
+			}
+		})
+
+		let updatedLinks = await WebModel.findOneAndUpdate({_id:webModel._id},webModel,{new:true})
+		console.log(updatedLinks)
+		if(!updatedLinks){
+			return pageRenderHandler('fail','Internal Server Error',webModel)
+		}
+		pageRenderHandler('success','Successfully Updated Futured Links',updatedLinks)
 
 	}catch(e){
 		next(e)
