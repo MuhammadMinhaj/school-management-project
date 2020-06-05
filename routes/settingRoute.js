@@ -17,7 +17,10 @@ const {
     sliderUploadPostController,
     sliderDeleteGetController,
     sliderEditInfoPostController,
-    sliderTextDeleteGetController
+    sliderTextDeleteGetController,
+    socialLinksCreatePostController,
+    socialLinksDeleteGetController,
+    socialLinksUpdatePostController
 }   = require('../controllers/adminControllers/settingController')
 
 router.get('/setting',isAuthenticatedAdmin,settingGetController)
@@ -40,4 +43,10 @@ router.get('/setting/slider-update/:id',isAuthenticatedAdmin,(req,res,next)=>{
 router.get('/setting/slider-text-delete/:id',isAuthenticatedAdmin,sliderTextDeleteGetController)
 router.post('/setting/slider-update/:id',isAuthenticatedAdmin,sliderEditInfoPostController)
 
+router.post('/setting/links/create',isAuthenticatedAdmin,socialLinksCreatePostController)
+router.get('/setting/links/delete/:id',isAuthenticatedAdmin,socialLinksDeleteGetController)
+router.post('/setting/links/update/:id',isAuthenticatedAdmin,socialLinksUpdatePostController)
+router.get('/setting/links/update/:id',isAuthenticatedAdmin,(req,res,next)=>{
+    res.redirect('/administrator/setting')
+})
 module.exports = router

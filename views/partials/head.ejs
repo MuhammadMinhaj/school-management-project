@@ -40,15 +40,22 @@
 							<%}%>
 						</div>
 						<div class="col-md-2 head-social-links">
-							<a class="head-twitter">
-								<i class="fab fa-twitter m-1"></i>
-							</a>
-							<a class="head-youtube">
+							<%if(webModel.links){%>
+								
+									<%webModel.links.forEach((link,ind)=>{%>
+										<a href="<%=link.action%>">
+											<i style="color:<%=link.color%>" class="<%=link.icon%> m-1"></i>
+										</a>
+									<%})%>
+								
+							<%}%>
+							
+							<!-- <a class="head-youtube">
 								<i class="fab fa-instagram"></i>
 							</a>
 							<a class="head-facebook">
 								<i class="fab fa-facebook m-1"></i>
-							</a>
+							</a> -->
 						</div>
 					</div>
 				</div>

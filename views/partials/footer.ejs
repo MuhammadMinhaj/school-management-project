@@ -4,7 +4,7 @@
 			<div class="text-center py-5">
 				<h2 class="footer-brand-title">JASA</h2>
 				<div class="footer-brand-bottom-border m-auto"></div>
-				<img src="/uploads/jasa-logo.svg" style="max-width: 120px;" alt="JASA" class="jasa-logo" />
+				<img src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" style="max-width: 120px;" alt="JASA" class="jasa-logo mt-1" />
 			</div>
 		</div>
 		<div class="col-md-4">
@@ -12,8 +12,10 @@
 				<h3 class="footer-title">ABOUT JASA</h3>
 				<div class="footer-border mt-4"></div>
 				<p class="footer-about-text mt-1">
-					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic ex alias ab! Beatae tempora ullam quibusdam suscipit eos rerum, odit corporis
-					culpa, minus adipisci consectetur explicabo unde optio. Totam, sint corrupti. Ad, mollitia reiciendis minus deserunt voluptatem doloremque
+					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic ex alias ab! Beatae tempora ullam
+					quibusdam suscipit eos rerum, odit corporis
+					culpa, minus adipisci consectetur explicabo unde optio. Totam, sint corrupti. Ad, mollitia
+					reiciendis minus deserunt voluptatem doloremque
 					sit exercitationem?
 				</p>
 			</div>
@@ -46,18 +48,13 @@
 				<h3 class="footer-title">SOCIAL LINKS</h3>
 				<div class="footer-border mt-4"></div>
 				<div class="social-links mt-2">
-					<a class="youtube">
-						<i class="fab fa-youtube m-1"></i>
+					<%if(webModel.links){%>
+					<%webModel.links.forEach((link,ind)=>{%>
+					<a href="<%=link.action%>">
+						<i style="color:<%=link.color%>" class="<%=link.icon%> m-1"></i>
 					</a>
-					<a class="twitter">
-						<i class="fab fa-twitter m-1"></i>
-					</a>
-					<a class="instragram">
-						<i class="fab fa-instagram"></i>
-					</a>
-					<a class="facebook">
-						<i class="fab fa-facebook m-1"></i>
-					</a>
+					<%})%>
+					<%}%>
 				</div>
 			</div>
 		</div>

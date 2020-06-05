@@ -295,7 +295,140 @@
                             <div class="card setting-title-radius">
                                <h6 class="slider-title setting-title-radius">Social Links Setting</h6>
                                <div class="card-body">
-                                   <h5>Assalamu Alaikum</h5>
+                                 <form action="/administrator/setting/links/create" method="POST">
+                                    <div class="form-row">    
+                                       <div class="col-sm-1 socialIconsStyle">
+                                                <i class="fas fa-file-signature"></i>
+                                       </div>
+                                       <div class="col-sm-5">
+                                             <input type="text" name="name" placeholder="Name" class="form-control">
+                                       </div>
+                                       <div class="col-sm-1 socialIconsStyle">
+                                             <i class="fas fa-icons"></i>
+                                       </div>
+                                       <div class="col-sm-5">
+                                             <input type="text" name="icon" placeholder="Icon Name" class="form-control">
+                                       </div>
+                                       <div class="col-sm-1 mt-2 socialIconsStyle">
+                                          <i class="fas fa-link"></i>
+                                       </div>
+                                       <div class="col-sm-5 mt-2">
+                                          <input type="text" name="action" placeholder="https://" class="form-control">
+                                       </div>
+                                       <div class="col-sm-1 mt-2 socialIconsStyle">
+                                          <i class="fas fa-palette"></i>
+                                       </div>
+                                       <div class="col-sm-3 mt-2">
+                                          <input type="color" name="color" class="form-control">
+                                       </div>
+                                       <div class="col-sm-2 mt-2">
+                                          <input type="submit" value="Add" style="width:100%" class="btn btn-success">
+                                       </div>
+                                    </div>
+                                 </form>
+
+                                   <div class="row mt-2">
+                                    <div class="col-sm-12">
+                                       <%if(webModel.links){%>
+                                        <%if(webModel.links.length===0){%>
+                                            <h6 class="text-muted text-center">There is nothing to show</h6>
+                                            <%}else{%>
+                                            <table class="table table-sm">
+                                               <thead>
+                                                  <tr class="text-center">
+                                                     <th scope="col">Name</th>
+                                                     <th scope="col">Icons</th>
+                                                     <th scope="col">Action</th>
+                                                     <th scope="col">Controlling</th>
+                                                  </tr>
+                                               </thead>
+                                               <tbody>
+                                                  
+                                                <%webModel.links.forEach((link,ind)=>{%>
+                                                       <!-- Social Links Modal -->
+                                                   
+
+
+                                          <div class="modal fade" id="socialLinksModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                   <div class="modal-header">
+                                                   <h5 class="modal-title text-muted" style="font-weight:bold;" id="exampleModalLabel"><%=link.name.toUpperCase()%></h5>
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                   </button>
+                                                   </div>
+                                                   <form action="/administrator/setting/links/update/<%=link._id%>" method="POST">
+                                                   <div class="modal-body">
+                                                      
+                                                      <div class="form-row">
+                                                         <div class="col-sm-1 socialIconsStyle">
+                                                               <i class="fas fa-file-signature"></i>
+                                                         </div>
+                                                         <div class="col-sm-5">
+                                                            <input type="text" name="name" value="<%=link.name%>" placeholder="Name" class="form-control">
+                                                         </div>
+                                                         <div class="col-sm-1 socialIconsStyle">
+                                                            <i class="fas fa-icons"></i>
+                                                         </div>
+                                                         <div class="col-sm-5">
+                                                            <input type="text" name="icon" value="<%=link.icon%>" placeholder="Icon Name" class="form-control">
+                                                         </div>
+                                                          <dvi class="col-sm-1 mt-2 socialIconsStyle">
+                                                              <i class="fas fa-link"></i>
+                                                          </dvi>
+                                                          <div class="col-sm-7 mt-2">
+                                                              <input type="text" value="<%=link.action%>" name="action" placeholder="https://" class="form-control">
+                                                          </div>
+                                                         <div class="col-sm-1 mt-2 socialIconsStyle">
+                                                            <i class="fas fa-palette"></i>
+                                                         </div>
+                                                         <div class="col-sm-3 mt-2">
+                                                            <input type="color" name="color" value="<%=link.color%>" class="form-control">
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div class="modal-footer">
+                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                   <input type="submit" value="Update" class="btn btn-primary">
+                                                   </div>
+                                                </form>
+                                                </div>
+                                             </div>
+                                             </div>
+                                                    <!-- Social Links Modal End -->
+   
+   
+   
+   
+                                                       <tr class="text-center" style="line-height:250%;">
+                                                           <td><%=link.name%></td>
+                                                           <td><%=link.icon%></td>
+                                                           <td class="text-muted">
+                                                               <%if(link.action.length>15){%>
+                                                                   <%=link.action.slice(0,16)+'...'%>
+                                                               <%}else{%>
+                                                                   <%=link.action%>
+                                                               <%}%>
+                                                           </td>
+                                                           <td>
+                                                              <a href="/administrator/setting/links/delete/<%=link._id%>" class="btn btn-sm">
+                                                               <i class="fas fa-trash-alt text-danger"></i>
+                                                              </a>
+                                                              <button class="btn btn-sm" data-toggle="modal" data-target="#socialLinksModal<%=ind%>" data-whatever="@mdo">
+                                                               <i class="fas fa-edit text-info"></i>
+                                                              </button>
+                                                           </td>
+                                                        </tr>
+                                                <%})%>
+                                                 
+                                               
+                                                  <%}%>
+                                               </tbody>
+                                            </table>
+                                        <%}%>
+                                    </div>
+                                   </div>
                                </div>
                             </div>
                          </div>

@@ -38,7 +38,7 @@
 	border-radius: 50%;
 	background: #343a40e0;
 }
-.head-youtube > i {
+/* .head-youtube > i {
 	color: red;
 }
 .head-twitter > i {
@@ -46,7 +46,7 @@
 }
 .head-facebook > i {
 	color: #0ca5ff;
-}
+} */
 .head-social-links > a > i:hover {
 	border: 1px dashed black;
 	background: none;

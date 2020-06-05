@@ -68,3 +68,20 @@ td:last-child {
 .editInputStyle:focus{
     box-shadow: 0pt 0pt 4pt #9a9598
 }
+.socialIconsStyle{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    border:1px solid #00000026;
+    border-radius:8px;
+    transition:all 1s;
+    color:#6c757d;
+}
+.socialIconsStyle:hover{
+    background:#545b62;
+    color:white;
+}
+.socialIconsStyle>i{
+    font-size:20px; 
+}
+

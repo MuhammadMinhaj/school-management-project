@@ -25,6 +25,14 @@ const schema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Gallery',
 	},
+	links: [
+		{
+			name:String,
+			action:String,
+			icon:String,
+			color:String
+		}
+	],
 	footer: {
 		brand: {
 			title: String,
@@ -42,12 +50,6 @@ const schema = new Schema({
 			location: String,
 			phone: String,
 			email: String,
-		},
-		links: {
-			google: String,
-			facebook: String,
-			twitter: String,
-			youtube: String,
 		},
 	},
 })
