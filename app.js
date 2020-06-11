@@ -32,7 +32,7 @@ app.use(
 
 // Set All Middlewares
 setMiddlewares(app)
-// Set All Routes
+// Set All Routese
 setRoutes(app)
 
 

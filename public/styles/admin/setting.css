@@ -111,13 +111,25 @@ td:last-child {
 .futuredLinkInputStyle:focus{
     border-bottom: 1px solid #d39e00;
 }
+
 textarea {
     border: none;
-    overflow: hidden;
     outline: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-
     resize: none; /*remove the resize handle on the bottom right*/
 }
+textarea::-webkit-scrollbar{
+    width:5px; 
+}
+textarea::-webkit-scrollbar-track{
+    background:rgba(94, 93, 93, 0.26);
+    border-radius: 25px
+}
+textarea::-webkit-scrollbar-thumb{
+    /* background:linear-gradient(#6200ea,#4a148c,#6200ea); */
+    background:#adb5bd;
+    border-radius: 25px
+}
+

@@ -25,7 +25,7 @@
                         <div class="row p-3">
                            <!-- Website Name -->
                            <div class="col-sm-6">
-                              <div class="card setting-title-radius">
+                              <div class="card setting-title-radius" style="height:100%">
                                  <h6 class="slider-title setting-title-radius">Name Setting</h6>
                                  <div class="card-body">
                                     <form action="/administrator/setting/web_name" method="POST" >
@@ -92,7 +92,7 @@
                            <!-- Website Name End -->
                            <!-- Website Logo -->
                            <div class="col-sm-6">
-                              <div class="card setting-title-radius">
+                              <div class="card setting-title-radius" style="height:100%">
                                  <h6 class="slider-title setting-title-radius">Logo Setting</h6>
                                  <div class="card-body">
                                     <form action="/administrator/setting/web_logo" method="POST" enctype="multipart/form-data">
@@ -141,8 +141,9 @@
                            <!-- Website Logo End -->
                         </div>
                         <div class="row p-3">
+                           <!-- Slider -->
                            <div class="col-sm-6">
-                              <div class="card setting-title-radius">
+                              <div class="card setting-title-radius" style="height:100%">
                                  <h6 class="slider-title setting-title-radius">Slider Setting</h6>
                                  <div class="card-body">
                                     <!-- Show Slider Images -->
@@ -271,11 +272,11 @@
                                                    <td><%=i+1%></td>
                                                    <td><%=s.name%></td>
                                                    <td>
-                                                      <a href="/administrator/setting/slider-delete/<%=s._id%>" class="btn btn-sm btn-upload">
-                                                         <i class="fas fa-trash text-danger"></i>
+                                                      <a href="/administrator/setting/slider-delete/<%=s._id%>" class="btn btn-sm">
+                                                         <i class="fas fa-trash-alt text-danger"></i>
                                                          <!-- <i class="fas fa-trash-alt text-danger"></i> -->
                                                       </a>
-                                                      <a class="btn btn-sm btn-upload" data-toggle="modal" data-target="#settingSliderModal<%=i%>" data-whatever="@mdo">
+                                                      <a class="btn btn-sm" data-toggle="modal" data-target="#settingSliderModal<%=i%>" data-whatever="@mdo">
                                                       <i class="fas fa-edit text-info"></i>
                                                       </a>
                                                    </td>
@@ -290,9 +291,10 @@
                                  </div>
                               </div>
                            </div>
+                           <!-- Slider End -->
                            <!-- Website Social Links -->
                            <div class="col-sm-6">
-                            <div class="card setting-title-radius">
+                            <div class="card setting-title-radius" style="height:100%">
                                <h6 class="slider-title setting-title-radius">Social Links Setting</h6>
                                <div class="card-body">
                                  <form action="/administrator/setting/links/create" method="POST">
@@ -430,8 +432,8 @@
                         </div>
                         <div class="row p-3">
                            <!-- About Text -->
-                           <div class="col-sm-6 mb-5">
-                              <div class="card setting-title-radius">
+                           <div class="col-sm-6">
+                              <div class="card setting-title-radius" style="height:100%">
                                  <h6 class="slider-title setting-title-radius">About Us</h6>
                                  <div class="card-body">
                                    <form action="/administrator/setting/about/text/add" method="POST">
@@ -447,7 +449,10 @@
                                              <strong>Text</strong> 
                                           </div>
                                           <div class="col-sm-12">
-                                                <textarea name="body" class="aboutInputStyle"><%=webModel.about.body||''%></textarea>
+                                                <textarea name="body" 
+                                                 rows="8"
+                                                class="aboutInputStyle"><%=webModel.about.body||''%></textarea>
+                                                
                                           </div>
                                          
                                          <div class="col-sm-2 mt-2">
@@ -461,7 +466,7 @@
                            </div>
                            <!-- Futured Links -->
                            <div class="col-sm-6">
-                              <div class="card setting-title-radius">
+                              <div class="card setting-title-radius" style="height:100%">
                                  <h6 class="slider-title setting-title-radius">Futured Links Setting</h6>
                                  <div class="card-body">
                                     <form action="/administrator/setting/futured/links/create" method="POST">

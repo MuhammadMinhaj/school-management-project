@@ -32,12 +32,15 @@
 .footer-link-container > li > a {
 	font-family: 'Raleway';
 	font-size: 14px;
+	
 }
 .footer-link-container > li:hover {
 	transform: translateX(10px);
 	transition: transform 0.5s;
 }
-
+.social-links > a{
+	text-decoration:none;
+}
 .social-links > a > i {
 	font-size: 21px;
 	padding: 5px;

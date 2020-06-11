@@ -1,13 +1,11 @@
 <!-- Header Section -->
 <%-include('../partials/head.ejs')%>
 
-<!-- Slider -->
-<!-- <div class="sub-img">
-  <img src="/uploads/syad-taher-sha-hozor.jpg" alt="">
-  <h6 class="sub-img-title">Syad Muhammad Tahir Shah</h6>
-</div> -->
 
-<div class="slider-container">
+<!-- Slider -->
+<div class="row backgroundImage">
+  <div class="col-sm-12">
+    <div class="slider-container">
   
       <div class="swiper-container">
           <!--     -->
@@ -42,7 +40,7 @@
                           <h2 class="ml3"><%=slider.text%></h2>
                       </div>
                         <%}%>
-
+  
                         <%if(slider.btnName && slider.action){%>
                           <a href="<%=slider.action%>" class="slider-text-button"><%=slider.btnName%></a>
                         <%}%>
@@ -62,13 +60,452 @@
         <div class="swiper-button-prev"></div>
       </div>
     
+  </div>
+  </div>
 </div>
-
 <!-- Slider End -->
 
+<!-- Links Card -->
+<div class="row backgroundImage px-5 pt-5">
+  <div class="col-sm-12 cardStyleMainContainer">
+    <div class="row mt-5 removeMargin">
+    <div class="col-sm-3 p-1">
+        <a href="/testingnow"
+        class="cardLinkContainer">
+          <div class="extra"></div>
+          <div class="cardLinkIconContainer py-2">
+            <i class="fas fa-info"></i>
+          </div>
+          <div class="cardLinkText">
+            <h6>About JASA</h6>
+          </div>
+        </a>
+    </div>
+    <div class="col-sm-3 p-1">
+        <a href="/testingnow"
+        class="cardLinkContainer">
+          <div class="extra"></div>
+          <div class="cardLinkIconContainer py-2">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="cardLinkText">
+            <h6>Administration</h6>
+          </div>
+        </a>
+    </div>
+    <div class="col-sm-3 p-1">
+        <a href="/testingnow"
+        class="cardLinkContainer">
+          <div class="extra"></div>
+          <div class="cardLinkIconContainer py-2">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <div class="cardLinkText">
+            <h6>Libray</h6>
+          </div>
+        </a>
+    </div>
+    <div class="col-sm-3 p-1">
+        <a href="/testingnow"
+        class="cardLinkContainer">
+          <div class="extra"></div>
+          <div class="cardLinkIconContainer py-2">
+            <i class="fas fa-road"></i>
+          </div>
+          <div class="cardLinkText">
+            <h6>Mission & Vission</h6>
+          </div>
+        </a>
+    </div>
+    </div>
+  </div>
+</div>
+<!-- Links Card End -->
+
+<!-- Creator Page Design -->
+<div class="row backgroundImage py-3 px-5">
+  <div class="col-sm-12 py-2 text-center">
+    <h3 style="border-bottom:5px solid #ffc107;display: inline-block;font-family:arial black;font-weight:bold;">
+      <i class="fas fa-quote-left" style="color:#adb5bd;font-size: 2.25rem;"></i> 
+      CREATOR OF 
+       <span style="text-shadow: 2pt 1pt 1pt #0a0a0a;color:green;font-size:3rem;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+        <span style="color:#575e64">J</span>
+        <span style="color:#28a745">A</span>
+        <span style="color:#575e64">S</span>
+        <span style="color:#28a745">A</span>
+      </span>
+    </h3>
+  </div>
+  <div class="col-sm-3">
+    <div class="swiper-container imageCustomStyle py-2">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
+          <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Syed Muhammad Taher Shah(MJA)</h6>
+          <img src="/uploads/syad-taher-sha-hozor.jpg" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
+          
+        </div>
+        <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
+          <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Syed Muhammad Tayyab Shah(RH)</h6>
+          <img src="/uploads/creator-2.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
+        </div>
+        <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
+          <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Syed Muhammad Ahmad Shah(RH)</h6>
+          <img src="/uploads/creator-3.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
+        </div>
+        <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
+          <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Sayed Muhammad Sabir Shah(MJA)</h6>
+          <img src="/uploads/creator-4.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
+        </div>
+      </div>
+      
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Navigation -->
+      <div class="swiper-button-prev" style="color:#ffa500"></div>
+      <div class="swiper-button-next" style="color:#ffa500"></div>
+    </div>
+     
+  </div>
+  <div class="col-sm-2"></div>
+  <div class="col-sm-7 p-4">
+    <div class="creatorTextContainer">
+      <div class="preStyle"></div>
+      <div class="swiper-container py-2" style="border-left:5px solid #28a745;">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" style="background-color: rgba(255, 255, 255, 0);">
+             <div class="text-left ml-2">
+              <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h5>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus modi dolor saepe, exercitationem placeat error ut qui pariatur perspiciatis omnis nostrum quos odit quibusdam at velit maxime mollitia cumque inventore.</p>
+             </div>  
+          </div>
+          <div class="swiper-slide" style="background-color: rgba(255, 255, 255, 0);">
+            <div>
+             <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h5>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus modi dolor saepe, exercitationem placeat error ut qui pariatur perspiciatis omnis nostrum quos odit quibusdam at velit maxime mollitia cumque inventore.</p>
+            </div>  
+          </div>
+          <div class="swiper-slide" style="background-color: rgba(255, 255, 255, 0);">
+            <div>
+             <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h5>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus modi dolor saepe, exercitationem placeat error ut qui pariatur perspiciatis omnis nostrum quos odit quibusdam at velit maxime mollitia cumque inventore.</p>
+            </div>  
+          </div>
+          <div class="swiper-slide" style="background-color: rgba(255, 255, 255, 0);">
+            <div>
+             <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h5>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus modi dolor saepe, exercitationem placeat error ut qui pariatur perspiciatis omnis nostrum quos odit quibusdam at velit maxime mollitia cumque inventore.</p>
+            </div>  
+          </div>
+        </div>
+
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Creator Page Design End-->
+
+<!-- Notice Board -->
+<div class="row backgroundImage">
+  <div class="col-sm-12">
+    <div class="row mt-5">
+
+      <div class="col-sm-6 p-5">
+    
+          <div class="newsMainContainer">
+         
+            <div class="newsIcon">
+              <!-- <i class="fas fa-clipboard"></i> -->
+              <i class="fas fa-clipboard-list"></i>
+            </div>
+            <h5 class="newsTitle">Latest New's</h5>
+             <div class="card newsMainBody mx-3 p-4">
+               <h5 style="color:#495057"> <i class="fas fa-quote-left" style="color:#6c757d;font-size:1.5rem"></i>  Lorem ipsum dolor sit amet.</h5>
+               <card class="body">
+                 <p style="color:#545b62;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum sed, consequuntur ullam architecto officia deleniti ipsam? Molestias sit deleniti ex dolor minima, pariatur repellendus magnam reprehenderit excepturi, asperiores iure unde.</p>
+               </card>
+             </div>  
+          </div>
+        
+      </div>
+
+      <div class="col-sm-6 p-5">
+        <div class="noticeMainContainer">
+          <div class="noticeTitle">
+              <h5 style="font-weight:bold;margin-top:5px;text-transform: uppercase;" class="text-danger">
+                Notice Board
+              </h5>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card m-1 p-2 maxHeightSet">
+                  <ul class="wrapperNoticeContainer">
+                    <li>
+                        <div class="noticeDateContainer">
+                          <span>22 <span>April</span></span>
+                          <br>
+                          <span>2020</span>
+                        </div>
+                        <div class="noticeTextContainer">
+                          <p style="font-weight: bold;">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                          
+                        </div>
+                    </li>
+                    <%for(let i = 0;i<11;i++){%>
+                      <li>
+                        <div class="noticeDateContainer">
+                          <span>22 <span>April</span></span>
+                          <br>
+                          <span>2020</span>
+                        </div>
+                        <div class="noticeTextContainer">
+                          <p style="font-weight: bold;">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                          </p>
+                          
+                        </div>
+                    </li>
+                      <%}%>
+                 
+                  </ul>
+
+              </div>
+            </div>   
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Notice Board End -->
+
+<!-- Department Of Jasa -->
+<div class="row px-5 pb-5 backgroundImage">
+  <div class="col-sm-12 pb-3 text-center">
+    <h3 style="border-bottom:5px solid #ffc107;display: inline-block;font-family:arial black;font-weight:bold;">
+      <i class="fas fa-quote-left" style="color:#adb5bd;font-size: 2.25rem;"></i> 
+      DEPARTMENT OF
+       <span style="text-shadow: 2pt 1pt 1pt #0a0a0a;color:green;font-size:3rem;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+        <span style="color:#575e64">J</span>
+        <span style="color:#28a745">A</span>
+        <span style="color:#575e64">S</span>
+        <span style="color:#28a745">A</span>
+      </span>
+    </h3>
+  </div>
 
 
-<a href="/auth/login" class="nav-link py-5">Login Admin</a>
+
+
+
+
+<div class="col-sm-3 mb-3">
+  <div class="departmentContainer py-5">
+      <h5>হাফিযুল কোরআন</h5>
+      <div class="tringleOfDepart">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+  </div>
+</div>
+<div class="col-sm-3 mb-3">
+  <div class="departmentContainer py-5">
+      <h5>ইবতেদায়ী</h5>
+      <div class="tringleOfDepart">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+  </div>
+</div>
+
+<div class="col-sm-3 mb-3">
+  <div class="departmentContainer py-5">
+      <h5>দাখিল</h5>
+      <div class="tringleOfDepart">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+  </div>
+</div>
+
+<div class="col-sm-3 mb-3">
+  <div class="departmentContainer py-5">
+      <h5>আলিম</h5>
+      <div class="tringleOfDepart">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+  </div>
+</div>
+
+<div class="col-sm-3 mb-3">
+  <div class="departmentContainer py-5">
+      <h5>ফাযিল</h5>
+      <div class="tringleOfDepart">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+  </div>
+</div>
+
+<div class="col-sm-3 mb-3">
+  <div class="departmentContainer py-5">
+      <h5>কামিল</h5>
+      <div class="tringleOfDepart">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+  </div>
+</div>
+
+<div class="col-sm-3 mb-3">
+  <div class="departmentContainer py-5">
+      <h5>অনার্স-মাস্টার্স</h5>
+      <div class="tringleOfDepart">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+  </div>
+</div>
+<div class="col-sm-3 mb-3">
+  <div class="departmentContainer py-5">
+      <h5>কামিল</h5>
+      <div class="tringleOfDepart">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+  </div>
+</div>
+
+
+
+</div>
+<!-- Department Of Jasa End -->
+
+<!-- Important Links End -->
+<div class="row px-5 pb-5 backgroundImage">
+  <div class="col-sm-12 pb-3 text-center">
+    <h3 style="border-bottom:5px solid #ffc107;display: inline-block;font-family:arial black;font-weight:bold;">
+      <i class="fas fa-quote-left mr-1" style="color:#adb5bd;font-size: 2.25rem;">
+      </i>IMPORTANCE  <span style="color:#bd2130">LINKS</span> 
+    </h3>
+  </div>
+
+<div class="col-sm-12">
+  <div class="row">
+    <div class="col-sm-6 mb-2">
+        <div class="importanceLinkContainer p-3">
+          <h5>Referance Links</h5>
+          <ul class="p-2">
+            <li>
+              <a href="">
+                <div class="linksIcon">
+                  <i class="fas fa-external-link-alt"></i>
+                </div>
+                <div class="linksText">
+                  Home
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <div class="linksIcon">
+                  <i class="fas fa-external-link-alt"></i>
+                </div>
+                <div class="linksText">
+                  Home
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <div class="linksIcon">
+                  <i class="fas fa-external-link-alt"></i>
+                </div>
+                <div class="linksText">
+                  Home
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+    </div>
+    <div class="col-sm-6 mb-2">
+      <div class="importanceLinkContainer p-3">
+        <h5>Links Of JASA</h5>
+        <ul class="p-2">
+          <li>
+            <a href="">
+              <div class="linksIcon">
+                <i class="fas fa-download"></i>
+              </div>
+              <div class="linksText">
+                Home
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <div class="linksIcon">
+                <i class="fas fa-download"></i>
+              </div>
+              <div class="linksText">
+                Home
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <div class="linksIcon">
+                <i class="fas fa-download"></i>
+              </div>
+              <div class="linksText">
+                Home
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+  </div>
+  </div>
+</div>
+
+</div>
+<!-- Important Links End -->
+
+<!-- Contact Us -->
+<div class="row px-5 pb-5" style="background:#343a40;border-bottom:5px solid #1e7e34">
+      <div class="col-sm-12 py-4 text-center">
+        <h3 style="color:#adb5bd;border-bottom:5px solid #ffc107;display: inline-block;font-family:arial black;font-weight:bold;">
+          
+          CONTACT
+           <span style="text-shadow: 2pt 1pt 1pt #0a0a0a;color:green;font-size:2.5rem;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+            <span style="color:#575e64">U</span>
+            <span style="color:#28a745">S</span>
+          </span>
+        </h3>
+      </div>
+    
+      <div class="col-sm-4">
+        <div class="contactTextContainer pl-5">
+          <h2 class="contactTitle" style="text-shadow: 2pt 1pt 1pt #0a0a0a;color:green;font-size:2.5rem;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+            <span style="color:#575e64">J</span>
+            <span style="color:#28a745">A</span>
+            <span style="color:#575e64">S</span>
+            <span style="color:#28a745">A</span>
+          </h2>
+            <p>Chittagong-4212</p>
+            <p>Bangladesh</p>
+            <p><strong>Phone : </strong> +88031655476</p>
+            <p><strong>Email : </strong> jasactg@gmail.com</p>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="locationOfUniversity">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d59030.94766746596!2d91.837064!3d22.374982!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcad5f4f134653769!2sJamia%20Ahmadia%20Sunnia%20Alia%20Madrasah!5e0!3m2!1sen!2sbd!4v1591810341900!5m2!1sen!2sbd" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+      </div>
+   
+</div>
+<!-- Contact Us End -->
+
+
+
+
+
+<!-- <a href="/auth/login" class="nav-link py-5">Login Admin</a> -->
 <!-- Footer Section -->
 <%-include('../partials/footer.ejs')%>
 

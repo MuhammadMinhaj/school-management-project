@@ -21,50 +21,55 @@
 		<link rel="stylesheet" href="/styles/style.css" />
 	</head>
 	<body>
-		<div class="container-fluid bg-dark main-head-container">
-			<div class="row">
-				<div class="container bg-light head-container">
-					<div class="row">
-						<div class="col-md-2 text-center text-dark">
-							<img src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" style="max-width: 90px;" alt="" />
-						</div>
-						<div class="col-md-8 head-name">
-							<!-- <h4 class="text-center web-name">الجامعة الاحمدية السنية العالية (الكامل)</h4>
-							<h4 class="text-center web-name">JAMEA AHMADIA SUNNIA KAMIL MADRASAH</h4> -->
-							<%if(webModel.name.length===0){%>
-								<h4 class="text-center web-name text-muted">YOUR WEBSITE TITLE HERE</h4>
-							<%}else{%>
-							<%for(let webName of webModel.name){%>
-								<h4 class="text-center web-name"><%=webName.name.toUpperCase()%></h4>
+		<div class="row bg-dark main-head-container">
+			<div class="col-sm-12">
+				<div class="row">
+					<div class="container bg-light head-container">
+						<div class="row">
+							<div class="col-md-2 text-center text-dark">
+								<img src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" style="max-width: 90px;" alt="" />
+							</div>
+							<div class="col-md-8 head-name">
+								<!-- <h4 class="text-center web-name">الجامعة الاحمدية السنية العالية (الكامل)</h4>
+								<h4 class="text-center web-name">JAMEA AHMADIA SUNNIA KAMIL MADRASAH</h4> -->
+								<%if(webModel.name.length===0){%>
+									<h4 class="text-center web-name text-muted">YOUR WEBSITE TITLE HERE</h4>
+								<%}else{%>
+								<%for(let webName of webModel.name){%>
+									<h4 class="text-center web-name"><%=webName.name.toUpperCase()%></h4>
+									<%}%>
 								<%}%>
-							<%}%>
-						</div>
-						<div class="col-md-2 head-social-links">
-							<%if(webModel.socialLinks){%>
+							</div>
+							<div class="col-md-2 head-social-links">
+								<%if(webModel.socialLinks){%>
+									
+										<%webModel.socialLinks.forEach((link,ind)=>{%>
+											<a href="<%=link.action%>">
+												<i style=<%='color:'+link.color%> class="<%=link.icon%> m-1"></i>
+											</a>
+										<%})%>
+									
+								<%}%>
 								
-									<%webModel.socialLinks.forEach((link,ind)=>{%>
-										<a href="<%=link.action%>">
-											<i style="color:<%=link.color%>" class="<%=link.icon%> m-1"></i>
-										</a>
-									<%})%>
-								
-							<%}%>
-							
-							<!-- <a class="head-youtube">
-								<i class="fab fa-instagram"></i>
-							</a>
-							<a class="head-facebook">
-								<i class="fab fa-facebook m-1"></i>
-							</a> -->
+								<!-- <a class="head-youtube">
+									<i class="fab fa-instagram"></i>
+								</a>
+								<a class="head-facebook">
+									<i class="fab fa-facebook m-1"></i>
+								</a> -->
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row braking-news py-2">
-				<marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();">
-					Jamea Ahamadia Sunnia Alia Kamil Madrasah
-				</marquee>
+			<div class="col-sm-12">
+				<div class="row braking-news py-2">
+					<marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();">
+						Jamea Ahamadia Sunnia Alia Kamil Madrasah
+					</marquee>
+				</div>
 			</div>
+			
 		</div>
 
 		<!-- Navigation -->

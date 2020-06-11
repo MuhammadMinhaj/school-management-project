@@ -32,8 +32,3 @@ btns.forEach((btn, indBtn) => {
 		})
 	})
 })
-
-// Slider
-
-
-// Slider End
