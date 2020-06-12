@@ -65,7 +65,19 @@
 			<div class="col-sm-12">
 				<div class="row braking-news py-2">
 					<marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();">
-						Jamea Ahamadia Sunnia Alia Kamil Madrasah
+						<div class="d-flex;" style="max-width:1300px">
+							<%if(webModel.breakingNews.length!==0){%>
+								<%for(let news of webModel.breakingNews){%>
+										<%if(news.url.length!==0){%>
+											<a class="mr-3" href="<%=news.url%>"><%=news.title%></a>
+										<%}else{%>
+											<span class="mr-3"><%=news.title%></span>
+											<%}%>
+									<%}%>
+							<%}else{%>
+								<span style="display: inline-block;">No have any kind of breaking News right now</span>
+							<%}%>
+						</div>
 					</marquee>
 				</div>
 			</div>

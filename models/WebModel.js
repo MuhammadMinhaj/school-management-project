@@ -25,6 +25,24 @@ const schema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Gallery',
 	},
+	breakingNews:[
+		{
+			title:String,
+			url:String
+		}
+	],
+	notice:[
+		{
+			title:String,
+			text:String,
+			date:String,
+			image:String,
+		}
+	],
+	latestNews:{
+		title:String,
+		text:String
+	},
 	socialLinks: [
 		{
 			name:String,

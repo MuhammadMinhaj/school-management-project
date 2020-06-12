@@ -220,9 +220,12 @@
             </div>
             <h5 class="newsTitle">Latest New's</h5>
              <div class="card newsMainBody mx-3 p-4">
-               <h5 style="color:#495057"> <i class="fas fa-quote-left" style="color:#6c757d;font-size:1.5rem"></i>  Lorem ipsum dolor sit amet.</h5>
+               <h5 style="color:#495057"> <i class="fas fa-quote-left" style="color:#6c757d;font-size:1.5rem"></i><%=webModel.latestNews.title?webModel.latestNews.title:'Lorem ipsum dolor sit'%></h5>
                <card class="body">
-                 <p style="color:#545b62;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum sed, consequuntur ullam architecto officia deleniti ipsam? Molestias sit deleniti ex dolor minima, pariatur repellendus magnam reprehenderit excepturi, asperiores iure unde.</p>
+                 <p style="color:#545b62;">
+                    <%=webModel.latestNews.text?webModel.latestNews.text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque dolorem similique distinctio ea magni mollitia rerum quos sit. Nulla qui aliquid hic totam repellendus odio assumenda provident iste id facere.'%>
+                    
+                  </p>
                </card>
              </div>  
           </div>

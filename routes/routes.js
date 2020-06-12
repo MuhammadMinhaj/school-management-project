@@ -3,6 +3,7 @@ const adminRoute = require('./adminRoute')
 const menuRoute = require('./menuRoute')
 const pageRoute = require('./pageRoute')
 const settingRoute = require('./settingRoute')
+const noticeRoute = require('./noticeRoute')
 // Web Explorer Related Routes
 const webRoute = require('./webRoute')
 
@@ -14,7 +15,8 @@ const router = [
 			adminRoute,
 			menuRoute,
 			pageRoute,
-			settingRoute
+			settingRoute,
+			noticeRoute
 		],
 	},
 	{

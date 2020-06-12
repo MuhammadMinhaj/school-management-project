@@ -13,27 +13,73 @@ function alertMessage(option, message, time, classNames) {
 }
 //End Alert Message
 
-let pages = document.getElementsByClassName('pages')[0]
-let pageBtn = document.getElementById('pageBtn')
-let pageContainer = document.getElementsByClassName('pages-menu-container')[0]
-let pageI = document.getElementsByClassName('pageSort')[0]
+// let pages = document.getElementsByClassName('pages')[0]
+// let pageBtn = document.getElementById('pageBtn')
+// let pageContainer = document.getElementsByClassName('pages-menu-container')[0]
+// let pageI = document.getElementsByClassName('pageSort')[0]
 
-if(pageBtn){
-	pageBtn.addEventListener('click', () => {
-		let checkPageCss = getComputedStyle(pageContainer)
-		if (checkPageCss.display === 'none') {
-			pageContainer.style.display = 'block'
-			pages.style.transform = 'translateX(15px)'
-			pages.classList.add('clickToStyle')
-			pageI.style.transform = 'rotate(0deg)'
-		} else {
-			pageContainer.style.display = 'none'
-			pages.style.transform = 'translateX(0px)'
-			pages.classList.remove('clickToStyle')
-			pageI.style.transform = 'rotate(90deg)'
-		}
+// if(pageBtn){
+// 	pageBtn.addEventListener('click', () => {
+// 		let checkPageCss = getComputedStyle(pageContainer)
+// 		if (checkPageCss.display === 'none') {
+// 			pageContainer.style.display = 'block'
+// 			pages.style.transform = 'translateX(15px)'
+// 			pages.classList.add('clickToStyle')
+// 			pageI.style.transform = 'rotate(0deg)'
+// 		} else {
+// 			pageContainer.style.display = 'none'
+// 			pages.style.transform = 'translateX(0px)'
+// 			pages.classList.remove('clickToStyle')
+// 			pageI.style.transform = 'rotate(90deg)'
+// 		}
+// 	})
+// }
+
+// Multiple Page Collapse
+let pageBtns = document.querySelectorAll('.pageBtn')
+let pageContainers = document.querySelectorAll('.pages-menu-container')
+let pages = document.querySelectorAll('.pages')
+let pageIcons = document.querySelectorAll('.pageSort')
+
+if(pageBtns){
+	pageBtns.forEach((pageBtn,pageBtnind)=>{
+		pageBtn.addEventListener('click', () => {
+			pageContainers.forEach((pageContainer,pageConInd)=>{
+				if(pageBtnind===pageConInd){
+					pages.forEach((page,pageInd)=>{
+						if(pageInd===pageBtnind){
+							pageIcons.forEach((pageIcon,pageIconInd)=>{
+								if(pageBtnind===pageIconInd){
+									let checkPageCss = getComputedStyle(pageContainer)
+								if (checkPageCss.display === 'none') {
+									pageContainer.style.display = 'block'
+									page.style.transform = 'translateX(15px)'
+									page.classList.add('clickToStyle')
+									pageIcon.style.transform = 'rotate(0deg)'
+								} else {
+									pageContainer.style.display = 'none'
+									page.style.transform = 'translateX(0px)'
+									page.classList.remove('clickToStyle')
+									pageIcon.style.transform = 'rotate(90deg)'
+								}
+								}
+							})
+
+						}
+					})
+				}
+			})
+		})
 	})
 }
+// Multiple Page Collapse End
+
+
+
+
+
+
+
 
 // ANCHOR Menu Start
 let MENU_CREATE_URL = 'http://localhost:8080/administrator/menu-create'
