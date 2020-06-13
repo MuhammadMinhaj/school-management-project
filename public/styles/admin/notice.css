@@ -1,9 +1,9 @@
 .custom-card{
     height:100%;
-    background: #dee2e6;
-    border-top: 6px solid #495057;
+    background: #495057;
+    border-top: 6px solid #adb5bd;
     /* box-shadow: 0pt -4pt 0pt 0px #545b62; */
-    border-radius: 6px 6px 0px 0px;
+    border-radius: 10px 10px 0px 0px;
 }
 .latestNewsTitle{
     width:100%;

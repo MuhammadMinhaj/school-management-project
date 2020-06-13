@@ -1,241 +1,219 @@
-
 <%-include('../../partials/admin/adminHead.ejs')%>
 <div class="container-luid">
-    <div class="row">
-        <!-- Admin Brand and Dashboard Menu -->
-        <%- include('../../partials/admin/adminSidebar.ejs')%>
-        <!-- Dashboard Content -->
-        <div class="col-sm-10 ">
-            <!-- Admin Navbar Content -->
-            <%- include('../../partials/admin/adminNavbar.ejs')%>
-            <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
-
-            
-
-            <div class="row <%=flashMessage.success||flashMessage.fail?'mt-1':'mt-0'%>">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8">
-                    <%-include('../../partials/Error/alert.ejs')%>
-                </div>
-                <div class="col-sm-2"></div>
+   <div class="row">
+      <!-- Admin Brand and Dashboard Menu -->
+      <%- include('../../partials/admin/adminSidebar.ejs')%>
+      <!-- Dashboard Content -->
+      <div class="col-sm-10 ">
+         <!-- Admin Navbar Content -->
+         <%- include('../../partials/admin/adminNavbar.ejs')%>
+         <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+         <div class="row <%=flashMessage.success||flashMessage.fail?'mt-1':'mt-0'%>">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+               <%-include('../../partials/Error/alert.ejs')%>
             </div>
+            <div class="col-sm-2"></div>
+         </div>
+         <div class="row scroll-style">
+            <div class="col-sm-12" style="background:#6c757d;">
+               <div class="row mt-2">
+                  <div class="col-sm-12">
+                     <h4 class="menu-title p-1 text-center" style="color:#f8f9fa;text-transform:uppercase;font-weight:bold;"> Notice </h4>
+                  </div>
+               </div>
+               <div class="row py-2">
+                  <div class="col-sm-12">
+                     <div class="custom-card p-3">
+                        <div class="row">
+                           <!-- Notice -->
+                           <div class="col-sm-6">
+                              <div class="p-2 h-100" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
+                                 <h5 class="text-center text-danger" style="font-weight:bold;">Notice</h5>
+                                 <div class="latestNewsBody">
+                                    <form action="/administrator/notice" enctype="multipart/form-data" method="POST">
+                                       <div class="form-group">
+                                          <label style="font-weight:bold;" for="latestNewsTitle">Title</label>
+                                          <textarea style="background:#0000000a;" class="latestNewsTitle" name="title" id="latestNewsTitle"></textarea>
+                                       </div>
+                                       <div class="form-group">
+                                          <label style="font-weight:bold;" for="latestNewsText">Text</label>
+                                          <textarea style="background:#0000000a;" class="latestNewsText" name="text" id="latestNewsText"></textarea>
+                                       </div>
+                                       <div class="form-group" id="noticeImgPreviewParent">
+                                          <label style="font-weight:bold;" for="latestNewsText">Upload Image</label>
+                                          <!-- <img id="singleNoticeImagePreview" style="width:100%;max-height:350px;"> -->
+                                       </div>
+                                       <div class="form-group">
+                                          <div class="custom-file">
+                                             <input type="file" id="singleNoticeImgUploadFiled" name="image" class="custom-file-input" id="customFile">
+                                             <label class="custom-file-label" for="customFile">Choose file</label>
+                                          </div>
+                                       </div>
+                                       <div class="form-group">
+                                          <label style="font-weight:bold;" for="latestNewsText">Date</label>
+                                          <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="date">
+                                       </div>
+                                       <button class="btn btn-primary btn-sm w-100">Publish</button>
+                                    </form>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Notice End -->
 
-            <div class="row scroll-style">
-                <div class="col-sm-12" style="background:#b7b7b724;">
-                    <div class="row mt-2">
-                        <div class="col-sm-12">
-                            <h4 class="menu-title p-1 text-center" style="text-transform:uppercase;font-weight:bold;"> News </h4>
-                        </div>
-                    </div>
-                    <div class="row py-2">
-                        <div class="col-sm-12">
-                           <div class="custom-card p-3">
-                               <div class="row">
-                                    <!-- Notice -->
-                                    <div class="col-sm-6">
-                                        <div class="p-2 h-100" style="border:1px solid #0000001c;border-radius:8px;background:#ffffffcf;">
-                                            <h5 class="text-center text-danger" style="font-weight:bold;">Notice</h5>
-
-                                            <div class="latestNewsBody">
-                                                <form action="/administrator/notice" enctype="multipart/form-data" method="POST">
-                                                    <div class="form-group">
-                                                        <label style="font-weight:bold;" for="latestNewsTitle">Title</label>
-                                                        <textarea style="background:white;" class="latestNewsTitle" name="title" id="latestNewsTitle"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label style="font-weight:bold;" for="latestNewsText">Text</label>
-                                                        <textarea style="background:white;" class="latestNewsText" name="text" id="latestNewsText"></textarea>
-                                                    </div>
-                                                    <div class="form-group" id="noticeImgPreviewParent">
-                                                        <label style="font-weight:bold;" for="latestNewsText">Upload Image</label>
-                                                        <!-- <img id="singleNoticeImagePreview" style="width:100%;max-height:350px;"> -->
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" id="singleNoticeImgUploadFiled" name="image" class="custom-file-input" id="customFile">
-                                                            <label class="custom-file-label" for="customFile">Choose file</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label style="font-weight:bold;" for="latestNewsText">Date</label>
-                                                        <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="date">
-                                                    </div>
-                                                    <button class="btn btn-primary btn-sm w-100">Publish</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                   </div>
-                                   <!-- Listed Notice -->
-                                   <div class="col-sm-6">
-                                    <div class="p-2" style="border:1px solid #0000001c;border-radius:8px;background:#ffffffcf;">
-                                        <h5 class="text-center text-danger" style="font-weight:bold;">Listed Notice</h5>
-                                    </div>
-
-                                    <!-- Table Section -->
-                                    <div class="p-2 mt-2 admin-show-scroll-style" style="height:250px!important;border:1px solid #0000001c;border-radius:8px;background:#ffffffcf;">
-                                      
-
-                                        <%if(webModel.notice.length!==0){%>
-                                        <table class="table table-sm">
-                                            <thead>
-                                               <tr class="text-center">
-                                                  <th scope="col">Title</th>
-                                                  <th scope="col">Image</th>
-                                                  <th scope="col">Date</th>
-                                                  <th scope="col">CONTROLLING</th>
-                                               </tr>
-                                            </thead>
-                                            <tbody>  
-                                                
-                                    <%webModel.notice.forEach((notice,ind)=>{%>
-
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="noticeModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                   <div class="modal-content">
-                                                      <div class="modal-header">
-                                                         <h5 class="modal-title" id="exampleModalLabel">Edit Breaking News</h5>
-                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                         <span aria-hidden="true">&times;</span>
-                                                         </button>
-                                                      </div>
-                                                      <form action="/administrator/notice/update/<%=ind%>" enctype="multipart/form-data" method="POST">
-                                                         <div class="modal-body">
-                                                            <div class="latestNewsBody">
-                                            
-                                                                    <div class="form-group">
-                                                                        <label style="font-weight:bold;" for="latestNewsTitle">Title</label>
-                                                                        <textarea style="background:white;" class="latestNewsTitle" name="title" id="latestNewsTitle"><%=notice.title%></textarea>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label style="font-weight:bold;" for="latestNewsText">Text</label>
-                                                                        <textarea style="background:white;height:150px;" class="latestNewsText" name="text" id="latestNewsText"><%=notice.text%></textarea>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label style="font-weight:bold;" for="latestNewsText">Date</label>
-                                                                        <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="date" value="<%=notice.date%>">
-                                                                    </div>
-                                                                    <%if(notice.image){%>
-                                                                        <div class="form-group">
-                                                                            <label style="font-weight:bold;" for="latestNewsText">Update Image</label>
-                                                                            <img class="noticeImagePreview" src="/uploads/<%=notice.image%>" alt="Image" style="width:100%;max-height:350px;">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <div class="custom-file">
-                                                                            <input type="file"  name="image" class="noticeImageUploadField custom-file-input" id="customFile">
-                                                                                <label class="custom-file-label" for="customFile">Choose file</label>
-                                                                            </div>
-                                                                        </div>
-                                                                    <%}else{%>
-                                                                        <div class="form-group">
-                                                                            
-                                                                            <img class="noticeImagePreview" style="width:100%;max-height:350px;">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label style="font-weight:bold;" for="latestNewsText">Upload Image</label>
-                                                                            
-                                                                            <div class="custom-file">
-                                                                                <input type="file" name="image" class="custom-file-input noticeImageUploadField" id="customFile">
-                                                                                <label class="custom-file-label" for="customFile">Choose file</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <%}%>
-                                                                    
-                                                             
+                           <!-- Listed Notice -->
+                           <div class="col-sm-6">
+                              <div class="p-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa">
+                                 <h5 class="text-center text-danger" style="font-weight:bold;">Listed Notice</h5>
+                              </div>
+                              <!-- Table Section -->
+                              <div class="p-2 mt-2 admin-show-scroll-style" style="height:250px!important;border:1px solid #0000001c;border-radius:8px;background:#f8f9fa">
+                                 <%if(webModel.notice.length!==0){%>
+                                 <table class="table table-sm">
+                                    <thead>
+                                       <tr class="text-center">
+                                          <th scope="col">Title</th>
+                                          <th scope="col">Image</th>
+                                          <th scope="col">Date</th>
+                                          <th scope="col">CONTROLLING</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       <%webModel.notice.forEach((notice,ind)=>{%>
+                                       <!-- Modal -->
+                                       <div class="modal fade" id="noticeModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog modal-lg">
+                                             <div class="modal-content">
+                                                <div class="modal-header">
+                                                   <h5 class="modal-title" id="exampleModalLabel">Edit Breaking News</h5>
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                   <span aria-hidden="true">&times;</span>
+                                                   </button>
+                                                </div>
+                                                <form action="/administrator/notice/update/<%=ind%>" enctype="multipart/form-data" method="POST">
+                                                   <div class="modal-body">
+                                                      <div class="latestNewsBody">
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsTitle">Title</label>
+                                                            <textarea style="background:white;" class="latestNewsTitle" name="title" id="latestNewsTitle"><%=notice.title%></textarea>
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsText">Text</label>
+                                                            <textarea style="background:white;height:150px;" class="latestNewsText" name="text" id="latestNewsText"><%=notice.text%></textarea>
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsText">Date</label>
+                                                            <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="date" value="<%=notice.numberDate%>">
+                                                         </div>
+                                                         <%if(notice.image){%>
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsText">Update Image</label>
+                                                            <img class="noticeImagePreview" src="/uploads/<%=notice.image%>" alt="Image" style="width:100%;max-height:350px;">
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <div class="custom-file">
+                                                               <input type="file"  name="image" class="noticeImageUploadField custom-file-input" id="customFile">
+                                                               <label class="custom-file-label" for="customFile">Choose file</label>
                                                             </div>
                                                          </div>
-                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button class="btn btn-primary">Update</button>
+                                                         <%}else{%>
+                                                         <div class="form-group">
+                                                            <img class="noticeImagePreview" style="width:100%;max-height:350px;">
                                                          </div>
-                                                      </form>
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsText">Upload Image</label>
+                                                            <div class="custom-file">
+                                                               <input type="file" name="image" class="custom-file-input noticeImageUploadField" id="customFile">
+                                                               <label class="custom-file-label" for="customFile">Choose file</label>
+                                                            </div>
+                                                         </div>
+                                                         <%}%>
+                                                      </div>
                                                    </div>
-                                                </div>
+                                                   <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                      <button class="btn btn-primary">Update</button>
+                                                   </div>
+                                                </form>
                                              </div>
-
-                                            
-                                            <!-- Modal End -->
-                                <tr class="text-center" style="line-height:250%;">
-                                    <td>
-                                        <%if(notice.title){%>
-                                            <%if(notice.title.length>25){%>
-                                                <%=notice.title.slice(0,26)+'...'%>
-                                            <%}else{%>
-                                                <%=notice.title%>
-                                            <%}%>
-                                        <%}else{%>
-                                            <span class="text-muted">N/A</span>
-                                        <%}%>
-                                    </td>
-                                    <td class="<%=notice.image?'':'text-muted'%>">
-                                        <%=notice.image?'Available':'N/A'%>
-                                    </td>
-                                    <td class="text-muted">
-                                       <%=notice.date%>
-                                    </td>
-                                   
-                                    <td class="webNameControllParent">
-                                    <a class="btn btn-sm" href="/administrator/notice/<%=ind%>">
-                                        <i class="fas fa-trash-alt text-danger"></i>
-                                    </a>
-                                        <button data-toggle="modal" data-target="#noticeModal<%=ind%>" data-whatever="@mdo"  class="btn btn-sm">
-                                        <i class="fas fa-edit text-info"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            <%})%>
-                                                    
-        
-                        </tbody>
-                        </table>
-                        <%}else{%>
-                        <h6 class="text-muted text-center">There is nothing to show</h6>
-                        <%}%>
-                    </div>
-
-                    </div>
-                </div>
+                                          </div>
+                                       </div>
+                                       <!-- Modal End -->
+                                       <tr class="text-center" style="line-height:250%;">
+                                          <td>
+                                             <%if(notice.title){%>
+                                             <%if(notice.title.length>25){%>
+                                             <%=notice.title.slice(0,26)+'...'%>
+                                             <%}else{%>
+                                             <%=notice.title%>
+                                             <%}%>
+                                             <%}else{%>
+                                             <span class="text-muted">N/A</span>
+                                             <%}%>
+                                          </td>
+                                          <td class="<%=notice.image?'':'text-muted'%>">
+                                             <%=notice.image?'Available':'N/A'%>
+                                          </td>
+                                          <td class="text-muted">
+                                             <%=notice.numberDate%>
+                                          </td>
+                                          <td class="webNameControllParent">
+                                             <a class="btn btn-sm" href="/administrator/notice/<%=ind%>">
+                                             <i class="fas fa-trash-alt text-danger"></i>
+                                             </a>
+                                             <button data-toggle="modal" data-target="#noticeModal<%=ind%>" data-whatever="@mdo"  class="btn btn-sm">
+                                             <i class="fas fa-edit text-info"></i>
+                                             </button>
+                                          </td>
+                                       </tr>
+                                       <%})%>
+                                    </tbody>
+                                 </table>
+                                 <%}else{%>
+                                 <h6 class="text-muted text-center">There is nothing to show</h6>
+                                 <%}%>
+                              </div>
+                           </div>
+                           <!-- Listed Notice End -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
-        </div>
-    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>
 <%-include('../../partials/admin/adminFooter.ejs')%>
-
 <script>
-
-let noticeImagePreview = document.querySelectorAll('.noticeImagePreview')
-let noticeImageUploadField = document.querySelectorAll('.noticeImageUploadField')
-
-noticeImageUploadField.forEach((field,fIndex)=>{
-    field.addEventListener('change',(e)=>{
-        noticeImagePreview.forEach((preview,pIndex)=>{
-            if(fIndex===pIndex){
-                preview.src=URL.createObjectURL(e.target.files[0])
-            }
-        })
-    })	
-})
-
-let noticeImgPreviewParent = document.getElementById('noticeImgPreviewParent')
-// let singleNoticeImagePreview = document.getElementById('singleNoticeImagePreview')
-let singleNoticeImgUploadFiled = document.getElementById('singleNoticeImgUploadFiled')
-
-singleNoticeImgUploadFiled.addEventListener('change',(e)=>{
-    let preview = document.createElement('img')
-    preview.style.width = '100%'
-    preview.style.maxHeight = '350px'
-    preview.src = URL.createObjectURL(e.target.files[0])
-
-    noticeImgPreviewParent.appendChild(preview)
-
-})
+   let noticeImagePreview = document.querySelectorAll('.noticeImagePreview')
+   let noticeImageUploadField = document.querySelectorAll('.noticeImageUploadField')
+   
+   noticeImageUploadField.forEach((field,fIndex)=>{
+       field.addEventListener('change',(e)=>{
+           noticeImagePreview.forEach((preview,pIndex)=>{
+               if(fIndex===pIndex){
+                   preview.src=URL.createObjectURL(e.target.files[0])
+               }
+           })
+       })	
+   })
+   
+   let noticeImgPreviewParent = document.getElementById('noticeImgPreviewParent')
+   // let singleNoticeImagePreview = document.getElementById('singleNoticeImagePreview')
+   let singleNoticeImgUploadFiled = document.getElementById('singleNoticeImgUploadFiled')
+   
+   singleNoticeImgUploadFiled.addEventListener('change',(e)=>{
+       let preview = document.createElement('img')
+       preview.style.width = '100%'
+       preview.style.maxHeight = '350px'
+       preview.src = URL.createObjectURL(e.target.files[0])
+   
+       noticeImgPreviewParent.appendChild(preview)
+   
+   })
+   
+   
 </script>
-
 </body>
 </html>

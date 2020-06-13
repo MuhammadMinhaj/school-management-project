@@ -243,30 +243,30 @@
             <div class="col-sm-12">
               <div class="card m-1 p-2 maxHeightSet">
                   <ul class="wrapperNoticeContainer">
-                    <li>
-                        <div class="noticeDateContainer">
-                          <span>22 <span>April</span></span>
-                          <br>
-                          <span>2020</span>
-                        </div>
-                        <div class="noticeTextContainer">
-                          <p style="font-weight: bold;">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                          
-                        </div>
-                    </li>
-                    <%for(let i = 0;i<11;i++){%>
-                      <li>
-                        <div class="noticeDateContainer">
-                          <span>22 <span>April</span></span>
-                          <br>
-                          <span>2020</span>
-                        </div>
-                        <div class="noticeTextContainer">
-                          <p style="font-weight: bold;">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                          </p>
-                          
-                        </div>
-                    </li>
+                    <!-- <li>
+                      <div class="noticeDateContainer">
+                        <span>22 <span>April</span></span>
+                        <br>
+                        <span>2020</span>
+                      </div>
+                      <div class="noticeTextContainer">
+                        <p style="font-weight: bold;">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                        
+                      </div>
+                  </li> -->
+  
+                   
+                      <%for(let notice of webModel.notice){%>
+                        <li>
+                          <div class="noticeDateContainer">
+                            <span><%=notice.date.date%> <span><%=notice.date.month%></span></span>
+                            <br>
+                            <span><%=notice.date.year%></span>
+                          </div>
+                          <div class="noticeTextContainer">
+                            <p style="font-weight: bold;"><%=notice.title%></p>
+                          </div>
+                      </li>
                       <%}%>
                  
                   </ul>

@@ -1,46 +1,50 @@
-table { 
+.table-custom-style { 
     border-collapse: separate; 
     border-spacing: 0 10px; 
     margin-top: -10px; /* correct offset on first border spacing if desired */
+    
 }
-td {
-    border: solid 1px #0003;
-    border-style: solid none;
+.td-custom-style {
+    /* border: solid 1px #0003; */
+    /* border-style: solid none; */
     padding: 10px;
-    background-color: #49505717;
+    background-color: #495057;
+    color: #dee2e6;
+    
+    border:none!important;
 }
-td:first-child {
-    border-left-style: solid;
+.td-custom-style:first-child {
+    /* border-left-style: solid; */
     border-top-left-radius: 10px; 
     border-bottom-left-radius: 10px;
 }
-td:last-child {
-    border-right-style: solid;
+.td-custom-style:last-child {
+    /* border-right-style: solid; */
     border-bottom-right-radius: 10px; 
     border-top-right-radius: 10px; 
 }
 
 .setting-title{
     /* background: #343a40; */
-    color: black;
+    color: #adb5bd;
     padding: 5px;
     margin: 3px 10px 0px 0px;
     /* border-radius: 8px; */
     font-family: roboto;
     text-transform: uppercase;
-    letter-spacing: 6px;
+    letter-spacing: 1px;
     box-shadow:0pt 1pt 0pt 0px #fd9801;
 }
 .setting-title-radius{
     border-radius: 10px 10px 0px 0px;
 }
 .slider-title{
-    background: #343a40;
+    background: #6c757d;
     color: #fafcffe0;
     padding: 5px;
     /* border-radius:5px 5px 0px 0px; */
     font-family: roboto;
-    text-align:center
+    text-align:center;
 }
 .btn-upload{
     border: 1px solid #343a4059;
@@ -87,7 +91,7 @@ td:last-child {
 .aboutInputStyle{
     display: block;
     width: 100%;
-    background: #21252917;
+    /* background: #0000000a; */
     border-radius: 8px;
     border: none;
     border-bottom: 1px solid #00000024;
@@ -101,12 +105,13 @@ td:last-child {
 .futuredLinkInputStyle{
     display: block;
     width: 100%;
-    background: #2125290f;
+    /* background: #0000000a; */
     border: none;
     border-bottom: 1px solid #0000001f;
     outline: none;
     padding:3px;
     font-size:16px;
+    border-radius: 6px;
 }
 .futuredLinkInputStyle:focus{
     border-bottom: 1px solid #d39e00;

@@ -30,6 +30,55 @@ function removeFilePath(path,next){
         }
     })
 }
+function makeDateHandler(d){
+    let splitDate = d.slice(8)
+    let splitMonth = d.slice(6).slice(0,1)
+    let splitYear = d.slice(0,4)
+    let month;
+    switch(parseInt(splitMonth)){
+        case 1 :
+            month = 'January'
+            break;
+        case 2 :
+            month = 'February'
+            break;
+        case 3 :
+            month = 'March' 
+            break;
+        case 4 :
+            month = 'April'
+            break;
+        case 5 :
+            month = 'May'
+            break;
+        case 6 :
+            month = 'June'
+            break;
+        case 7 :
+            month = 'July'
+            break;
+        case 8 :
+            month = 'August'
+            break 
+        case 9 : 
+            month = 'September'
+            break;
+        case 10 :
+            month = 'October'
+            break;
+        case 11 :
+            month = 'November'
+            break;
+        case 12:
+            month = 'December'
+    }
+    let correctDate = {
+        date:splitDate,
+        month,
+        year:splitYear
+    }
+    return correctDate
+}
 
 exports.newsPageGetController = async(req,res,next)=>{
     try{
@@ -38,10 +87,10 @@ exports.newsPageGetController = async(req,res,next)=>{
         next(e)
     }
 }
-exports.latestNewsPostController = async(req,res,next)=>{
+exports.latestNewsCreateAndUpdatePostController = async(req,res,next)=>{
     try{
-        let { title,text } = req.body
-        if(title.length===0||text.length===0){
+        let { title,text,date } = req.body
+        if(title.length===0||text.length===0||date.length===0){
             return renderPageHandler(req,res,'news','fail','Cannot Be Empty Field')
         }
         let webModel = await WebModel.findOne()
@@ -51,7 +100,8 @@ exports.latestNewsPostController = async(req,res,next)=>{
             let publishedLatestNews = await WebModel.findOneAndUpdate({_id:webModel._id},{
                 latestNews:{
                     title,
-                    text
+                    text,
+                    date
                 }
             },{
                 new:true
@@ -60,6 +110,27 @@ exports.latestNewsPostController = async(req,res,next)=>{
                 return renderPageHandler(req,res,'news','fail','Internal Server Error')
             }
         renderPageHandler(req,res,'news','success',`${hasNews?'Updated':'Published'} Latest News`)
+    }catch(e){
+        next(e)
+    }
+}
+exports.latestNewsDeleteGetController = async(req,res,next)=>{
+    try{
+            let webModel = await WebModel.findOne()
+            
+            let hasNews = false
+            if(webModel.latestNews.title) hasNews = true
+            if(!hasNews) return res.redirect('/administrator/news')
+
+            let clearLatestNews = await WebModel.findOneAndUpdate({_id:webModel._id},{
+                latestNews:{}
+            },{
+                new:true
+            })
+            if(!clearLatestNews){
+                return renderPageHandler(req,res,'news','fail','Internal Server Error')
+            }
+            renderPageHandler(req,res,'news','success',`Clear Latest News`)
     }catch(e){
         next(e)
     }
@@ -144,49 +215,7 @@ exports.breakingNewsUpdatePostController = async(req,res,next)=>{
         next(e)
     }
 }
-exports.newsDeleteGetController = async(req,res,next)=>{
-    try{
-        let { name } = req.params
-        if(name==='latest'){
-            let webModel = await WebModel.findOne()
-            
-            let hasNews = false
-            if(webModel.latestNews.title) hasNews = true
-            if(!hasNews) return res.redirect('/administrator/news')
 
-            let clearLatestNews = await WebModel.findOneAndUpdate({_id:webModel._id},{
-                latestNews:{}
-            },{
-                new:true
-            })
-            if(!clearLatestNews){
-                return renderPageHandler(req,res,'news','fail','Internal Server Error')
-            }
-            renderPageHandler(req,res,'news','success',`Clear Latest News`)
-        }else if(name==='breaking'){  
-             console.log(name+'It Works Now')  
-            let webModel = await WebModel.findOne()
-            
-         
-            if(webModel.breakingNews===''||undefined||null) return res.redirect('/administrator/news')
-             
-
-            let clearBreakingNews = await WebModel.findOneAndUpdate({_id:webModel._id},{
-                breakingNews:""
-            },{
-                new:true
-            })
-            if(!clearBreakingNews){
-                return renderPageHandler(req,res,'news','fail','Internal Server Error')
-            }
-            renderPageHandler(req,res,'news','success',`Clear Breaking News`)
-        }else{
-            res.redirect('/administrator/news')
-        }
-    }catch(e){
-        next(e)
-    }
-}
 exports.noticeGetController = async(req,res,next)=>{
     try{
         renderPageHandler(req,res,'notice')
@@ -223,12 +252,13 @@ exports.noticePostController = async(req,res,next)=>{
                 notice:{
                     title,
                     text,
-                    date,
+                    date:makeDateHandler(date),
+                    numberDate:date,
                     image:req.file?req.file.filename:''
                 }
             }
         },{new:true})
-        
+        console.log(publishedNotice)
         if(!publishedNotice){
             removeFilePath(req.file.filename,next)
             return renderPageHandler(req,res,'notice','fail','Internal Server Error')
@@ -317,7 +347,8 @@ exports.noticeUpdatePostController = async(req,res,next)=>{
                 imgPath = n.image
                 n.title = title
                 n.text = text 
-                n.date = date
+                n.date = makeDateHandler(date)
+                n.numberDate = date
                 n.image = req.file?req.file.filename:imgPath?imgPath:''                
             }
         })

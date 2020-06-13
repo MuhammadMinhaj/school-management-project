@@ -12,7 +12,7 @@
 	font-family: roboto;
 	font-weight: bold;
 	letter-spacing: 4px;
-	color: #77797b;
+	color: #dee2e6;
 }
 .menu-title > h5 {
 	font-size: 20px;
@@ -67,7 +67,7 @@
 	box-shadow: 0pt 0pt 3pt #007bff;
 }
 .dropHeader {
-	background: #d8dadc;
+	background: #6c757d;
 }
 .droptitle {
 	font-weight: bold;

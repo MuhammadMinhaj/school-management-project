@@ -16,16 +16,16 @@
             <div class="col-sm-2"></div>
          </div>
          <!-- Content Body -->
-         <div class="row scroll-style">
+         <div class="row scroll-style" style="background:#6c757d;">
             <div class="col-sm-12">
                <h4 class="text-center setting-title">Settings</h4>
                <div class="row mt-2">
                   <div class="col-sm-12">
-                     <div class="card">
+                     <div class="card mb-2" style="background:#495057;">
                         <div class="row p-3">
                            <!-- Website Name -->
                            <div class="col-sm-6">
-                              <div class="card setting-title-radius" style="height:100%">
+                              <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
                                  <h6 class="slider-title setting-title-radius">Name Setting</h6>
                                  <div class="card-body">
                                     <form action="/administrator/setting/web_name" method="POST" >
@@ -58,7 +58,7 @@
                                           <%if(webNameList.length===0){%>
                                           <h6 class="text-muted text-center">There is nothing to show</h6>
                                           <%}else{%>
-                                          <table class="table table-sm">
+                                          <table class="table table-sm table-custom-style">
                                              <thead>
                                                 <tr class="text-center">
                                                    <th scope="col">LANGUAGE</th>
@@ -69,9 +69,9 @@
                                              <tbody>
                                                 <%for(let webName of webNameList){%>
                                                 <tr class="text-center" style="line-height:250%;">
-                                                   <td><%=webName.lang.charAt(0).toUpperCase()+webName.lang.slice(1)%></td>
-                                                   <td class="webNameParent" data-webname="<%=webName.name%>"><%=webName.name%></td>
-                                                   <td class="webNameControllParent">
+                                                   <td class="td-custom-style"><%=webName.lang.charAt(0).toUpperCase()+webName.lang.slice(1)%></td>
+                                                   <td class="webNameParent td-custom-style" data-webname="<%=webName.name%>"><%=webName.name%></td>
+                                                   <td class=" td-custom-style webNameControllParent">
                                                       <a class="btn btn-sm" href="/administrator/setting/web_name_delete/<%=webName.lang%>">
                                                       <i class="fas fa-trash-alt text-danger"></i>
                                                       </a>
@@ -92,7 +92,7 @@
                            <!-- Website Name End -->
                            <!-- Website Logo -->
                            <div class="col-sm-6">
-                              <div class="card setting-title-radius" style="height:100%">
+                              <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
                                  <h6 class="slider-title setting-title-radius">Logo Setting</h6>
                                  <div class="card-body">
                                     <form action="/administrator/setting/web_logo" method="POST" enctype="multipart/form-data">
@@ -143,7 +143,7 @@
                         <div class="row p-3">
                            <!-- Slider -->
                            <div class="col-sm-6">
-                              <div class="card setting-title-radius" style="height:100%">
+                              <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
                                  <h6 class="slider-title setting-title-radius">Slider Setting</h6>
                                  <div class="card-body">
                                     <!-- Show Slider Images -->
@@ -210,7 +210,7 @@
                                     </form>
                                     <div class="row">
                                        <div class="col-sm-12">
-                                          <table class="table table-sm">
+                                          <table class="table table-sm table-custom-style">
                                              <thead>
                                                 <tr class="text-center">
                                                    <th scope="col">ID</th>
@@ -221,7 +221,7 @@
                                              <tbody>
                                                 <%if(webModel.slider.length===0){%>
                                                 <tr>
-                                                   <td colspan='3'>
+                                                   <td class="colspan='3'>
                                                       <h6 class="text-muted text-center">There is nothing to show</h6>
                                                    </td>
                                                 </tr>
@@ -242,7 +242,7 @@
                                                                <div class="form-row">
                                                                    <div class="col-sm-5">
                                                                         <label for="message-text" class="col-form-label">Name(Optional)</label>
-                                                                        <input type="text" value="<%=s.btnName?s.btnName:''%>" name="name" placeholder="Name" class="form-control">
+                                                                        <input type="text" value="<%=s.btnName?s.btnName:''%>" name="name" placeholder="..." class="form-control">
                                                                    </div>
                                                                    <div class="col-sm-7">
                                                                         <label for="message-text" class="col-form-label">Action</label>
@@ -269,9 +269,9 @@
                                                 </div>
                                                 <!-- End Modal -->
                                                 <tr class="text-center" style="line-height:250%">
-                                                   <td><%=i+1%></td>
-                                                   <td><%=s.name%></td>
-                                                   <td>
+                                                   <td class="td-custom-style"><%=i+1%></td>
+                                                   <td class="td-custom-style" style="text-transform: uppercase;"><%=s.name%></td>
+                                                   <td class="td-custom-style">
                                                       <a href="/administrator/setting/slider-delete/<%=s._id%>" class="btn btn-sm">
                                                          <i class="fas fa-trash-alt text-danger"></i>
                                                          <!-- <i class="fas fa-trash-alt text-danger"></i> -->
@@ -294,7 +294,7 @@
                            <!-- Slider End -->
                            <!-- Website Social Links -->
                            <div class="col-sm-6">
-                            <div class="card setting-title-radius" style="height:100%">
+                            <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
                                <h6 class="slider-title setting-title-radius">Social Links Setting</h6>
                                <div class="card-body">
                                  <form action="/administrator/setting/links/create" method="POST">
@@ -335,7 +335,7 @@
                                         <%if(webModel.socialLinks.length===0){%>
                                             <h6 class="text-muted text-center">There is nothing to show</h6>
                                             <%}else{%>
-                                            <table class="table table-sm">
+                                            <table class="table table-sm table-custom-style">
                                                <thead>
                                                   <tr class="text-center">
                                                      <th scope="col">Name</th>
@@ -400,16 +400,16 @@
                                           </div>
                                                     <!-- Social Links Modal End -->
                                                        <tr class="text-center" style="line-height:250%;">
-                                                           <td><%=link.name%></td>
-                                                           <td><%=link.icon%></td>
-                                                           <td class="text-muted">
+                                                           <td class="td-custom-style"><%=link.name%></td>
+                                                           <td class="td-custom-style"><%=link.icon%></td>
+                                                           <td class="td-custom-style text-muted">
                                                                <%if(link.action.length>15){%>
                                                                    <%=link.action.slice(0,16)+'...'%>
                                                                <%}else{%>
                                                                    <%=link.action%>
                                                                <%}%>
                                                            </td>
-                                                           <td>
+                                                           <td class="td-custom-style">
                                                               <a href="/administrator/setting/links/delete/<%=link._id%>" class="btn btn-sm">
                                                                <i class="fas fa-trash-alt text-danger"></i>
                                                               </a>
@@ -433,7 +433,7 @@
                         <div class="row p-3">
                            <!-- About Text -->
                            <div class="col-sm-6">
-                              <div class="card setting-title-radius" style="height:100%">
+                              <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
                                  <h6 class="slider-title setting-title-radius">About Us</h6>
                                  <div class="card-body">
                                    <form action="/administrator/setting/about/text/add" method="POST">
@@ -466,7 +466,7 @@
                            </div>
                            <!-- Futured Links -->
                            <div class="col-sm-6">
-                              <div class="card setting-title-radius" style="height:100%">
+                              <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
                                  <h6 class="slider-title setting-title-radius">Futured Links Setting</h6>
                                  <div class="card-body">
                                     <form action="/administrator/setting/futured/links/create" method="POST">
@@ -475,7 +475,7 @@
                                               <strong>Name</strong> 
                                            </div>
                                            <div class="col-sm-12">
-                                                 <input type="text" placeholder="Example" name="name" class="futuredLinkInputStyle">
+                                                 <input type="text" placeholder="..." name="name" class="futuredLinkInputStyle">
                                            </div>
                                          
                                            <div class="col-sm-12 mt-2">
@@ -493,9 +493,7 @@
                                     <div class="row mt-2">
                                        <div class="col-sm-12">
                                          
-                                          <!-- <h6 class="text-muted text-center">There is nothing to show</h6> -->
-                                          
-                                          <table class="table table-sm">
+                                          <table class="table table-sm table-custom-style">
                                              <thead>
                                                 <tr class="text-center">
                                                    <th scope="col">Name</th>
@@ -528,14 +526,14 @@
                                                                   <strong>Name</strong> 
                                                                </div>
                                                                <div class="col-sm-12">
-                                                                     <input type="text" placeholder="Example" value="<%=link.name%>" name="name" class="futuredLinkInputStyle">
+                                                                     <input type="text" placeholder="..." value="<%=link.name%>" name="name" class="futuredLinkInputStyle">
                                                                </div>
                                                             
                                                                <div class="col-sm-12 mt-2">
                                                                   <strong>URL</strong> 
                                                                </div>
                                                                <div class="col-sm-12">
-                                                                  <input type="text"  placeholder="https://example.com/" value="<%=link.url%>" name="url" class="futuredLinkInputStyle">
+                                                                  <input type="text"  placeholder="https://example.com" value="<%=link.url%>" name="url" class="futuredLinkInputStyle">
                                                                </div>
                                                             </div>
                                                       </div>
@@ -551,9 +549,9 @@
                      
                                                             <!-- Modal End -->
                                                             <tr class="text-center" style="line-height:250%">
-                                                               <td><%=link.name%></td>
-                                                               <td class="text-muted"><%=link.url%></td>
-                                                               <td>
+                                                               <td class="td-custom-style"><%=link.name%></td>
+                                                               <td class="td-custom-style text-muted"><%=link.url%></td>
+                                                               <td class="td-custom-style">
                                                                   <a href="/administrator/setting/futured/links/delete/<%=link._id%>">
                                                                      <i class="fas fa-trash-alt text-danger"></i>
                                                                   </a>

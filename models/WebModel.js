@@ -35,13 +35,19 @@ const schema = new Schema({
 		{
 			title:String,
 			text:String,
-			date:String,
+			date:{
+				date:String,
+				month:String,
+				year:String
+			},
+			numberDate:String,
 			image:String,
 		}
 	],
 	latestNews:{
 		title:String,
-		text:String
+		text:String,
+		date:String
 	},
 	socialLinks: [
 		{
