@@ -11,30 +11,25 @@
 
 
 
-            <div class="row <%=flashMessage.success||flashMessage.fail?'mt-1':'mt-0'%>">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8">
+          
+
+            <div class="row scroll-style" style="background: #6c757d;">
+                <div class="w-100">
                     <%-include('../../partials/Error/alert.ejs')%>
                 </div>
-                <div class="col-sm-2"></div>
-            </div>
-
-            <div class="row scroll-style">
                 <div class="col-sm-12">
                     <div class="row mt-2">
                         <div class="col-sm-12">
-                            <div class="page-title border text-center p-1">
-                                <h5> Create Page </h5>
+                            <div class="page-title text-center p-1">
+                                <h5 class="mt-2"> Create Page </h5>
                             </div>
                         </div>
                     </div>
-                    <div id="alert-page-box">
-
-                    </div>
+                   
                     <div class="row py-2">
                         <div class="col-sm-12">
                             <form action="/administrator/page_create" method="POST">
-                                <div class="card p-5">
+                                <div class="card p-5" style="color:#dee2e6;background: #495057;border: 1px solid #ffffff7a;">
                                     <div class="form-group">
                                         <label for="#title">Select Menu</label>
                                         <select name="menuName" class="custom-select <%=error.menuName?'is-invalid':''%>">

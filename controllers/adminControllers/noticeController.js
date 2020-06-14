@@ -79,7 +79,6 @@ function makeDateHandler(d){
     }
     return correctDate
 }
-
 exports.newsPageGetController = async(req,res,next)=>{
     try{
         renderPageHandler(req,res,'news')
@@ -215,7 +214,6 @@ exports.breakingNewsUpdatePostController = async(req,res,next)=>{
         next(e)
     }
 }
-
 exports.noticeGetController = async(req,res,next)=>{
     try{
         renderPageHandler(req,res,'notice')
@@ -225,15 +223,15 @@ exports.noticeGetController = async(req,res,next)=>{
 }
 exports.noticePostController = async(req,res,next)=>{
     try{
-        let { title,text,date } = req.body
+        let { title,text,date,action } = req.body
         if(!req.file){
-            if(title.length===0||text.length===0||date.length===0){
+            if(title.length===0||text.length===0||date.length===0||action.length===0){
                 return renderPageHandler(req,res,'notice','fail','Cannot Be Empty Field')  
             }
         }
         if(req.file){
-            if(title.length>=1||text.length>=1){
-                if(title.length===0||text.length===0||date.length===0){
+            if(title.length>=1||text.length>=1||action.length>=1){
+                if(title.length===0||text.length===0||date.length===0||action.length===0){
                     removeFilePath(req.file.filename,next)
                     return renderPageHandler(req,res,'notice','fail','1 test Cannot Be Empty Field')
                 }
@@ -254,7 +252,8 @@ exports.noticePostController = async(req,res,next)=>{
                     text,
                     date:makeDateHandler(date),
                     numberDate:date,
-                    image:req.file?req.file.filename:''
+                    image:req.file?req.file.filename:'',
+                    action
                 }
             }
         },{new:true})
@@ -307,7 +306,7 @@ exports.noticeDeleteGetController = async(req,res,next)=>{
 }
 exports.noticeUpdatePostController = async(req,res,next)=>{
     try{    
-        let { title,text,date } = req.body
+        let { title,text,date,action } = req.body
         let { id } = req.params
        
         let webModel = await WebModel.findOne()
@@ -319,14 +318,14 @@ exports.noticeUpdatePostController = async(req,res,next)=>{
                     hasImg = n.image?true:false
                 }
             })
-            if(title.length===0||text.length===0||date.length===0){
+            if(title.length===0||text.length===0||date.length===0||action.length===0){
                 let msg = hasImg?'Already Exist Image':'Cannot Be Empty Field'
                 return renderPageHandler(req,res,'notice','fail',msg)  
             }
         }
         if(req.file){
-            if(title.length>=1||text.length>=1){
-                if(title.length===0||text.length===0||date.length===0){
+            if(title.length>=1||text.length>=1||action.length>=1){
+                if(title.length===0||text.length===0||date.length===0||action.length===0){
                     removeFilePath(req.file.filename,next)
                     return renderPageHandler(req,res,'notice','fail','1 test Cannot Be Empty Field')
                 }
@@ -349,7 +348,8 @@ exports.noticeUpdatePostController = async(req,res,next)=>{
                 n.text = text 
                 n.date = makeDateHandler(date)
                 n.numberDate = date
-                n.image = req.file?req.file.filename:imgPath?imgPath:''                
+                n.image = req.file?req.file.filename:imgPath?imgPath:''
+                n.action = action                
             }
         })
         console.log(imgPath)

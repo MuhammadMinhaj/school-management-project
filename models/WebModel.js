@@ -42,6 +42,7 @@ const schema = new Schema({
 			},
 			numberDate:String,
 			image:String,
+			action:String
 		}
 	],
 	latestNews:{

@@ -220,7 +220,7 @@
             </div>
             <h5 class="newsTitle">Latest New's</h5>
              <div class="card newsMainBody mx-3 p-4">
-               <h5 style="color:#495057"> <i class="fas fa-quote-left" style="color:#6c757d;font-size:1.5rem"></i><%=webModel.latestNews.title?webModel.latestNews.title:'Lorem ipsum dolor sit'%></h5>
+               <h6 style="color:#495057;text-transform: uppercase;font-weight: bolder;"> <i class="fas fa-quote-left mr-1" style="color:#6c757d;font-size:1.5rem"></i><%=webModel.latestNews.title?webModel.latestNews.title:'Lorem ipsum dolor sit'%></h6>
                <card class="body">
                  <p style="color:#545b62;">
                     <%=webModel.latestNews.text?webModel.latestNews.text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque dolorem similique distinctio ea magni mollitia rerum quos sit. Nulla qui aliquid hic totam repellendus odio assumenda provident iste id facere.'%>
@@ -243,20 +243,26 @@
             <div class="col-sm-12">
               <div class="card m-1 p-2 maxHeightSet">
                   <ul class="wrapperNoticeContainer">
-                    <!-- <li>
-                      <div class="noticeDateContainer">
-                        <span>22 <span>April</span></span>
-                        <br>
-                        <span>2020</span>
-                      </div>
-                      <div class="noticeTextContainer">
-                        <p style="font-weight: bold;">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                        
-                      </div>
-                  </li> -->
-  
-                   
-                      <%for(let notice of webModel.notice){%>
+                      <%webModel.notice.reverse().forEach((notice,ind)=>{%>
+                        <%if(ind===0){%>
+                          <li>
+                            <div class="noticeDateContainer" style="background:#ad1523;
+                            box-shadow:0pt 2pt 1pt #196129">
+                              <span><%=notice.date.date%> <span><%=notice.date.month%></span></span>
+                              <br>
+                              <span><%=notice.date.year%></span>
+                            </div>
+                            <div class="noticeTextContainer">
+                              <p style="font-weight: bold;margin:0px!important;">
+                           
+                                <%=notice.title%>
+                             tesy
+                              </p>
+                             
+                            </div>
+                        </li>
+                        <%}else{%>
+
                         <li>
                           <div class="noticeDateContainer">
                             <span><%=notice.date.date%> <span><%=notice.date.month%></span></span>
@@ -264,10 +270,19 @@
                             <span><%=notice.date.year%></span>
                           </div>
                           <div class="noticeTextContainer">
-                            <p style="font-weight: bold;"><%=notice.title%></p>
+                            <p style="font-weight: bold;margin:0px!important;">
+                         
+                              <%=notice.title%>
+                           tesy
+                            </p>
+                           
                           </div>
                       </li>
-                      <%}%>
+                          
+                          <%}%>
+
+                  
+                      <%})%>
                  
                   </ul>
 

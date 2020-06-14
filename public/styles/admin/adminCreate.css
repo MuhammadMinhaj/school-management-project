@@ -5,13 +5,13 @@
 	font-style: normal;
 }
 .admin-create-title{
-    color:#440236;
+    color:#dee2e6;
     font-family: 'Georgia';
 }
-.admin-create-sub-title{
+/* .admin-create-sub-title{
 	font-family:Georgia;
-	color:#39a732;
-}
+	color:#dee2e6;
+} */
 .input-style{
 	border:1px solid #28a74552;
 	width:100%;
@@ -38,8 +38,8 @@
 
 .admin-show-scroll-style{
 
-	height:563px;
-	overflow: scroll;
+	height:380px;
+	overflow-Y: scroll;
 	scroll-behavior: smooth;
 	margin-right:1px;
 
@@ -65,4 +65,43 @@ table{
 }
 .admin-show-card-body{
 	padding:0rem!important
+}
+.adminCreateBtn{
+	
+	outline:none!important;
+	background:#0000001a;
+	border: 1px solid #e9ecef6e;
+	border-radius:8px;
+	color:#dee2e6;
+}
+.adminCreateBtn:hover{
+	background:#6c757d;
+}
+#createAdminBtn{
+	background: #495057;
+	
+    width: 100%;
+    border: none;
+    outline: none!important;
+    border-radius: 6px;
+	color: white;
+	padding:4px 0px;
+}
+#createAdminBtn:hover{
+	background: #343a40;
+    color: #dee2e6;
+}
+.closeModalBtn{
+	float: right;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1;
+    color: #bd2130;
+	background:transparent;
+	border:none;
+	outline: none!important;
+	border-radius:4px
+}
+.closeModalBtn:hover{
+	background:#495057;
 }

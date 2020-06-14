@@ -1,5 +1,6 @@
 <%-include('../../partials/admin/adminHead.ejs')%>
 <div class="container-luid">
+   
    <div class="row">
       <!-- Admin Brand and Dashboard Menu -->
       <%- include('../../partials/admin/adminSidebar.ejs')%>
@@ -8,16 +9,16 @@
          <!-- Admin Navbar Content -->
          <%- include('../../partials/admin/adminNavbar.ejs')%>
          <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
-         <div class="row <%=flashMessage.success||flashMessage.fail?'mt-1':'mt-0'%>">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8">
-               <%-include('../../partials/Error/alert.ejs')%>
-            </div>
-            <div class="col-sm-2"></div>
-         </div>
+         
+         
          <div class="row scroll-style">
+            
             <div class="col-sm-12" style="background:#6c757d;">
-               <div class="row mt-2">
+               
+               <div class="row">
+                  <div class="w-100">
+                     <%-include('../../partials/Error/alert.ejs')%>
+                  </div>
                   <div class="col-sm-12">
                      <h4 class="menu-title p-1 text-center" style="color:#f8f9fa;text-transform:uppercase;font-weight:bold;"> Notice </h4>
                   </div>
@@ -32,6 +33,7 @@
                                  <h5 class="text-center text-danger" style="font-weight:bold;">Notice</h5>
                                  <div class="latestNewsBody">
                                     <form action="/administrator/notice" enctype="multipart/form-data" method="POST">
+                                       
                                        <div class="form-group">
                                           <label style="font-weight:bold;" for="latestNewsTitle">Title</label>
                                           <textarea style="background:#0000000a;" class="latestNewsTitle" name="title" id="latestNewsTitle"></textarea>
@@ -39,6 +41,10 @@
                                        <div class="form-group">
                                           <label style="font-weight:bold;" for="latestNewsText">Text</label>
                                           <textarea style="background:#0000000a;" class="latestNewsText" name="text" id="latestNewsText"></textarea>
+                                       </div>
+                                       <div class="form-group">
+                                          <label style="font-weight:bold;">Action</label>
+                                          <input type="text" placeholder="https://www.example.com" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="action">
                                        </div>
                                        <div class="form-group" id="noticeImgPreviewParent">
                                           <label style="font-weight:bold;" for="latestNewsText">Upload Image</label>
@@ -100,6 +106,10 @@
                                                          <div class="form-group">
                                                             <label style="font-weight:bold;" for="latestNewsText">Text</label>
                                                             <textarea style="background:white;height:150px;" class="latestNewsText" name="text" id="latestNewsText"><%=notice.text%></textarea>
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;">Action</label>
+                                                            <input type="text" placeholder="https://www.example.com" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="action" value="<%=notice.action%>"> 
                                                          </div>
                                                          <div class="form-group">
                                                             <label style="font-weight:bold;" for="latestNewsText">Date</label>

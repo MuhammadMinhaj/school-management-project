@@ -59,3 +59,16 @@
     border:1px solid #0000001f;
     padding:5px 10px;
 }
+.note-editor{
+    background:white;
+    color:#343a40;
+}
+.page-title{
+    background: #495057;
+    border-radius:4px;
+    border:1px solid #f8f9fa80;
+    color:#dee2e6;
+    text-transform: uppercase;
+    font-weight: bold;
+
+}
