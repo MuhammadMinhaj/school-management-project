@@ -2,6 +2,7 @@ let { validationResult } = require('express-validator')
 let bcrypt = require('bcrypt')
 let Admin = require('../../models/Admin')
 let Page = require('../../models/Page')
+let WebModel = require('../../models/WebModel')
 exports.createAdminGetController = async (req, res, next) => {
 	try {
 		let hasAdmin = await Admin.findOne({ _id: req.admin._id, email: req.admin.email })
@@ -11,6 +12,7 @@ exports.createAdminGetController = async (req, res, next) => {
 		}
 		let contactsAdmin = await Admin.find()
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 		res.render('pages/administrator/adminCreateAccount.ejs', {
 			title: 'Create Admin',
 			error: {},
@@ -19,6 +21,7 @@ exports.createAdminGetController = async (req, res, next) => {
 			data: req.admin,
 			errorData: {},
 			pages,
+			webModel,
 			createdPage:{},
 			contacts: contactsAdmin.slice(1),
 			index: 1,
@@ -32,6 +35,7 @@ exports.createAdminPostController = async (req, res, next) => {
 	try {
 		let contactsAdmin = await Admin.find()
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Invalid Creadentials')
 			return res.render('pages/administrator/adminCreateAccount.ejs', {
@@ -42,6 +46,7 @@ exports.createAdminPostController = async (req, res, next) => {
 				data: req.admin,
 				errorData: req.body,
 				pages,
+				webModel,
 				createdPage:{},
 				contacts: contactsAdmin.slice(1),
 				index: 1,
@@ -75,6 +80,7 @@ exports.createAdminPostController = async (req, res, next) => {
 				data: req.body,
 				errorData: {},
 				pages,
+				webModel,
 				createdPage:{},
 				contacts: contactsAdmin.slice(1),
 				index: 1,
@@ -124,17 +130,7 @@ exports.createdAdminDeleteController = async (req, res, next) => {
 		}
 		req.flash('success', 'Successfully Deleted Admin')
 		res.redirect('/administrator/create')
-		// let contactsAdmin = await Admin.find()
-		// res.render('pages/administrator/adminCreateAccount.ejs', {
-		// 	title: 'Create Admin',
-		// 	error: {},
-		// 	style: 'bg-light',
-		// 	flashMessage: req.flash(),
-		// 	data: req.admin,
-		// 	errorData: {},
-		// 	contacts: contactsAdmin.slice(1),
-		// 	index: 1,
-		// })
+		
 	} catch (e) {
 		next(e)
 	}
@@ -161,6 +157,7 @@ exports.createdAdminUpdateGetController = async (req, res, next) => {
 			birthday: checkUpdateAdmin.dateOfBirthday,
 		}
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 		res.render('pages/administrator/createdAdminUpdate.ejs', {
 			title: 'Update Admin',
 			style: 'bg-light',
@@ -168,6 +165,7 @@ exports.createdAdminUpdateGetController = async (req, res, next) => {
 			data: req.admin,
 			errorData: data,
 			pages,
+			webModel,
 			createdPage:{},
 			flashMessage: req.flash(),
 			id,
@@ -186,6 +184,7 @@ exports.createdAdminUpdateController = async (req, res, next) => {
 		return res.redirect('/auth/login')
 	}
 	try {
+		let webModel = await WebModel.findOne()
 		let pages = await Page.find()
 
 		let error = validationResult(req).formatWith(err => err.msg)
@@ -198,6 +197,7 @@ exports.createdAdminUpdateController = async (req, res, next) => {
 				data: req.admin,
 				errorData: req.body,
 				pages,
+				webModel,
 				createdPage:{},
 				flashMessage: req.flash(),
 				id,
@@ -213,6 +213,7 @@ exports.createdAdminUpdateController = async (req, res, next) => {
 				data: req.admin,
 				errorData: req.body,
 				pages,
+				webModel,
 				createdPage:{},
 				flashMessage: req.flash(),
 				id,
@@ -250,6 +251,7 @@ exports.createdAdminUpdateController = async (req, res, next) => {
 			data: req.admin,
 			errorData: data,
 			pages,
+			webModel,
 			createdPage:{},
 			flashMessage: req.flash(),
 			id,

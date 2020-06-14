@@ -47,9 +47,8 @@ exports.contactsAdminGetController = async (req, res, next) => {
 	}
 }
 exports.contactsAdminDeleteController = async (req, res, next) => {
-	let { id } = req.params
-
 	try {
+		let { id } = req.params
 		let admin = await Admin.findOne({ _id: req.admin._id, email: req.admin.email })
 		if (!admin) {
 			req.flash('fail', 'Please Login')

@@ -2,17 +2,21 @@ const Admin = require('../../models/Admin')
 const bcrypt = require('bcrypt')
 const { validationResult } = require('express-validator')
 const Page = require('../../models/Page')
+const WebModel = require('../../models/WebModel')
 
 exports.adminAccountGetController = async (req, res, next) => {
 	try {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
+
 		res.render('pages/administrator/account.ejs', {
 			title: 'Administraotr Account',
 			style: 'bg-light',
 			flashMessage: {},
 			data: admin,
 			pages,
+			webModel,
 			createdPage:{},
 			error: {},
 		})
@@ -32,6 +36,7 @@ exports.adminAccountPostController = async (req, res, next) => {
 			gender,
 		}
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Wrong Information')
@@ -41,6 +46,7 @@ exports.adminAccountPostController = async (req, res, next) => {
 				error: error.mapped(),
 				data: data,
 				pages,
+				webModel,
 				createdPage:{},
 				flashMessage: req.flash(),
 			})
@@ -55,6 +61,7 @@ exports.adminAccountPostController = async (req, res, next) => {
 			style: 'bg-light',
 			error: {},
 			pages,
+			webModel,
 			createdPage:{},
 			data: updatedAdmin,
 			flashMessage: req.flash(),
@@ -68,6 +75,7 @@ exports.createAdminSecurityPasswordGetController = async (req, res, next) => {
 	try {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 		if (admin) {
 			res.render('pages/administrator/securityPassword.ejs', {
 				title: admin.securityPassword ? 'Update Security Password' : 'Create Security Password',
@@ -75,6 +83,7 @@ exports.createAdminSecurityPasswordGetController = async (req, res, next) => {
 				error: {},
 				data: admin,
 				pages,
+				webModel,
 				createdPage:{},
 				flashMessage: req.flash(),
 			})
@@ -89,6 +98,7 @@ exports.createAdminSecurityPasswordPostController = async (req, res, next) => {
 		// If Founded Any Error In Express Validator Then Work This Condition
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
@@ -99,6 +109,7 @@ exports.createAdminSecurityPasswordPostController = async (req, res, next) => {
 				error: error.mapped(),
 				data: admin,
 				pages,
+				webModel,
 				createdPage:{},
 				flashMessage: req.flash(),
 			})
@@ -125,6 +136,7 @@ exports.createAdminSecurityPasswordPostController = async (req, res, next) => {
 			error: error.mapped(),
 			data: admin,
 			pages,
+			webModel,
 			createdPage:{},
 			flashMessage: req.flash(),
 		})
@@ -143,6 +155,7 @@ exports.loginAdminSecurityPasswordGetController = async (req, res, next) => {
 				style: 'bg-dark',
 				error: {},
 				pages,
+				webModel,
 				createdPage:{},
 				flashMessage: req.flash(),
 				data: admin,
@@ -157,6 +170,7 @@ exports.loginAdminSecurityPasswordPostController = async (req, res, next) => {
 	try {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
 			return res.render('pages/administrator/loginSecurityPassword.ejs', {
@@ -165,6 +179,7 @@ exports.loginAdminSecurityPasswordPostController = async (req, res, next) => {
 				error: error.mapped(),
 				flashMessage: {},
 				pages,
+				webModel,
 				createdPage:{},
 				data: admin,
 			})

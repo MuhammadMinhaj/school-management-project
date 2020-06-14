@@ -4,6 +4,7 @@ const menuRoute = require('./menuRoute')
 const pageRoute = require('./pageRoute')
 const settingRoute = require('./settingRoute')
 const noticeRoute = require('./noticeRoute')
+const departmentRoute = require('./departmentRoute')
 // Web Explorer Related Routes
 const webRoute = require('./webRoute')
 
@@ -16,7 +17,8 @@ const router = [
 			menuRoute,
 			pageRoute,
 			settingRoute,
-			noticeRoute
+			noticeRoute,
+			departmentRoute
 		],
 	},
 	{

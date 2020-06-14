@@ -50,6 +50,21 @@ const schema = new Schema({
 		text:String,
 		date:String
 	},
+	departments:[
+		{
+			name:String,
+			url:String,
+			title:String,
+			text:String,
+			date:{
+				date:String,
+				month:String,
+				year:String
+			},
+			numberDate:String,
+			image:String
+		}
+	],
 	socialLinks: [
 		{
 			name:String,

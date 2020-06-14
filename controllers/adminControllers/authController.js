@@ -110,12 +110,14 @@ exports.adminChangePasswordGetController = async (req, res, next) => {
 	try {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 		res.render('pages/administrator/changePassword.ejs', {
 			title: 'Change-Password',
 			style: 'bg-light',
 			error: {},
 			data: admin,
 			pages,
+			webModel,
 			createdPage: {},
 			flashMessage: {},
 		})
@@ -129,6 +131,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 	try {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Invalid Creadentials')
@@ -138,6 +141,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				error: error.mapped(),
 				data: admin,
 				pages,
+				webModel,
 				createdPage: {},
 				flashMessage: req.flash(),
 			})
@@ -168,6 +172,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 						data: admin,
 						error: {},
 						pages,
+						webModel,
 						createdPage: {},
 						flashMessage: req.flash(),
 					})
@@ -179,6 +184,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 					error: {},
 					data: admin,
 					pages,
+					webModel,
 					createdPage: {},
 					flashMessage: req.flash(),
 				})
@@ -190,6 +196,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				error: {},
 				data: admin,
 				pages,
+				webModel,
 				createdPage: {},
 				flashMessage: req.flash(),
 			})
@@ -202,6 +209,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				error: {},
 				data: admin,
 				pages,
+				webModel,
 				createdPage: {},
 				flashMessage: req.flash(),
 			})
@@ -224,6 +232,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 					error: {},
 					data: admin,
 					pages,
+					webModel,
 					createdPage: {},
 					flashMessage: req.flash(),
 				})
@@ -235,6 +244,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				error: {},
 				data: admin,
 				pages,
+				webModel,
 				createdPage: {},
 				flashMessage: req.flash(),
 			})
@@ -246,6 +256,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 			error: {},
 			data: admin,
 			pages,
+			webModel,
 			createdPage: {},
 			flashMessage: req.flash(),
 		})
@@ -253,7 +264,6 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 		next(e)
 	}
 }
-
 // Administrator Logout Handlerer
 exports.adminLogoutGetController = (req, res, next) => {
 	req.session.destroy(error => {

@@ -117,8 +117,8 @@ exports.webNameDeleteGetController = async (req, res, next) => {
 		let { lang } = req.params
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
-
 		let webModel = await WebModel.findOne()
+
 		let hasDeletedName
 		webModel.name.forEach(n => {
 			if (n.lang === lang) {

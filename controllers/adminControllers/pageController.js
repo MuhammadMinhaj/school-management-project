@@ -1,8 +1,9 @@
-let Admin = require('../../models/Admin')
-let Menu = require('../../models/Menu')
-let Page = require('../../models/Page')
+const Admin = require('../../models/Admin')
+const Menu = require('../../models/Menu')
+const Page = require('../../models/Page')
+const WebModel = require('../../models/WebModel')
 
-let { validationResult } = require('express-validator')
+const { validationResult } = require('express-validator')
 
 exports.pageCreateGetController = async (req, res, next) => {
 	try {
@@ -11,7 +12,7 @@ exports.pageCreateGetController = async (req, res, next) => {
 			return res.redirect('/auth/login')
 		}
 		let menu = await Menu.find()
-
+		let webModel = await WebModel.findOne()
 		let pages = await Page.find()
 		res.render('pages/administrator/createPage.ejs', {
 			title: 'Create Menu',
@@ -20,6 +21,7 @@ exports.pageCreateGetController = async (req, res, next) => {
 			flashMessage: req.flash(),
 			menu,
 			pages,
+			webModel,
 			createdPage: {},
 			error: {},
 		})
@@ -39,6 +41,7 @@ exports.pageCreatePostController = async (req, res, next) => {
 
 		let menu = await Menu.find()
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Invalid Creadentials')
 			return res.render('pages/administrator/createPage.ejs', {
@@ -48,6 +51,7 @@ exports.pageCreatePostController = async (req, res, next) => {
 				flashMessage: req.flash(),
 				menu,
 				pages,
+				webModel,
 				createdPage: {},
 				error: error.mapped(),
 			})
@@ -70,6 +74,7 @@ exports.pageCreatePostController = async (req, res, next) => {
 				flashMessage: req.flash(),
 				menu,
 				pages,
+				webModel,
 				createdPage: {},
 				error: {},
 			})
@@ -83,6 +88,7 @@ exports.pageCreatePostController = async (req, res, next) => {
 			flashMessage: req.flash(),
 			menu,
 			pages,
+			webModel,
 			createdPage,
 			error: {},
 		})
@@ -99,6 +105,7 @@ exports.pageUpdateGetController = async (req, res, next) => {
 		}
 		let menu = await Menu.find()
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 
 		let updatePage = await Page.findOne({ _id: req.params.pageId })
 
@@ -113,6 +120,7 @@ exports.pageUpdateGetController = async (req, res, next) => {
 			flashMessage: req.flash(),
 			menu,
 			pages,
+			webModel,
 			updatePage,
 			createdPage: {},
 			error: {},
@@ -132,7 +140,7 @@ exports.pageUpdatePostController = async (req, res, next) => {
 
 		let menu = await Menu.find()
 		let pages = await Page.find()
-
+		let webModel = await WebModel.findOne()
 		let updatePage = await Page.findOne({ _id: pageId })
 
 		let { title, menuName, body } = req.body
@@ -147,6 +155,7 @@ exports.pageUpdatePostController = async (req, res, next) => {
 				flashMessage: req.flash(),
 				menu,
 				pages,
+				webModel,
 				updatePage: {
 					menu: menuName,
 					title,
@@ -178,6 +187,7 @@ exports.pageUpdatePostController = async (req, res, next) => {
 				flashMessage: req.flash(),
 				menu,
 				pages,
+				webModel,
 				updatePage: {
 					menu: menuName,
 					title,
@@ -196,6 +206,7 @@ exports.pageUpdatePostController = async (req, res, next) => {
 			flashMessage: req.flash(),
 			menu,
 			pages,
+			webModel,
 			updatePage: updatedPage,
 			createdPage: {},
 			error: {},
@@ -220,6 +231,7 @@ exports.pageDeleteGetController = async (req, res, next) => {
 		}
 		let menu = await Menu.find()
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 		let deletedPage = await Page.findOneAndDelete({ _id: pageId })
 
 		if (!deletedPage) {
@@ -231,6 +243,7 @@ exports.pageDeleteGetController = async (req, res, next) => {
 				flashMessage: req.flash(),
 				menu,
 				pages,
+				webModel,
 				updatePage: hasPage,
 				createdPage: {},
 				error: {},

@@ -1,16 +1,19 @@
-let Admin = require('../../models/Admin')
-let Menu = require('../../models/Menu')
-let Page = require('../../models/Page')
+const Admin = require('../../models/Admin')
+const Menu = require('../../models/Menu')
+const Page = require('../../models/Page')
+const WebModel = require('../../models/WebModel')
 
 exports.menuCreateGetController = async (req, res, next) => {
 	try {
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 		res.render('pages/administrator/createMenu', {
 			title: 'Create Menu',
 			style: 'bg-light',
 			error: {},
 			data: req.admin,
 			pages,
+			webModel,
 			createdPage:{},
 			flashMessage: req.flash(),
 		})
@@ -141,6 +144,7 @@ exports.dropDownCreateGetController = async (req, res, next) => {
 		}
 		let menu = await Menu.findOne({ _id: req.params.id })
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 		if (!menu) {
 			req.flash('fail', 'Please Create New Menu')
 			return res.redirect('/administrator/menu-create')
@@ -154,6 +158,7 @@ exports.dropDownCreateGetController = async (req, res, next) => {
 			flashMessage: req.flash(),
 			menuName: menu.name,
 			pages,
+			webModel,
 			createdPage:{},
 			id: menu._id,
 		})
