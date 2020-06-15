@@ -65,6 +65,19 @@ const schema = new Schema({
 			image:String
 		}
 	],
+	referenceLinks:[
+		{
+			name:String,
+			url:String 
+		}
+	],
+	documentsLinks:[
+		{
+			name:String,
+			url:String,
+			document:String 
+		}
+	],
 	socialLinks: [
 		{
 			name:String,

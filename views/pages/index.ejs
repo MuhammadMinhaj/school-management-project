@@ -407,36 +407,35 @@
         <div class="importanceLinkContainer p-3">
           <h5>Referance Links</h5>
           <ul class="p-2">
-            <li>
-              <a href="">
-                <div class="linksIcon">
-                  <i class="fas fa-external-link-alt"></i>
-                </div>
-                <div class="linksText">
-                  Home
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="linksIcon">
-                  <i class="fas fa-external-link-alt"></i>
-                </div>
-                <div class="linksText">
-                  Home
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="linksIcon">
-                  <i class="fas fa-external-link-alt"></i>
-                </div>
-                <div class="linksText">
-                  Home
-                </div>
-              </a>
-            </li>
+            <%if(webModel.referenceLinks.length!==0){%>
+              <%for(link of webModel.referenceLinks){%>
+                <li>
+                  <a href="<%=link.url%>">
+                    <div class="linksIcon">
+                      <i class="fas fa-external-link-alt"></i>
+                    </div>
+                    <div class="linksText">
+                      <%=link.name%>
+                    </div>
+                  </a>
+                </li>
+                <%}%>
+            <%}else{%>
+              <%for(let i = 0;i<=5;i++){%>
+                <li>
+                  <a href="#">
+                    <div class="linksIcon">
+                      <i class="fas fa-external-link-alt"></i>
+                    </div>
+                    <div class="linksText">
+                        Link 
+                    </div>
+                  </a>
+                </li>
+                <%}%>
+              <%}%>
+           
+          
           </ul>
         </div>
     </div>
@@ -444,36 +443,38 @@
       <div class="importanceLinkContainer p-3">
         <h5>Links Of JASA</h5>
         <ul class="p-2">
-          <li>
-            <a href="">
-              <div class="linksIcon">
-                <i class="fas fa-download"></i>
-              </div>
-              <div class="linksText">
-                Home
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="linksIcon">
-                <i class="fas fa-download"></i>
-              </div>
-              <div class="linksText">
-                Home
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="linksIcon">
-                <i class="fas fa-download"></i>
-              </div>
-              <div class="linksText">
-                Home
-              </div>
-            </a>
-          </li>
+
+
+          <%if(webModel.documentsLinks.length!==0){%>
+            <%for(document of webModel.documentsLinks){%>
+              <li>
+                <a href="<%=document.url%>">
+                  <div class="linksIcon">
+                    <i class="fas fa-download"></i>
+                  </div>
+                  <div class="linksText">
+                    <%=document.name%>
+                  </div>
+                </a>
+              </li>
+              <%}%>
+          <%}else{%>
+            <%for(let i = 0;i<=5;i++){%>
+              <li>
+                <a href="">
+                  <div class="linksIcon">
+                    <i class="fas fa-download"></i>
+                  </div>
+                  <div class="linksText">
+                    Home
+                  </div>
+                </a>
+              </li>
+              <%}%>
+            <%}%>
+
+          
+      
         </ul>
       </div>
   </div>

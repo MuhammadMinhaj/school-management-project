@@ -149,6 +149,7 @@ exports.loginAdminSecurityPasswordGetController = async (req, res, next) => {
 	try {
 		let admin = req.admin
 		let pages = await Page.find()
+		let webModel = await WebModel.findOne()
 		if (admin) {
 			res.render('pages/administrator/loginSecurityPassword.ejs', {
 				title: 'Login Security Password',

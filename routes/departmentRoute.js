@@ -23,6 +23,5 @@ router.post('/department',isAuthenticatedAdmin,uploads.single('image'),departmen
 
 router.get('/department/update/:id',isAuthenticatedAdmin,departmentUpdateGetController)
 router.post('/department/update/:id',isAuthenticatedAdmin,uploads.single('image'),departmentUpdatePostController)
-
 router.get('/department/delete/:id',isAuthenticatedAdmin,departmnetDeleteGetController)
 module.exports = router

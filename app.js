@@ -30,11 +30,18 @@ app.use(
     publicLibrayPath
 )
 
+
 // Set All Middlewares
 setMiddlewares(app)
 // Set All Routese
 setRoutes(app)
 
+// All Error Handleling
+// app.use((error,req,res,next)=>{
+//     if(error){
+//         res.send('Ops! Something went to wrong')
+//     }
+// })
 
 
 app.get('*',(req,res,next)=>{
