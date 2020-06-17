@@ -13,28 +13,6 @@ function alertMessage(option, message, time, classNames) {
 }
 //End Alert Message
 
-// let pages = document.getElementsByClassName('pages')[0]
-// let pageBtn = document.getElementById('pageBtn')
-// let pageContainer = document.getElementsByClassName('pages-menu-container')[0]
-// let pageI = document.getElementsByClassName('pageSort')[0]
-
-// if(pageBtn){
-// 	pageBtn.addEventListener('click', () => {
-// 		let checkPageCss = getComputedStyle(pageContainer)
-// 		if (checkPageCss.display === 'none') {
-// 			pageContainer.style.display = 'block'
-// 			pages.style.transform = 'translateX(15px)'
-// 			pages.classList.add('clickToStyle')
-// 			pageI.style.transform = 'rotate(0deg)'
-// 		} else {
-// 			pageContainer.style.display = 'none'
-// 			pages.style.transform = 'translateX(0px)'
-// 			pages.classList.remove('clickToStyle')
-// 			pageI.style.transform = 'rotate(90deg)'
-// 		}
-// 	})
-// }
-
 // Multiple Page Collapse
 let pageBtns = document.querySelectorAll('.pageBtn')
 let pageContainers = document.querySelectorAll('.pages-menu-container')
@@ -294,7 +272,7 @@ function createMenuTable(parentElement, data, index) {
 	TR.appendChild(emptyAction)
 	// Create At
 	let createdAt = document.createElement('td')
-	createdAt.innerHTML = data.createdAt ? data.createdAt : 'N/A'
+	createdAt.innerHTML = data.createdAt ? data.createdAt.slice(0,10) : 'N/A'
 	createdAt.className = 'text-muted'
 	TR.appendChild(createdAt)
 

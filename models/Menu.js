@@ -17,11 +17,9 @@ const schema = new Schema({
             _id:false
         }
     ]
-        
-    
     ,
     createdAt:{
-        type:Date,
+        type:String,
         default:Date.now
     }
   

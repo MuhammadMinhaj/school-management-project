@@ -8,6 +8,7 @@
 @import './createPage.css';
 @import './setting.css';
 @import './notice.css';
+@import './multipleStyle.css';
 /* Defaullt Scroll Style */
 @media (min-width:576px){
     html{

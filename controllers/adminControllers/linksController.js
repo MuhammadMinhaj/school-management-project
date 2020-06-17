@@ -164,15 +164,16 @@ exports.referenceLinksDeleteGetController = async(req,res,next)=>{
 }
 exports.uploadsDocumentLinksPostController = async(req,res,next)=>{
     try{
-        let { name,url } = req.body 
+        let { name,option } = req.body 
         let file = req.file 
-        
-        if(name.length===0||url.length===0){
+   
+       
+        if(name.length===0||option.length===0){
             if(!file){
                 return renderPageHandler(req,res,'links','fail','Please Include Document')
             }else{
                 removeDocumentPath(file.filename,next)
-                return renderPageHandler(req,res,'links','fail','Please Provied Name and URL')
+                return renderPageHandler(req,res,'links','fail','Please Provied Name')
             }
         }
         if(!file){
@@ -186,7 +187,7 @@ exports.uploadsDocumentLinksPostController = async(req,res,next)=>{
             $push:{
                 documentsLinks:{
                     name,
-                    url,
+                    option,
                     document:file.filename
                 }
             }
@@ -206,14 +207,14 @@ exports.uploadsDocumentLinksPostController = async(req,res,next)=>{
 }
 exports.documentLinksUpdatePostController = async(req,res,next)=>{
     try{
-        let { name,url } = req.body 
+        let { name,option } = req.body 
         let file = req.file 
         let { id } = req.params
-        if(name.length===0||url.length===0){
+        if(name.length===0||option.length===0){
                 if(file){
                     removeDocumentPath(file.filename,next)
                 }
-                return renderPageHandler(req,res,'links','fail','Please Provied Name And URL')
+                return renderPageHandler(req,res,'links','fail','Please Provied Name')
         }
 
   
@@ -232,7 +233,7 @@ exports.documentLinksUpdatePostController = async(req,res,next)=>{
             return res.redirect('/administrator/links')
         }
         foundedDocument.name = name 
-        foundedDocument.url = url 
+        foundedDocument.option = option 
         foundedDocument.document = file?file.filename:previousDocumentPath
 
         let updatedDocument = await WebModel.findOneAndUpdate({_id:webModel._id},webModel,{new:true})

@@ -1,0 +1,47 @@
+#parentProfilePicPreview{
+    position: relative;
+}
+
+
+.editProfilePicsEditBtn{
+    position: absolute;
+    top: 0px;
+    right: 2px;
+    font-size: 1.25rem;
+    color: #e9ecef;
+    cursor: pointer;
+    display: none;
+
+}
+.updateProfilePicPreview{
+    position: relative;
+}
+.updateProfilePicsEditBtn{
+    position: absolute;
+    top: 0px;
+    right: 2px;
+    font-size: 1.25rem;
+    color: #e9ecef;
+    cursor: pointer;
+    display: none;
+}
+
+.inputGroupCustomStyle{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #0000004d;
+    width: 100%;
+    background: transparent;
+    padding: 3px;
+}
+.inputGroupCustomStyle:focus{
+    border-bottom:1px solid #e9ecef;
+}
+
+.fileBrowserStyle{
+    border: 1px solid #0000004d;
+    background: transparent;
+}
+.fileBrowserStyle::after{
+    background: transparent;
+}

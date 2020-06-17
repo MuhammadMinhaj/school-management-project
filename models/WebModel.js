@@ -74,8 +74,8 @@ const schema = new Schema({
 	documentsLinks:[
 		{
 			name:String,
-			url:String,
-			document:String 
+			document:String,
+			option:String, 
 		}
 	],
 	socialLinks: [

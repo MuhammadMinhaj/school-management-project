@@ -4,6 +4,8 @@ let storage = multer.diskStorage({
     destination:(req,file,cb)=>{
         if(file.fieldname==='documents'){
             cb(null,'public/uploads/documents')
+        }else if(file.fieldname==='picture'){
+            cb(null,'public/uploads/images')
         }else{
             cb(null,'public/uploads')
         }
