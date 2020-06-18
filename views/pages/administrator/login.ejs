@@ -1,6 +1,6 @@
 <%-include('../../partials/head.ejs')%>
 
-<div class="container-fluid bg-secondary pb-5 <%=flashMessage.success||flashMessage.fail?'pt-4':'pt-5'%> login-container">
+<div class="container-fluid bg-secondary bg-image pb-5 <%=flashMessage.success||flashMessage.fail?'pt-4':'pt-5'%> login-container">
 	<!-- <h1 class="text-center admin-login-title"><span>J</span>ASA</h1> -->
 	<div class="container">
 		<div class="row">
@@ -11,47 +11,41 @@
 			<div class="col-sm-3"></div>
 		</div>
 	</div>
-	<div class="card m-auto admin-login-card py-4" style="max-width: 35rem;">
-		<form action="/auth/login" class="admin-login-form" method="POST">
-			<h4 class="admin-login-text">LOGIN</h4>
-			<div class="form-row">
-				<div class="col-md-12 mb-3">
-					<div class="input-group">
-						<div class="input-group-prepend ">
-							<span class="input-group-text"><i class="fas fa-envelope"></i></span>
-						</div>
-						<input 
-						type="text" 
-						class="form-control <%=error.email?'is-invalid':''%>" 
-						name="email"
-						placeholder="Email"  />
-						<div class="invalid-feedback">
+	<div class="custom-login-card">
+		<form action="/auth/login" method="POST">
+			<div class="custom-login-title">
+				<h4 class="pt-2">LOGIN</h4>
+			</div>
+			<div class="custom-login-body text-center">
+			
+					<div class="form-group py-2">
+						<label for="input-email" class="text-left w-100">EMAIL</label>
+						<input type="text" autocomplete="off" name="email" id="input-email" class="custom-login-field-style <%=error.email?'is-invalid':''%>" placeholder="example@example.com">
+						<div class="invalid-feedback text-left">
 							<%=error.email%>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-12 mb-3">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						<input 
-						type="password" 
-						name="password"
-						class="form-control <%=error.password?'is-invalid':''%>" 
-						placeholder="Password"  />
-						<div class="invalid-feedback">
+					<div class="form-group py-2">
+						<label for="input-password" class="text-left w-100">PASSWORD</label>
+						<input type="password" name="password" id="input-password" class="<%=error.password?'is-invalid':''%> custom-login-field-style " placeholder="**********">
+						<div class="invalid-feedback text-left">
 							<%=error.password%>
 						</div>
-						
 					</div>
 					
-				</div>
-				<a href="/auth/forgot_password" class="pb-2 pl-2">Forgot Password?</a>
+						<a href="/auth/forgot_password">Forgotten Password</a>
+					
+				
 			</div>
-			
-			<input type="submit" class="btn btn-primary" value="Login" />
+	
+			<div class="custom-login-footer">
+				<input type="submit" class="login-btn-style" value="LOGIN">
+				
+			</div>
 		</form>
 	</div>
 </div>
 <%-include('../../partials/footer.ejs')%>
+
+</body>
+</html>

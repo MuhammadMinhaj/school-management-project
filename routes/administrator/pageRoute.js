@@ -1,11 +1,11 @@
 const router = require('express').Router()
-const uploads = require('../middlewares/uploadMIddleware')
+// const uploads = require('../../middlewares/uploadMIddleware')
 
 const {
     isAuthenticatedAdmin
-} = require('../middlewares/adminAuthMiddleware')
-const createPageValidator = require('../validators/admin/createPageValidator')
-const updatePageValidator = require('../validators/admin/updatePageValidator')
+} = require('../../middlewares/adminAuthMiddleware')
+const createPageValidator = require('../../validators/admin/createPageValidator')
+const updatePageValidator = require('../../validators/admin/updatePageValidator')
 
 const {
     pageCreateGetController,
@@ -13,7 +13,7 @@ const {
     pageUpdateGetController,
     pageUpdatePostController,
     pageDeleteGetController
-} = require('../controllers/adminControllers/pageController')
+} = require('../../controllers/adminControllers/pageController')
 
 
 router.get('/page_create',isAuthenticatedAdmin,pageCreateGetController)

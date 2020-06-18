@@ -3,8 +3,8 @@ const router = require('express').Router()
 // Middlewares Imported
 const {
     isAuthenticatedAdmin
-} = require('../middlewares/adminAuthMiddleware')
-const uploads = require('../middlewares/uploadMIddleware')
+} = require('../../middlewares/adminAuthMiddleware')
+const uploads = require('../../middlewares/uploadMIddleware')
 
 // Controller Importend
 const {
@@ -15,7 +15,7 @@ const {
     uploadsDocumentLinksPostController,
     documentsLinksDeleteGetController,
     documentLinksUpdatePostController
-} = require('../controllers/adminControllers/linksController')
+} = require('../../controllers/adminControllers/linksController')
 
 
 router.get('/links',isAuthenticatedAdmin,linksGetController)

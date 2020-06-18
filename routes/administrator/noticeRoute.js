@@ -1,10 +1,10 @@
 const router = require('express').Router()
 
-const uploads = require('../middlewares/uploadMIddleware')
+const uploads = require('../../middlewares/uploadMIddleware')
 
 const { 
     isAuthenticatedAdmin,
-} = require('../middlewares/adminAuthMiddleware')
+} = require('../../middlewares/adminAuthMiddleware')
 
 const {
     newsPageGetController,
@@ -19,7 +19,7 @@ const {
     noticePostController,
     noticeDeleteGetController,
     noticeUpdatePostController
-} = require('../controllers/adminControllers/noticeController')
+} = require('../../controllers/adminControllers/noticeController')
 
 router.get('/news',isAuthenticatedAdmin,newsPageGetController)
 router.get('/news/latest',isAuthenticatedAdmin,(req,res,next)=>{res.redirect('/administrator/news')})

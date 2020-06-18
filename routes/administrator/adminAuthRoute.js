@@ -1,10 +1,10 @@
 const router = require('express').Router()
 
 // Import All Authentication Validators
-const adminLoginValidator = require('../validators/admin/loginValidator')
-const adminChangePasswordValidator = require('../validators/admin/changePasswordValidator')
-const forgotPasswordEmailValidator = require('../validators/admin/forgotPasswordEmailValidator')
-const resetPasswordValidator = require('../validators/admin/resetPasswordValidator')
+const adminLoginValidator = require('../../validators/admin/loginValidator')
+const adminChangePasswordValidator = require('../../validators/admin/changePasswordValidator')
+const forgotPasswordEmailValidator = require('../../validators/admin/forgotPasswordEmailValidator')
+const resetPasswordValidator = require('../../validators/admin/resetPasswordValidator')
 
 const {
 	adminLoginGetController,
@@ -12,19 +12,19 @@ const {
 	adminChangePasswordGetController,
 	adminChangePasswordPostController,
 	adminLogoutGetController,
-} = require('../controllers/adminControllers/authController')
+} = require('../../controllers/adminControllers/authController')
 // Forgot Passsowrd
 const {
 	forgotPasswordGetController,
 	forgotPasswordPostController
-} = require('../controllers/adminControllers/forgotPassword')
+} = require('../../controllers/adminControllers/forgotPassword')
 
 const {
 	resetPasswordGetController,
 	resetPasswordPostController
-} = require('../controllers/adminControllers/forgotPassword')
+} = require('../../controllers/adminControllers/forgotPassword')
 
-const { isAuthenticatedAdmin, isUnauthenticatedAdmin, isAuthenticatedSecurity } = require('../middlewares/adminAuthMiddleware')
+const { isAuthenticatedAdmin, isUnauthenticatedAdmin, isAuthenticatedSecurity } = require('../../middlewares/adminAuthMiddleware')
 
 router.get('/login', isUnauthenticatedAdmin, adminLoginGetController)
 router.post('/login', isUnauthenticatedAdmin, adminLoginValidator, adminLoginPostController)

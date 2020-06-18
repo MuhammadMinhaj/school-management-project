@@ -3,8 +3,8 @@ const router = require('express').Router()
 // Middlewares
 const {
     isAuthenticatedAdmin,
-} = require('../middlewares/adminAuthMiddleware')
-const uploads = require('../middlewares/uploadMIddleware')
+} = require('../../middlewares/adminAuthMiddleware')
+const uploads = require('../../middlewares/uploadMIddleware')
 
 // Controllers
 const {
@@ -13,7 +13,7 @@ const {
     departmentUpdateGetController,
     departmentUpdatePostController,
     departmnetDeleteGetController
-} = require('../controllers/adminControllers/departmentController')
+} = require('../../controllers/adminControllers/departmentController')
 
 
 router.get('/department',isAuthenticatedAdmin,departmentCreateGetController)

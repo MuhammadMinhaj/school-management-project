@@ -3,8 +3,8 @@ const router = require('express').Router()
 // Imported All Middlewares
 const {
     isAuthenticatedAdmin
-} = require('../middlewares/adminAuthMiddleware')
-const uploads = require('../middlewares/uploadMIddleware')
+} = require('../../middlewares/adminAuthMiddleware')
+const uploads = require('../../middlewares/uploadMIddleware')
 
 // Imported All Controllers
 const {
@@ -12,11 +12,11 @@ const {
     createUserPostController,
     updateUserPostController,
     deleteUserGetController
-} = require('../controllers/adminControllers/createTeacherController')
+} = require('../../controllers/adminControllers/createTeacherController')
 
 // Imporet All Validator
-const createUserValidator = require('../validators/admin/teacherCreateValidatior')
-const updateUserValidator = require('../validators/admin/userUpdateValidator')
+const createUserValidator = require('../../validators/admin/teacherCreateValidatior')
+const updateUserValidator = require('../../validators/admin/userUpdateValidator')
 
 router.get('/user/create',isAuthenticatedAdmin,createUserGetController)
 

@@ -1,9 +1,9 @@
 const router = require('express').Router()
-const uploads = require('../middlewares/uploadMIddleware')
+const uploads = require('../../middlewares/uploadMIddleware')
 
 const {
     isAuthenticatedAdmin
-} = require('../middlewares/adminAuthMiddleware')
+} = require('../../middlewares/adminAuthMiddleware')
 
 
 const {
@@ -25,7 +25,7 @@ const {
     futuredLinksCreatePostController,
     futuredLinksDeleteGetController,
     futuredLinksUpdatePostController
-}   = require('../controllers/adminControllers/settingController')
+}   = require('../../controllers/adminControllers/settingController')
 
 function redirectPageController(req,res,next){
     return res.redirect('/administrator/setting')

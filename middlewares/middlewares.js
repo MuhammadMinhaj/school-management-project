@@ -10,7 +10,8 @@ const setLocals = require('./setLocals')
 
 // Bind Admin With Request
 const {
-    bindAdminWithRequest
+    bindAdminWithRequest,
+    bindUserWithRequest
 } = require('./adminAuthMiddleware')
 
 const MONGO_DB_URI = `mongodb+srv://${config.get('db-username')}:${config.get('db-password')}@dream-softwares-dyvoa.mongodb.net/jasa-edu?retryWrites=true&w=majority`
@@ -19,8 +20,7 @@ const MONGO_DB_URI = `mongodb+srv://${config.get('db-username')}:${config.get('d
 const store = new MongoDbStore({
     uri:MONGO_DB_URI,
     collection:'sessions',
-    expires:60*60*2*1000
-    
+    expires:60*60*2*1000 
 })
 
 const middlewares = [
@@ -40,7 +40,8 @@ const middlewares = [
     }),
     flash(),
     setLocals(),
-    bindAdminWithRequest()
+    bindAdminWithRequest(),
+    bindUserWithRequest()
 ]
 module.exports = app =>{
     middlewares.forEach(middleware=>{

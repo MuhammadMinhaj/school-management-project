@@ -1,4 +1,5 @@
 const Admin = require('../models/Admin')
+const User = require('../models/User')
 exports.bindAdminWithRequest = () => {
 	return async (req, res, next) => {
 		if (!req.session.isLoggedIn) {
@@ -44,6 +45,37 @@ exports.isAuthenticatedSecurity = async(req, res, next) => {
 exports.isUnauthenticatedSecurity = (req, res, next) => {
 	if (req.session.isSecurityLoggedIn) {
 		return res.redirect('/administrator/account')
+	}
+	next()
+}
+
+// User Authentication 
+
+exports.bindUserWithRequest = ()=>{
+	return async(req,res,next)=>{
+		if(!req.session.userIsLoggedIn){
+			return next()
+		}
+		try{	
+			let user  = await User.findOne({_id:req.session.user._id})
+			if(user){
+				req.user = user||null
+			}
+			next()
+		}catch(e){
+			next(e)
+		}	
+	}
+}
+exports.isAuthenticatedUser = (req,res,next)=>{
+	if(!req.session.userIsLoggedIn){
+		return res.redirect('/user/auth/login')
+	}
+	next()
+}
+exports.isUnAuthenticatedUser = (req,res,next)=>{
+	if(req.session.userIsLoggedIn){
+		res.redirect('/user/dashboard')
 	}
 	next()
 }

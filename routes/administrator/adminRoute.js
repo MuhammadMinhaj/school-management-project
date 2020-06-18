@@ -1,15 +1,15 @@
 const router = require('express').Router()
 
 // Validator Of Administrator Account Form
-const accountValidator = require('../validators/admin/accountValidator')
+const accountValidator = require('../../validators/admin/accountValidator')
 // Validator Of Administrator Security Password
-const securityPasswordValidator = require('../validators/admin/securityPasswordValidator')
+const securityPasswordValidator = require('../../validators/admin/securityPasswordValidator')
 // Login Security Password Validator
-const loginSecurityPasswordValidator = require('../validators/admin/loginSecurityPasswordValidator')
+const loginSecurityPasswordValidator = require('../../validators/admin/loginSecurityPasswordValidator')
 // Admin Create Validator
-const adminCreateValidator = require('../validators/admin/createAdminValidator')
+const adminCreateValidator = require('../../validators/admin/createAdminValidator')
 // created Admin Update Validator 
-const createdAdminUpdateValidator = require('../validators/admin/createdAdminUpdateValidator')
+const createdAdminUpdateValidator = require('../../validators/admin/createdAdminUpdateValidator')
 
 // Import All Controller of Administrator
 
@@ -17,9 +17,9 @@ const createdAdminUpdateValidator = require('../validators/admin/createdAdminUpd
 
 
 // Import Authentication
-const { isAuthenticatedAdmin, isAuthenticatedSecurity, isUnauthenticatedSecurity } = require('../middlewares/adminAuthMiddleware')
+const { isAuthenticatedAdmin, isAuthenticatedSecurity, isUnauthenticatedSecurity } = require('../../middlewares/adminAuthMiddleware')
 
-const { adminDashboardGetController } = require('../controllers/adminControllers/dashboardController')
+const { adminDashboardGetController } = require('../../controllers/adminControllers/dashboardController')
 
 // ANCHOR Administrator Some Functionality Controller
 const {
@@ -29,7 +29,7 @@ const {
 	createAdminSecurityPasswordPostController,
 	loginAdminSecurityPasswordGetController,
 	loginAdminSecurityPasswordPostController,
-} = require('../controllers/adminControllers/adminController')
+} = require('../../controllers/adminControllers/adminController')
 // ANCHOR Administrator Create
 const { 
 		createAdminGetController,
@@ -37,7 +37,7 @@ const {
 		createdAdminDeleteController,
 		createdAdminUpdateGetController,
 		createdAdminUpdateController 
-	} = require('../controllers/adminControllers/createAccount')
+	} = require('../../controllers/adminControllers/createAccount')
 
 router.get('/dashboard', isAuthenticatedAdmin, adminDashboardGetController)
 

@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const {
     isAuthenticatedAdmin,
-} = require('../middlewares/adminAuthMiddleware')
+} = require('../../middlewares/adminAuthMiddleware')
 
 const {
     menuGetController,
@@ -14,7 +14,7 @@ const {
     showAllDropDownGetController,
     dropDownDeletePostController,
     dropDownUpdatePutController
-}   = require('../controllers/adminControllers/menuController')
+}   = require('../../controllers/adminControllers/menuController')
 
 
 router.get('/menus',isAuthenticatedAdmin,menuGetController)

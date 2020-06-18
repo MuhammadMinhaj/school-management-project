@@ -1,12 +1,19 @@
-const adminAuthRoute = require('./adminAuthRoute')
-const adminRoute = require('./adminRoute')
-const menuRoute = require('./menuRoute')
-const pageRoute = require('./pageRoute')
-const settingRoute = require('./settingRoute')
-const noticeRoute = require('./noticeRoute')
-const departmentRoute = require('./departmentRoute')
-const linksRoute = require('./linksRoute')
-const createTeacherRoute = require('./createTeacherRoute')
+// All Imported Administrator Related Routes
+const adminAuthRoute = require('./administrator/adminAuthRoute')
+const adminRoute = require('./administrator/adminRoute')
+const menuRoute = require('./administrator/menuRoute')
+const pageRoute = require('./administrator/pageRoute')
+const settingRoute = require('./administrator/settingRoute')
+const noticeRoute = require('./administrator/noticeRoute')
+const departmentRoute = require('./administrator/departmentRoute')
+const linksRoute = require('./administrator/linksRoute')
+const createTeacherRoute = require('./administrator/createTeacherRoute')
+
+
+// All Imported User Related  Routes
+const userAuthRoute = require('./user/authRoute')
+const userRoute = require('./user/userRoute')
+
 // Web Explorer Related Routes
 const webRoute = require('./webRoute')
 
@@ -25,6 +32,14 @@ const router = [
 			createTeacherRoute
 		],
 	},
+	{
+		path:'/user',
+		handler:[
+			userAuthRoute,
+			userRoute
+		]
+	}
+	,
 	{
 		path: '/auth',
 		handler: adminAuthRoute,
