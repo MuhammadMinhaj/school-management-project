@@ -1,16 +1,61 @@
 <%-include('../../partials/user/head.ejs')%>
 
 
-<%-include('../../partials/user/navbar.ejs')%>
+
 
 <div>
     <%-include('../../partials/Error/alert.ejs')%>
 </div>
 
-<%-include('../../partials/user/sidebar.ejs')%>
 
 
 
-<h5>Assalamu Alaikum</h5>
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+---- Include the above in your HEAD tag -------- -->
+
+
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+
+  <!-- Navbar -->
+  <%-include('../../partials/user/navbar.ejs')%>
+  <!-- Navbar End -->
+
+  <!-- sidebar-wrapper  -->
+  <main class="page-content">
+    <div class="container-fluid">
+      <h2>DASHBOARD</h2>
+      <hr>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <p>This is a responsive sidebar template with dropdown menu based on bootstrap 4 framework.</p>
+          <p> You can find the complete code on <a href="#" target="_blank">
+              Github</a>, it contains more themes and background image option</p>
+        </div>
+       
+        <div class="form-group col-md-12">
+          <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Assalamu Alaikum
+                <br> <hr> Welcome To JASA</h4>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </main>
+</div>
+
+
+
 
 <%-include('../../partials/user/footer.ejs')%>
+
+    
+</body>
+
+</html>

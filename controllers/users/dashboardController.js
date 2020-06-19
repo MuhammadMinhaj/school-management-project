@@ -12,7 +12,7 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,error){
         return res.render(`pages/user/${pagename}`, {
             title: 'User Login',
 			error: error?error:{},
-			menu,
+            user:req.user?req.user:{},
 			flashMessage: req.flash(),
 			webModel
         })

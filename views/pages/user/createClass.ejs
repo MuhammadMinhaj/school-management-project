@@ -1,0 +1,141 @@
+<%-include('../../partials/user/head.ejs')%>
+
+
+
+
+
+
+
+
+
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+---- Include the above in your HEAD tag -------- -->
+
+
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+
+  <!-- Navbar -->
+  <%-include('../../partials/user/navbar.ejs')%>
+  <!-- Navbar End -->
+
+  <!-- sidebar-wrapper  -->
+  <main class="page-content">
+    <div class="container-fluid">
+      <h3 style="color: #545b62;font-weight: 600;text-align:center">CLASS MANAGEMENT</h3>
+      <hr>
+    <div>
+        <%-include('../../partials/Error/alert.ejs')%>
+    </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+            <!-- Class Create Form -->
+            <h4 style="color: #545b62;font-weight: 600;">Class Create</h4>
+            <div class="card my-2 p-2">
+                <form action="/user/class/create" method="POST">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="className"> <strong> Class Name</strong></label>
+                                <input type="text" id="className" class="form-control" placeholder="Name" name="name">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="classNumeric"><strong> Class Numeric</strong></label>
+                                <input type="text" id="classNumeric" name="numeric" class="form-control" placeholder="Numeric">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="classSection"><strong>Class Section</strong></label>
+                                <input type="text" id="classSection" name="section" class="form-control" placeholder="Group">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="classGroup"><strong>Select Group</strong></label>
+                                <select name="group" class="custom-select">
+                                    <option selected disabled>...</option>
+                                    <option value="science">Science</option>
+                                    <option value="commerce">Commerce</option>
+                                    <option value="arts">Arts</option>
+                                    <option value="diploma">Diploma</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <input type="submit" value="CREATE" class="btn btn-success btn-sm w-25">
+                  
+                </form>
+            </div>
+             <!-- Class Create Form End-->
+
+             <!-- Class List -->
+             <h4 style="color: #545b62;font-weight: 600;">Class List</h4>
+
+             <div class="card my-2 p-2">
+                <%if(classes){%>
+                    <table class="table text-center">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">CLASS</th>
+                            <th scope="col">SECTION</th>
+                            <th scope="col">GROUP</th>
+                            <th scope="col">CONTROLLING</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <%if(classes.length!==0){%>
+                                <%classes.forEach((c,ind)=>{%>
+                                <tr>
+
+                                    <th scope="row"><%=ind+1%></th>
+                                    <td><%=c.name%></td>
+                                    <td><%=c.section%></td>
+                                    <td><%=c.group%></td>
+                                    <td>
+                                        <a class="btn btn-sm" href="/user/class/delete">
+                                        <i class="fas fa-trash-alt text-danger"></i>
+                                        </a>
+                                        <button data-toggle="modal" data-target="#noticeModal" data-whatever="@mdo"  class="btn btn-sm">
+                                        <i class="fas fa-edit text-info"></i>
+                                        </button>
+                                    </td>
+                                  </tr>
+                                <%})%>
+                                <%}else{%>
+                                    <tr>
+                                        <td>
+                                            <h5 class="text-muted">There is nothing to show</h5>
+                                        </td>
+                                    </tr>
+                                    <%}%>
+                        </tbody>
+                    </table>
+                    <%}%>
+            </div>
+             <!-- Class List End -->
+        </div>
+      </div>
+
+
+    </div>
+  </main>
+</div>
+
+
+
+
+<%-include('../../partials/user/footer.ejs')%>
+
+</body>
+
+</html>

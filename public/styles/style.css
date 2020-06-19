@@ -3,6 +3,7 @@
 @import './slider.css';
 @import './login.css';
 @import './footer.css';
+@import './user/sidebar.css';
 * {
 	margin: 0px;
 	padding: 0px;

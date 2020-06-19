@@ -13,7 +13,7 @@ const createTeacherRoute = require('./administrator/createTeacherRoute')
 // All Imported User Related  Routes
 const userAuthRoute = require('./user/authRoute')
 const userRoute = require('./user/userRoute')
-
+const classRoute = require('./user/classRoute')
 // Web Explorer Related Routes
 const webRoute = require('./webRoute')
 
@@ -36,7 +36,8 @@ const router = [
 		path:'/user',
 		handler:[
 			userAuthRoute,
-			userRoute
+			userRoute,
+			classRoute
 		]
 	}
 	,

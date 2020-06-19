@@ -1,4 +1,4 @@
-const { Schema,model } = require('mongoose')
+const { Schema,model, SchemaType } = require('mongoose')
 
 
 const schema = new Schema({
@@ -30,6 +30,12 @@ const schema = new Schema({
      },
      picture:String,
      createdAt:String,
+     classes:[
+        {
+         type:Schema.Types.ObjectId,
+         ref:'Class'
+        }
+    ]
 })
 
 const User = new model('User',schema)
