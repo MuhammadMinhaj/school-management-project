@@ -1,20 +1,19 @@
 const User = require('../../models/User')
 const Menu = require('../../models/Menu')
 const WebModel = require('../../models/WebModel')
+const Class  = require('../../models/Class')
 
 // Render Handler
 async function renderPageHandler(req,res,pagename,msgOpt,msg,error){
     try{    
-        let menu = await Menu.find()
-        let webModel = await WebModel.findOne()
-
+        let classes = await Class.find()
         if(msg) req.flash(msgOpt,msg)
         return res.render(`pages/user/${pagename}`, {
             title: 'User Login',
 			error: error?error:{},
             user:req.user?req.user:{},
 			flashMessage: req.flash(),
-			webModel
+			classes
         })
     }catch(e){
         console.log(e)

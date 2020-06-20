@@ -1,0 +1,208 @@
+<%-include('../../partials/user/head.ejs')%>
+
+
+
+
+
+
+
+
+
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+---- Include the above in your HEAD tag -------- -->
+
+
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+
+  <!-- Navbar -->
+  <%-include('../../partials/user/navbar.ejs')%>
+  <!-- Navbar End -->
+
+  <!-- sidebar-wrapper  -->
+  <main class="page-content">
+    <div class="container-fluid">
+      <h3 style="color: #545b62;font-weight: 600;text-align:center">CLASS UPDATE</h3>
+      <hr>
+    <div>
+        <%-include('../../partials/Error/alert.ejs')%>
+    </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+            <!-- Class Create Form -->
+            <h4 style="color: #545b62;font-weight: 600;">Add Subject</h4>
+            <div class="card my-2 p-2">
+                <form action="/user/class/subject/add/<%=singleClass._id%>" method="POST">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <label for="className"> <strong> Subject Name</strong></label>
+                                <input type="text" id="className" class="form-control" placeholder="Subject" name="name">
+                            </div>
+                        </div>
+                      
+                        <div class="col-sm-4">
+                            
+                            <div class="form-group">
+                                <label for="className"> <strong> Subject Code(Optional)</strong></label>
+                                <input type="text" id="className" class="form-control" placeholder="000" name="code">
+                            </div>
+                        </div>
+                        
+                    </div>
+                
+                    <input type="submit" value="ADD" class="btn btn-success btn-sm w-25">
+                  
+                </form>
+            </div>
+             <!-- Class Create Form End-->
+
+             <!-- Class List -->
+             
+
+             <div class="row">
+               
+                 <!-- Class  Info Update -->
+                 <div class="col-sm-6">
+                    <h4 style="color: #545b62;font-weight: 600;">Class Info</h4>
+                    <div class="card my-2 p-2">
+                        <form action="/user/class/update/<%=singleClass._id%>" method="POST">
+                            <div class="form-group">
+                                <label for="className"> <strong> Class Name</strong></label>
+                                <input type="text" id="className" class="form-control" placeholder="Name" name="name" value="<%=singleClass.name?singleClass.name:''%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="className"> <strong> Class Numeric</strong></label>
+                                <input type="text" id="className" class="form-control" placeholder="Numeric" name="numeric"
+                                value="<%=singleClass.nameOfNumeric?singleClass.nameOfNumeric:''%>"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="className"> <strong> Class Section</strong></label>
+                                <input type="text" id="className" class="form-control" placeholder="Section" name="section"
+                                value="<%=singleClass.section?singleClass.section:''%>"
+                                >
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="classGroup"><strong>Select Group</strong></label>
+                                <select name="group" class="custom-select">
+                                    <option <%=singleClass.group?'':'selected'%>>...</option>
+                                    <option value="science"  <%=singleClass.group==='science'?'selected':''%> >Science</option>
+                                    <option value="commerce" <%=singleClass.group==='commerce'?'selected':''%> >Commerce</option>
+                                    <option value="arts" <%=singleClass.group==='arts'?'selected':''%> >Arts</option>
+                                    <option value="diploma" <%=singleClass.group==='diploma'?'selected':''%> >Diploma</option>
+                                </select>
+                            </div>
+                      
+                                
+                            <input type="submit" value="Update" class="btn btn-primary btn-sm w-100">
+                            
+                        </form>
+                    </div>
+                 </div>
+                 <!-- Class Info End -->
+
+                   <!-- Subject List -->
+                   <div class="col-sm-6">
+                    <h4 style="color: #545b62;font-weight: 600;">Subject List</h4>
+                    <div class="card my-2 p-2">
+                        <%if(singleClass.subject){%>
+                            <table class="table table-borderless text-center table-hover">
+                                <thead class="thead-light">
+                                  <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Subject Name</th>
+                                    <th scope="col">Code</th>
+                                    <th scope="col">CONTROLLING</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <%if(singleClass.subject.length!==0){%>
+                                        <%singleClass.subject.forEach((subject,ind)=>{%>
+                                        <!-- Class Subject Edit Modal -->
+                    
+
+                                    <div class="modal fade" id="classSubjectEditModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Update Subject</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <form action="/user/class/subject/update/<%=singleClass._id%>/<%=subject._id%>" method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                            <label for="name" class="col-form-label">Name</label>
+                                            <input type="text" name="name" value="<%=subject.name%>" class="form-control" id="name">
+                                            </div>
+                                            <div class="form-group">
+                                            <label for="code" class="col-form-label">Code</label>
+                                            <input type="text" name="code" value="<%=subject.code?subject.code:''%>" class="form-control" id="code">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        </div>
+                                    </form>
+                                    </div>
+                                    </div>
+                                    </div>
+                                        <!-- Class Subject Edit Modal End -->
+                                        <tr>
+                                            <th scope="row"><%=ind+1%></th>
+                                            <td><%=subject.name%></td>
+                                            <td><%=subject.code?subject.code:'N/A'%></td>
+                                            <td>
+                                        <a class="btn btn-sm" href="/user/class/subject/remove/<%=singleClass._id%>/<%=subject._id%>">
+                                                <i class="fas fa-trash-alt text-danger"></i>
+                                                </a>
+                                                <button data-toggle="modal" data-target="#classSubjectEditModal<%=ind%>" data-whatever="@mdo"  class="btn btn-sm">
+                                                <i class="fas fa-edit text-info"></i>
+                                                </button>
+                                            </td>
+                                          </tr>
+                                        <%})%>
+                                        <%}else{%>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <h5 class="text-muted py-5" style="font-weight:bold">There is nothing to show</h5>
+                                                </td>
+                                            </tr>
+                                            <%}%>
+                                </tbody>
+                            </table>
+                            <%}%>
+                          
+                    </div>
+                 </div>
+                 <!-- Subject List End -->
+
+             </div>
+
+             
+             <!-- Class List End -->
+        </div>
+      </div>
+
+
+    </div>
+  </main>
+</div>
+
+
+
+
+<%-include('../../partials/user/footer.ejs')%>
+
+</body>
+
+</html>

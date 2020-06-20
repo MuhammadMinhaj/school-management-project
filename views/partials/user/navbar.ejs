@@ -56,17 +56,19 @@
             </a>
             <div class="sidebar-submenu">
               <ul>
-                <li>
-                  <a href="/user/class/create">Create Class
+                <li style="border-bottom:1px solid #ffffff1c;">
+                  <a href="/user/class/create" style="color:white">Create Class
 
                   </a>
                 </li>
-                <li>
-                  <a href="#">Orders</a>
-                </li>
-                <li>
-                  <a href="#">Credit cart</a>
-                </li>
+
+                <%if(classes){%>
+                  <%classes.forEach((c,ind)=>{%>
+                    <li>
+                      <a href="/user/class/update/<%=c._id%>"><%='Class '+c.nameOfNumeric+' '+c.section%> <%=c.group?c.group:''%></a>
+                    </li>
+                  <%})%>
+                  <%}%>
               </ul>
             </div>
           </li>

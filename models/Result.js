@@ -26,7 +26,6 @@ const schema = new Schema({
     reject:{
         Boolean
     },
-
     subject:[
         {
             name:{

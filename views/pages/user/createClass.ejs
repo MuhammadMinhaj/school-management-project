@@ -54,14 +54,14 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label for="classSection"><strong>Class Section</strong></label>
-                                <input type="text" id="classSection" name="section" class="form-control" placeholder="Group">
+                                <input type="text" id="classSection" name="section" class="form-control" placeholder="Section">
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label for="classGroup"><strong>Select Group</strong></label>
                                 <select name="group" class="custom-select">
-                                    <option selected disabled>...</option>
+                                    <option selected value="">...</option>
                                     <option value="science">Science</option>
                                     <option value="commerce">Commerce</option>
                                     <option value="arts">Arts</option>
@@ -85,7 +85,7 @@
                     <table class="table text-center">
                         <thead class="thead-light">
                           <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
                             <th scope="col">CLASS</th>
                             <th scope="col">SECTION</th>
                             <th scope="col">GROUP</th>
@@ -100,14 +100,14 @@
                                     <th scope="row"><%=ind+1%></th>
                                     <td><%=c.name%></td>
                                     <td><%=c.section%></td>
-                                    <td><%=c.group%></td>
+                                    <td><%=c.group?c.group:'N/A'%></td>
                                     <td>
-                                        <a class="btn btn-sm" href="/user/class/delete">
+                                        <a class="btn btn-sm" href="/user/class/delete/<%=c._id%>">
                                         <i class="fas fa-trash-alt text-danger"></i>
                                         </a>
-                                        <button data-toggle="modal" data-target="#noticeModal" data-whatever="@mdo"  class="btn btn-sm">
+                                        <a href="/user/class/update/<%=c._id%>">
                                         <i class="fas fa-edit text-info"></i>
-                                        </button>
+                                        </a>
                                     </td>
                                   </tr>
                                 <%})%>

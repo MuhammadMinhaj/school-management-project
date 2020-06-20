@@ -5,13 +5,13 @@ const schema = new Schema({
         type:String,
         trim:true,
         required:true,
-        unique:true 
+        unique:false
     },
     nameOfNumeric:{
         type:String,
         trim:true,
-        unique:true, 
-        requred:true
+        requred:true,
+        unique:false
     },
     group:{
         type:String,
@@ -19,7 +19,8 @@ const schema = new Schema({
     },
     section:{
         type:String,
-        trim:true 
+        trim:true,
+        required:true 
     },
     student:[
         {
@@ -30,6 +31,7 @@ const schema = new Schema({
     subject:[
         {
             name:String,
+            code:String
         }
     ]
 })
