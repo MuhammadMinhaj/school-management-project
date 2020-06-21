@@ -14,7 +14,12 @@ const {
     deleteClassGetController,
     classSubjectAddPostController,
     classSubjectUpdatePostController,
-    classSubjectRemoveGetController
+    classSubjectRemoveGetController,
+
+    createStudentGetController,
+    createStudentPostController,
+    updateStudentPostController,
+    studentDeleteGetController
 } = require('../../controllers/users/classController') 
 
 router.get('/class/create',isAuthenticatedUser,createClassGetController)
@@ -27,4 +32,9 @@ router.post('/class/subject/add/:id',isAuthenticatedUser,classSubjectAddPostCont
 router.post('/class/subject/update/:classId/:subjectId',isAuthenticatedUser,classSubjectUpdatePostController)
 router.get('/class/subject/remove/:classId/:subjectId',isAuthenticatedUser,classSubjectRemoveGetController)
 
+router.get('/student/create/:id',isAuthenticatedUser,createStudentGetController)
+router.post('/student/create/:classid',isAuthenticatedUser,createStudentPostController)
+
+router.post('/student/update/:id',isAuthenticatedUser,updateStudentPostController)
+router.get('/student/delete/:stuid/:classid',isAuthenticatedUser,studentDeleteGetController)
 module.exports = router 

@@ -6,7 +6,7 @@ const Class  = require('../../models/Class')
 // Render Handler
 async function renderPageHandler(req,res,pagename,msgOpt,msg,error){
     try{    
-        let classes = await Class.find()
+        let classes = await Class.find({user:req.user._id})
         if(msg) req.flash(msgOpt,msg)
         return res.render(`pages/user/${pagename}`, {
             title: 'User Login',

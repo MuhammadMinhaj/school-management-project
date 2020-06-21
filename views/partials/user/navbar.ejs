@@ -80,9 +80,18 @@
             </a>
             <div class="sidebar-submenu">
               <ul>
-                <li>
-                  <a href="#">Create Student</a>
-                </li>
+
+                <%if(classes){%>
+                  <%if(classes.length!==0){%>
+                    <%classes.forEach((c,ind)=>{%>
+                      <li style="padding:0px!important;">
+                        <a href="/user/student/create/<%=c._id%>" style="padding-left:10px!important;">Student of Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+                      </li>
+                    <%})%>
+                    <%}%>
+                  <%}%>
+               
+
               </ul>
             </div>
           </li>

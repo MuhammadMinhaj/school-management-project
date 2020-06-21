@@ -21,17 +21,12 @@ const schema = new Schema({
         trim:true,
         required:true
     },
-    class:{
+    phone:{
         type:String,
         trim:true,
-        required:true,
+        required:true
     },
-    group:{
-        type:String,
-        trim:true,
-        required:true 
-    },
-    id:{
+    roll:{
         type:String,
         trim:true,
         required:true 
@@ -39,6 +34,10 @@ const schema = new Schema({
     result:{
         type:Schema.Types.ObjectId,
         ref:'Result'
+    },
+    classId:{
+        type:Schema.Types.ObjectId,
+        ref:'Class'
     }
 
 })

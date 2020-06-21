@@ -33,7 +33,12 @@ const schema = new Schema({
             name:String,
             code:String
         }
-    ]
+    ],
+    user:{ 
+        type:Schema.Types.ObjectId,
+        ref:'User'
+    }
+    
 })
 
 const Class = new model('Class',schema)

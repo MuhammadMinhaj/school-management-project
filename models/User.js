@@ -37,6 +37,5 @@ const schema = new Schema({
         }
     ]
 })
-
 const User = new model('User',schema)
 module.exports = User
