@@ -1,0 +1,67 @@
+<%-include('../../partials/user/head.ejs')%>
+
+
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+
+  <!-- Navbar -->
+  <%-include('../../partials/user/navbar.ejs')%>
+  <!-- Navbar End -->
+
+  <!-- sidebar-wrapper  -->
+<main class="page-content">
+  <div class="container-fluid">
+      <h4 style="color: #545b62;font-weight: 600;text-align:center">REJECTED RESULTS</h4>
+      <hr>
+    <div>
+        <%-include('../../partials/Error/alert.ejs')%>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card p-2">
+
+        <table class="table text-center">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Roll</th>
+              <th scope="col">Student Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Result</th>
+              <th scope="col">GPA</th>
+              <th scope="col">Rank</th>
+              <th scope="col">Controlling</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>07</th>
+              <td>101145</td>
+              <td>Muhammad Minhaj</td>
+              <td><strong class="text-success">Passed</strong> </td>
+              <td>5.00</td>
+              <td>01</td>
+              <td>Controller</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+</main>
+</div>
+
+
+
+
+<%-include('../../partials/user/footer.ejs')%>
+
+</body>
+
+</html>

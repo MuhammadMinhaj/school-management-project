@@ -1,0 +1,217 @@
+<%-include('../../partials/user/head.ejs')%>
+
+
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+
+  <!-- Navbar -->
+  <%-include('../../partials/user/navbar.ejs')%>
+  <!-- Navbar End -->
+
+  <!-- sidebar-wrapper  -->
+<main class="page-content">
+  <div class="container-fluid">
+      <h4 style="color: #545b62;font-weight: 600;text-align:center">RESULTS MANAGEMENT</h4>
+      <hr>
+    <div>
+        <%-include('../../partials/Error/alert.ejs')%>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card p-2 mb-1">
+
+        <table class="table text-center">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Roll</th>
+              <th scope="col">Student Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Result</th>
+              <th scope="col">Controlling</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <%if(students){%>
+                <%if(students.length!==0){%>
+                    <%students.forEach((student,ind)=>{%>
+                      <!-- Result Create Modal -->
+
+
+<div class="modal fade" id="createResultModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Result</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <form action="/user/results/create/<%=singleClass._id%>/<%=student._id%>" method="POST">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-3">
+            
+            <div class="form-group">
+              <label for="<%=student._id%>"><strong>Working Days</strong></label>
+              <input type="text" name="workingdays" id="<%=student._id%>" value="<%=id.toString()===student._id.toString()?subjectFieldValue.workingdays:''%>" class="form-control <%=id.toString()===student._id.toString()&&fieldError.workingdays?'is-invalid':''%>">
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="<%=student._id+1%>"><strong>Present Days</strong></label>
+              <input type="text" name="presentdays" id="<%=student._id+1%>" value="<%=id.toString()===student._id.toString()?subjectFieldValue.presentdays:''%>" class="form-control <%=id.toString()===student._id.toString()&&fieldError.presentdays?'is-invalid':''%>">
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="<%=student._id+2%>"><strong>Session</strong></label>
+              <input type="text" name="session" id="<%=student._id+2%>" value="<%=id.toString()===student._id.toString()?subjectFieldValue.session:''%>" class="form-control <%=id.toString()===student._id.toString()&&fieldError.session?'is-invalid':''%>">
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="<%=student._id+3%>"><strong>Type</strong></label>
+              <input type="text" name="type" id="<%=student._id+3%>" value="<%=id.toString()===student._id.toString()?subjectFieldValue.type:''%>" class="form-control <%=id.toString()===student._id.toString()&&fieldError.type?'is-invalid':''%>">
+            </div>
+          </div>
+
+          <!-- Subject List And Obtianed Marks -->
+          <div class="col-sm-12">
+            <h5 class="py-3"> <strong>Subject List</strong> </h5>
+            <div class="row">
+              <%if(singleClass.subject){%>
+                <%if(singleClass.subject.length!==0){%>
+                  <%singleClass.subject.forEach((subject,ind)=>{%>
+                    <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="<%=student._id+4+ind%>"><strong><%=subject.name%></strong></label>
+                      <input type="text" value="<%=id.toString()===student._id.toString()?subjectFieldValue[subject.name]:''%>" name="<%=subject.name%>"  id="<%=student._id+4+ind%>" class="form-control <%=id.toString()===student._id.toString()&&subjectFieldError[subject.name]?'is-invalid':''%>">
+                      <div class="invalid-feedback">
+                        <%=id.toString()===student._id.toString()?subjectFieldError[subject.name]:''%>
+                      </div>
+                    </div>
+                  </div>
+                  <%})%>
+                  <%}%>
+                <%}%>
+            </div>
+          </div>
+
+          
+           
+
+         
+          <!-- Subject List And Obtained Marks End -->
+
+          <!-- Optional Subject List And Obtained MArks -->
+          <div class="col-sm-12">
+            <h5 class="py-3"> <strong>Optional Subject</strong> </h5>
+            <div class="row">
+              <%if(singleClass.optionalSubject){%>
+                <%if(singleClass.optionalSubject.length!==0){%>
+                  <%singleClass.optionalSubject.forEach((subject,ind)=>{%>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label for="<%=student._id+5+ind%>"><strong><%=subject.name%></strong></label>
+                          <input type="text" value="<%=id.toString()===student._id.toString()?subjectFieldValue[subject.name]:''%>" id="<%=student._id+5+ind%>" name="<%=subject.name%>" class="form-control <%=id.toString()===student._id.toString()&&subjectFieldError[subject.name]?'is-invalid':''%>">
+                          
+                          <div class="invalid-feedback">
+                            <%=id.toString()===student._id.toString()?subjectFieldError[subject.name]:''%>
+                          </div>
+                        </div>
+                      </div>
+                    <%})%>
+                  <%}%>
+                <%}%>
+            </div>
+          </div>
+          
+          <!-- Optional Subject List And Obtained Marks End -->
+        </div>
+        <!-- Subject List -->
+ 
+        <!-- Subject List End -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Create</button>
+      </div>
+     </form>
+    </div>
+  </div>
+</div>
+                      <tr>
+                        <th><%=student.roll%></th>
+                        <td><%=student.studentId%></td>
+                        <td><%=student.name%></td>
+                        <td><strong><%=student.hasResult?'Available':'N/A'%></strong> </td>
+                        <td>
+                          <button type="button" data-toggle="modal" data-target="#createResultModal<%=ind%>" data-whatever="@getbootstrap" style="border:1px solid #00000026;" class="btn btn-sm text-primary">
+                            <i class="fas fa-plus"></i>
+                          </button>
+
+                          <button style="border:1px solid #00000026;" class="btn btn-sm text-info">
+                            <i class="fas fa-edit"></i>
+                          </button>
+
+                          <a href="" style="border:1px solid #00000026;" class="btn btn-sm text-danger">
+                            <i class="fas fa-trash-alt"></i>
+                          </a>
+
+                        </td>
+                      </tr>
+                    <%})%>
+                  <%}else{%>
+                    <tr class="py-5">
+                      <td colspan="5" class="py-5">
+                        <h4 class="text-muted py-5"> <strong>There is a nothing to show</strong> </h4>
+                      </td>
+                    </tr>
+                    <%}%>
+              <%}%>
+           
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        <li class="page-item <%=correntPage===1?'disabled':''%>"><a class="page-link" href="/user/results/create/<%=singleClass._id%>?page=<%=correntPage-1%>">Previous</a></li>
+
+          <%for(let i = 1;i<=totalPage;i++){%>
+            <li class="page-item"><a class="page-link" href="/user/results/create/<%=singleClass._id%>?page=<%=i%>"><%=i%></a></li>
+            <%}%>
+         
+          <li class="page-item <%=correntPage>totalPage?'disabled':''%>"><a class="page-link" href="/user/results/create/<%=singleClass._id%>?page=<%=correntPage+1%>">Next</a></li>
+
+          <li class="page-item ml-1" >
+            <a class="page-link"  href="/user/results/create/<%=singleClass._id%>">
+              <i class="fas fa-redo-alt"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- Pagination End -->
+    </div>
+  </div>
+
+
+
+</main>
+</div>
+
+
+
+
+<%-include('../../partials/user/footer.ejs')%>
+
+</body>
+
+</html>

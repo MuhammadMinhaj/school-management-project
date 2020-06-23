@@ -99,17 +99,114 @@
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fas fa-receipt"></i>
-              <span>Result</span>
+              <span>Create Results</span>
             </a>
             <div class="sidebar-submenu">
               <ul>
-                <li>
-                  <a href="#">Create Result</a>
-                </li>
+
+                <%if(classes){%>
+                  <%if(classes.length!==0){%>
+                    <%classes.forEach((c,ind)=>{%>
+                      <li style="padding:0px!important;">
+                        <a href="/user/results/create/<%=c._id%>" style="padding-left:10px!important;">Results of Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+                      </li>
+                    <%})%>
+                    <%}%>
+                  <%}%>
+               
+
               </ul>
             </div>
           </li>
-          
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fas fa-clipboard-check"></i>
+              <span>Published Results</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+
+                <%if(classes){%>
+                  <%if(classes.length!==0){%>
+                    <%classes.forEach((c,ind)=>{%>
+                      <li style="padding:0px!important;">
+                        <a href="/user/results/<%=c._id%>" style="padding-left:10px!important;">Results of Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+                      </li>
+                    <%})%>
+                    <%}%>
+                  <%}%>
+               
+
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fas fa-window-close"></i>
+              <span>Rejected Results</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+
+                <%if(classes){%>
+                  <%if(classes.length!==0){%>
+                    <%classes.forEach((c,ind)=>{%>
+                      <li style="padding:0px!important;">
+                        <a href="/user/results/<%=c._id%>" style="padding-left:10px!important;">Results of Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+                      </li>
+                    <%})%>
+                    <%}%>
+                  <%}%>
+               
+
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fas fa-check text-success"></i>
+              <span>Passed Results</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+
+                <%if(classes){%>
+                  <%if(classes.length!==0){%>
+                    <%classes.forEach((c,ind)=>{%>
+                      <li style="padding:0px!important;">
+                        <a href="/user/results/<%=c._id%>" style="padding-left:10px!important;">Results of Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+                      </li>
+                    <%})%>
+                    <%}%>
+                  <%}%>
+               
+
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fas fa-times text-danger "></i>
+              <span>Failed Results</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+
+                <%if(classes){%>
+                  <%if(classes.length!==0){%>
+                    <%classes.forEach((c,ind)=>{%>
+                      <li style="padding:0px!important;">
+                        <a href="/user/results/<%=c._id%>" style="padding-left:10px!important;">Results of Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+                      </li>
+                    <%})%>
+                    <%}%>
+                  <%}%>
+               
+
+              </ul>
+            </div>
+          </li>
+     
           <li class="header-menu">
             <span>Upcomming Futured</span>
           </li>

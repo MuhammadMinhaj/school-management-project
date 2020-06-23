@@ -31,6 +31,13 @@ const schema = new Schema({
         trim:true,
         required:true 
     },
+    studentId:{
+        type:String,
+        trim:true,
+     },
+    hasResult:{
+        type:Boolean
+    },
     result:{
         type:Schema.Types.ObjectId,
         ref:'Result'

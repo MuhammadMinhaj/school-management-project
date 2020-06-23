@@ -2,18 +2,41 @@ const Class = require('../../models/Class')
 const User = require('../../models/User')
 const Student = require('../../models/Student')
 
-
 async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,errorData){
     try{    
         let classes = await Class.find({user:req.user._id})
         let correntPage = parseInt(req.query.page||1)
         let itemPerPage = 5
-        let totalStudent = await Student.find({classId:singleClass._id}).countDocuments()
 
-        let students = await Student.find({classId:singleClass._id}).skip((itemPerPage*correntPage)-itemPerPage).limit(itemPerPage)
-        
+        let totalStudent;
+        let students;
+        let totalSearchStudent;
+        if(singleClass){
+            totalStudent = await Student.find({classId:singleClass._id}).countDocuments()
+            students = await Student.find({classId:singleClass._id}).skip((itemPerPage*correntPage)-itemPerPage).limit(itemPerPage)
+            totalSearchStudent = await Student.find({classId:singleClass._id})
+        }
+
         let totalPage = parseInt(totalStudent/itemPerPage)
-        
+
+        let searchResult;
+        let didSearch = false
+        if(req.query.term){
+            let { term } =  req.query 
+            didSearch = true 
+            if(totalSearchStudent){
+                if(totalSearchStudent.length!==0){
+                    totalSearchStudent.forEach(s=>{
+                        if(s.roll.toString()===term.toString()||parseInt(s.roll).toString()===term.toString()||s.phone.toString()===term.toString()){
+                            console.log('0'+s.roll.toString())
+                            searchResult = s
+                            return false
+                        }
+                    })
+                }
+            }
+        }
+      
         if(msg) req.flash(msgOpt,msg)
         return res.render(`pages/user/${pagename}`,{
             title: 'Notice',
@@ -22,7 +45,10 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,errorDa
             classes,
             students,
             totalPage,
+            totalStudent,
             correntPage,
+            searchResult,
+            didSearch,
             singleClass:singleClass?singleClass:{},
             flashMessage: req.flash(),
             errorData
@@ -32,7 +58,6 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,errorDa
         console.log(e)
     }
 }
-
 exports.createClassGetController = async(req,res,next)=>{
     try{
         renderPageHandler(req,res,'createClass')
@@ -215,14 +240,16 @@ exports.deleteClassGetController = async(req,res,next)=>{
 exports.classSubjectAddPostController = async (req,res,next)=>{
     try{
         let { id } = req.params
-        let { name,code } = req.body
+        let { name,code,option,passedmarks,fullmarks } = req.body
 
+
+     
         let hasClass = await Class.findOne({_id:id})
         if(!hasClass){
             res.redirect('/user/class/create')
         }
-        if(name.length===0){
-            return renderPageHandler(req,res,'updateClass','fail','Please Subject Name',hasClass)
+        if(name.length===0||option==='...'||passedmarks.length===0||fullmarks.length===0){
+            return renderPageHandler(req,res,'updateClass','fail','Please Provied Full Info',hasClass)
         }
         
         let hasError;
@@ -237,15 +264,33 @@ exports.classSubjectAddPostController = async (req,res,next)=>{
         if(hasError){
             return renderPageHandler(req,res,'updateClass','fail',hasError,hasClass)
         }
-        
-        let addedSubjectOnClass = await Class.findOneAndUpdate({_id:id},{
-            $push:{
-                subject:{
-                    name,
-                    code:code?code:''
+
+        let addedSubjectOnClass;
+
+        if(option==='main'){
+            addedSubjectOnClass = await Class.findOneAndUpdate({_id:id},{
+                $push:{
+                    subject:{
+                        name,
+                        code:code?code:'',
+                        passedMarks:passedmarks,
+                        fullMarks:fullmarks
+                    }
                 }
-            }
-        },{new:true})
+            },{new:true})
+        }else{
+            addedSubjectOnClass = await Class.findOneAndUpdate({_id:id},{
+                $push:{
+                    optionalSubject:{
+                        name,
+                        code:code?code:'',
+                        passedMarks:passedmarks,
+                        fullMarks:fullmarks
+                    }
+                }
+            },{new:true})
+        }
+        
 
         if(!addedSubjectOnClass){
             return renderPageHandler(req,res,'updateClass','fail','Internal Server Error',hasClass)
@@ -262,21 +307,20 @@ exports.classSubjectUpdatePostController = async (req,res,next)=>{
     try{
 
         let { classId,subjectId } = req.params
-        let { name,code } = req.body
+        let { name,code,option,passedmarks,fullmarks } = req.body
 
         let hasClass = await Class.findOne({_id:classId})
         if(!hasClass){
             res.redirect('/user/class/create')
         }
-        if(name.length===0){
+        if(name.length===0||option==='...'||passedmarks.length===0||fullmarks.length===0){
 
-            req.flash('fail','Please Enter Subject Name')
+            req.flash('fail','Please Provied Full Info')
             return res.redirect('back')
         }
         
         let hasError;
 
- 
         hasClass.subject.forEach(s=>{
            if(s._id.toString()!==subjectId.toString()){
             if(s.name.toLowerCase()===name.toLowerCase()||s.code===code){
@@ -290,14 +334,28 @@ exports.classSubjectUpdatePostController = async (req,res,next)=>{
             return res.redirect('back')
         }
         
-        hasClass.subject.forEach(s=>{
-            if(s._id.toString()===subjectId.toString()){
-                s.name = name 
-                s.code = code?code:''
-                return false
-            }
-        })
-
+        if(option==='main'){
+            hasClass.subject.forEach(s=>{
+                if(s._id.toString()===subjectId.toString()){
+                    s.name = name 
+                    s.code = code?code:''
+                    s.passedMarks=passedmarks
+                    s.fullMarks=fullmarks
+                    return false
+                }
+            })
+        }else{
+            hasClass.optionalSubject.forEach(s=>{
+                if(s._id.toString()===subjectId.toString()){
+                    s.name = name 
+                    s.code = code?code:''
+                    s.passedMarks=passedmarks
+                    s.fullMarks=fullmarks
+                    return false
+                }
+            })
+        }
+        
         let updatedSubject = await Class.findOneAndUpdate({_id:classId},hasClass,{new:true})
         if(!updatedSubject){
             req.flash('fail','Internal Server Error')
@@ -315,18 +373,37 @@ exports.classSubjectRemoveGetController = async(req,res,next)=>{
     try{
         let { classId,subjectId } = req.params 
         
+        let { type } = req.query
+
         let hasClass = await Class.findOne({_id:classId})
         if(!hasClass){
             req.flash('fail','Please Create Class')
             return res.redirect('/user/class/create')
         }
-        let deletedSubject = await Class.findOneAndUpdate({_id:classId},{
-            $pull:{
-                subject:{
-                    _id:subjectId
+
+        let deletedSubject;
+        
+        if(type==='main'){
+            deletedSubject = await Class.findOneAndUpdate({_id:classId},{
+                $pull:{
+                    subject:{
+                        _id:subjectId
+                    }
                 }
-            }
-        },{new:true})
+            },{new:true})
+        }
+
+        if(type==='optional'){
+            deletedSubject = await Class.findOneAndUpdate({_id:classId},{
+                $pull:{
+                    optionalSubject:{
+                        _id:subjectId
+                    }
+                }
+            },{new:true})
+        }
+        
+
         if(!deletedSubject){
             return renderPageHandler(req,res,'updateClass','fail','Internal Server Error',hasClass)
         }
@@ -351,14 +428,14 @@ exports.createStudentGetController = async(req,res,next)=>{
 exports.createStudentPostController = async(req,res,next)=>{
     try{
         let { classid } = req.params
-        let { name,fathername,mothername,guardianphone,dateofbirthday,roll } = req.body 
+        let { name,fathername,mothername,guardianphone,dateofbirthday,roll,studentid } = req.body 
         
         let hasSingleClass = await Class.findOne({_id:classid})
         if(!hasSingleClass){
             return res.redirect('back')
         } 
         
-        if(name.length===0||fathername.length===0||mothername.length===0||guardianphone.length===0||dateofbirthday.length===0||roll.length===0){
+        if(name.length===0||fathername.length===0||mothername.length===0||guardianphone.length===0||dateofbirthday.length===0||roll.length===0||studentid.length===0){
             return renderPageHandler(req,res,'studentClass','fail','Please Fill Up Full Form',hasSingleClass,req.body)
         }
 
@@ -366,9 +443,14 @@ exports.createStudentPostController = async(req,res,next)=>{
         let alreadyCreatedStudent = false;
         if(getAllStudents){
             getAllStudents.forEach((s)=>{
-                if(s.name===name&&s.fatherName===fathername&&s.motherName===mothername&&s.dateOfBirthday===dateofbirthday&&s.phone===guardianphone&&s.roll===roll){
+                if(s.studentId===studentid||s.roll===roll){
                     alreadyCreatedStudent = true 
                     return false
+                }else{
+                    if(s.name===name&&s.fatherName===fathername&&s.motherName===mothername&&s.dateOfBirthday===dateofbirthday&&s.phone===guardianphone){
+                        alreadyCreatedStudent = true 
+                        return false
+                    }
                 }
             })
         }
@@ -384,9 +466,10 @@ exports.createStudentPostController = async(req,res,next)=>{
             dateOfBirthday:dateofbirthday,
             phone:guardianphone,
             roll:roll,
-            classId:hasSingleClass._id
+            studentId:studentid,
+            classId:hasSingleClass._id,
+            hasResult:false
         })
-      
         let createdStudent = await createStudent.save()
         if(!createdStudent){
             req.flash('fail','Internal Server Error')
@@ -411,8 +494,8 @@ exports.createStudentPostController = async(req,res,next)=>{
 exports.updateStudentPostController = async(req,res,next)=>{
     try{
         let { id } =  req.params
-        let { name,fathername,mothername,guardianphone,dateofbirthday,roll } = req.body 
-        if(name.length===0||fathername.length===0||mothername.length===0||guardianphone.length===0||dateofbirthday.length===0||roll.length===0){
+        let { name,fathername,mothername,guardianphone,dateofbirthday,roll,studentid } = req.body 
+        if(name.length===0||fathername.length===0||mothername.length===0||guardianphone.length===0||dateofbirthday.length===0||roll.length===0||studentid.length===0){
             req.flash('fail','Invalid Creadentials')
             return res.redirect('back')
         }
@@ -426,9 +509,16 @@ exports.updateStudentPostController = async(req,res,next)=>{
     
         let alreadyCreatedStudent = false;
         getAllStudents.forEach((s)=>{
-            if(s.name===name&&s.fatherName===fathername&&s.motherName===mothername&&s.dateOfBirthday===dateofbirthday&&s.phone===guardianphone&&s.roll===roll){
-                alreadyCreatedStudent = true 
-                return false
+            if(s._id.toString()!==id.toString()){
+                if(s.studentId===studentid||s.roll===roll){
+                    alreadyCreatedStudent = true 
+                    return false
+                }else{
+                if(s.name===name&&s.fatherName===fathername&&s.motherName===mothername&&s.dateOfBirthday===dateofbirthday&&s.phone===guardianphone){
+                    alreadyCreatedStudent = true 
+                    return false
+                    }
+                }
             }
         })
 
@@ -444,6 +534,7 @@ exports.updateStudentPostController = async(req,res,next)=>{
             dateOfBirthday:dateofbirthday,
             phone:guardianphone,
             roll:roll,
+            studentId:studentid
         },{new:true})
         if(!updatedStudent){
             req.flash('fail','Internal Server Error')

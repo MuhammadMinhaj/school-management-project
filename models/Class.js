@@ -31,7 +31,17 @@ const schema = new Schema({
     subject:[
         {
             name:String,
-            code:String
+            code:String,
+            passedMarks:String,
+            fullMarks:String,
+        }
+    ],
+    optionalSubject:[
+        {
+            name:String,
+            code:String,
+            passedMarks:String,
+            fullMarks:String,
         }
     ],
     user:{ 

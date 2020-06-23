@@ -13,7 +13,7 @@
   <!-- sidebar-wrapper  -->
   <main class="page-content">
     <div class="container-fluid">
-      <h3 style="color: #545b62;font-weight: 600;text-align:center">Student Management</h3>
+      <h4 style="color: #545b62;font-weight: 600;text-align:center">STUDANT MANAGEMENT</h4>
       <hr>
     <div>
         <%-include('../../partials/Error/alert.ejs')%>
@@ -21,6 +21,7 @@
 
       <div class="row">
             <!-- Create Student Form -->
+
 
 <div class="modal fade" id="studentCreateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -67,11 +68,16 @@
                 </div>
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <label for="studentId"> <strong>Roll No </strong></label>
-                        <input type="text" id="studentId" class="form-control" placeholder="000000" name="roll" value="<%=errorData?errorData.roll:''%>" >
+                        <label for="studentroll"> <strong>Roll No </strong></label>
+                        <input type="text" id="studentroll" class="form-control" placeholder="000000" name="roll" value="<%=errorData?errorData.roll:''%>" >
                     </div>
                 </div>
-                
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="studentId"> <strong>Student Id</strong></label>
+                        <input type="text" id="studentId" class="form-control" placeholder="000000" name="studentid" value="<%=errorData?errorData.studentid:''%>" >
+                    </div>
+                </div>
             </div>
         </div>
       </div>
@@ -89,26 +95,37 @@
 
         <!-- Show All Student Of Class -->
         <div class="col-sm-12">     
-            <div class="card p-2">
+            <h5 class="text-center" style="text-transform: uppercase;font-weight: bolder;color:#495057;">
+                Student Of Class
+                <span style="color:#0062cc">
+                    <%=singleClass.nameOfNumeric%>
+                </span>
+               
+                Branch 
+               <span style="color:#0062cc">
+                <%=singleClass.section%>
+               </span>
+               <%if(singleClass.group){%>
+                Group
+                <span style="color:#0062cc">
+                    <%=singleClass.group%>
+                </span>
+                <%}%>
+            </h5>
+            <h5 class="text-center"><strong>Total Student: <%=totalStudent%></strong></h5>
+            <div class="card p-2 mb-1">
                     <div class="row">
-                        <div class="col-sm-8">
-                            <h5 style="text-transform: uppercase;font-weight: bolder;color:#495057;">
-                                Student Of Class
-                                <span style="color:#0062cc">
-                                    <%=singleClass.nameOfNumeric%>
-                                </span>
-                               
-                                Branch 
-                               <span style="color:#0062cc">
-                                <%=singleClass.section%>
-                               </span>
-                               <%if(singleClass.group){%>
-                                Group
-                                <span style="color:#0062cc">
-                                    <%=singleClass.group%>
-                                </span>
-                                <%}%>
-                            </h5>
+                        <div class="col-sm-5">
+                          
+                                <form action="/user/student/create/<%=singleClass._id%>" method="GET" class="form-inline">
+                                  <input class="form-control mr-sm-2" name="term" style="height:auto!important;padding:3px 10px!important;" type="search" placeholder="Search as a phone or roll" aria-label="Search">
+                                  <button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit">Search</button>
+                                </form>
+                          
+                            
+                        </div>
+                        <div class="col-sm-3">
+                           
                         </div>
                         <div class="col-sm-4">
                             <button type="button" class="w-100 btn btn-secondary btn-sm" data-toggle="modal" data-target="#studentCreateModal" data-whatever="@mdo">Create</button>
@@ -116,119 +133,233 @@
                   
 
                     </div>
-                
-                <table class="table text-center mt-2">
-                    <thead class="thead-dark">
-                      <tr>
-                        <th scope="col">Roll</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Father's Name</th>
-                        <th scope="col">Mother's Name</th>
-                        <th scope="col">Date Of Birthday</th>
-                        <th scope="col">Controlling</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <%if(students){%>
-                            <%if(students.length!==0){%>
-                                <%students.forEach((student,ind)=>{%>
-                                    <div class="modal fade" id="studentUpdateModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                          <div class="modal-content">
-                                            <div class="modal-header">
-                                              <h5 class="modal-title" id="exampleModalLabel">Update Registration Form</h5>
-                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                              </button>
-                                            </div>
-                                            <form action="/user/student/update/<%=student._id%>" method="POST">
-                                            <div class="modal-body">
-                                              <div class="card p-3">
-                                                  <div class="row">
-                                                      <div class="col-sm-12">
-                                                          <div class="form-group">
-                                                              <label for="studentName"> <strong> Student Full Name</strong></label>
-                                                              <input type="text" id="studentName" class="form-control" placeholder="..." name="name" value="<%=student.name%>" >
+                    <table class="table text-center mt-2">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Roll</th>
+                            <th scope="col">Student Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Father's Name</th>
+                            <th scope="col">Mother's Name</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Date Of Birthday</th>
+                            <th scope="col">Controlling</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <%if(students){%>
+                                <%if(students.length!==0){%>
+
+                                   
+
+
+                                    <%if(didSearch){%>
+                                        <%if(searchResult){%>
+                                            <div class="modal fade" id="studentUpdateModal<%=searchResult.roll.toString()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Update Registration Form</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                    </div>
+                                                    <form action="/user/student/update/<%=searchResult._id%>" method="POST">
+                                                    <div class="modal-body">
+                                                      <div class="card p-3">
+                                                          <div class="row">
+                                                              <div class="col-sm-12">
+                                                                  <div class="form-group">
+                                                                      <label for="studentName"> <strong> Student Full Name</strong></label>
+                                                                      <input type="text" id="studentName" class="form-control" placeholder="..." name="name" value="<%=searchResult.name%>" >
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col-sm-12">
+                                                                  <div class="form-group">
+                                                                      <label for="studentFather"> <strong> Father's Name</strong></label>
+                                                                      <input type="text" id="studentFather" class="form-control" placeholder="..." name="fathername" value="<%=searchResult.fatherName%>" >
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col-sm-12">
+                                                                  <div class="form-group">
+                                                                      <label for="studentMother"> <strong> Mother's Name</strong></label>
+                                                                      <input type="text" id="studentMother" class="form-control" placeholder="..." name="mothername" value="<%=searchResult.motherName%>" >
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col-sm-12">
+                                                                  <div class="form-group">
+                                                                      <label for="studentGuardian"> <strong>Guardian Phone No</strong></label>
+                                                                      <input type="text" id="studentGuardian" class="form-control" placeholder="+880" name="guardianphone" value="<%=searchResult.phone%>" >
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col-sm-12">
+                                                                  <div class="form-group">
+                                                                      <label for="studentDate"> <strong>Date Of Birthday</strong></label>
+                                                                      <input type="date" id="studentDate" class="form-control" name="dateofbirthday" value="<%=searchResult.dateOfBirthday%>" >
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col-sm-12">
+                                                                  <div class="form-group">
+                                                                      <label for="studentId"> <strong>Roll No </strong></label>
+                                                                      <input type="text" id="studentId" class="form-control" placeholder="000000" name="roll" value="<%=searchResult.roll%>" >
+                                                                  </div>
+                                                              </div>
+                                                              
                                                           </div>
                                                       </div>
-                                                      <div class="col-sm-12">
-                                                          <div class="form-group">
-                                                              <label for="studentFather"> <strong> Father's Name</strong></label>
-                                                              <input type="text" id="studentFather" class="form-control" placeholder="..." name="fathername" value="<%=student.fatherName%>" >
-                                                          </div>
-                                                      </div>
-                                                      <div class="col-sm-12">
-                                                          <div class="form-group">
-                                                              <label for="studentMother"> <strong> Mother's Name</strong></label>
-                                                              <input type="text" id="studentMother" class="form-control" placeholder="..." name="mothername" value="<%=student.motherName%>" >
-                                                          </div>
-                                                      </div>
-                                                      <div class="col-sm-12">
-                                                          <div class="form-group">
-                                                              <label for="studentGuardian"> <strong>Guardian Phone No</strong></label>
-                                                              <input type="text" id="studentGuardian" class="form-control" placeholder="+880" name="guardianphone" value="<%=student.phone%>" >
-                                                          </div>
-                                                      </div>
-                                                      <div class="col-sm-12">
-                                                          <div class="form-group">
-                                                              <label for="studentDate"> <strong>Date Of Birthday</strong></label>
-                                                              <input type="date" id="studentDate" class="form-control" name="dateofbirthday" value="<%=student.dateOfBirthday%>" >
-                                                          </div>
-                                                      </div>
-                                                      <div class="col-sm-12">
-                                                          <div class="form-group">
-                                                              <label for="studentId"> <strong>Roll No </strong></label>
-                                                              <input type="text" id="studentId" class="form-control" placeholder="000000" name="roll" value="<%=student.roll%>" >
-                                                          </div>
-                                                      </div>
-                                                      
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                      <button type="submit" class="btn btn-primary">Update</button>
+                                                    </div>
+                                                  </form>
                                                   </div>
-                                              </div>
+                                                </div>
                                             </div>
-                                            <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                              <button type="submit" class="btn btn-primary">Update</button>
-                                            </div>
-                                          </form>
-                                          </div>
-                                        </div>
-                                    </div>
-                                    <tr>
-                                        <td><%=student.roll%></td>
-                                        <td><%=student.name%></td>
-                                        <td><%=student.fatherName%></td>
-                                        <td><%=student.motherName%></td>
-                                        <td><%=student.dateOfBirthday%></td>
-                                        
-                                        <td>
-         
-                                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#studentUpdateModal<%=ind%>" data-whatever="@mdo">
-                                                <i class="fas fa-user-edit"></i>
-                                            </button>
-                                            
-                                            <a href="/user/student/delete/<%=student._id%>/<%=singleClass._id%>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                <%})%>
-                                <%}else{%>
-                                    <tr>
-                                        <td colspan="7" class="py-5"><h5 class="p-5">Not Available Data</h5></td>
-                                    </tr>
+                                            <tr>
+                                                <td><%=searchResult.roll%></td>
+                                                <td><%=searchResult.name%></td>
+                                                <td><%=searchResult.fatherName%></td>
+                                                <td><%=searchResult.motherName%></td>
+                                                <td><%=searchResult.phone%></td>
+                                                <td><%=searchResult.dateOfBirthday%></td>
+                                                
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#studentUpdateModal<%=searchResult.roll.toString()%>" data-whatever="@mdo">
+                                                        <i class="fas fa-user-edit"></i>
+                                                    </button>
+                                                    
+                                                    <a href="/user/student/delete/<%=searchResult._id%>/<%=singleClass._id%>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                            <%}else{%>
+                                                <tr>
+                                                    <td colspan="6" class="py-5">
+                                                        <h3 class="text-muted py-5" style="font-weight:bold;">Dose Not Found Any Kind Of Student</h3>
+                                                    </td>
+                                                </tr>
+                                            <%}%>
+                                       
+                                       
+                                        <%}else{%>
+                                            <%students.forEach((student,ind)=>{%>
+                                                <div class="modal fade" id="studentUpdateModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                        <div class="modal-header">
+                                                          <h5 class="modal-title" id="exampleModalLabel">Update Registration Form</h5>
+                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                          </button>
+                                                        </div>
+                                                        <form action="/user/student/update/<%=student._id%>" method="POST">
+                                                        <div class="modal-body">
+                                                          <div class="card p-3">
+                                                              <div class="row">
+                                                                  <div class="col-sm-12">
+                                                                      <div class="form-group">
+                                                                          <label for="studentName"> <strong> Student Full Name</strong></label>
+                                                                          <input type="text" id="studentName" class="form-control" placeholder="..." name="name" value="<%=student.name%>" >
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="col-sm-12">
+                                                                      <div class="form-group">
+                                                                          <label for="studentFather"> <strong> Father's Name</strong></label>
+                                                                          <input type="text" id="studentFather" class="form-control" placeholder="..." name="fathername" value="<%=student.fatherName%>" >
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="col-sm-12">
+                                                                      <div class="form-group">
+                                                                          <label for="studentMother"> <strong> Mother's Name</strong></label>
+                                                                          <input type="text" id="studentMother" class="form-control" placeholder="..." name="mothername" value="<%=student.motherName%>" >
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="col-sm-12">
+                                                                      <div class="form-group">
+                                                                          <label for="studentGuardian"> <strong>Guardian Phone No</strong></label>
+                                                                          <input type="text" id="studentGuardian" class="form-control" placeholder="+880" name="guardianphone" value="<%=student.phone%>" >
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="col-sm-12">
+                                                                      <div class="form-group">
+                                                                          <label for="studentDate"> <strong>Date Of Birthday</strong></label>
+                                                                          <input type="date" id="studentDate" class="form-control" name="dateofbirthday" value="<%=student.dateOfBirthday%>" >
+                                                                      </div>
+                                                                  </div>
+                                                                  
+                                                                  <div class="col-sm-12">
+                                                                      <div class="form-group">
+                                                                          <label for="studentId"> <strong>Roll No </strong></label>
+                                                                          <input type="text" id="studentId" class="form-control" placeholder="000000" name="roll" value="<%=student.roll%>" >
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <label for="studentId"> <strong>Student Id</strong></label>
+                                                                        <input type="text" id="studentId" class="form-control" placeholder="000000" name="studentid" value="<%=student.studentId%>" >
+                                                                    </div>
+                                                                </div>
+                                                                  
+                                                              </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                          <button type="submit" class="btn btn-primary">Update</button>
+                                                        </div>
+                                                      </form>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                <tr>
+                                                    <td><%=student.roll%></td>
+                                                    <td><%=student.studentId?student.studentId:'N/A'%></td>
+                                                    <td><%=student.name%></td>
+                                                    <td><%=student.fatherName%></td>
+                                                    <td><%=student.motherName%></td>
+                                                    <td><%=student.phone%></td>
+                                                    <td><%=student.dateOfBirthday%></td>
+                                                    
+                                                    <td>
+                     
+                                                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#studentUpdateModal<%=ind%>" data-whatever="@mdo">
+                                                            <i class="fas fa-user-edit"></i>
+                                                        </button>
+                                                        
+                                                        <a href="/user/student/delete/<%=student._id%>/<%=singleClass._id%>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                                    </td>
+                                                </tr>
+                                            <%})%>
+                                    <%}%>
+
+                                    <%}else{%>
+                                        <tr>
+                                            <td colspan="7" class="py-5"><h5 class="p-5">Not Available Data</h5></td>
+                                        </tr>
+                                    <%}%>
                                 <%}%>
-                            <%}%>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                
             </div>
+            <!-- Pagination -->
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                   <li class="page-item <%=correntPage===1?'disabled':''%>"><a class="page-link" href="/user/student/create/<%=singleClass._id%>?page=<%=correntPage-1%>">Previous</a></li>
                   <%for(let i = 1;i<=totalPage;i++){%>
-                    <li class="page-item"><a class="page-link" href="/user/student/create/<%=singleClass._id%>?page=<%=i%>"><%=i%></a></li>
+                    <li class="page-item"><a class="page-link" href="/user/student/create/<%=singleClass._id%>?page=<%=i%>"> <strong><%=i%></strong> </a></li>
                     <%}%>
                   
                   <li class="page-item <%=correntPage>totalPage?'disabled':''%>"><a class="page-link" href="/user/student/create/<%=singleClass._id%>?page=<%=correntPage+1%>">Next</a></li>
+                  <li class="page-item">
+                    <a class="page-link ml-2" href="/user/student/create/<%=singleClass._id%>"><i class="fas fa-redo-alt"></i></a>
+                  </li>
                 </ul>
-              </nav>
+                
+            </nav>
+            <!-- Pagination End -->
         </div>
         
         </div>

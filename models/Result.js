@@ -1,6 +1,22 @@
 const { Schema,model } = require('mongoose')
 
 const schema = new Schema({
+    totalStudents:{
+        type:String,
+        trim:true
+    },
+    workingDays:{
+        type:String,
+        trim:true
+    },
+    presentDays:{
+        type:String,
+        trim:true
+    },
+    session:{
+        type:String,
+        trim:true
+    },
     types:{
         type:String,
         trim:true,
@@ -16,24 +32,40 @@ const schema = new Schema({
         trim:true,
         required:true
     },
-
+    rank:{
+        type:String,
+        trim:true 
+    },
+    comments:{
+        type:String,
+        trim:true
+    },
+    signatureOfPrinciple:String,
+    signatureOfTeacher:String,
     approved:{
         type:Boolean
     },
-    pending:{
+    submited:{
         type:Boolean
     },
-    reject:{
+    rejected:{
         Boolean
     },
-    subject:[
+    passedOrFailed:{
+        type:Boolean
+    },
+    dateOfResultPublication:{
+        type:String,
+        trim:true
+    },
+    subjects:[
         {
             name:{
                 type:String,
                 trim:String,
                 required:true 
             },
-            number:{
+            obtainedMarks:{
                 type:String,
                 trim:String,
                 required:true   
@@ -42,14 +74,15 @@ const schema = new Schema({
                 type:String,
                 trim:String,
                 required:true 
-            }
+            },
+            passedMarks:String,
+            fullMarks:String,
         }
     ],
     Student:{
         type:Schema.Types.ObjectId,
         ref:'Student'
     }
-
 
 })
 
