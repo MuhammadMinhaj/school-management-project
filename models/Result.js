@@ -20,17 +20,17 @@ const schema = new Schema({
     types:{
         type:String,
         trim:true,
-        required:true
+
     },
     result:{
         type:String,
         trim:true,
-        required:true
+
     },
     gpa:{
         type:String,
         trim:true,
-        required:true
+
     },
     rank:{
         type:String,
@@ -60,26 +60,79 @@ const schema = new Schema({
     },
     subjects:[
         {
-            name:{
-                type:String,
-                trim:String,
-                required:true 
-            },
-            obtainedMarks:{
-                type:String,
-                trim:String,
-                required:true   
-            },
-            grade:{
-                type:String,
-                trim:String,
-                required:true 
-            },
-            passedMarks:String,
-            fullMarks:String,
+        name:{
+            type:String,
+            trim:true,
+        },
+        obtainedMarks:{
+            type:String,
+            trim:true,
+        },
+        grade:{
+            type:String,
+            trim:true,
+        
+        },
+        gradePoint:{
+            type:String,
+            trim:true
+        },
+        passedMarks:String,
+        fullMarks:String,
+        code:String
         }
     ],
-    Student:{
+    subjectAandSubjectB:[
+        {
+        name:{
+            type:String,
+            trim:true,
+        },
+        obtainedMarks:{
+            type:String,
+            trim:true,
+        },
+        grade:{
+            type:String,
+            trim:true,
+        
+        },
+        gradePoint:{
+            type:String,
+            trim:true
+        },
+        passedMarks:String,
+        fullMarks:String,
+        code:String,
+        }
+    ],
+    optionalSubject:[
+        {
+        name:{
+            type:String,
+            trim:true,
+        
+        },
+        obtainedMarks:{
+            type:String,
+            trim:true,
+        
+        },
+        grade:{
+            type:String,
+            trim:true,
+        
+        },
+        gradePoint:{
+            type:String,
+            trim:true
+        },
+        passedMarks:String,
+        fullMarks:String,
+        code:String,
+        }
+    ],
+    student:{
         type:Schema.Types.ObjectId,
         ref:'Student'
     }

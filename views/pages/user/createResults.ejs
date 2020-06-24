@@ -60,24 +60,36 @@
             <div class="form-group">
               <label for="<%=student._id%>"><strong>Working Days</strong></label>
               <input type="text" name="workingdays" id="<%=student._id%>" value="<%=id.toString()===student._id.toString()?subjectFieldValue.workingdays:''%>" class="form-control <%=id.toString()===student._id.toString()&&fieldError.workingdays?'is-invalid':''%>">
+              <div class="invalid-feedback">
+                <%=fieldError.workingdays%>
+              </div>
             </div>
           </div>
           <div class="col-sm-3">
             <div class="form-group">
               <label for="<%=student._id+1%>"><strong>Present Days</strong></label>
               <input type="text" name="presentdays" id="<%=student._id+1%>" value="<%=id.toString()===student._id.toString()?subjectFieldValue.presentdays:''%>" class="form-control <%=id.toString()===student._id.toString()&&fieldError.presentdays?'is-invalid':''%>">
+              <div class="invalid-feedback">
+                <%=fieldError.presentdays%>
+              </div>
             </div>
           </div>
           <div class="col-sm-3">
             <div class="form-group">
               <label for="<%=student._id+2%>"><strong>Session</strong></label>
               <input type="text" name="session" id="<%=student._id+2%>" value="<%=id.toString()===student._id.toString()?subjectFieldValue.session:''%>" class="form-control <%=id.toString()===student._id.toString()&&fieldError.session?'is-invalid':''%>">
+              <div class="invalid-feedback">
+                <%=fieldError.session%>
+              </div>
             </div>
           </div>
           <div class="col-sm-3">
             <div class="form-group">
               <label for="<%=student._id+3%>"><strong>Type</strong></label>
               <input type="text" name="type" id="<%=student._id+3%>" value="<%=id.toString()===student._id.toString()?subjectFieldValue.type:''%>" class="form-control <%=id.toString()===student._id.toString()&&fieldError.type?'is-invalid':''%>">
+              <div class="invalid-feedback">
+                <%=fieldError.type%>
+              </div>
             </div>
           </div>
 
@@ -119,7 +131,7 @@
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label for="<%=student._id+5+ind%>"><strong><%=subject.name%></strong></label>
-                          <input type="text" value="<%=id.toString()===student._id.toString()?subjectFieldValue[subject.name]:''%>" id="<%=student._id+5+ind%>" name="<%=subject.name%>" class="form-control <%=id.toString()===student._id.toString()&&subjectFieldError[subject.name]?'is-invalid':''%>">
+                          <input type="text" value="<%=id.toString()===student._id.toString()?subjectFieldValue[subject.name]:''%>" id="<%=student._id+5+ind%>" name="<%='opt'+subject.name%>" class="form-control <%=id.toString()===student._id.toString()&&subjectFieldError[subject.name]?'is-invalid':''%>">
                           
                           <div class="invalid-feedback">
                             <%=id.toString()===student._id.toString()?subjectFieldError[subject.name]:''%>
