@@ -9,11 +9,15 @@ const {
 // Imported All Controllers 
 const {
    resultGetController,
-   createResultPostController
+   createResultPostController,
+   editResultGetController,
+   editResultPostController
 } = require('../../controllers/users/resultController')
 
 
 router.get('/results/create/:classid',isAuthenticatedUser,resultGetController)
 router.post('/results/create/:classid/:studentid',isAuthenticatedUser,createResultPostController)
+router.get('/result/edit/:id',isAuthenticatedUser,editResultGetController)
+router.post('/result/edit/:id',isAuthenticatedUser,editResultPostController)
 
 module.exports = router 

@@ -1,0 +1,133 @@
+<%-include('../../partials/user/head.ejs')%>
+
+
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+
+  <!-- Navbar -->
+  <%-include('../../partials/user/navbar.ejs')%>
+  <!-- Navbar End -->
+
+  <!-- sidebar-wrapper  -->
+<main class="page-content">
+  <div class="container-fluid">
+      <h4 style="color: #545b62;font-weight: 600;text-align:center">UPDATE RESULTS</h4>
+      <hr>
+    <div>
+        <%-include('../../partials/Error/alert.ejs')%>
+    </div>
+  </div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <%if(result){%>
+        <form action="/user/result/edit/<%=result._id%>" method="POST">
+           <div class="card p-3">
+            <div class="card p-3 mb-2">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="workdays"><strong>Working Days</strong></label>
+                            <input type="text" name="workingdays" value="<%=result.workingDays%>" class="form-control <%=fieldError.workingdays?'is-invalid':''%>">
+
+                            <div class="invalid-feedback">
+                                <%=subjectFieldError.workingdays%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="workdays"><strong>Present Days</strong></label>
+                            <input type="text" name="presentdays" value="<%=result.presentDays%>" class="form-control <%=fieldError.presentdays?'is-invalid':''%>">
+                            <div class="invalid-feedback">
+                                <%=subjectFieldError.presentdays%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="workdays"><strong>Session</strong></label>
+                            <input type="text" name="session" value="<%=result.session%>" class="form-control <%=fieldError.session?'is-invalid':''%>">
+                            <div class="invalid-feedback">
+                                <%=subjectFieldError.session%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="workdays"><strong>Type</strong></label>
+                            <input type="text" name="type" value="<%=result.types%>" class="form-control <%=fieldError.type?'is-invalid':''%>">
+                            <div class="invalid-feedback">
+                                <%=subjectFieldError.type%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h5 class="text-center"><strong>Subject List</strong></h5>
+            <div class="card my-2 p-3">
+                <div class="row">
+
+                <%result.subjects.forEach((subject,ind)=>{%>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="<%=subject.name%>"><strong><%=subject.name%></strong></label>
+                            <input type="text" name="<%='subject'+subject.name%>" value="<%=subject.obtainedMarks%>" class="form-control">
+                        </div>
+                    </div>
+                <%})%>
+                    
+                </div>
+            </div>
+            <h5 class="text-center"><strong>Subject Combination</strong></h5>
+            <div class="card my-2 p-3">
+                <div class="row">
+
+                <%result.subjectAandSubjectB.forEach((subject,ind)=>{%>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="<%=subject.name%>"><strong><%=subject.name%></strong></label>
+                            <input type="text" name="<%='combsub'+subject.name%>" value="<%=subject.obtainedMarks%>" class="form-control">
+                        </div>
+                    </div>
+                <%})%>
+                    
+                </div>
+            </div>
+            <h5 class="text-center"><strong>Optional Subject</strong></h5>
+            <div class="card my-2 p-3">
+                <div class="row">
+
+                <%result.optionalSubject.forEach((subject,ind)=>{%>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="<%=subject.name%>"><strong><%=subject.name%></strong></label>
+                            <input type="text" name="<%='opt'+subject.name%>" value="<%=subject.obtainedMarks%>" class="form-control">
+                        </div>
+                    </div>
+                <%})%>
+                    
+                </div>
+            </div>
+            <input type="submit" value="UPDATE" class="btn btn-success btn-sm">
+           </div>
+        </form>
+        <%}%>
+    </div>
+</div>
+
+
+</main>
+</div>
+
+
+
+
+<%-include('../../partials/user/footer.ejs')%>
+
+</body>
+
+</html>

@@ -3,9 +3,7 @@ const User = require('../../models/User')
 const Student = require('../../models/Student')
 const Result = require('../../models/Result')
 
-
-
-async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,subjectFieldError,fieldError,id,subjectFieldValue){
+async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,subjectFieldError,fieldError,id,subjectFieldValue,result){
     let classes = await Class.find({user:req.user._id})
     let correntPage  = parseInt(req.query.page)||1
    
@@ -34,7 +32,8 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,subject
         flashMessage: req.flash(),
         subjectFieldError:subjectFieldError?subjectFieldError:{},
         id:id?id:'',
-        subjectFieldValue:subjectFieldValue?subjectFieldValue:{}
+        subjectFieldValue:subjectFieldValue?subjectFieldValue:{},
+        result:result?result:''
     })
 }
 
@@ -58,9 +57,6 @@ exports.createResultPostController = async(req,res,next)=>{
         let { classid,studentid } = req.params
         let { workingdays,presentdays,session,type,...others } = req.body 
 
-
-        
-      
         let subjectFieldError = {}
         let fieldError = {}
         let hasClass = await Class.findOne({_id:classid})
@@ -69,7 +65,7 @@ exports.createResultPostController = async(req,res,next)=>{
         if(!hasClass){
             return res.redirect('back')
         }
-
+       
         Object.entries(others).forEach((fields,ind)=>{
             if(!fields[1]){
                 // subjectFieldError[fields[0].toString().trim().toLowerCase().slice(0,3)+ind] = 's'
@@ -91,7 +87,8 @@ exports.createResultPostController = async(req,res,next)=>{
         // console.log(Object.keys(subjectFieldError))
         // console.log(Object.keys(fieldError))
         if(Object.keys(subjectFieldError).length!==0||Object.keys(fieldError).length!==0){
-           return renderPageHandler(req,res,'createResults',null,null,hasClass,subjectFieldError,fieldError,studentid,valueOfField)
+
+           return renderPageHandler(req,res,'createResults','fail','Please Provied Full Info About Student For Make A Result',hasClass,subjectFieldError,fieldError,studentid,valueOfField)
         }
 
          let createResult = new Result({
@@ -113,8 +110,6 @@ exports.createResultPostController = async(req,res,next)=>{
         let valueOfOptionalSubject = []
 
      
-        
-    
         // Difference Subject For Get Value
         let subjects = []
 
@@ -174,13 +169,17 @@ exports.createResultPostController = async(req,res,next)=>{
    
        let createdResult = await createResult.save()
 
+       if(!createdResult){
+           req.flash('fail','Internal Server Error')
+        return res.redirect('back')
+       }
 
-       let resultIdStoreInStudent = await Student.findOneAndUpdate({_id:studentid},{
+        await Student.findOneAndUpdate({_id:studentid},{
         result:createdResult._id,
         hasResult:true,
        },{new:true})
 
-       let studentIdStoreInResult = await Result.findOneAndUpdate({_id:createdResult._id},{
+        await Result.findOneAndUpdate({_id:createdResult._id},{
         student:studentid
        },{new:true})
 
@@ -232,9 +231,19 @@ exports.createResultPostController = async(req,res,next)=>{
            }
        }
        
-       console.log(addedAllSubjectInResult)
-       console.log('Break')
-       console.log(resultIdStoreInStudent)
+
+       if(!addedAllSubjectInResult){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+       }
+
+       req.flash('success','Successfully Created Result')
+       res.redirect('back')
+
+
+    //    console.log(addedAllSubjectInResult)
+    //    console.log('Break')
+    //    console.log(resultIdStoreInStudent)
     //    console.log('Subject Main')
     //    console.log(mainSubjectOfValue)
     //    console.log('Subject 1st and 2nd papers')
@@ -247,3 +256,126 @@ exports.createResultPostController = async(req,res,next)=>{
     }
 }
 
+exports.editResultGetController = async(req,res,next)=>{
+    try{
+        let { id } = req.params
+
+        let result = await Result.findOne({_id:id})
+        console.log(result)
+        if(!result){
+            return res.redirect('back')
+        }
+        renderPageHandler(req,res,'editResult',null,null,null,null,null,null,null,result)
+    }catch(e){
+        next(e)
+    }
+}
+exports.editResultPostController = async(req,res,next)=>{
+    try{
+        let { id } = req.params
+        let { workingdays,presentdays,session,type,...others } = req.body 
+        
+        let result = await Result.findOne({_id:id})
+
+        if(!result){
+            return res.redirect('back')
+        }
+
+        let subjectFieldError = {}
+        let fieldError = {}
+       
+        Object.entries(others).forEach((fields,ind)=>{
+            if(!fields[1]){
+                subjectFieldError[fields[0]] = `Please Provied Obtained Marks Of ${fields[0]}`
+            }
+        })
+        workingdays.length===0?fieldError.workingdays='Please Provied Working Days':''
+        presentdays.length===0?fieldError.presentdays='Please Provied Present Days':''
+        session.length===0?fieldError.session='Please Provied Session':''
+        type.length===0?fieldError.type='Please Provied Type':''
+
+        if(Object.keys(subjectFieldError).length!==0||Object.keys(fieldError).length!==0){
+            req.flash('fail','Cannot Empty Subject Field')
+            return res.redirect('back')
+        }
+
+
+        let subjects = []
+        let combinationSubjects = []
+        let optionalSubjects = []
+
+
+        Object.entries(others).forEach((fields,ind)=>{
+            if(fields[0].includes('subject')){
+                subjects.push(fields)
+            }            
+        })
+
+        Object.entries(others).forEach((fields,ind)=>{
+            if(fields[0].includes('combsub')){
+                combinationSubjects.push(fields)
+            }
+        })
+        Object.entries(others).forEach((fields,ind)=>{
+            if(fields[0].includes('opt')){
+                optionalSubjects.push(fields)
+            }
+        })
+
+       
+       
+        let updatedResults = await Result.findOneAndUpdate({_id:id},{
+            workingDays:workingdays,
+            presentDays:presentdays,
+            session:session,
+            types:type,
+
+        },{new:true})
+
+        if(!updatedResults){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+
+        if(subjects.length!==0){
+            updatedResults.subjects.forEach(subjectA=>{
+                subjects.forEach(subjectB=>{
+                    if(subjectA.name.toString().toLowerCase()===subjectB[0].toString().toLowerCase().slice(7)){
+                        subjectA.obtainedMarks = subjectB[1]
+                    }
+                })
+            })    
+        }
+        
+        if(combinationSubjects.length!==0){
+            updatedResults.subjectAandSubjectB.forEach(subjectA=>{
+                combinationSubjects.forEach(subjectB=>{
+                    if(subjectA.name.toString().toLowerCase()===subjectB[0].toString().toLowerCase().slice(7)){
+                        subjectA.obtainedMarks = subjectB[1] 
+                    }
+                })
+            })
+        }
+      
+        if(optionalSubjects.length!==0){
+            updatedResults.optionalSubject.forEach(subjectA=>{
+                optionalSubjects.forEach(subjectB=>{
+                    if(subjectA.name.toString().toLowerCase()===subjectB[0].toString().toLowerCase().slice(3)){
+                        subjectA.obtainedMarks = subjectB[1]
+                    }
+                })
+            })
+        }
+        
+        let updatedSubjectOfResult = await Result.findOneAndUpdate({_id:updatedResults._id},updatedResults,{new:true})
+
+        if(!updatedSubjectOfResult){
+            req.flash('fail','Internal Server Error')
+        }
+        req.flash('success','Successfully Updated Result')
+        res.redirect('back')
+        
+    }catch(e){
+        next(e)
+    }
+}

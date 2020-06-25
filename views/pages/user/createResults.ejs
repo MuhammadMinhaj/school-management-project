@@ -42,7 +42,7 @@
                     <%students.forEach((student,ind)=>{%>
                       <!-- Result Create Modal -->
 
-
+<!-- Result Create Modal -->
 <div class="modal fade" id="createResultModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -158,6 +158,9 @@
     </div>
   </div>
 </div>
+<!-- Result Create Modal End -->
+
+
                       <tr>
                         <th><%=student.roll%></th>
                         <td><%=student.studentId%></td>
@@ -168,11 +171,11 @@
                             <i class="fas fa-plus"></i>
                           </button>
 
-                          <button style="border:1px solid #00000026;" class="btn btn-sm text-info">
+                          <a href="/user/result/edit/<%=student.result%>" style="border:1px solid #00000026;" class="btn btn-sm text-info">
                             <i class="fas fa-edit"></i>
-                          </button>
+                          </a>
 
-                          <a href="" style="border:1px solid #00000026;" class="btn btn-sm text-danger">
+                          <a href="/user/result/delete/<%=student.result%>" style="border:1px solid #00000026;" class="btn btn-sm text-danger">
                             <i class="fas fa-trash-alt"></i>
                           </a>
 
