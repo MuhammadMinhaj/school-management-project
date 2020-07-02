@@ -39,28 +39,28 @@
             <div class="card my-2 p-2">
                 <form action="/user/class/create" method="POST">
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="className"> <strong> Class Name</strong></label>
                                 <input type="text" id="className" class="form-control" placeholder="Name" name="name">
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="classNumeric"><strong> Class Numeric</strong></label>
                                 <input type="text" id="classNumeric" name="numeric" class="form-control" placeholder="Numeric">
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="classSection"><strong>Class Section</strong></label>
                                 <input type="text" id="classSection" name="section" class="form-control" placeholder="Section">
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="classGroup"><strong>Select Group</strong></label>
-                                <select name="group" class="custom-select">
+                                <select id="classGroup" name="group" class="custom-select">
                                     <option selected value="">...</option>
                                     <option value="science">Science</option>
                                     <option value="commerce">Commerce</option>
@@ -69,6 +69,27 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="resultType"><strong>Select Result Type</strong></label>
+                                <select id="resultType" name="resultType" class="custom-select">
+                                    <option selected value="">...</option>
+                                    <option value="gpa">Grade Point Average</option>
+                                    <option value="cgpa">Cumulative Grade Point Average</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="resultCalculteType"><strong>Select Results Calculation Type</strong></label>
+                                <select id="resultCalculteType" name="resultCalculateType" class="custom-select">
+                                    <option selected value="">...</option>
+                                    <option value="same">Same Subject Marks</option>
+                                    <option value="difference">Difference Subject Marks</option>
+                                </select>
+                            </div>
+                        </div>
+                        
                     </div>
                 
                     <input type="submit" value="CREATE" class="btn btn-success btn-sm w-25">

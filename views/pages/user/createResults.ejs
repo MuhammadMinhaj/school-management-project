@@ -23,7 +23,7 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card p-2 mb-1">
-
+      
         <table class="table text-center">
           <thead class="thead-dark">
             <tr>
@@ -92,7 +92,25 @@
               </div>
             </div>
           </div>
-
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="<%=student._id+4%>"><strong>Select Examination</strong></label>
+             
+                <select id="<%=student._id+4%>" name="examination" class="<%=id.toString()===student._id.toString()&&fieldError.examination?'is-invalid':''%> custom-select">
+                    <option selected value="">...</option>
+                
+                    <%if(examination){%>
+                      <%examination.forEach((exam,ind)=>{%>
+                        <option value="<%=exam._id%>"><%=exam.name%></option>
+                      <%})%>
+                    <%}%>
+                </select>
+         
+              <div class="invalid-feedback">
+                <%=fieldError.examination%>
+              </div>
+            </div>
+          </div>
           <!-- Subject List And Obtianed Marks -->
           <div class="col-sm-12">
             <h5 class="py-3"> <strong>Subject List</strong> </h5>
@@ -131,10 +149,10 @@
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label for="<%=student._id+5+ind%>"><strong><%=subject.name%></strong></label>
-                          <input type="text" value="<%=id.toString()===student._id.toString()?subjectFieldValue[subject.name]:''%>" id="<%=student._id+5+ind%>" name="<%='opt'+subject.name%>" class="form-control <%=id.toString()===student._id.toString()&&subjectFieldError[subject.name]?'is-invalid':''%>">
+                          <input type="text" value="<%=id.toString()===student._id.toString()?subjectFieldValue['opt'+subject.name]:''%>" id="<%=student._id+5+ind%>" name="<%='opt'+subject.name%>" class="form-control <%=id.toString()===student._id.toString()&&subjectFieldError['opt'+subject.name]?'is-invalid':''%>">
                           
                           <div class="invalid-feedback">
-                            <%=id.toString()===student._id.toString()?subjectFieldError[subject.name]:''%>
+                            <%=id.toString()===student._id.toString()?subjectFieldError['opt'+subject.name]:''%>
                           </div>
                         </div>
                       </div>
@@ -171,13 +189,14 @@
                             <i class="fas fa-plus"></i>
                           </button>
 
-                          <a href="/user/result/edit/<%=student.result%>" style="border:1px solid #00000026;" class="btn btn-sm text-info">
+                          <!-- <a href="/user/result/edit/<%=student.result%>" style="border:1px solid #00000026;" class="btn btn-sm text-info">
                             <i class="fas fa-edit"></i>
                           </a>
 
                           <a href="/user/result/delete/<%=student.result%>" style="border:1px solid #00000026;" class="btn btn-sm text-danger">
                             <i class="fas fa-trash-alt"></i>
-                          </a>
+                          </a> -->
+                          <a href="/user/student/all/results/<%=student._id%>" style="border:1px solid #00000026;" class="btn btn-sm" ><i class="fas fa-eye-slash"></i></a>
 
                         </td>
                       </tr>
@@ -195,9 +214,12 @@
         </table>
       </div>
 
-      <!-- Pagination -->
+
+      <div class="row">
+        <div class="col-sm-12">
+                <!-- Pagination -->
       <nav aria-label="Page navigation example">
-        <ul class="pagination">
+        <ul class="pagination flex-wrap">
         <li class="page-item <%=correntPage===1?'disabled':''%>"><a class="page-link" href="/user/results/create/<%=singleClass._id%>?page=<%=correntPage-1%>">Previous</a></li>
 
           <%for(let i = 1;i<=totalPage;i++){%>
@@ -206,14 +228,158 @@
          
           <li class="page-item <%=correntPage>totalPage?'disabled':''%>"><a class="page-link" href="/user/results/create/<%=singleClass._id%>?page=<%=correntPage+1%>">Next</a></li>
 
-          <li class="page-item ml-1" >
+          <!-- <li class="page-item ml-1" >
             <a class="page-link"  href="/user/results/create/<%=singleClass._id%>">
               <i class="fas fa-redo-alt"></i>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <!-- Pagination End -->
+        </div>
+
+
+
+
+<div class="modal fade" id="settingOfResult" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Setting</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+          <form action="/user/results/all/create/<%=singleClass._id%>" method="GET">
+            <h5 class="text-center">Create All Results</h5>
+            <div class="form-group">
+              <strong>Exam Type</strong>
+              <select name="option" class="custom-select">
+                <option value="">Select exam type</option>
+                <%examination.forEach((exam,ind)=>{%>
+                 <option value="<%=exam._id%>" <%=searchValue.option===exam._id.toString()?'selected':''%> ><%=exam.name%></option>
+                <%})%>
+              </select>
+            </div>
+
+              
+            <div class="form-group"> 
+              <strong>Calculation Type</strong>
+              <select name="typeOfcalculate" class="custom-select">
+                <option value="">Select calculation type</option>
+                <option value="gpa">Grade Point Average</option>
+                <option value="cgpa">Cumulative Grade Point Average</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-sm btn-light text-dark border w-100" style="background:#dae0e5;">
+              <svg width="2em" height="1.25em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z"/>
+                <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z"/>
+              </svg>
+            </button>
+          </form>
+            
+
+         
+          <form class="my-3" action="/user/results/all/divied/<%=singleClass._id%>" method="GET">
+            <div class="form-group">
+              <h5 class="text-center mt-3">Passed And Failed Results Divider</h5>
+              <select name="option" class="custom-select">
+                <option value="">Select exam type</option>
+                <%examination.forEach((exam,ind)=>{%>
+                  <option value="<%=exam._id%>" <%=searchValue.option===exam._id.toString()?'selected':''%> ><%=exam.name%></option>
+                <%})%>
+              </select>
+
+              <!-- <a href="/user/results/all/divied/<%=singleClass._id%>" class="btn btn-info btn-sm w-100 my-2">Divied All Results</a> -->
+            </div>
+            <button type="submit" class="btn btn-sm  btn-light text-dark border w-100" style="background:#dae0e5;">
+              <svg width="2em" height="1.25em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z"/>
+                <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z"/>
+              </svg>
+            </button>
+          </form>
+            
+            <!-- <div class="form-group">
+              <a href="#" class="btn btn-dark btn-sm w-100 my-2">Submit To Administrator</a>
+            </div> -->
+           
+          <form class="my-3" action="/user/results/all/update/<%=singleClass._id%>" method="GET">
+            <div class="form-group">
+              <h5 class="text-center">Update All Results</h5>
+              <select name="option" class="custom-select">
+                <option value="">Select exam type</option>
+                <%examination.forEach((exam,ind)=>{%>
+                  <option value="<%=exam._id%>" <%=searchValue.option===exam._id.toString()?'selected':''%> ><%=exam.name%></option>
+                <%})%>
+              </select>
+
+              <!-- <a href="/user/results/all/update/<%=singleClass._id%>" class="btn btn-info btn-sm w-100 my-2">Click To Update All Result</a> -->
+            </div>
+            <button type="submit" class="btn btn-sm  btn-light text-dark border w-100" style="background:#dae0e5;">
+              <svg width="2em" height="1.25em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z"/>
+                <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z"/>
+              </svg>
+            </button>
+          </form>
+        
+          <form action="/user/results/all/rank/<%=singleClass._id%>" method="GET">
+            <div class="form-group">
+              <h5 class="text-center">Result Ranking Setting</h5>
+              <select name="option" class="custom-select">
+                <option value="">Select exam type</option>
+                <%examination.forEach((exam,ind)=>{%>
+                  <option value="<%=exam._id%>" <%=searchValue.option===exam._id.toString()?'selected':''%> ><%=exam.name%></option>
+                <%})%>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-sm  btn-light text-dark border w-100" style="background:#dae0e5;">
+              <svg width="2em" height="1.25em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z"/>
+                <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z"/>
+              </svg>
+            </button>
+
+          </form>
+          
+            
+            
+            
+          
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger text-light w-25 btn-sm"  data-dismiss="modal">
+          <svg width="2em" height="1.75em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+          <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+          </svg>
+      </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+      <div class="col-sm-12">
+        <button class="w-75 btn btn-sm btn-dark my-2" data-toggle="modal" data-target="#settingOfResult" data-whatever="@mdo">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 0 0-5.86 2.929 2.929 0 0 0 0 5.858z"/>
+            </svg>
+        </button>
+          <a class="btn btn-sm btn-secondary" style="width:24%"  href="/user/results/create/<%=singleClass._id%>">
+            <i class="fas fa-redo-alt"></i>
+          </a>
+        </div>
+      </div>
+
+    
     </div>
   </div>
 

@@ -38,10 +38,12 @@ const schema = new Schema({
     hasResult:{
         type:Boolean
     },
-    result:{
-        type:Schema.Types.ObjectId,
-        ref:'Result'
-    },
+    result:[
+        {
+            type:Schema.Types.ObjectId,
+            ref:'Result'
+        }
+    ],
     classId:{
         type:Schema.Types.ObjectId,
         ref:'Class'

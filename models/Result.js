@@ -25,13 +25,14 @@ const schema = new Schema({
     result:{
         type:String,
         trim:true,
-
     },
-    gpa:{
-        type:String,
-        trim:true,
-
-    },
+    totalSubject:String,
+    targetTotalSubjectNumber:String,
+    totalSubjectObtainedNumber:String,
+    totalGradePoint:String,
+    gradePoint:String,
+    grade:String,
+    
     rank:{
         type:String,
         trim:true 
@@ -42,10 +43,10 @@ const schema = new Schema({
     },
     signatureOfPrinciple:String,
     signatureOfTeacher:String,
-    approved:{
+    submited:{
         type:Boolean
     },
-    submited:{
+    approved:{
         type:Boolean
     },
     rejected:{
@@ -79,7 +80,9 @@ const schema = new Schema({
         },
         passedMarks:String,
         fullMarks:String,
-        code:String
+        code:String,
+        latterGread:String,
+        greadPoint:String
         }
     ],
     subjectAandSubjectB:[
@@ -100,6 +103,10 @@ const schema = new Schema({
         gradePoint:{
             type:String,
             trim:true
+        },
+        combinationObtainedMarks:{
+            type:String,
+            trim:true 
         },
         passedMarks:String,
         fullMarks:String,
@@ -130,11 +137,22 @@ const schema = new Schema({
         passedMarks:String,
         fullMarks:String,
         code:String,
+
+        latterGread:String,
+        greadPoint:String
         }
     ],
     student:{
         type:Schema.Types.ObjectId,
         ref:'Student'
+    },
+    classid:{
+        type:Schema.Types.ObjectId,
+        ref:'Class'
+    },
+    examination:{
+        type:Schema.Types.ObjectId,
+        ref:'Examination'
     }
 
 })

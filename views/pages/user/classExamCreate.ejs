@@ -1,0 +1,168 @@
+<%-include('../../partials/user/head.ejs')%>
+
+
+
+
+
+
+
+
+
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+---- Include the above in your HEAD tag -------- -->
+
+
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+
+  <!-- Navbar -->
+  <%-include('../../partials/user/navbar.ejs')%>
+  <!-- Navbar End -->
+
+  <!-- sidebar-wrapper  -->
+  <main class="page-content">
+    <div class="container-fluid">
+      <h3 style="color: #545b62;font-weight: 600;text-align:center">Examination MANAGEMENT</h3>
+      <hr>
+    <div>
+        <%-include('../../partials/Error/alert.ejs')%>
+    </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+            <!-- Class Create Form -->
+            <h4 style="color: #545b62;font-weight: 600;">Create Exam</h4>
+            <div class="card my-2 p-2">
+                <form action="/user/class/exam/create/<%=singleClass._id%>" method="POST">
+                    <div class="row">
+                        
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="examName"><strong>Exam Name</strong></label>
+                                <input type="text" id="examName" name="name" class="form-control" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="examYear"><strong>Select Year</strong></label>
+                                <input type="number" min="2000" max="2099" step="1" value="2020" name="year" class="form-control" placeholder="Year" id="examYear">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="examTitle"> <strong>Exam Title</strong></label>
+                                <textarea name="title" id="examTitle" placeholder="Title" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <input type="submit" value="CREATE" class="btn btn-success btn-sm w-25">
+                  
+                </form>
+            </div>
+             <!-- Class Create Form End-->
+
+             <!-- Class List -->
+             <h4 style="color: #545b62;font-weight: 600;">Exam List</h4>
+
+             <div class="card my-2 p-2">
+                <%if(examination){%>
+                    <table class="table text-center">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">SL</th>
+                            <th scope="col">Exam Name</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">CONTROLLING</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <%if(examination.length!==0){%>
+                                <%examination.forEach((exam,ind)=>{%>
+
+                                
+            <!-- Edit Examination Modal -->
+            <div class="modal fade" id="editExamModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Examination</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/user/class/exam/update/<%=exam._id%>" method="POST">
+            <div class="modal-body">
+                
+                    <div class="form-group">
+                        <label for="editExamName"><strong>Exam Name</strong></label>
+                        <input type="text" id="editExamName" name="name" value="<%=exam.name%>" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="editExamYear"><strong>Select Year</strong></label>
+                        <input type="number" min="2000" max="2099" step="1" value="<%=exam.year%>" name="year" class="form-control" placeholder="Year" id="editExamYear">
+                    </div>
+                    <div class="form-group">
+                        <label for="editExamTitle"> <strong>Exam Title</strong></label>
+                        <textarea name="title" id="editExamTitle" placeholder="Title" class="form-control"><%=exam.title%></textarea>
+                    </div>
+                
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            </form>
+            </div>
+            </div>
+            </div>
+            <!-- End Edit Examination Modal -->
+                                <tr>
+                                    <th scope="row"><%=ind+1%></th>
+                                    <td><%=exam.name%></td>
+                                    <td><%=exam.year%></td>
+                                    <td><%=exam.title%></td>
+                                    <td>
+                                        <a class="btn btn-sm" href="/user/class/exam/delete/<%=exam._id%>">
+                                            <i class="fas fa-trash-alt text-danger"></i>
+                                        </a>
+                                        <button class="btn btn-sm" type="button" data-toggle="modal" data-target="#editExamModal<%=ind%>" data-whatever="@mdo">
+                                            <i class="fas fa-edit text-info"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <%})%>
+                                <%}else{%>
+                                    <tr>
+                                        <td>
+                                            <h5 class="text-muted">There is nothing to show</h5>
+                                        </td>
+                                    </tr>
+                                <%}%>
+                        </tbody>
+                    </table>
+                    <%}%>
+            </div>
+             <!-- Class List End -->
+        </div>
+      </div>
+
+
+    </div>
+  </main>
+</div>
+
+
+
+
+<%-include('../../partials/user/footer.ejs')%>
+
+</body>
+
+</html>

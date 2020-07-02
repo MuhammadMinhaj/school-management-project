@@ -13,6 +13,11 @@ const {
     updateClassPostController,
     deleteClassGetController,
     
+    classExamCreateGetController,
+    classExamCreatePostController,
+    classExamDeleteGetController,
+    classExamUpdatePostController,
+
     classSubjectAddPostController,
     classSubjectUpdatePostController,
     classSubjectRemoveGetController,
@@ -38,4 +43,9 @@ router.post('/student/create/:classid',isAuthenticatedUser,createStudentPostCont
 
 router.post('/student/update/:id',isAuthenticatedUser,updateStudentPostController)
 router.get('/student/delete/:stuid/:classid',isAuthenticatedUser,studentDeleteGetController)
+
+router.get('/class/exam/create/:id',isAuthenticatedUser,classExamCreateGetController)
+router.post('/class/exam/create/:id',isAuthenticatedUser,classExamCreatePostController)
+router.get('/class/exam/delete/:id',isAuthenticatedUser,classExamDeleteGetController)
+router.post('/class/exam/update/:id',isAuthenticatedUser,classExamUpdatePostController)
 module.exports = router 

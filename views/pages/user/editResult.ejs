@@ -65,6 +65,26 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                          <label for=""><strong>Select Examination</strong></label>
+                          
+                            <select id="" name="examination" class="<%=fieldError.examination?'is-invalid':''%> custom-select">
+                                <option value="">...</option>
+                            
+                                <%if(examination){%>
+                                  <%examination.forEach((exam,ind)=>{%>
+                                    <option value="<%=exam._id%>" <%=selectedExam.name===exam.name?'selected':''%>><%=exam.name%></option>
+                                  <%})%>
+                                <%}%>
+
+                            </select>
+                     
+                          <div class="invalid-feedback">
+                            <%=fieldError.examination%>
+                          </div>
+                        </div>
+                      </div>
                 </div>
             </div>
             <h5 class="text-center"><strong>Subject List</strong></h5>

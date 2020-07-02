@@ -39,7 +39,7 @@
       <div class="sidebar-menu">
         <ul>
           <li class="header-menu">
-            <span>General</span>
+            <span>SETTING</span>
           </li>
           <li class="sidebar-dropdown">
             <a href="/user/dashboard">
@@ -51,7 +51,7 @@
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fas fa-house-user"></i>
-              <span>Class</span>
+              <span>Class Management</span>
              
             </a>
             <div class="sidebar-submenu">
@@ -76,7 +76,7 @@
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fas fa-users"></i>
-              <span>Students</span>
+              <span>Students Management</span>
             </a>
             <div class="sidebar-submenu">
               <ul>
@@ -84,8 +84,8 @@
                 <%if(classes){%>
                   <%if(classes.length!==0){%>
                     <%classes.forEach((c,ind)=>{%>
-                      <li style="padding:0px!important;">
-                        <a href="/user/student/create/<%=c._id%>" style="padding-left:10px!important;">Student of Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+                      <li>
+                        <a href="/user/student/create/<%=c._id%>">Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
                       </li>
                     <%})%>
                     <%}%>
@@ -95,11 +95,28 @@
               </ul>
             </div>
           </li>
-
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fas fa-tasks"></i>
+              <span>Exam Management</span>
+             
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <%if(classes){%>
+                  <%classes.forEach((c,ind)=>{%>
+                    <li>
+                      <a href="/user/class/exam/create/<%=c._id%>"><%='Class '+c.nameOfNumeric+' '+c.section%> <%=c.group?c.group:''%></a>
+                    </li>
+                  <%})%>
+                  <%}%>
+              </ul>
+            </div>
+          </li>
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fas fa-receipt"></i>
-              <span>Create Results</span>
+              <span>Results Management</span>
             </a>
             <div class="sidebar-submenu">
               <ul>
@@ -107,8 +124,8 @@
                 <%if(classes){%>
                   <%if(classes.length!==0){%>
                     <%classes.forEach((c,ind)=>{%>
-                      <li style="padding:0px!important;">
-                        <a href="/user/results/create/<%=c._id%>" style="padding-left:10px!important;">Results of Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+                      <li>
+                        <a href="/user/results/create/<%=c._id%>">Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
                       </li>
                     <%})%>
                     <%}%>
@@ -129,8 +146,8 @@
                 <%if(classes){%>
                   <%if(classes.length!==0){%>
                     <%classes.forEach((c,ind)=>{%>
-                      <li style="padding:0px!important;">
-                        <a href="/user/results/<%=c._id%>" style="padding-left:10px!important;">Results of Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+                      <li>
+                        <a href="/user/results/<%=c._id%>">Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
                       </li>
                     <%})%>
                     <%}%>
@@ -151,8 +168,8 @@
                 <%if(classes){%>
                   <%if(classes.length!==0){%>
                     <%classes.forEach((c,ind)=>{%>
-                      <li style="padding:0px!important;">
-                        <a href="/user/results/<%=c._id%>" style="padding-left:10px!important;">Results of Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+                      <li>
+                        <a href="/user/results/<%=c._id%>">Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
                       </li>
                     <%})%>
                     <%}%>
@@ -173,8 +190,8 @@
                 <%if(classes){%>
                   <%if(classes.length!==0){%>
                     <%classes.forEach((c,ind)=>{%>
-                      <li style="padding:0px!important;">
-                        <a href="/user/results/<%=c._id%>" style="padding-left:10px!important;">Results of Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+                      <li>
+                        <a href="/user/results/all/passed/<%=c._id%>">Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
                       </li>
                     <%})%>
                     <%}%>
@@ -195,8 +212,8 @@
                 <%if(classes){%>
                   <%if(classes.length!==0){%>
                     <%classes.forEach((c,ind)=>{%>
-                      <li style="padding:0px!important;">
-                        <a href="/user/results/<%=c._id%>" style="padding-left:10px!important;">Results of Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+                      <li>
+                        <a href="/user/results/all/failed/<%=c._id%>">Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
                       </li>
                     <%})%>
                     <%}%>

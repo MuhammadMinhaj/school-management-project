@@ -4,6 +4,7 @@
 @import './login.css';
 @import './footer.css';
 @import './user/sidebar.css';
+@import './user/resultsdesign.css';
 * {
 	margin: 0px;
 	padding: 0px;
@@ -40,6 +41,9 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
 	background: #adb5bd;
 	border-radius: 25px;
+}
+.table th{
+	padding:0.75rem 0rem!important;
 }
 
 .backgroundImage {

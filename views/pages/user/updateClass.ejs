@@ -118,7 +118,7 @@
                             <div class="form-group">
                                 <label for="classGroup"><strong>Select Group</strong></label>
                                 <select name="group" class="custom-select">
-                                    <option <%=singleClass.group?'':'selected'%>>...</option>
+                                    <option value="" <%=singleClass.group?'':'selected'%>>...</option>
                                     <option value="science"  <%=singleClass.group==='science'?'selected':''%> >Science</option>
                                     <option value="commerce" <%=singleClass.group==='commerce'?'selected':''%> >Commerce</option>
                                     <option value="arts" <%=singleClass.group==='arts'?'selected':''%> >Arts</option>
@@ -126,7 +126,23 @@
                                 </select>
                             </div>
                       
-                                
+                            
+                            <div class="form-group">
+                                <label for="resultType"><strong>Select Result Type</strong></label>
+                                <select id="resultType" name="resultType" class="custom-select">
+                                    <option <%=singleClass.resultType?'':'selected'%> value="" >...</option>
+                                    <option value="gpa" <%=singleClass.resultType==='gpa'?'selected':''%> >Grade Point Average</option>
+                                    <option value="cgpa" <%=singleClass.resultType==='cgpa'?'selected':''%> >Cumulative Grade Point Average</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="resultCalculteType"><strong>Select Results Calculation Type</strong></label>
+                                <select id="resultCalculteType" name="resultCalculateType" class="custom-select">
+                                    <option selected <%=singleClass.resultCalculateType?'':'selected'%> value="" >...</option>
+                                    <option value="same" <%=singleClass.resultCalculateType==='same'?'selected':''%> >Same Subject Marks</option>
+                                    <option value="difference" <%=singleClass.resultCalculateType==='difference'?'selected':''%> >Difference Subject Marks</option>
+                                </select>
+                            </div>
                             <input type="submit" value="Update" class="btn btn-primary btn-sm w-100">
                             
                         </form>

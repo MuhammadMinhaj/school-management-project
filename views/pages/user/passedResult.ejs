@@ -11,48 +11,150 @@
   <!-- Navbar End -->
 
   <!-- sidebar-wrapper  -->
-<main class="page-content">
-  <div class="container-fluid">
+<main class="page-content" style="padding-top:0px!important;">
+  <div class="container-fluid" style="padding-bottom:0px!important">
       <h4 style="color: #545b62;font-weight: 600;text-align:center">PASSED RESULT</h4>
       <hr>
     <div>
         <%-include('../../partials/Error/alert.ejs')%>
     </div>
+    <h5 class="text-center" style="text-transform: uppercase;font-weight: bolder;color:#495057;">
+      Student Of Class
+      <span style="color:#0062cc">
+          <%=singleClass.nameOfNumeric%>
+      </span>
+     
+      Branch 
+     <span style="color:#0062cc">
+      <%=singleClass.section%>
+     </span>
+     <%if(singleClass.group){%>
+      Group
+      <span style="color:#0062cc">
+          <%=singleClass.group%>
+      </span>
+      <%}%>
+  </h5>
+  <h5 class="text-center"><strong>Total Passed:<%=results.length%> </strong></h5>
   </div>
 
   <div class="row">
     <div class="col-sm-12">
+      
+    
       <div class="card p-2">
+          <form class="form-inline pb-2" action="/user/results/all/passed/<%=singleClass._id%>" method="GET">
+            <div class="form-group mr-2">
+         
+              <select name="option" class="custom-select">
+                <option value="">Select exam type</option>
+                <%examination.forEach((exam,ind)=>{%>
+                 <option value="<%=exam._id%>" <%=searchValue.option===exam._id.toString()?'selected':''%> ><%=exam.name%></option>
+                <%})%>
+              </select>
+            
+            </div>
+            <div class="form-group">
+              <input class="form-control mr-sm-2" value="<%=searchValue.roll?searchValue.roll:''%>" name="roll" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </div>
+          </form>
+       
+
+ 
+
 
         <table class="table text-center">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">Roll</th>
-              <th scope="col">Student Id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Result</th>
+              <th scope="col">RANK</th>
+              <th scope="col">NAME</th>
               <th scope="col">GPA</th>
-              <th scope="col">Rank</th>
-              <th scope="col">Controlling</th>
+              <th scope="col">GRADE</th>
+              <th scope="col">RESULTS</th>
+              <th scope="col">TYPES</th>
+              <th scope="col">ROLL</th>
+              <th scope="col">CONTROLLING</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>07</th>
-              <td>101145</td>
-              <td>Muhammad Minhaj</td>
-              <td><strong class="text-success">Passed</strong> </td>
-              <td>5.00</td>
-              <td>01</td>
-              <td>Controller</td>
-            </tr>
+            <%if(results){%>
+              <%if(results.length!==0){%>
+                <%results.sort((a,b)=>{return a.rank-b.rank}).forEach((result,ind)=>{%>
+                  <!-- Results Modal -->
+                  <div class="modal fade" id="resultModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Results</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="card p-2">
+                            <div class="result-content p-1">
+                               <div class="result-header text-center">
+                                    <div class="result-logo m-auto" style="max-width:80px;height:80px;">
+                                      <img src="<%=webModel.logo%>" width="80%" alt="">
+                                    </div>
+                                    <%webModel.name.forEach((name,indOfWebModel)=>{%>
+                                          <%if(name.lang.toLowerCase()==='english'){%>
+                                            <h5 style="color:#1e7e34"><strong><%=name.name%></strong></h5>
+                                            <%}%>
+                                    <%})%>
+                                          <h6 style="color:#6c757d;font-weight: bolder;">SHOLASHAHAR,CHATTOGRAM</h6>
+                                          <h5 style="color:#d39e00">Half-Yearly Examination-2020</h5>
+                                          <h5 style="color:#0062cc">Dhakil Class <%=result.classes.name%> Branch <%=result.classes.section%></h5>
+                               </div>
+  
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          
+                          <button type="button" class="btn btn-secondary">Download</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Results Modal End -->
+                  <tr>
+                    <th><%=result.rank%></th>
+                    <td><%=result.studentInfo.name%></td>
+                    <td><strong class="text-dark"><%=result.gradePoint%></strong></td>
+                    <td><strong class="text-secondary"><%=result.grade%></strong></td>
+                    <td><span class="text-success">Passed</span> </td>
+                    <td><%=result.types%></td>
+                    <td><%=result.studentInfo.roll%></td>
+                    <td>
+                      <button class="btn btn-secondary btn-sm"  data-toggle="modal" data-target="#resultModal<%=ind%>" data-whatever="@mdo">Preview</button>
+                      <button class="btn btn-secondary btn-sm">Download</button>
+                    </td>
+                  
+                </tr>
+                <%})%>
+            <%}else{%>
+              <%if(searchValue.roll){%>
+                <tr>
+                  <td colspan="8">
+                    <h5 class=" pt-5">Search For: <%=searchValue.roll%></h5>
+                    <h5 class="text-muted pb-5">No Data Available</h5>
+                  </td>
+                </tr>
+                <%}else{%>
+                  <tr>
+                    <td colspan="8"><h5 class="text-muted py-5">Please Search To See All Data</h5></td>
+                  </tr>
+                  <%}%>
+              <%}%>
+              <%}%>  
           </tbody>
         </table>
       </div>
     </div>
   </div>
-
-
 
 </main>
 </div>

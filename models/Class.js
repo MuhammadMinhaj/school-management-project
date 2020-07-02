@@ -22,6 +22,14 @@ const schema = new Schema({
         trim:true,
         required:true 
     },
+    resultType:{
+        type:String,
+        trim:true,
+    },
+    resultCalculateType:{
+        type:String,
+        trim:true,
+    },
     student:[
         {
             type:Schema.Types.ObjectId,
@@ -47,7 +55,13 @@ const schema = new Schema({
     user:{ 
         type:Schema.Types.ObjectId,
         ref:'User'
-    }
+    },
+    examination:[
+        {
+            type:Schema.Types.ObjectId,
+            ref:'Examination'
+        }
+    ]
     
 })
 

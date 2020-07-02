@@ -12,13 +12,31 @@
 
   <!-- sidebar-wrapper  -->
 <main class="page-content">
-  <div class="container-fluid">
-      <h4 style="color: #545b62;font-weight: 600;text-align:center">FAILED RESULTS</h4>
-      <hr>
-    <div>
-        <%-include('../../partials/Error/alert.ejs')%>
-    </div>
+  <div class="container-fluid" style="padding-bottom:0px!important">
+    <h4 style="color: #545b62;font-weight: 600;text-align:center">FAILED RESULT</h4>
+    <hr>
+  <div>
+      <%-include('../../partials/Error/alert.ejs')%>
   </div>
+  <h5 class="text-center" style="text-transform: uppercase;font-weight: bolder;color:#495057;">
+    Student Of Class
+    <span style="color:#0062cc">
+        <%=singleClass.nameOfNumeric%>
+    </span>
+   
+    Branch 
+   <span style="color:#0062cc">
+    <%=singleClass.section%>
+   </span>
+   <%if(singleClass.group){%>
+    Group
+    <span style="color:#0062cc">
+        <%=singleClass.group%>
+    </span>
+    <%}%>
+</h5>
+<h5 class="text-center"><strong>Total Failed:<%=results.length%> </strong></h5>
+</div>
 
   <div class="row">
     <div class="col-sm-12">
@@ -27,25 +45,34 @@
         <table class="table text-center">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">Roll</th>
-              <th scope="col">Student Id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Result</th>
+              <th scope="col">ROLL</th>
+              <th scope="col">NAME</th>
               <th scope="col">GPA</th>
-              <th scope="col">Rank</th>
-              <th scope="col">Controlling</th>
+              <th scope="col">GRADE</th>
+              <th scope="col">RESULTS</th>
+              <th scope="col">TYPES</th>
+              <th scope="col">CONTROLLING</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>07</th>
-              <td>101145</td>
-              <td>Muhammad Minhaj</td>
-              <td><strong class="text-success">Passed</strong> </td>
-              <td>5.00</td>
-              <td>01</td>
-              <td>Controller</td>
-            </tr>
+          <%if(results){%>
+              <%results.forEach((result,ind)=>{%>
+                <tr>
+                  <th><%=result.studentInfo.roll%></th>
+                  <td><%=result.studentInfo.name%></td>
+                  <td><strong class="text-dark"><%=result.gradePoint%></strong></td>
+                  <td><strong class="text-secondary"><%=result.grade%></strong></td>
+                  <td><span class="text-danger">Failed</span> </td>
+                  <td><%=result.types%></td>
+                  <td>
+                    <button class="btn btn-secondary btn-sm">Preview</button>
+                    <button class="btn btn-secondary btn-sm">Download</button>
+                  </td>
+                
+              </tr>
+              <%})%>
+          <%}%>
+            
           </tbody>
         </table>
       </div>

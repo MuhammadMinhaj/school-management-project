@@ -1,8 +1,10 @@
 const Class = require('../../models/Class')
 const User = require('../../models/User')
 const Student = require('../../models/Student')
+const Examination = require('../../models/Examination')
+const Result = require('../../models/Result')
 
-async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,errorData){
+async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,errorData,examination){
     try{    
         let classes = await Class.find({user:req.user._id})
         let correntPage = parseInt(req.query.page||1)
@@ -43,6 +45,7 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,errorDa
             error: {},
             user:req.user,
             classes,
+            examination:examination?examination:{},
             students,
             totalPage,
             totalStudent,
@@ -68,9 +71,11 @@ exports.createClassGetController = async(req,res,next)=>{
 exports.createClassPostController = async(req,res,next)=>{
     try{
  
-        let { name,numeric,section,group } = req.body
+        let { name,numeric,section,group,resultType,resultCalculateType } = req.body
 
-        if(name.length===0||numeric.length===0||section.length===0){
+        console.log(req.body)
+
+        if(name.length===0||numeric.length===0||section.length===0||resultType.length===0||resultCalculateType.length===0){
             return renderPageHandler(req,res,'createClass','fail','Invalid Creadentials')
         }
         if(numeric>=9){
@@ -111,7 +116,9 @@ exports.createClassPostController = async(req,res,next)=>{
             nameOfNumeric:numeric,
             section,
             group,
-            user:req.user._id
+            user:req.user._id,
+            resultType,
+            resultCalculateType
         })
         let createdClass = await createClass.save()
         if(!createdClass){
@@ -142,10 +149,11 @@ exports.updateClassGetController = async(req,res,next)=>{
 }
 exports.updateClassPostController = async(req,res,next)=>{
     try{
-        let { name,numeric,section,group } = req.body
+        let { name,numeric,section,group,resultType,resultCalculateType } = req.body
         let { id } = req.params 
         console.log(req.body)
-        console.log(req.params)   
+        console.log(req.params)  
+      
 
         // Check Unique
         let hasClass = await Class.findOne({_id:id})
@@ -153,7 +161,7 @@ exports.updateClassPostController = async(req,res,next)=>{
             return res.redirect('/user/class/create')
         }
 
-        if(name.length===0||numeric.length===0||section.length===0){
+        if(name.length===0||numeric.length===0||section.length===0||resultType.length===0||resultCalculateType.length===0){
             return renderPageHandler(req,res,'updateClass','fail','Invalid Creadentials',hasClass)
         }
         if(numeric>=9){
@@ -194,7 +202,9 @@ exports.updateClassPostController = async(req,res,next)=>{
             name,
             nameOfNumeric:numeric,
             section,
-            group
+            group,
+            resultType,
+            resultCalculateType
         },{
             new:true
         })
@@ -510,6 +520,8 @@ exports.updateStudentPostController = async(req,res,next)=>{
         let alreadyCreatedStudent = false;
         getAllStudents.forEach((s)=>{
             if(s._id.toString()!==id.toString()){
+               
+
                 if(s.studentId===studentid||s.roll===roll){
                     alreadyCreatedStudent = true 
                     return false
@@ -560,10 +572,23 @@ exports.studentDeleteGetController = async(req,res,next)=>{
             req.flash('fail','Internal Server Error')
             return res.redirect('back')
         }
+        let hasResultsOfStudent = await Result.find({student:deletedStudent._id})
+        if(hasResultsOfStudent){
+            if(hasResultsOfStudent.length!==0){
+                hasResultsOfStudent.forEach(async(result,ind)=>{
+                    let deletedResultOfStudent = await Result.findOneAndDelete({_id:result._id})
+                    if(!deletedResultOfStudent){
+                        req.flash('fail','Internal Server Error')
+                        return res.redirect('back')
+                    }
+                })
+                
+            }
+        }
         let deletedStudentIdFromClass = await Class.findOneAndUpdate({_id:classid},{
             $pull:{
                 student:deletedStudent._id
-            }
+            },
         },{new:true})
         if(!deletedStudentIdFromClass){
             req.flash('fail','Internal Server Error')
@@ -575,3 +600,124 @@ exports.studentDeleteGetController = async(req,res,next)=>{
         next(e)
     }
 }
+exports.classExamCreateGetController = async(req,res,next)=>{
+    try{
+        let { id } = req.params
+        let hasClass = await Class.findOne({_id:id})
+        if(!hasClass){
+            return res.redirect('back')
+        }
+
+        let hasExam = await Examination.find({classid:hasClass._id})
+        console.log('Finded Exam')
+        console.log(hasExam)
+
+        renderPageHandler(req,res,'classExamCreate',null,null,hasClass,null,hasExam)
+    }catch(e){
+        next(e)
+    }
+}
+exports.classExamCreatePostController = async(req,res,next)=>{
+    try{
+        let { id } = req.params
+        let {  name,year,title } = req.body
+
+        let hasClass = await Class.findOne({_id:id})
+        if(!hasClass){
+            return res.redirect('back')
+        }
+
+        if(name.length===0||year.length===0||title.length===0){
+            req.flash('fail','Please Provied Full Info About Examination')
+            return res.redirect('back')
+        }
+
+        let createExam = new Examination({
+            name,
+            year,
+            title,
+            classid:hasClass._id
+        })
+
+        let createdExam = await createExam.save()
+
+        if(!createExam){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+
+        let examIdAddInClass = await Class.findOneAndUpdate({_id:hasClass._id},{
+            $push:{
+                examination:createdExam._id
+            }
+        },{new:true})
+
+        if(!examIdAddInClass){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+
+        req.flash('success','Successfully Created Exam')
+        res.redirect('back')
+    }catch(e){
+        next(e)
+    }
+}
+exports.classExamUpdatePostController = async(req,res,next)=>{
+    try{
+        let { id } = req.params
+        let { name,year,title } = req.body
+        
+        let hasExam = await Examination.findOne({_id:id})
+
+        if(!hasExam){
+            return res.redirect('back')
+        }
+        if(name.length===0||year.length===0||title.lenght===0){
+            req.flash('fail','Please Provied Full Info For Examination')
+            return res.redirect('back')
+        }
+
+        let updatedExamination  = await Examination.findOneAndUpdate({_id:id},{
+            name,
+            year,
+            title
+        },{new:true})
+
+        if(!updatedExamination){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+        req.flash('success','Successfully Updated Examination')
+        res.redirect('back')
+    }catch(e){
+        next(e)
+    }
+}
+exports.classExamDeleteGetController = async(req,res,next)=>{
+    try{    
+        let { id } = req.params  
+
+        let hasExam = await Examination.findOne({_id:id})
+        if(!hasExam){
+            return res.redirect('back')
+        }
+
+        let deletedExam = await Examination.findOneAndDelete({_id:id})
+        if(!deletedExam){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+        await Class.findOneAndUpdate({_id:hasExam.classid},{
+            $pull:{
+                examination:deletedExam._id
+            }
+        },{new:true})
+       
+        req.flash('success','Successfully Deleted Exam')
+        return res.redirect('back')
+    }catch(e){
+        next(e)
+    }
+}
+

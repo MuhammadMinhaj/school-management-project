@@ -1,0 +1,106 @@
+<%-include('../../partials/user/head.ejs')%>
+
+
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+
+  <!-- Navbar -->
+  <%-include('../../partials/user/navbar.ejs')%>
+  <!-- Navbar End -->
+
+  <!-- sidebar-wrapper  -->
+<main class="page-content">
+  <div class="container-fluid">
+      <h4 style="color: #545b62;font-weight: 600;text-align:center">RESULTS MANAGEMENT</h4>
+      <hr>
+    <div>
+        <%-include('../../partials/Error/alert.ejs')%>
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="col-sm-12">
+        
+        <div class="card mb-3 py-3">
+          
+             
+            <h4 class="ml-2 text-center"> <strong><%=student.name%></strong> </h4>
+           
+           <div class="row pt-2">
+                <div class="col-sm-4">
+                    <div class="text-center">
+                        <h6 class="ml-2"><strong>Class:</strong> <%=student.classed.name%></h6>
+                    </div> 
+                </div>
+                <div class="col-sm-4">    
+                    <div class="text-center">
+                        <h6 class="ml-2"> <strong>Branch:</strong><%=student.classed.section%></h6>
+                    </div> 
+                </div>  
+                <div class="col-sm-4">
+                    <div class="text-center">
+                        <h6 class="ml-2"><strong>Roll:</strong><%=student.roll%></h6>
+                    </div>
+                </div>
+             
+          
+
+            </div> 
+           
+        </div>
+        
+        <div class="card p-2">
+            <table class="table text-center table-hover">
+                <thead  class="thead-dark">
+                <tr>
+                    <th scope="col">SL</th>
+                    <th scope="col">Examination Name</th>
+                    <th scope="col">Grade</th>
+                    <th scope="col">Grade Point</th>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Controlling</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%if(results){%>
+                    <%if(results.length!==0){%>
+                        <%results.forEach((result,ind)=>{%>
+                            <tr>
+                                <td><%=ind+1%></td>
+                                <td><%=result.examInfo.name%></td>
+                                <td class="<%=result.grade.toLowerCase()==='f'?'text-danger':''%>"><%=result.grade?result.grade:'N/A'%></td>
+                                <td><%=result.gradePoint?result.gradePoint:'N/A'%></td>
+                                <td><%=result.rank?result.rank:'N/A'%></td>
+                                <td>
+                                    <a href="/user/result/edit/<%=result._id%>" style="border:1px solid #00000026;" class="btn btn-sm text-info">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+
+                                    <a href="/user/result/delete/<%=result._id%>" style="border:1px solid #00000026;" class="btn btn-sm text-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <%})%>
+                    <%}%>
+                <%}%>
+                </tbody>
+            </table>
+        </div>
+      </div>
+  </div>
+
+
+</main>
+</div>
+
+
+
+
+<%-include('../../partials/user/footer.ejs')%>
+
+</body>
+
+</html>
