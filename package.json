@@ -1,5 +1,5 @@
 {
-  "name": "JASA-Edu-Project",
+  "name": "jasaeduporject",
   "version": "1.0.0",
   "description": "This is my first website for JASA.",
   "main": "app.js",
@@ -55,6 +55,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "engines": {
-    "node":"12.18.1"
+    "node": "12.18.1"
   }
 }
