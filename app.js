@@ -16,8 +16,8 @@ const app = express()
 
 // Set Views Engine
 app.set('view engine','ejs')
-app.set('views','views')
-
+// app.set('views','views')
+app.set('views', path.join(__dirname, './Views'));
 // Public Path for Use Libray
 const publicLibrayPath = [
     express.static(__dirname+'/node_modules/bootstrap/dist'),
