@@ -7,7 +7,7 @@
     "start": "node app.js",
     "startdev": "webpack-dev-server ./public/scripts/index.js",
     "dev": "nodemon app.js",
-    "build": "webpack --mode production",
+    "build": "NODE_ENV=production node app.js",
     "starts": "webpack --mode development"
   },
   "repository": {
