@@ -1,5 +1,5 @@
 const express = require('express')
-// const morgan = require('morgan')
+const morgan = require('morgan')
 const flash = require('connect-flash')
 const session = require('express-session')
 const config = require('config')
@@ -23,8 +23,10 @@ const store = new MongoDbStore({
     expires:60*60*2*1000 
 })
 
+
+
 const middlewares = [
-    // morgan('dev'),
+    
     express.static('public'),
     express.urlencoded({extended:true}),
     express.json(),
@@ -46,5 +48,8 @@ const middlewares = [
 module.exports = app =>{
     middlewares.forEach(middleware=>{
         app.use(middleware)
+        if(app.get('env').toLowerCase()==='development'){
+            app.use(morgan('dev'))
+        }
     })
 }
