@@ -786,6 +786,8 @@ exports.allCreateResultsController = async(req,res,next)=>{
             return true
         }
         let cGpaHalfMarksSubjectHandler = (obtainedMarks,subject)=>{
+            console.log(obtainedMarks)
+            console.log(typeof obtainedMarks)
             switch (true){
                 case obtainedMarks>=40&&obtainedMarks<=50:
                     subject.grade = 'A+'
@@ -795,7 +797,7 @@ exports.allCreateResultsController = async(req,res,next)=>{
                     subject.grade = 'A'
                     subject.gradePoint = 3.75
                 break
-                case obtainedMarks>=34&obtainedMarks<=36:
+                case obtainedMarks>=34&&obtainedMarks<=36:
                     subject.grade = 'A-'
                     subject.gradePoint = 3.50
                 break
@@ -1153,11 +1155,18 @@ exports.allPassedResultsGetController = async(req,res,next)=>{
             }
         }
 
+        allExamBasedPassedResults.forEach(async(result,ind)=>{
+            let findExamination = await Examination.findOne({_id:result.examination})
+            result.exam = findExamination
+
+        })
         console.log(allExamBasedPassedResults)
+
         let searchValue = {
             option,
             roll
         }
+        // console.log(hasClass)
         renderPageHandler(req,res,'passedResult',null,null,hasClass,null,null,null,null,null,allExamBasedPassedResults,null,searchValue)
 
     }catch(e){

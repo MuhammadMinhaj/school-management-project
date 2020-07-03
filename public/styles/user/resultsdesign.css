@@ -3,6 +3,37 @@
     outline:4px solid #1e7e34;
    
 }
+html{
+    font-size:1em
+}
 /* .result-header{
 
 } */
+@-ms-viewport{
+    width: device-width;
+  }
+.custom-table{
+    display: grid;
+}
+.custom-table-col-1{
+    grid-template-columns: auto;
+}
+.custom-table-head-col-2{
+    grid-template-columns: 25% 75%;
+}
+.custom-table-head-col-4{
+    grid-template-columns: 25% 25% 25% 25%;
+}
+.custom-table-col-5{
+    grid-template-columns: auto auto auto auto auto;
+}
+.res-large{
+    /* font-size: 1.75vw; */
+    font-size: 1em;
+}
+.res-small{
+    font-size:1vw;
+}
+.res-text-normal{
+    font-size:0.75vw;
+}
