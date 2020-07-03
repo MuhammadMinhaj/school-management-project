@@ -33,7 +33,7 @@
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^2.3.1",
     "dotenv": "^8.2.0",
-    "ejs": "^3.1.2",
+    "ejs": "^2.6.2",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "express-validator": "^6.4.1",
