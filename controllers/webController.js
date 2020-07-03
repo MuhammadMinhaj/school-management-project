@@ -13,7 +13,8 @@ exports.webGetController = async(req,res,next)=>{
         // })
         res.json({
             message:'Assalamu Aalaikum',
-            models:webModel
+            models:webModel,
+            menus:menu
         })
     }catch(e){
         next(e)
