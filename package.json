@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node app.js",
     "startdev": "webpack-dev-server ./public/scripts/index.js",
-    "dev": "nodemon app.js",
-    "build": "NODE_ENV=production node app.js",
-    "starts": "webpack --mode development"
+    "dev": "node app.js",
+    "build": "node app.js"
+    
   },
   "repository": {
     "type": "git",
