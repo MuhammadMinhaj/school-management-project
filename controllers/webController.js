@@ -4,11 +4,12 @@ exports.webGetController = async(req,res,next)=>{
     try{
         let menu  = await Menu.find()
         let webModel = await WebModel.findOne()
-        res.render('pages/index',{
-            title:'Web Explorer',
-            menu,
-            webModel
-        })
+        // res.render('pages/index',{
+        //     title:'Web Explorer',
+        //     menu,
+        //     webModel
+        // })
+        res.json({message:'Assalamu Aalaikum'})
     }catch(e){
         next(e)
     }
