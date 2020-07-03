@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "startdev": "webpack-dev-server ./public/scripts/index.js",
-    "dev": "node app.js",
+    "dev": "nodemon app.js",
     "build": "webpack --mode production",
     "starts": "webpack --mode development"
   },

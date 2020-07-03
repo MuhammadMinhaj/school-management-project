@@ -26,7 +26,6 @@ const store = new MongoDbStore({
 
 
 const middlewares = [
-    
     express.static('public'),
     express.urlencoded({extended:true}),
     express.json(),
@@ -38,7 +37,6 @@ const middlewares = [
         cookie:{
             maxAge:60*60*2*1000
         },
-        
     }),
     flash(),
     setLocals(),
