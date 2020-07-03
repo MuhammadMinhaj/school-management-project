@@ -8,7 +8,7 @@ const setRoutes = require('./routes/routes')
 // All Middlewares Registared
 const setMiddlewares = require('./middlewares/middlewares')
 
-const BASE_URL = `mongodb+srv://${config.get('db-username')}:${config.get('db-password')}@dream-softwares-dyvoa.mongodb.net/jasa-edu?retryWrites=true&w=majority`
+const BASE_URL = process.env.MONGO_URL||`mongodb+srv://${config.get('db-username')}:${config.get('db-password')}@dream-softwares-dyvoa.mongodb.net/jasa-edu?retryWrites=true&w=majority`
 
 
 

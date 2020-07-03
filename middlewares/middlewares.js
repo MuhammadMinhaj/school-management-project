@@ -14,7 +14,7 @@ const {
     bindUserWithRequest
 } = require('./adminAuthMiddleware')
 
-const MONGO_DB_URI = `mongodb+srv://${config.get('db-username')}:${config.get('db-password')}@dream-softwares-dyvoa.mongodb.net/jasa-edu?retryWrites=true&w=majority`
+const MONGO_DB_URI = process.env.MONGO_URL||`mongodb+srv://${config.get('db-username')}:${config.get('db-password')}@dream-softwares-dyvoa.mongodb.net/jasa-edu?retryWrites=true&w=majority`
 
 
 const store = new MongoDbStore({
