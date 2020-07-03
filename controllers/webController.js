@@ -4,6 +4,7 @@ exports.webGetController = async(req,res,next)=>{
     try{
         let menu  = await Menu.find()
         let webModel = await WebModel.findOne()
+        console.log(webModel)
         res.render('pages/index',{
             title:'Web Explorer',
             menu,
