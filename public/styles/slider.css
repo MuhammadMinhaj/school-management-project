@@ -82,7 +82,11 @@
 	z-index: -1000;
 }
 
-
+@media (max-width:576px){
+	.sliderOpacityStyleContainer>img{
+		height:220px;
+	}
+}
 .sliderOpacityStyle {
 	background-color: #00000026;
 	position: absolute;
