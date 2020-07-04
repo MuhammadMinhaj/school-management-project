@@ -342,6 +342,7 @@ a{
 
 /* Responsive design */
 @media (max-width: 576px) {
+
 	h6{
 		font-size:4.25vw;
 	}
