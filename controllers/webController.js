@@ -6,16 +6,16 @@ exports.webGetController = async(req,res,next)=>{
         let webModel = await WebModel.findOne()
         console.log(webModel)
         // res.send('<h5>Assalamu Alaikum</h5>')
-        // res.render('pages/index',{
-        //     title:'Web Explorer',
-        //     menu,
-        //     webModel
-        // })
-        res.json({
-            message:'Assalamu Aalaikum',
-            models:webModel,
-            menus:menu
+        res.render('pages/index',{
+            title:'Web Explorer',
+            menu,
+            webModel
         })
+        // res.json({
+        //     message:'Assalamu Aalaikum',
+        //     models:webModel,
+        //     menus:menu
+        // })
     }catch(e){
         next(e)
     }
