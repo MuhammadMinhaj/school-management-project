@@ -31,6 +31,8 @@
 body {
 	overflow-x: hidden;
 	scroll-behavior: smooth;
+	max-width: 1300px;
+	margin:auto;
 }
 body::-webkit-scrollbar {
 	width: 8px;
@@ -45,6 +47,17 @@ body::-webkit-scrollbar-thumb {
 .table th{
 	padding:0.75rem 0rem!important;
 }
+
+h6{
+	font-size:1.25vw;
+}
+p{
+	font-size: 1em;
+}
+a{
+	font-size: 1em;
+}
+
 
 .backgroundImage {
 	background: #a8b2bb42;
@@ -111,9 +124,11 @@ body::-webkit-scrollbar-thumb {
 	border-radius: 8px;
 }
 .cardLinkIconContainer > i {
-	font-size: 40px;
+	/* font-size: 40px; */
+	font-size: 3vw;
 	color: #1e7e34;
 }
+
 .cardLinkText {
 	border-top: 2px solid #6c757d;
 	margin-top: 10px;
@@ -327,6 +342,18 @@ body::-webkit-scrollbar-thumb {
 
 /* Responsive design */
 @media (max-width: 576px) {
+	h6{
+		font-size:4.25vw;
+	}
+	.cardLinkIconContainer > i{
+		font-size:12vw;
+	}
+	p{
+		font-size: 1em;
+	}
+	a{
+		font-size: 1em;
+	}
 	.cardLinkContainer {
 		transform: translateY(0px);
 	}
@@ -345,4 +372,5 @@ body::-webkit-scrollbar-thumb {
 	.locationOfUniversity {
 		height: 230px;
 	}
+
 }
