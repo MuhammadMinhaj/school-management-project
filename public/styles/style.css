@@ -68,6 +68,23 @@ a{
 	border-radius: 10px; */
 	border: 5px solid orange;
 }
+.sectionHeadTitle{
+	border-bottom:5px solid #ffc107;
+	display: inline-block;
+	font-family:arial black;
+	font-weight:bold;
+	font-size:2.5vw
+}
+.sectionHeadSubSubTitle{
+	text-shadow: 2pt 1pt 1pt #0a0a0a;
+	color:green;
+	font-size:5vw;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.sectionHeadTitleIcon{
+	color:#adb5bd;
+	font-size: 4vw;
+}
 .creatorTextContainer {
 	position: relative;
 	/* background:white; */
@@ -354,6 +371,15 @@ a{
 	}
 	a{
 		font-size: 1em;
+	}
+	.sectionHeadTitle{
+		font-size:5vw
+	}
+	.sectionHeadSubSubTitle{
+		font-size:7vw;
+	}
+	.sectionHeadTitleIcon{
+		font-size: 6vw;
 	}
 	.cardLinkContainer {
 		transform: translateY(0px);
