@@ -47,7 +47,12 @@ body::-webkit-scrollbar-thumb {
 .table th{
 	padding:0.75rem 0rem!important;
 }
-
+.text-size-title{
+	font-size: 1.5vw;
+}
+.text-size-para{
+	font-size: 1.25vw;
+}
 h6{
 	font-size:1.25vw;
 }
@@ -57,7 +62,10 @@ p{
 a{
 	font-size: 1em;
 }
-
+.quoteIconStyle{
+	font-size:2.5vw;
+	color:#545b62;
+}
 
 .backgroundImage {
 	background: #a8b2bb42;
@@ -73,40 +81,45 @@ a{
 	display: inline-block;
 	font-family:arial black;
 	font-weight:bold;
-	font-size:2.5vw
+	font-size:2.5vw;
+	color:#545b62;
 }
 .sectionHeadSubSubTitle{
 	text-shadow: 2pt 1pt 1pt #0a0a0a;
 	color:green;
-	font-size:5vw;
+	font-size:3.75vw;
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-.sectionHeadTitleIcon{
-	color:#adb5bd;
-	font-size: 4vw;
-}
+
 .creatorTextContainer {
 	position: relative;
-	/* background:white; */
+	background:white;
 	padding: 20px;
 	perspective: 1000px;
 	perspective-origin: left;
 	height: 100%;
-	background-image: url('/uploads/background.png');
-	border-right: 2px solid orange;
+	/* background-image: url('/uploads/background.png'); */
+	display: flex;
+	align-items: center;
+	border-radius: 120px 0px 120px 0px;
+	border-right:40px solid #adb5bd;
+	border-left: 40px solid #adb5bd;
+	/* border-top:15px solid #6c757d; */
+	/* border-bottom: 15px solid #6c757d; */
+	box-shadow: 0pt 0pt 5pt 0pt #00000059;
 }
-.preStyle {
+/* .preStyle {
 	position: absolute;
 	top: -17px;
 	left: -145px;
-	/* background-color: #6c757d; */
+	background-color: #6c757d;
 	background: linear-gradient(#6c757d, #232323, #6c757d);
 	width: 30%;
 	height: 109%;
 	transform-style: preserve-3d;
 	transform: rotateY(-117deg);
 	border-right: 15px solid #ffffff6b;
-}
+} */
 .cardStyleMainContainer {
 	border: 3px solid #1e7e34;
 	border-radius: 10px;
@@ -167,13 +180,13 @@ a{
 }
 .newsIcon {
 	border: 5px solid #1e7e34;
-	max-width: 20%;
-	font-size: 5rem;
+	max-width: 10vw;
+	font-size: 6vw;
 	/* color: #bd2130; */
 	color: #1e7e34;
 	margin: auto;
 	text-align: center;
-	transform: translateY(-65px);
+	transform: translateY(-5vw);
 	background: white;
 	border-radius: 15px;
 }
@@ -219,6 +232,7 @@ a{
 	background: #6c757d47;
 	cursor: pointer;
 }
+
 .noticeDateContainer {
 	border: 1px solid #ffe9e975;
 	width: 20%;
@@ -372,14 +386,29 @@ a{
 	a{
 		font-size: 1em;
 	}
+	.text-size-title{
+		font-size: 2.75vw;
+	}
+	.text-size-para{
+		font-size: 2.50vw;
+	}
+	.creatorTextContainer {
+		position: relative;
+		background:white;
+		padding: 20px;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		border-radius:0px;
+		border-right:0px solid #adb5bd;
+		border-left: 0px solid #adb5bd;
+		box-shadow: 0pt 0pt 5pt 0pt #00000059;
+	}
 	.sectionHeadTitle{
 		font-size:6vw
 	}
 	.sectionHeadSubSubTitle{
 		font-size:10vw;
-	}
-	.sectionHeadTitleIcon{
-		font-size: 8vw;
 	}
 	.cardLinkContainer {
 		transform: translateY(0px);
@@ -399,5 +428,15 @@ a{
 	.locationOfUniversity {
 		height: 230px;
 	}
-
+	.noticeDateContainer{
+		width:35%;
+	}
+	.noticeTextContainer{
+		width:65%;
+	}
+	.newsIcon{
+		font-size:12vw;
+		max-width:20vw;
+		transform: translateY(-11vw);
+	}
 }
