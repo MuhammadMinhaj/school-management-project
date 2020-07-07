@@ -403,8 +403,7 @@
 <div class="row px-5 clearXPadding pb-5 backgroundImage">
   <div class="col-sm-12 pb-3 text-center">
     <h3 style="border-bottom:5px solid #ffc107;display: inline-block;font-family:arial black;font-weight:bold;">
-      <i class="fas fa-quote-left mr-1" style="color:#adb5bd;font-size: 2.25rem;">
-      </i>IMPORTANCE  <span style="color:#bd2130">LINKS</span> 
+      IMPORTANCE  <span style="color:green">LINKS</span> 
     </h3>
   </div>
 
@@ -415,30 +414,59 @@
           <h5>Referance Links</h5>
           <ul class="p-2">
             <%if(webModel.referenceLinks.length!==0){%>
-              <%for(link of webModel.referenceLinks){%>
-                <li>
-                  <a href="<%=link.url%>">
-                    <div class="linksIcon">
-                      <i class="fas fa-external-link-alt"></i>
-                    </div>
-                    <div class="linksText">
-                      <%=link.name%>
-                    </div>
-                  </a>
-                </li>
-                <%}%>
+              <%webModel.referenceLinks.forEach((link,ind)=>{%>
+                <%if(ind===0){%>
+                  <li style="border-top:none">
+                    <a href="<%=link.url%>">
+                      <div class="linksIcon">
+                        <i class="fas fa-external-link-alt"></i>
+                      </div>
+                      <div class="linksText">
+                        <%=link.name%>
+                      </div>
+                    </a>
+                  </li>
+                  <%}else{%>
+                    <li>
+                      <a href="<%=link.url%>">
+                        <div class="linksIcon">
+                          <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <div class="linksText">
+                          <%=link.name%>
+                        </div>
+                      </a>
+                    </li>
+                    <%}%>
+              <%})%>
+             
+
             <%}else{%>
               <%for(let i = 0;i<=5;i++){%>
-                <li>
-                  <a href="#">
-                    <div class="linksIcon">
-                      <i class="fas fa-external-link-alt"></i>
-                    </div>
-                    <div class="linksText">
-                        Link <%=i+1%>
-                    </div>
-                  </a>
-                </li>
+                <%if(i===0){%>
+                  <li style="border-top:none">
+                    <a href="#">
+                      <div class="linksIcon">
+                        <i class="fas fa-external-link-alt"></i>
+                      </div>
+                      <div class="linksText">
+                          Link <%=i+1%>
+                      </div>
+                    </a>
+                  </li>
+                  <%}else{%>
+                    <li>
+                      <a href="#">
+                        <div class="linksIcon">
+                          <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <div class="linksText">
+                            Link <%=i+1%>
+                        </div>
+                      </a>
+                    </li>
+                    <%}%>
+                
                 <%}%>
               <%}%>
            
@@ -453,30 +481,58 @@
 
 
           <%if(webModel.documentsLinks.length!==0){%>
-            <%for(document of webModel.documentsLinks){%>
-              <li>
-                <a href="uploads/documents/<%=document.document%>" <%=document.option==='direct'?'download':''%>>
-                  <div class="linksIcon">
-                    <i class="fas fa-download"></i>
-                  </div>
-                  <div class="linksText">
-                    <%=document.name%>
-                  </div>
-                </a>
-              </li>
-              <%}%>
+            <%webModel.documentsLinks.forEach((document,ind)=>{%>
+              <%if(ind===0){%>
+                <li style="border-top:none">
+                  <a href="uploads/documents/<%=document.document%>" <%=document.option==='direct'?'download':''%>>
+                    <div class="linksIcon">
+                      <i class="fas fa-download"></i>
+                    </div>
+                    <div class="linksText">
+                      <%=document.name%>
+                    </div>
+                  </a>
+                </li>
+                <%}else{%>
+                  <li>
+                    <a href="uploads/documents/<%=document.document%>" <%=document.option==='direct'?'download':''%>>
+                      <div class="linksIcon">
+                        <i class="fas fa-download"></i>
+                      </div>
+                      <div class="linksText">
+                        <%=document.name%>
+                      </div>
+                    </a>
+                  </li>
+                  <%}%>
+            <%})%>
+           
           <%}else{%>
             <%for(let i = 0;i<=5;i++){%>
-              <li>
-                <a href="">
-                  <div class="linksIcon">
-                    <i class="fas fa-download"></i>
-                  </div>
-                  <div class="linksText">
-                    Download <%=i+1%>
-                  </div>
-                </a>
-              </li>
+              
+              <%if(i===0){%>
+                <li style="border-top:none">
+                  <a href="#">
+                    <div class="linksIcon">
+                      <i class="fas fa-download"></i>
+                    </div>
+                    <div class="linksText">
+                      Download <%=i+1%>
+                    </div>
+                  </a>
+                </li>
+                <%}else{%>
+                  <li>
+                    <a href="#">
+                      <div class="linksIcon">
+                        <i class="fas fa-download"></i>
+                      </div>
+                      <div class="linksText">
+                        Download <%=i+1%>
+                      </div>
+                    </a>
+                  </li>
+                  <%}%>
               <%}%>
             <%}%>
 
@@ -506,7 +562,7 @@
     
       <div class="col-sm-4">
         <div class="contactTextContainer pl-5">
-          <h2 class="contactTitle" style="text-shadow: 2pt 1pt 1pt #0a0a0a;color:green;font-size:2.5rem;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+          <h2 class="contactTitle hiddenTitle" style="text-shadow: 2pt 1pt 1pt #0a0a0a;color:green;font-size:2.5rem;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
             <span style="color:#575e64">J</span>
             <span style="color:#28a745">A</span>
             <span style="color:#575e64">S</span>

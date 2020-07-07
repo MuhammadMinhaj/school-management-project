@@ -452,5 +452,8 @@ a{
 	.importanceLinkContainer{
 		box-shadow: none;
 	}
+	.hiddenTitle{
+		display: none;
+	}
 
 }
