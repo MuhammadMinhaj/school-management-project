@@ -209,10 +209,17 @@
 </div>
 <!-- Creator Page Design End-->
 
-<!-- Notice Board -->
-<div class="row backgroundImage px-5 clearXPadding">
+<div class="row text-center backgroundImage">
   <div class="col-sm-12">
-    <div class="row my-5">
+    <h3 class="addMargin sectionHeadTitle"> 
+      NOTICE
+    </h3>
+  </div>
+</div>
+<!-- Notice Board -->
+<div class="row backgroundImage px-5 py-2 clearXPadding">
+  <div class="col-sm-12">
+    <div class="row">
 
       <div class="col-sm-6">
     
@@ -222,7 +229,7 @@
               <h5>Latest New's</h5>
             </div>
             
-             <div class="card p-2"  style="border-radius: 0px!important;">
+             <div class="card p-2 maxHeightSet"  style="border-radius: 0px!important;">
                <h6 style="color:#495057;text-transform: uppercase;font-weight: bolder;"> <%=webModel.latestNews.title?webModel.latestNews.title:'Lorem ipsum dolor sit'%></h6>
                <card class="body">
                  <p style="color:#545b62;">
@@ -242,55 +249,51 @@
                 Notice Board
               </h5>
           </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="card p-2 maxHeightSet" style="border-radius: 0px!important;">
-                  <ul class="wrapperNoticeContainer">
-                      <%webModel.notice.reverse().forEach((notice,ind)=>{%>
-                        <%if(ind===0){%>
-                          <li style="border-top:none!important">
-                            <div class="noticeDateContainer" style="background:#ad1523;
-                            box-shadow:0pt 2pt 1pt #196129">
-                              <span><%=notice.date.date%> <span><%=notice.date.month%></span></span>
-                              <br>
-                              <span><%=notice.date.year%></span>
-                            </div>
-                            <div class="noticeTextContainer">
-                              <p style="font-weight: bold;margin:0px!important;">
-                           
-                                <%=notice.title%>
-                             tesy
-                              </p>
-                             
-                            </div>
-                        </li>
-                        <%}else{%>
+          <div class="card p-2 maxHeightSet" style="border-radius: 0px!important;">
+              <ul class="wrapperNoticeContainer">
+                  <%webModel.notice.reverse().forEach((notice,ind)=>{%>
+                    <%if(ind===0){%>
+                      <li style="border-top:none!important">
+                        <div class="noticeDateContainer" style="background:#ad1523;
+                        box-shadow:0pt 2pt 1pt #196129">
+                          <span><%=notice.date.date%> <span><%=notice.date.month%></span></span>
+                          <br>
+                          <span><%=notice.date.year%></span>
+                        </div>
+                        <div class="noticeTextContainer">
+                          <h6 style="margin:0px!important;">
+                      
+                            <%=notice.title%>
+                        tesy
+                          </h6>
+                        
+                        </div>
+                    </li>
+                    <%}else{%>
 
-                        <li>
-                          <div class="noticeDateContainer">
-                            <span><%=notice.date.date%> <span><%=notice.date.month%></span></span>
-                            <br>
-                            <span><%=notice.date.year%></span>
-                          </div>
-                          <div class="noticeTextContainer">
-                            <p style="font-weight: bold;margin:0px!important;">
-                         
-                              <%=notice.title%>
-                           tesy
-                            </p>
-                           
-                          </div>
-                      </li>
-                          
-                          <%}%>
+                    <li>
+                      <div class="noticeDateContainer">
+                        <span><%=notice.date.date%> <span><%=notice.date.month%></span></span>
+                        <br>
+                        <span><%=notice.date.year%></span>
+                      </div>
+                      <div class="noticeTextContainer">
+                        <h6 style="margin:0px!important;">
+                    
+                          <%=notice.title%>
+                      tesy
+                        </h6>
+                      
+                      </div>
+                  </li>
+                      
+                      <%}%>
 
-                  
-                      <%})%>
-                 
-                  </ul>
+              
+                  <%})%>
+            
+              </ul>
 
-              </div>
-            </div>   
           </div>
         </div>
       </div>
@@ -319,83 +322,77 @@
 </div>
 
 <div class="row px-5 pb-5 backgroundImage">
-  <!-- <div class="col-sm-12 pb-3 text-center">
-   
-  </div> -->
+    <div class="col-sm-3 mb-3">
+    <div class="departmentContainer py-5">
+        <h5>হাফিযুল কোরআন</h5>
+        <div class="tringleOfDepart">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+    </div>
+    </div>
 
+    <div class="col-sm-3 mb-3">
+    <div class="departmentContainer py-5">
+        <h5>ইবতেদায়ী</h5>
+        <div class="tringleOfDepart">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+    </div>
+    </div>
 
-<div class="col-sm-3 mb-3">
-  <div class="departmentContainer py-5">
-      <h5>হাফিযুল কোরআন</h5>
-      <div class="tringleOfDepart">
-        <i class="fas fa-arrow-right"></i>
-      </div>
-  </div>
-</div>
-<div class="col-sm-3 mb-3">
-  <div class="departmentContainer py-5">
-      <h5>ইবতেদায়ী</h5>
-      <div class="tringleOfDepart">
-        <i class="fas fa-arrow-right"></i>
-      </div>
-  </div>
-</div>
+    <div class="col-sm-3 mb-3">
+    <div class="departmentContainer py-5">
+        <h5>দাখিল</h5>
+        <div class="tringleOfDepart">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+    </div>
+    </div>
 
-<div class="col-sm-3 mb-3">
-  <div class="departmentContainer py-5">
-      <h5>দাখিল</h5>
-      <div class="tringleOfDepart">
-        <i class="fas fa-arrow-right"></i>
-      </div>
-  </div>
-</div>
+    <div class="col-sm-3 mb-3">
+    <div class="departmentContainer py-5">
+        <h5>আলিম</h5>
+        <div class="tringleOfDepart">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+    </div>
+    </div>
 
-<div class="col-sm-3 mb-3">
-  <div class="departmentContainer py-5">
-      <h5>আলিম</h5>
-      <div class="tringleOfDepart">
-        <i class="fas fa-arrow-right"></i>
-      </div>
-  </div>
-</div>
+    <div class="col-sm-3 mb-3">
+    <div class="departmentContainer py-5">
+        <h5>ফাযিল</h5>
+        <div class="tringleOfDepart">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+    </div>
+    </div>
 
-<div class="col-sm-3 mb-3">
-  <div class="departmentContainer py-5">
-      <h5>ফাযিল</h5>
-      <div class="tringleOfDepart">
-        <i class="fas fa-arrow-right"></i>
-      </div>
-  </div>
-</div>
+    <div class="col-sm-3 mb-3">
+    <div class="departmentContainer py-5">
+        <h5>কামিল</h5>
+        <div class="tringleOfDepart">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+    </div>
+    </div>
 
-<div class="col-sm-3 mb-3">
-  <div class="departmentContainer py-5">
-      <h5>কামিল</h5>
-      <div class="tringleOfDepart">
-        <i class="fas fa-arrow-right"></i>
-      </div>
-  </div>
-</div>
+    <div class="col-sm-3 mb-3">
+    <div class="departmentContainer py-5">
+        <h5>অনার্স-মাস্টার্স</h5>
+        <div class="tringleOfDepart">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+    </div>
+    </div>
 
-<div class="col-sm-3 mb-3">
-  <div class="departmentContainer py-5">
-      <h5>অনার্স-মাস্টার্স</h5>
-      <div class="tringleOfDepart">
-        <i class="fas fa-arrow-right"></i>
-      </div>
-  </div>
-</div>
-<div class="col-sm-3 mb-3">
-  <div class="departmentContainer py-5">
-      <h5>কামিল</h5>
-      <div class="tringleOfDepart">
-        <i class="fas fa-arrow-right"></i>
-      </div>
-  </div>
-</div>
-
-
-
+    <div class="col-sm-3 mb-3">
+    <div class="departmentContainer py-5">
+        <h5>কামিল</h5>
+        <div class="tringleOfDepart">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+    </div>
+    </div>
 </div>
 <!-- Department Of Jasa End -->
 
@@ -419,7 +416,11 @@
                   <li style="border-top:none">
                     <a href="<%=link.url%>">
                       <div class="linksIcon">
-                        <i class="fas fa-external-link-alt"></i>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M10.146 7.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 11l-2.647-2.646a.5.5 0 0 1 0-.708z"/>
+                          <path fill-rule="evenodd" d="M2 11a.5.5 0 0 1 .5-.5H13a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 11zm3.854-9.354a.5.5 0 0 1 0 .708L3.207 5l2.647 2.646a.5.5 0 1 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z"/>
+                          <path fill-rule="evenodd" d="M2.5 5a.5.5 0 0 1 .5-.5h10.5a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
                       </div>
                       <div class="linksText">
                         <%=link.name%>
@@ -430,7 +431,11 @@
                     <li>
                       <a href="<%=link.url%>">
                         <div class="linksIcon">
-                          <i class="fas fa-external-link-alt"></i>
+                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10.146 7.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 11l-2.647-2.646a.5.5 0 0 1 0-.708z"/>
+                            <path fill-rule="evenodd" d="M2 11a.5.5 0 0 1 .5-.5H13a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 11zm3.854-9.354a.5.5 0 0 1 0 .708L3.207 5l2.647 2.646a.5.5 0 1 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z"/>
+                            <path fill-rule="evenodd" d="M2.5 5a.5.5 0 0 1 .5-.5h10.5a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                          </svg>
                         </div>
                         <div class="linksText">
                           <%=link.name%>
@@ -447,7 +452,11 @@
                   <li style="border-top:none">
                     <a href="#">
                       <div class="linksIcon">
-                        <i class="fas fa-external-link-alt"></i>
+                       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.146 7.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 11l-2.647-2.646a.5.5 0 0 1 0-.708z"/>
+                        <path fill-rule="evenodd" d="M2 11a.5.5 0 0 1 .5-.5H13a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 11zm3.854-9.354a.5.5 0 0 1 0 .708L3.207 5l2.647 2.646a.5.5 0 1 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z"/>
+                        <path fill-rule="evenodd" d="M2.5 5a.5.5 0 0 1 .5-.5h10.5a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                      </svg>
                       </div>
                       <div class="linksText">
                           Link <%=i+1%>
@@ -458,7 +467,11 @@
                     <li>
                       <a href="#">
                         <div class="linksIcon">
-                          <i class="fas fa-external-link-alt"></i>
+                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M10.146 7.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 11l-2.647-2.646a.5.5 0 0 1 0-.708z"/>
+                          <path fill-rule="evenodd" d="M2 11a.5.5 0 0 1 .5-.5H13a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 11zm3.854-9.354a.5.5 0 0 1 0 .708L3.207 5l2.647 2.646a.5.5 0 1 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z"/>
+                          <path fill-rule="evenodd" d="M2.5 5a.5.5 0 0 1 .5-.5h10.5a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
                         </div>
                         <div class="linksText">
                             Link <%=i+1%>
@@ -486,7 +499,11 @@
                 <li style="border-top:none">
                   <a href="uploads/documents/<%=document.document%>" <%=document.option==='direct'?'download':''%>>
                     <div class="linksIcon">
-                      <i class="fas fa-download"></i>
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z"/>
+                      <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z"/>
+                      <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z"/>
+                    </svg>
                     </div>
                     <div class="linksText">
                       <%=document.name%>
@@ -497,7 +514,11 @@
                   <li>
                     <a href="uploads/documents/<%=document.document%>" <%=document.option==='direct'?'download':''%>>
                       <div class="linksIcon">
-                        <i class="fas fa-download"></i>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z"/>
+                        <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z"/>
+                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z"/>
+                      </svg>
                       </div>
                       <div class="linksText">
                         <%=document.name%>
@@ -514,7 +535,11 @@
                 <li style="border-top:none">
                   <a href="#">
                     <div class="linksIcon">
-                      <i class="fas fa-download"></i>
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z"/>
+                      <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z"/>
+                      <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z"/>
+                    </svg>
                     </div>
                     <div class="linksText">
                       Download <%=i+1%>
@@ -525,7 +550,11 @@
                   <li>
                     <a href="#">
                       <div class="linksIcon">
-                        <i class="fas fa-download"></i>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z"/>
+  <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z"/>
+  <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z"/>
+</svg>
                       </div>
                       <div class="linksText">
                         Download <%=i+1%>

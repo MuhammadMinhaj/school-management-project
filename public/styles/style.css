@@ -246,19 +246,13 @@ a{
 }
 .maxHeightSet {
 	max-height: 28rem;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
-
 .maxHeightSet::-webkit-scrollbar {
-	width: 5px;
-}
-.maxHeightSet::-webkit-scrollbar-track {
-	background: #495057;
-	border-radius: 25px;
+	width: 3px;
 }
 .maxHeightSet::-webkit-scrollbar-thumb {
-	background: #6c757d;
-	border-radius: 25px;
+	background: #adb5bd;
 }
 
 /* Department */
@@ -298,7 +292,7 @@ a{
 /* Importance Links */
 .importanceLinkContainer {
 	border: 3px solid #1e7e34;
-	box-shadow: 0pt 0pt 3pt 0px #000000;
+	/* box-shadow: 0pt 0pt 3pt 0px #000000; */
 	border-radius: 5px;
 	background: white;
 }
@@ -338,7 +332,6 @@ a{
 }
 .linksText {
 	color: #1e7e34;
-	font-weight: 600;
 }
 /* Imortance Links End */
 
@@ -447,9 +440,7 @@ a{
 		text-transform: uppercase;
 		font-weight: bold;
 	} */
-	.importanceLinkContainer{
-		box-shadow: none;
-	}
+	
 	.hiddenTitle{
 		display: none;
 	}
