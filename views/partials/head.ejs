@@ -23,67 +23,62 @@
 
 	</head>
 	<body>
-		<div class="row bg-dark main-head-container">
-			<div class="col-sm-12">
+		<div style="margin:0px!important" class="row bg-dark main-head-container">
+			
+			<div class="container bg-light head-container">
 				<div class="row">
-					<div class="container bg-light head-container">
-						<div class="row">
-							<div class="col-md-2 text-center text-dark">
-								<img src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" style="max-width: 90px;" alt="" />
-							</div>
-							<div class="col-md-8 head-name">
-								<!-- <h4 class="text-center web-name">الجامعة الاحمدية السنية العالية (الكامل)</h4>
-								<h4 class="text-center web-name">JAMEA AHMADIA SUNNIA KAMIL MADRASAH</h4> -->
-								<%if(webModel.name.length===0){%>
-									<h4 class="text-center web-name text-muted">YOUR WEBSITE TITLE HERE</h4>
-								<%}else{%>
-								<%for(let webName of webModel.name){%>
-									<h4 class="text-center web-name"><%=webName.name.toUpperCase()%></h4>
-									<%}%>
-								<%}%>
-							</div>
-							<div class="col-md-2 head-social-links">
-								<%if(webModel.socialLinks){%>
-									
-										<%webModel.socialLinks.forEach((link,ind)=>{%>
-											<a href="<%=link.action%>">
-												<i style=<%='color:'+link.color%> class="<%=link.icon%> m-1"></i>
-											</a>
-										<%})%>
-									
-								<%}%>
-								
-								<!-- <a class="head-youtube">
-									<i class="fab fa-instagram"></i>
-								</a>
-								<a class="head-facebook">
-									<i class="fab fa-facebook m-1"></i>
-								</a> -->
-							</div>
-						</div>
+					<div class="col-md-2 text-center text-dark">
+						<img src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" style="max-width: 90px;" alt="" />
+					</div>
+					<div class="col-md-8 head-name">
+						<!-- <h4 class="text-center web-name">الجامعة الاحمدية السنية العالية (الكامل)</h4>
+						<h4 class="text-center web-name">JAMEA AHMADIA SUNNIA KAMIL MADRASAH</h4> -->
+						<%if(webModel.name.length===0){%>
+							<h4 class="text-center web-name text-muted">YOUR WEBSITE TITLE HERE</h4>
+						<%}else{%>
+						<%for(let webName of webModel.name){%>
+							<h4 class="text-center web-name"><%=webName.name.toUpperCase()%></h4>
+							<%}%>
+						<%}%>
+					</div>
+					<div class="col-md-2 head-social-links">
+						<%if(webModel.socialLinks){%>
+							
+								<%webModel.socialLinks.forEach((link,ind)=>{%>
+									<a href="<%=link.action%>">
+										<i style=<%='color:'+link.color%> class="<%=link.icon%> m-1"></i>
+									</a>
+								<%})%>
+							
+						<%}%>
+						
+						<!-- <a class="head-youtube">
+							<i class="fab fa-instagram"></i>
+						</a>
+						<a class="head-facebook">
+							<i class="fab fa-facebook m-1"></i>
+						</a> -->
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12">
-				<div class="row braking-news py-2">
-					<marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();">
-						<div class="d-flex;" style="max-width:1300px">
-							<%if(webModel.breakingNews.length!==0){%>
-								<%for(let news of webModel.breakingNews){%>
-										<%if(news.url.length!==0){%>
-											<a class="mr-3" href="<%=news.url%>"><%=news.title%></a>
-										<%}else{%>
-											<span class="mr-3"><%=news.title%></span>
-											<%}%>
-									<%}%>
-							<%}else{%>
-								<span style="display: inline-block;">No have any kind of breaking News right now</span>
-							<%}%>
-						</div>
-					</marquee>
-				</div>
+			<div class="col-sm-12 braking-news py-2">
+				<marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();">
+					<div class="d-flex;" style="max-width:1300px">
+						<%if(webModel.breakingNews.length!==0){%>
+							<%for(let news of webModel.breakingNews){%>
+									<%if(news.url.length!==0){%>
+										<a class="mr-3" href="<%=news.url%>"><%=news.title%></a>
+									<%}else{%>
+										<span class="mr-3"><%=news.title%></span>
+										<%}%>
+								<%}%>
+						<%}else{%>
+							<span style="display: inline-block;">No have any kind of breaking News right now</span>
+						<%}%>
+					</div>
+				</marquee>
+				
 			</div>
-			
 		</div>
 
 		<!-- Navigation -->
