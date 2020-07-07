@@ -5,7 +5,7 @@
 
 <!-- Slider -->
 <div class="row backgroundImage">
-  <div class="col-sm-12">
+  <div class="col-sm-12" style="padding-right:0px!important;padding-left:0px!important">
     <div class="slider-container" >
   
       <div class="swiper-container">
@@ -13,7 +13,7 @@
         <div class="swiper-wrapper">
           <%if(webModel.slider.length===0){%>
               <%for(let i = 0;i<3;i++){%>
-                <div class="swiper-slide" style="background-color: transparent;">
+                <div class="swiper-slide" style="background-color: transparent;" style="width:100%!important">
            
                   <div class="slider-container-text">
                       <div class="slider-wrapper-text">
@@ -61,7 +61,7 @@
         <div class="swiper-button-prev"></div>
       </div>
     
-  </div>
+    </div>
   </div>
 </div>
 <!-- Slider End -->
@@ -124,17 +124,20 @@
 <!-- Links Card End -->
 
 <!-- Creator Page Design -->
-<div class="text-center backgroundImage">
-  <h3 class="sectionHeadTitle"> 
-    CREATOR OF 
-     <span class="sectionHeadSubSubTitle">
-      <span style="color:#575e64">J</span>
-      <span style="color:#28a745">A</span>
-      <span style="color:#575e64">S</span>
-      <span style="color:#28a745">A</span>
-    </span>
-  </h3>
+<div class="row text-center backgroundImage">
+  <div class="col-sm-12">
+    <h3 class="addMargin sectionHeadTitle"> 
+      CREATOR OF 
+       <span class="sectionHeadSubSubTitle">
+        <span style="color:#575e64">J</span>
+        <span style="color:#28a745">A</span>
+        <span style="color:#575e64">S</span>
+        <span style="color:#28a745">A</span>
+      </span>
+    </h3>
+  </div>
 </div>
+
 
 <div class="row backgroundImage py-3 px-5 clearXPadding">
   
@@ -169,7 +172,7 @@
      
   </div>
   <!-- <div class="col-sm-2"></div> -->
-  <div class="col-sm-9">
+  <div class="col-sm-9 addMargin">
     <div class="creatorTextContainer">
       <div class="swiper-container py-2">
         <div class="swiper-wrapper">
@@ -215,14 +218,12 @@
     
           <div class="newsMainContainer">
          
-            <div class="newsIcon">
-              <!-- <i class="fas fa-clipboard"></i> -->
-              <!-- <i class="fas fa-clipboard-list"></i> -->
-              <i class="fas fa-book-open"></i>
+            <div class="newsTitle">
+              <h5>Latest New's</h5>
             </div>
-            <h5 class="newsTitle">Latest New's</h5>
-             <div class="card newsMainBody mx-3 p-4">
-               <h6 style="color:#495057;text-transform: uppercase;font-weight: bolder;"> <i class="fas fa-quote-left mr-1" style="color:#6c757d;font-size:1.5rem"></i><%=webModel.latestNews.title?webModel.latestNews.title:'Lorem ipsum dolor sit'%></h6>
+            
+             <div class="card newsMainBody m-1 p-2">
+               <h6 style="color:#495057;text-transform: uppercase;font-weight: bolder;"> <%=webModel.latestNews.title?webModel.latestNews.title:'Lorem ipsum dolor sit'%></h6>
                <card class="body">
                  <p style="color:#545b62;">
                     <%=webModel.latestNews.text?webModel.latestNews.text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque dolorem similique distinctio ea magni mollitia rerum quos sit. Nulla qui aliquid hic totam repellendus odio assumenda provident iste id facere.'%>
@@ -301,17 +302,20 @@
 
 
 <!-- Department Of Jasa -->
-<div class="text-center backgroundImage">
-  <h3 class="sectionHeadTitle text-center">
+<div class="row text-center backgroundImage">
+  <div class="col-sm-12">
+    <h3 class="sectionHeadTitle text-center">
 
-    DEPARTMENT OF
-     <span class="sectionHeadSubSubTitle">
-      <span style="color:#575e64">J</span>
-      <span style="color:#28a745">A</span>
-      <span style="color:#575e64">S</span>
-      <span style="color:#28a745">A</span>
-    </span>
-  </h3>
+      DEPARTMENT OF
+       <span class="sectionHeadSubSubTitle">
+        <span style="color:#575e64">J</span>
+        <span style="color:#28a745">A</span>
+        <span style="color:#575e64">S</span>
+        <span style="color:#28a745">A</span>
+      </span>
+    </h3>
+  </div>
+ 
 </div>
 
 <div class="row px-5 pb-5 backgroundImage">
