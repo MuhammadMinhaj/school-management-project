@@ -180,7 +180,7 @@ a{
 }
 
 .newsTitle{
-	background:green;
+	background:#1e7e34;
 	padding:1px 0px;
 }
 .newsTitle>h5 {
@@ -199,7 +199,7 @@ a{
 	border-radius: 10px;
 }
 .noticeTitle {
-	background: green;
+	background: #1e7e34;
 	margin: auto;
 	text-align: center;
 	padding:1px 0px;
