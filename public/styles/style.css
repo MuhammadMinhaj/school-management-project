@@ -449,4 +449,8 @@ a{
 		text-transform: uppercase;
 		font-weight: bold;
 	} */
+	.importanceLinkContainer{
+		box-shadow: none;
+	}
+
 }
