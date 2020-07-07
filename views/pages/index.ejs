@@ -222,7 +222,7 @@
               <h5>Latest New's</h5>
             </div>
             
-             <div class="card p-2">
+             <div class="card p-2"  style="border-radius: 0px!important;">
                <h6 style="color:#495057;text-transform: uppercase;font-weight: bolder;"> <%=webModel.latestNews.title?webModel.latestNews.title:'Lorem ipsum dolor sit'%></h6>
                <card class="body">
                  <p style="color:#545b62;">
@@ -244,7 +244,7 @@
           </div>
           <div class="row">
             <div class="col-sm-12">
-              <div class="card p-2 maxHeightSet">
+              <div class="card p-2 maxHeightSet" style="border-radius: 0px!important;">
                   <ul class="wrapperNoticeContainer">
                       <%webModel.notice.reverse().forEach((notice,ind)=>{%>
                         <%if(ind===0){%>
