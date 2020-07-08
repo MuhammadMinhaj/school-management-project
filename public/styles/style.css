@@ -31,8 +31,8 @@
 body {
 	overflow-x: hidden;
 	scroll-behavior: smooth;
-	/* max-width: 1350px;
-	margin:auto; */
+	max-width: 1300px;
+	float:right;
 }
 body::-webkit-scrollbar {
 	width: 8px;
