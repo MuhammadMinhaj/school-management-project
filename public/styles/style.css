@@ -31,7 +31,7 @@
 body {
 	overflow-x: hidden;
 	scroll-behavior: smooth;
-	max-width: 1300px;
+	max-width: 1350px;
 	margin:auto;
 }
 body::-webkit-scrollbar {
