@@ -27,12 +27,15 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
+.displaySizeOfWeb{
+	max-width: 1300px;
+	margin:0 auto;
+}
 body {
 	overflow-x: hidden;
 	scroll-behavior: smooth;
-	max-width: 1300px;
-	margin:0 auto;
+	/* max-width: 1300px;
+	margin:0 auto; */
 }
 body::-webkit-scrollbar {
 	width: 8px;
