@@ -32,7 +32,7 @@ body {
 	overflow-x: hidden;
 	scroll-behavior: smooth;
 	max-width: 1300px;
-	float:right;
+	margin:0 auto;
 }
 body::-webkit-scrollbar {
 	width: 8px;
