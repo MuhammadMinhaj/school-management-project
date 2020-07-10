@@ -54,7 +54,7 @@ body::-webkit-scrollbar-thumb {
 	font-size: 1.25vw;
 }
 h6{
-	font-size:1.25vw;
+	font-size:min(1.25vw,18px)
 }
 p{
 	font-size: 1em;
@@ -81,13 +81,14 @@ a{
 	display: inline-block;
 	font-family:arial black;
 	font-weight:bold;
-	font-size:2.5vw;
+	font-size:min(2.5vw,35px);
+	/* font-size:2.5vw; */
 	color:#545b62;
 }
 .sectionHeadSubSubTitle{
 	text-shadow: 2pt 1pt 1pt #0a0a0a;
 	color:green;
-	font-size:3.75vw;
+	font-size:min(3.75vw,45px);
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
@@ -155,7 +156,7 @@ a{
 }
 .cardLinkIconContainer > i {
 	/* font-size: 40px; */
-	font-size: 3vw;
+	font-size: min(3vw,40px);
 	color: #1e7e34;
 }
 

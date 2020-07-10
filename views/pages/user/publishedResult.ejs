@@ -12,46 +12,41 @@
 
   <!-- sidebar-wrapper  -->
 <main class="page-content">
-  <div class="container-fluid">
-      <h4 style="color: #545b62;font-weight: 600;text-align:center">PUBLISHED RESULTS</h4>
+  <div class="container-fluid" style="padding:5px 40px!important;">
+      <h4 style="color: #545b62;font-weight: 600;text-align:center">STATUS</h4>
       <hr>
     <div>
         <%-include('../../partials/Error/alert.ejs')%>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="card p-2">
+  <div class="row" style="padding:5px 40px!important;">
+    
 
-        <table class="table text-center">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Roll</th>
-              <th scope="col">Student Id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Result</th>
-              <th scope="col">GPA</th>
-              <th scope="col">Rank</th>
-              <th scope="col">Controlling</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>07</th>
-              <td>101145</td>
-              <td>Muhammad Minhaj</td>
-              <td><strong class="text-success">Passed</strong> </td>
-              <td>5.00</td>
-              <td>01</td>
-              <td>Controller</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <%if(getAllSubmitedRequest){%>
+      <%for(let submited of getAllSubmitedRequest){%>
+        <div class="col-sm-3">
+          <div class="card <%=submited.approved&&'border-success'%> <%=submited.reject&&'border-warning'%> <%=!submited.approved&&!submited.reject?'border-primary':''%> mb-3">
+            <div class="card-header bg-transparent <%=submited.approved&&'text-success'%> <%=submited.reject&&'text-warning'%> <%=!submited.approved&&!submited.reject?'text-primary':''%> text-center border-muted"><h5><%=submited.status%></h5></div>
+            <div class="card-body">
+              <h6 class="card-title text-secondary"><strong><%=submited.examTitle%></strong></h6>
+            
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item" style="padding:0.25rem!important"><strong>Class : </strong> <span><%=submited.classname%></span> </li>
+                <li class="list-group-item" style="padding:0.25rem!important"><strong>Section : </strong> <span><%=submited.classSection%></span> </li>
+                <li class="list-group-item" style="padding:0.25rem!important"><strong>Group : </strong> <span><%=submited.classGroup?submited.classGroup:'N/A'%></span> </li>
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent text-center border-muted">
+              <a href="/user/results/published/request/delete/<%=submited._id%>" class="btn btn-danger btn-sm w-100  <%=submited.approved&&'disabled'%>">Delete</a>
+            </div>
+          </div>
+        </div>
+        <%}%>
+      <%}%>
+   
+    
   </div>
-
 
 
 </main>

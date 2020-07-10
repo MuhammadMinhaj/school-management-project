@@ -136,26 +136,10 @@
             </div>
           </li>
           <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fas fa-clipboard-check"></i>
-              <span>Published Results</span>
+            <a href="/user/results/published/status">
+              <i class="fas fa-eye-slash"></i>
+              <span>Status</span>
             </a>
-            <div class="sidebar-submenu">
-              <ul>
-
-                <%if(classes){%>
-                  <%if(classes.length!==0){%>
-                    <%classes.forEach((c,ind)=>{%>
-                      <li>
-                        <a href="/user/results/<%=c._id%>">Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
-                      </li>
-                    <%})%>
-                    <%}%>
-                  <%}%>
-               
-
-              </ul>
-            </div>
           </li>
           <li class="sidebar-dropdown">
             <a href="#">

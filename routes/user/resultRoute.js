@@ -21,6 +21,10 @@ const {
    resultsRankController,
    allPassedResultsGetController,
    allFailedResultsGetController,
+
+   resultsSubmitToAdminGetController,
+   resultsPublishedStatusGetController,
+   resultSPublishedRequestDelete
 } = require('../../controllers/users/resultController')
 
 
@@ -41,4 +45,12 @@ router.get('/results/all/rank/:id',isAuthenticatedUser,resultsRankController)
 
 router.get('/results/all/passed/:id',isAuthenticatedUser,allPassedResultsGetController)
 router.get('/results/all/failed/:id',isAuthenticatedUser,allFailedResultsGetController)
+
+router.get('/results/published/request/:id',isAuthenticatedUser,resultsSubmitToAdminGetController)
+
+router.get('/results/published/status',isAuthenticatedUser,resultsPublishedStatusGetController)
+
+
+router.get('/results/published/request/delete/:id',isAuthenticatedUser,resultSPublishedRequestDelete)
+
 module.exports = router 

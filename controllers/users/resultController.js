@@ -4,7 +4,9 @@ const Student = require('../../models/Student')
 const Result = require('../../models/Result')
 const WebModel = require('../../models/WebModel')
 const Examination = require('../../models/Examination')
-
+const Request = require('../../models/Request')
+const { all } = require('../../routes/user/authRoute')
+const { has } = require('config')
 
 async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,subjectFieldError,fieldError,id,subjectFieldValue,result,results,selectedExam,searchValue){
     try{
@@ -551,6 +553,7 @@ exports.dividedPassedAndFailedResultController = async(req,res,next)=>{
                     passedOrFailed:false,
                     gradePoint:00,
                     grade:'F',
+                    rank:null
                 },{new:true})
                 if(!updatedResult){
                     req.flash('fail','Internal Server Error')
@@ -1070,8 +1073,15 @@ exports.resultsRankController = async(req,res,next)=>{
             req.flash('fail','Please Select Examination')
             return res.redirect('back')
         }
+        
+       
 
-        results.sort((a,b)=>{
+        let allPassedResults = resultDiviededHandler('passedresults',results)
+
+        console.log(allPassedResults)
+        console.log(allPassedResults.length)
+        
+        allPassedResults.sort((a,b)=>{
             if(a.gradePoint===b.gradePoint){
                 return Number(b.totalSubjectObtainedNumber)-Number(a.totalSubjectObtainedNumber)
             }else{
@@ -1079,7 +1089,7 @@ exports.resultsRankController = async(req,res,next)=>{
             }
         })
         let rankOfResult = 0;
-        for(result of results){
+        for(result of allPassedResults){
             if(result.examination.toString()===option.toString()){
                 if(result.passedOrFailed){
                     rankOfResult++
@@ -1095,7 +1105,7 @@ exports.resultsRankController = async(req,res,next)=>{
         }
         req.flash('success','Successfully Added Rank On Result')
         res.redirect('back')
-            console.log(results)
+            console.log(allPassedResults)
         
         
         // totalSubjectObtainedNumber
@@ -1177,6 +1187,8 @@ exports.allPassedResultsGetController = async(req,res,next)=>{
 exports.allFailedResultsGetController = async(req,res,next)=>{
     try{
         let { id } = req.params
+        let { option,roll } = req.query 
+        console.log(req.query)
 
         let hasClass = await Class.findOne({_id:id})
 
@@ -1198,11 +1210,184 @@ exports.allFailedResultsGetController = async(req,res,next)=>{
             
         }
     
+        let allFailedResults = resultDiviededHandler('failedresults',results)
 
-        let allPassedResults = resultDiviededHandler('failedresults',results)
+        let allExamBasedFailedResults = []
 
-     
-        renderPageHandler(req,res,'failedResults',null,null,hasClass,null,null,null,null,null,allPassedResults)
+        if(!roll){
+            if(option){
+                for(let failedResults of allFailedResults){
+                    if( failedResults.examination.toString()===option.toString()){
+                     allExamBasedFailedResults.push(failedResults)
+                    }
+                 }
+            }
+        }else{
+            if(option){
+                for(let failedResults of allFailedResults){
+                    if( failedResults.examination.toString()===option.toString()&&failedResults.studentInfo.roll.toString()===roll.toString()){
+                     allExamBasedFailedResults.push(failedResults)
+                    }
+                 }
+            }
+        }
+
+        allExamBasedFailedResults.forEach(async(result,ind)=>{
+            let findExamination = await Examination.findOne({_id:result.examination})
+            result.exam = findExamination
+
+        })
+        console.log(allExamBasedFailedResults)
+
+        let searchValue = {
+            option,
+            roll
+        }
+        renderPageHandler(req,res,'failedResults',null,null,hasClass,null,null,null,null,null,allExamBasedFailedResults,null,searchValue)
+
+    }catch(e){
+        next(e)
+    }
+}
+
+exports.resultsSubmitToAdminGetController = async(req,res,next)=>{
+    try{
+        let { id } = req.params
+        let { option } = req.query
+
+        let hasClass = await Class.findOne({_id:id})
+        if(!hasClass){
+            return res.redirect('back')
+        }
+        let user = req.user
+
+        let results = await Result.find({classid:id,examination:option})
+        
+        let exam = await Examination.findOne({_id:option})
+
+        let hasRequest = await Request.find()
+        
+        for(let hasReq of hasRequest){
+            if(hasClass.classGroup){
+                if(hasReq.username===user.name&&hasReq.classname===hasClass.name&&hasReq.classSection===hasClass.section&&hasReq.examination.toString()===option.toString()&&hasReq.examTitle===exam.title&&hasReq.classes.toString()===hasClass._id.toString()&&hasReq.classGroup===hasClass.group){
+                    req.flash('fail','Already Submited The Request')
+                    return res.redirect('back')
+                }
+            }
+            if(hasReq.username===user.name&&hasReq.classname===hasClass.name&&hasReq.classSection===hasClass.section&&hasReq.examination.toString()===option.toString()&&hasReq.examTitle===exam.title&&hasReq.classes.toString()===hasClass._id.toString()){
+                req.flash('fail','Already Submited The Request')
+                return res.redirect('back')
+            }
+            
+        }
+          
+        let createSubmitReq = new Request({
+            username:user.name,
+            classname:hasClass.name,
+            classSection:hasClass.section,
+            classGroup:hasClass.group,
+            status:'Pending',
+            user:user._id,
+            examination:option,
+            
+            examTitle:exam.title,
+            classes:hasClass._id
+        })
+
+        let createdSubmitReq = await createSubmitReq.save()
+        
+        if(!createdSubmitReq){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+        for(let result of results){
+            let updatedRequest = await Request.findOneAndUpdate({_id:createdSubmitReq._id},{
+                $push:{
+                    results:result._id
+                }
+            },{new:true})
+
+            if(!updatedRequest){
+                req.flash('fail','Internal Server Error')
+                return res.redirect('back')
+            }
+            let requestIdSetInresult = await Result.findOneAndUpdate({_id:result._id},{
+                request:createdSubmitReq._id,
+                submited:true
+            },{new:true})
+
+            if(!requestIdSetInresult){
+                req.flash('fail','Internal Server Error')
+                return res.redirect('back')
+            }
+
+        }
+
+        console.log(createdSubmitReq)
+        
+        req.flash('success','Successfully Submited Results')
+        res.redirect('back')
+        console.log('Done')
+
+    }catch(e){
+        next(e)
+    }
+}
+
+exports.resultsPublishedStatusGetController = async(req,res,next)=>{
+    try{
+        let user = req.user
+
+        let classes = await Class.find({user:req.user._id})
+
+        let getAllSubmitedRequest = await Request.find({user:user._id})
+        
+
+        res.render('pages/user/publishedResult',{
+            title:'Submited Status',
+            flashMessage:req.flash(),
+            getAllSubmitedRequest,
+            user,
+            classes
+        })
+        // console.log(getAllRequest)
+    }catch(e){
+        next(e)
+    }
+}
+
+exports.resultSPublishedRequestDelete = async(req,res,next)=>{
+    try{
+        let { id } = req.params
+        
+        let hasSubmit = await Request.findOne({_id:id})
+
+        if(hasSubmit.status.toLowerCase()==='pending'||hasSubmit.status.toLowerCase()==='rejected'){
+       
+            let deletedSubmitReq = await Request.findOneAndDelete({_id:id})
+
+            if(!deletedSubmitReq){
+                req.flash('fail','Internal Server Error')
+                return res.redirect('back')
+            }
+            
+            let results = await Result.find({request:id})
+            
+            for(let result of results){
+                let updatedResult = await Result.findOneAndUpdate({_id:result._id},{
+                    request:null,
+                    submited:false
+                },{new:true})
+
+                if(!updatedResult){
+                    req.flash('fail','Internal Server Error')
+                    return res.redirect('back')
+                }
+            }
+
+        }
+        req.flash('success','Successfully Deleted Request')
+        res.redirect('back')
     }catch(e){
         next(e)
     }

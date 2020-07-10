@@ -49,8 +49,11 @@ const schema = new Schema({
     approved:{
         type:Boolean
     },
+    published:{
+        type:Boolean
+    },
     rejected:{
-        Boolean
+        type:Boolean
     },
     passedOrFailed:{
         type:Boolean
@@ -153,6 +156,10 @@ const schema = new Schema({
     examination:{
         type:Schema.Types.ObjectId,
         ref:'Examination'
+    },
+    request:{
+        type:Schema.Types.ObjectId,
+        ref:'Request'
     }
 
 })

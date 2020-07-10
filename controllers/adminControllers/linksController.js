@@ -22,6 +22,7 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb){
         console.log(e)
     }
 }
+
 function removeDocumentPath(path,next){
     fs.unlink(`public/uploads/documents/${path}`,error=>{
         if(error){

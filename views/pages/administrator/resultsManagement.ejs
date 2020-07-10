@@ -1,0 +1,74 @@
+<%-include('../../partials/admin/adminHead.ejs')%>
+<div class="container-luid">
+   <div class="row">
+      <!-- Admin Brand and Dashboard Menu -->
+      <%- include('../../partials/admin/adminSidebar.ejs')%>
+      <!-- Dashboard Content -->
+      <div class="col-sm-10 ">
+         <!-- Admin Navbar Content -->
+         <%- include('../../partials/admin/adminNavbar.ejs')%>
+         <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+         
+         <div class="row scroll-style" style="background:#6c757d;">
+            <div class="col-sm-12">
+                
+                <div class="w-100">
+                    <%-include('../../partials/Error/alert.ejs')%>
+                </div>
+
+                <h4 class="menu-title p-1 text-center">Results Management</h4>
+                <div class="card">
+                    <table class="table text-center">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">SL</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Class</th>
+                            <th scope="col">Section</th>
+                            <th scope="col">Group</th>
+                            <th scope="col">Exam</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Controlling</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                                <%if(requestModel){%>
+                                    <%requestModel.forEach((request,ind)=>{%>
+                                    <tr>
+                                        <th scope="row"><%=ind+1%></th>
+                                        <td><%=request.username%></td>
+                                        <td><%=request.classname%></td>
+                                        <td><%=request.classSection%></td>
+                                        <td><%=request.group?group:'N/A'%></td>
+                                        <td><%=request.examTitle%></td>
+                                        <td><%=request.status%></td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                <a href="/administrator/results/all/show/<%=request._id%>" class="btn border btn-light text-primary btn-sm">Show</a>
+
+                                                <a href="/administrator/results/request/approve/<%=request._id%>" class="btn border btn-light text-success btn-sm">Approved</a>
+    
+                                                <a href="/administrator/results/request/reject/<%=request._id%>" class="btn border btn-light text-warning btn-sm">Reject</a>
+                                                
+                                                <a href="/administrator/results/request/delete/<%=request._id%>" class="btn border btn-light text-danger btn-sm">Delete</a>
+                                              </div>
+                                        </td>
+                                        
+                                      </tr>
+                                    <%})%>
+                                <%}%>
+                     
+                            
+                        </tbody>
+                      </table>
+                </div>
+                
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<%-include('../../partials/admin/adminFooter.ejs')%>
+
+</body>
+</html>
