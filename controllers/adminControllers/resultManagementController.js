@@ -4,6 +4,7 @@ const Request = require('../../models/Request')
 const Result = require('../../models/Result')
 const Student = require('../../models/Student')
 const Examination = require('../../models/Examination')
+const Class = require('../../models/Class')
 
 
 async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb,requestModel,results){
@@ -47,19 +48,21 @@ exports.showAllResultsGetController = async(req,res,next)=>{
 
         let results = await Result.find({classid:request.classes,examination:request.examination,request:request._id})
 
-        
-
+      
         let exam = await Examination.findOne({_id:request.examination})
+        let classes = await Class.findOne({_id:request.classes})
 
-        console.log(exam)
-
+        console.log(classes)
+        console.log('Test')
 
         for(let result of results){
             let student = await Student.findOne({_id:result.student})
-            result.studentinfo = student
+            result.studentInfo = student
+            result.exam = exam
+            result.classes = classes
         }
        
-        console.log(results)
+       
 
         renderPageHandler(req,res,'allResults',null,null,null,request,results)
     }catch(e){
@@ -165,15 +168,48 @@ exports.resultPublishedReqDeleteGetController = async(req,res,next)=>{
     }
 }
 
-exports.resultsPublishedPostController = async(req,res,next)=>{
+exports.resultsPublishedAndUnPublishedPostController = async(req,res,next)=>{
     try{
         let { id } = req.params
         let { option } = req.body
 
+        if(!option){
+            req.flash('fail','Please Select Option')
+            return res.redirect('back')
+        }
+
         let request = await Request.findOne({_id:id})
-        console.log(request)
-        console.log(req.params)
-        console.log(req.body)
+        
+        let { approved,classes,examination,_id } = request
+
+        if(!approved){
+            req.flash('fail','Please Approved To Published Results')
+            return res.redirect('back')
+        }
+
+        let results = await Result.find({classid:classes,examination:examination,request:_id})
+        
+        for(let result of results){
+            let hasResult
+            if(option.toLowerCase()==='published'){
+                 hasResult = await Result.findOneAndUpdate({_id:result._id},{
+                    published:true
+                },{new:true})
+            }
+            if(option.toLowerCase()==='unpublished'){
+                hasResult = await Result.findOneAndUpdate({_id:result._id},{
+                    published:false
+                },{new:true})
+            }
+            if(!hasResult){
+                req.flash('fail','Internal Server Error')
+                return res.redirect('back')
+            }
+        }
+
+        let msg = option==='published'?'Successfully Results Has Been Published On Website':option==='unpublished'?'Successfully  UnPublished Results From Website':'Some Went To Wrong'
+        req.flash('success',msg)
+        res.redirect('back')
     }catch(e){
         next(e)
     }

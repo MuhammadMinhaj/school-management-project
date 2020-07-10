@@ -13,7 +13,7 @@ const {
     resultsPublishedReqApproveGetController,
     resultsPublishedReqRejectGetController,
     resultPublishedReqDeleteGetController,
-    resultsPublishedPostController
+    resultsPublishedAndUnPublishedPostController
 } = require('../../controllers/adminControllers/resultManagementController')
 
 
@@ -25,6 +25,6 @@ router.get('/results/request/approve/:id',isAuthenticatedAdmin,resultsPublishedR
 router.get('/results/request/reject/:id',isAuthenticatedAdmin,resultsPublishedReqRejectGetController)
 router.get('/results/request/delete/:id',isAuthenticatedAdmin,resultPublishedReqDeleteGetController)
 
-router.post('/results/published/:id',isAuthenticatedAdmin,resultsPublishedPostController)
+router.post('/results/web/view/:id',isAuthenticatedAdmin,resultsPublishedAndUnPublishedPostController)
 
 module.exports = router

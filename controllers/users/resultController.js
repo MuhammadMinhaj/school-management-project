@@ -5,8 +5,7 @@ const Result = require('../../models/Result')
 const WebModel = require('../../models/WebModel')
 const Examination = require('../../models/Examination')
 const Request = require('../../models/Request')
-const { all } = require('../../routes/user/authRoute')
-const { has } = require('config')
+
 
 async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,subjectFieldError,fieldError,id,subjectFieldValue,result,results,selectedExam,searchValue){
     try{
@@ -534,7 +533,7 @@ exports.dividedPassedAndFailedResultController = async(req,res,next)=>{
         
         for(let result of results){
             if(result.examination.toString()===option.toString()){
-                console.log('Massed')
+                console.log('Mached')
             let failedSubject = false
             let combinationFailedSubject = false
             for(let subject of result.subjects){
@@ -581,8 +580,8 @@ exports.allCreateResultsController = async(req,res,next)=>{
     try{    
         let { id } = req.params
         let { option,typeOfcalculate } = req.query
-        console.log(req.params)
-        console.log(req.query)
+        // console.log(req.params)
+        // console.log(req.query)
        
         let hasClass = await Class.findOne({_id:id})
         if(!hasClass){
@@ -629,7 +628,16 @@ exports.allCreateResultsController = async(req,res,next)=>{
             }
         }
         
-        let gpaSubjectHandler = (obtainedMarks,subject)=>{
+        let gpaSubjectHandler = (obtainedMarks1,subject)=>{
+
+            let obtainedMarks = parseInt(obtainedMarks1)
+            console.log('Testing 501')
+            console.log(obtainedMarks)
+            console.log('Testing 502')
+            
+
+
+
             switch (true){
                 case obtainedMarks>=80&&obtainedMarks<=100:
                     subject.grade = 'A+'
@@ -663,9 +671,14 @@ exports.allCreateResultsController = async(req,res,next)=>{
                     subject.grade = null
                     subject.gradePoint = null
             }
+            console.log('Testing 503')
+            console.log(subject)
+            console.log('Done This')
             return true
         }
-        let gpaHalfMarksSubjectHandler = (obtainedMarks,subject)=>{
+
+        let gpaHalfMarksSubjectHandler = (obtainedMarks1,subject)=>{
+            let obtainedMarks = parseInt(obtainedMarks1)
             switch (true){
                 case obtainedMarks>=40&&obtainedMarks<=50:
                     subject.grade = 'A+'
@@ -740,7 +753,8 @@ exports.allCreateResultsController = async(req,res,next)=>{
                     result.grade = null
             }
         }
-        let cGpaSubjectHandler = (obtainedMarks,subject)=>{
+        let cGpaSubjectHandler = (obtainedMarks1,subject)=>{
+            let obtainedMarks = parseInt(obtainedMarks1)
             switch (true){
                 case obtainedMarks>=80&&obtainedMarks<=100:
                     subject.grade = 'A+'
@@ -788,9 +802,8 @@ exports.allCreateResultsController = async(req,res,next)=>{
             }
             return true
         }
-        let cGpaHalfMarksSubjectHandler = (obtainedMarks,subject)=>{
-            console.log(obtainedMarks)
-            console.log(typeof obtainedMarks)
+        let cGpaHalfMarksSubjectHandler = (obtainedMarks1,subject)=>{
+            let obtainedMarks = obtainedMarks1
             switch (true){
                 case obtainedMarks>=40&&obtainedMarks<=50:
                     subject.grade = 'A+'
@@ -836,6 +849,7 @@ exports.allCreateResultsController = async(req,res,next)=>{
                     subject.grade = null
                     subject.gradePoint = null
             }
+           
             return true
         }
 
@@ -883,6 +897,11 @@ exports.allCreateResultsController = async(req,res,next)=>{
                 subjectsTow.push(result.subjectAandSubjectB[i*2-1])
                 
             }
+            // console.log('Break33')
+            // console.log(subjectsOne)
+            // console.log('Break33')
+            // console.log(subjectsTow)
+            
             subjectsOne.forEach((subjectOne,indOne)=>{
                 subjectsTow.forEach((subjectTow,indTow)=>{
                     if(indOne===indTow){
@@ -984,8 +1003,8 @@ exports.allCreateResultsController = async(req,res,next)=>{
                 req.flash('fail','Internal Server Error')
                 return res.redirect('back')
             }
-            console.log(makingResults)
-            console.log('Test')
+            // console.log(makingResults)
+            // console.log('Test')
            }
         }
         req.flash('success','Successfully Created All Result')
@@ -1207,6 +1226,8 @@ exports.allFailedResultsGetController = async(req,res,next)=>{
         for(let result of results){
             let student = await Student.findOne({_id:result.student})
             result.studentInfo = student 
+            let classes = await Class.findOne({_id:result.classid})
+            result.classes = classes
             
         }
     
@@ -1245,6 +1266,7 @@ exports.allFailedResultsGetController = async(req,res,next)=>{
         }
         renderPageHandler(req,res,'failedResults',null,null,hasClass,null,null,null,null,null,allExamBasedFailedResults,null,searchValue)
 
+        
     }catch(e){
         next(e)
     }
@@ -1392,3 +1414,4 @@ exports.resultSPublishedRequestDelete = async(req,res,next)=>{
         next(e)
     }
 }
+

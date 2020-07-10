@@ -38,10 +38,11 @@ body::-webkit-scrollbar {
 	width: 8px;
 }
 body::-webkit-scrollbar-track {
-	background: #545b62;
+	background:adb5bd;
+	border-left:1px solid #343a40;
 }
 body::-webkit-scrollbar-thumb {
-	background: #adb5bd;
+	background: #495057;
 	border-radius: 25px;
 }
 .table th{

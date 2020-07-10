@@ -227,23 +227,43 @@
     
                                       
                                       </div>
-                                      <div class="custom-table custom-table-head-col-4 border-bottom border-right border-left">
+
+                                       <div class="custom-table custom-table-head-col-4 border-bottom border-right border-left">
+                                                        <div class="border-right py-1 px-2">
+                                                        
+                                                            <strong>Grade : </strong>
+                                                        
+                                                        </div>
+                                                        <div class="border-right py-1 px-2">
+                                                            <%=result.grade%>
+                                                        </div>
+                                                        <div class="border-right py-1 px-2">
+                                                        
+                                                            <strong>Grade Point : </strong>
+                                                        
+                                                        </div>
+                                                        <div class="border-right py-1 px-2">
+                                                            <%=result.gradePoint?result.gradePoint:'N/A'%>
+                                                        </div>
+                                      </div>
+
+                                    <div class="custom-table custom-table-head-col-4 border-bottom border-right border-left">
                                         <div class="border-right py-1 px-2">
                                         
                                             <strong>Result : </strong>
                                         
                                         </div>
                                         <div class="border-right py-1 px-2">
-                                          <%=result.gradePoint%>
+                                            <%=Number(result.gradePoint)===0?'Failed':'Passed'%>
                                         </div>
                                         <div class="border-right py-1 px-2">
                                         
-                                          <strong>Rank : </strong>
-                                      
-                                      </div>
-                                      <div class="border-right py-1 px-2">
-                                        <%=result.rank%>
-                                      </div>
+                                            <strong>Rank : </strong>
+                                        
+                                        </div>
+                                        <div class="border-right py-1 px-2">
+                                            <%=result.rank?result.rank:'N/A'%>
+                                        </div>
                                       </div>
                                       
                                       <!-- Subject Number -->
@@ -427,6 +447,7 @@
                           </div>
                         </div>
                       </div>
+                      
                       <!-- Results Modal End -->
                       <tr>
                         <th><%=result.rank%></th>

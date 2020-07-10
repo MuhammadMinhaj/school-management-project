@@ -21,14 +21,14 @@
                     
                     
                   
-                    <form action="/administrator/results/published/<%=requestModel._id%>" method="POST" class="ml-3">
+                    <form action="/administrator/results/web/view/<%=requestModel._id%>" method="POST" class="ml-3">
                         <div class="form-row align-items-center">
                           <div class="col-auto my-1">
                             <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
                             <select name="option" class="custom-select custom-select-sm" id="inlineFormCustomSelect">
                                 <option value="" selected>Open this select menu</option>
                                 <option value="published">Published</option>
-                                <option value="unpublished">UnPublished</option>
+                                <option value="unpublished">Unpublished</option>
                               </select>
                           </div>
                           <div class="col-auto my-1">
@@ -56,19 +56,387 @@
                                 <%if(results){%>
                                     <%results.sort((a,b)=>a.rank-b.rank).forEach((result,ind)=>{%>
                                         <%if(result.rank){%>
+                                    <div class="modal fade" id="resultModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Results</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                
+                                                <div class="card p-2">
+                                                <div class="result-content p-1">
+                                                    <div class="result-header text-center">
+                                                        <div class="result-logo m-auto" style="max-width:80px;height:80px;">
+                                                            <img src="<%=webModel.logo%>" width="80%" alt="">
+                                                        </div>
+                                                        <%webModel.name.forEach((name,indOfWebModel)=>{%>
+                                                                <%if(name.lang.toLowerCase()==='english'){%>
+                                                                <h5 class="res-large" style="color:#1e7e34"><%=name.name%></h5>
+                                                                <%}%>
+                                                        <%})%>
+                                                                <h6 style="color:#6c757d;font-weight: bolder;">SHOLASHAHAR,CHATTOGRAM</h6>
+                                                                <h5 style="color:#d39e00"><%=result.exam.title%></h5>
+                                                                <h5 style="color:#0062cc">Class <%=result.classes.name%> Branch <%=result.classes.section%></h5>
+                                                    </div>
+                                                    <div class="result-body p-3">
+                                                    <div class="custom-table custom-table-head-col-4 border-top border-right border-left">
+                                                        <div class="border-right py-1 px-2">
+                                                        
+                                                            <strong>Roll No: </strong>
+                                                        
+                                                        </div>
+                                                        <div class="border-right py-1 px-2">
+                                                            
+                                                            <span><%=result.studentInfo.roll%></span>
+                                                        </div>
+                    
+                                                        <div class="border-right py-1 px-2">
+                                                            
+                                                            <strong>Student ID : </strong>
+                                                        
+                                                        </div>
+                                                        <div class="py-1 px-2">
+                                                            
+                                                            <span><%=result.studentInfo.studentId%></span>
+                                                        </div>
+                    
+                                                        
+                                                    </div>
+                    
+                                                        <div class="custom-table custom-table-head-col-2 border">
+                                                            <div class="border-right py-1 px-2">
+                                                            
+                                                                <strong>Name Of Student: </strong>
+                                                            
+                                                            </div>
+                                                            <div class="py-1 px-2">
+                                                            
+                                                            <span><%=result.studentInfo.name%></span>
+                                                            </div>
+                    
+                                                            <!-- <div class="border-right border-bottom py-1 px-2">
+                                                            <strong>Father's Name: </strong>
+                                                            
+                                                            </div>
+                                                            <div class="border-bottom py-1 px-2">
+                                                            
+                                                            <span><%=result.studentInfo.fatherName%></span>
+                                                            </div>
+                    
+                                                            <div class="border-right py-1 px-2">
+                                                            <strong>Mother's Name: </strong>
+                                                            
+                                                            </div>
+                                                            <div class="py-1 px-2">
+                                                            
+                                                            <span><%=result.studentInfo.name%></span>
+                                                            </div> -->
+                                                        </div>
+                    
+                                                        <div class="custom-table custom-table-head-col-4 border-bottom border-right border-left">
+                                                        <div class="border-right py-1 px-2">
+                                                        
+                                                            <strong>Group: </strong>
+                                                        
+                                                        </div>
+                                                        <div class="border-right py-1 px-2">
+                                                            <span><%=result.classes.group?result.classes.group:'N/A'%></span>
+                                                        </div>
+                    
+                                                        <div class="border-right py-1 px-2">
+                                                            
+                                                            <strong>Type: </strong>
+                                                        
+                                                        </div>
+                                                        <div class="py-1 px-2">
+                                                            
+                                                            <span><%=result.types.toUpperCase()%></span>
+                                                        </div>
+                    
+                                                        
+                                                        </div>
+                                                        <div class="custom-table custom-table-head-col-4 border-bottom border-right border-left">
+                                                        <div class="border-right py-1 px-2">
+                                                        
+                                                            <strong>Session: </strong>
+                                                        
+                                                        </div>
+                                                        <div class="border-right py-1 px-2">
+                                                            <%=result.session%>
+                                                        </div>
+                    
+                                                        <div class="border-right py-1 px-2">
+                                                            
+                                                            <strong>Total Students : </strong>
+                                                        
+                                                        </div>
+                                                        <div class="py-1 px-2">
+                                                            
+                                                            <%=result.totalStudents%>
+                                                        </div>
+                    
+                                                        
+                                                        </div>
+                                                        <div class="custom-table custom-table-head-col-4 border-bottom border-right border-left">
+                                                        <div class="border-right py-1 px-2">
+                                                        
+                                                            <strong>Working Days: </strong>
+                                                        
+                                                        </div>
+                                                        <div class="border-right py-1 px-2">
+                                                            <%=result.workingDays%>
+                                                        </div>
+                    
+                                                        <div class="border-right py-1 px-2">
+                                                            
+                                                            <strong>Present Days : </strong>
+                                                        
+                                                        </div>
+                                                        <div class="py-1 px-2">
+                                                            <%=result.presentDays%>
+                                                            
+                                                        </div>
+                    
+                                                        
+                                                        </div>
+
+                                                        <div class="custom-table custom-table-head-col-4 border-bottom border-right border-left">
+                                                        <div class="border-right py-1 px-2">
+                                                        
+                                                            <strong>Grade : </strong>
+                                                        
+                                                        </div>
+                                                        <div class="border-right py-1 px-2">
+                                                            <%=result.grade%>
+                                                        </div>
+                                                        <div class="border-right py-1 px-2">
+                                                        
+                                                            <strong>Grade Point : </strong>
+                                                        
+                                                        </div>
+                                                        <div class="border-right py-1 px-2">
+                                                            <%=result.gradePoint?result.gradePoint:'N/A'%>
+                                                        </div>
+                                                        </div>
+
+                                                        <div class="custom-table custom-table-head-col-4 border-bottom border-right border-left">
+                                                            <div class="border-right py-1 px-2">
+                                                            
+                                                                <strong>Result : </strong>
+                                                            
+                                                            </div>
+                                                            <div class="border-right py-1 px-2">
+                                                                <%=Number(result.gradePoint)===0?'Failed':'Passed'%>
+                                                            </div>
+                                                            <div class="border-right py-1 px-2">
+                                                            
+                                                                <strong>Rank : </strong>
+                                                            
+                                                            </div>
+                                                            <div class="border-right py-1 px-2">
+                                                                <%=result.rank?result.rank:'N/A'%>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <!-- Subject Number -->
+                                                    <!-- Main Subject -->
+                                                    <h6 class="text-center my-2"><strong>Subjects</strong></h6>
+                                                    <div class="custom-table text-center custom-table-col-5 border-top border-right border-left border-bottom">
+                    
+                                                        <div class="border-right py-1 px-2">
+                                                            <strong>Code</strong>
+                                                        </div>
+                    
+                                                        <div class="border-right py-1 px-2">
+                                                            <strong>Subjects Name</strong>
+                                                        </div>
+                    
+                                                        <div class="border-right py-1 px-2">
+                                                            <strong>Full Marks</strong>
+                                                        </div>
+                                                        <div class="border-right py-1 px-2">
+                                                            <strong>Obtained Marks</strong>
+                                                        </div>
+                                                        <div class="py-1 px-2">
+                                                            
+                                                            <strong>Grade</strong>
+                                                        </div>
+                    
+                    
+                                                        
+                                                        <%for(let subject of result.subjects){%>
+                                                        <div class="border-top border-right py-1 px-2">
+                                                            <span><%=subject.code%></span>
+                                                        </div>
+                    
+                                                        <div class="text-left border-top border-right py-1 px-2">
+                                                            <span class="ml-2"><%=subject.name%></span>
+                                                        </div>
+                    
+                                                        <div class="border-top border-right py-1 px-2">
+                                                            <span><%=subject.fullMarks%></span>
+                                                        </div>
+                                                        <div class="border-top border-right py-1 px-2">
+                                                            <span><%=subject.obtainedMarks%></span>
+                                                        </div>
+                                                        <div class=" border-top py-1 px-2">
+                                                            
+                                                            <span><%=subject.gradePoint%></span>
+                                                        </div>
+                                                        <%}%>
+                                                        
+                                                        
+                                                    </div>
+                                                    <!-- Main Subject End -->
+                    
+                                                    <!-- Combination Subject -->
+                                                    <h6 class="text-center my-2"><strong>Combination Subjects</strong></h6>
+                                                    <div class="custom-table text-center custom-table-col-5 border-top border-right border-left border-bottom">
+                    
+                                                        <div class="border-right py-1 px-2">
+                                                            <strong>Code</strong>
+                                                        </div>
+                    
+                                                        <div class="border-right py-1 px-2">
+                                                            <strong>Subjects Name</strong>
+                                                        </div>
+                    
+                                                        <div class="border-right py-1 px-2">
+                                                            <strong>Full Marks</strong>
+                                                        </div>
+                                                        <div class="border-right py-1 px-2">
+                                                            <strong>Obtained Marks</strong>
+                                                        </div>
+                                                        <div class="py-1 px-2">
+                                                            
+                                                            <strong>Grade</strong>
+                                                        </div>
+                    
+                    
+                    
+                                                        
+                                                        <%result.subjectAandSubjectB.forEach((subject,ind)=>{%>
+                                                            <div class="border-top border-right py-1 px-2">
+                                                            <span><%=subject.code%></span>
+                                                            </div>
+                    
+                                                            <div class="text-left border-top border-right py-1 px-2">
+                                                            <span class="ml-2"><%=subject.name%></span>
+                                                            </div>
+                    
+                                                            <div class="border-top border-right py-1 px-2">
+                                                            <span><%=subject.fullMarks%></span>
+                                                            </div>
+                                                            <div class="border-top border-right py-1 px-2">
+                                                            <span><%=subject.obtainedMarks%></span>
+                                                            </div>
+                                                        
+                                                            <!-- <div class=" border-top py-1 px-2">
+                                                            <span><%=subject.gradePoint%></span>
+                                                            </div> -->
+                                                            
+                                                            <%if(ind%2===1){%>
+                                                            <div  style="transform: translateY(-12px);" class="py-1 px-2">
+                                                                <span><%=subject.gradePoint%></span>
+                                                            </div>
+                                                        
+                                                            <%}else{%>
+                                                                <div class=" border-top py-1 px-2">
+                                                                
+                                                                </div>
+                                                                <%}%>
+                                                        
+                                                            
+                                                        <%})%>
+                                                    </div>
+                                                    <!-- Combination Subject End -->
+                    
+                    
+                                                    <!-- Optional Subject -->
+                    
+                                                    <%if(result.optionalSubject.length!==0){%>
+                                                        <h6 class="text-center my-2"><strong>Optional Subjects</strong></h6>
+                                                    <div class="custom-table text-center custom-table-col-5 border-top border-right border-left border-bottom">
+                    
+                                                        <div class="border-right py-1 px-2">
+                                                            <strong>Code</strong>
+                                                        </div>
+                    
+                                                        <div class="border-right py-1 px-2">
+                                                        <strong>Subjects Name</strong>
+                                                        </div>
+                    
+                                                        <div class="border-right py-1 px-2">
+                                                        <strong>Full Marks</strong>
+                                                        </div>
+                                                        <div class="border-right py-1 px-2">
+                                                        <strong>Obtained Marks</strong>
+                                                        </div>
+                                                        <div class="py-1 px-2">
+                                                        
+                                                        <strong>Grade</strong>
+                                                        </div>
+                    
+                    
+                    
+                                                    <%for(let subject of result.optionalSubject){%>
+                                                        <div class="border-top border-right py-1 px-2">
+                                                        <span><%=subject.code%></span>
+                                                        </div>
+                    
+                                                        <div class="text-left border-top border-right py-1 px-2">
+                                                        <span class="ml-2"><%=subject.name%></span>
+                                                        </div>
+                    
+                                                        <div class="border-top border-right py-1 px-2">
+                                                        <span><%=subject.fullMarks%></span>
+                                                        </div>
+                                                        <div class="border-top border-right py-1 px-2">
+                                                        <span><%=subject.obtainedMarks%></span>
+                                                        </div>
+                                                        <div class=" border-top py-1 px-2">
+                                                        
+                                                        <span><%=subject.gradePoint%></span>
+                                                        </div>
+                                                    <%}%>
+                    
+                                                    </div>
+                                                        <%}%>
+                                                    
+                                                    <!-- Optional Subject End -->
+                    
+                    
+                    
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                
+                                                <button type="button" class="btn btn-secondary">Download</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                             <tr>
                                                 <th scope="row"><%=result.rank%></th>
-                                                <td><%=result.studentinfo.name%></td>
-                                                <td><%=result.grade%></td>
+                                                <td><%=result.studentInfo.name%></td>
+                                                <td class="<%=result.grade.toLowerCase()==='f'?'text-danger':''%>"><%=result.grade%></td>
                                                 <td><%=result.gradePoint%></td>
                                                 <td><%=result.totalSubjectObtainedNumber%></td>
                                                 <td><%=result.totalGradePoint%></td>
-                                                <td><%=result.studentinfo.roll%></td>
-                                                <td>Pending</td>
+                                                <td><%=result.studentInfo.roll%></td>
+                                                <td class="<%=result.published?'text-success':'text-muted'%>"><%=result.published?'PUBLISHED':'UNPUBLISHED'%></td>
                                                 <td>
                                                     <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-                                                        <a href="#" class="btn border btn-light text-primary btn-sm">Preview</a>
-                                                       
+                                                        <!-- <a href="#" class="btn border btn-light text-primary btn-sm">Preview</a> -->
+                                                        <button class="btn border btn-light text-primary btn-sm"  data-toggle="modal" data-target="#resultModal<%=ind%>" data-whatever="@mdo">Preview</button>
+
                                                         <a href="#" class="btn border btn-light text-dark btn-sm">Download</a>
                                                     </div>
                                                 </td>
@@ -77,21 +445,388 @@
                                         <%}%>
                                     <%})%>
                                     
-                                    <%results.sort((a,b)=>a.studentinfo.roll-b.studentinfo.roll).forEach((result,ind)=>{%>
+                                    <%results.sort((a,b)=>{return a.studentInfo.roll-b.studentInfo.roll}).forEach((result,ind)=>{%>
                                         <%if(!result.rank){%>
+                                            <div class="modal fade" id="resultModal<%=ind*100000%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Results</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        
+                                                        <div class="card p-2">
+                                                        <div class="result-content p-1">
+                                                            <div class="result-header text-center">
+                                                                <div class="result-logo m-auto" style="max-width:80px;height:80px;">
+                                                                    <img src="<%=webModel.logo%>" width="80%" alt="">
+                                                                </div>
+                                                                <%webModel.name.forEach((name,indOfWebModel)=>{%>
+                                                                        <%if(name.lang.toLowerCase()==='english'){%>
+                                                                        <h5 class="res-large" style="color:#1e7e34"><%=name.name%></h5>
+                                                                        <%}%>
+                                                                <%})%>
+                                                                        <h6 style="color:#6c757d;font-weight: bolder;">SHOLASHAHAR,CHATTOGRAM</h6>
+                                                                        <h5 style="color:#d39e00"><%=result.exam.title%></h5>
+                                                                        <h5 style="color:#0062cc">Class <%=result.classes.name%> Branch <%=result.classes.section%></h5>
+                                                            </div>
+                                                            <div class="result-body p-3">
+                                                            <div class="custom-table custom-table-head-col-4 border-top border-right border-left">
+                                                                <div class="border-right py-1 px-2">
+                                                                
+                                                                    <strong>Roll No: </strong>
+                                                                
+                                                                </div>
+                                                                <div class="border-right py-1 px-2">
+                                                                    
+                                                                    <span><%=result.studentInfo.roll%></span>
+                                                                </div>
+                            
+                                                                <div class="border-right py-1 px-2">
+                                                                    
+                                                                    <strong>Student ID : </strong>
+                                                                
+                                                                </div>
+                                                                <div class="py-1 px-2">
+                                                                    
+                                                                    <span><%=result.studentInfo.studentId%></span>
+                                                                </div>
+                            
+                                                                
+                                                            </div>
+                            
+                                                                <div class="custom-table custom-table-head-col-2 border">
+                                                                    <div class="border-right py-1 px-2">
+                                                                    
+                                                                        <strong>Name Of Student: </strong>
+                                                                    
+                                                                    </div>
+                                                                    <div class="py-1 px-2">
+                                                                    
+                                                                    <span><%=result.studentInfo.name%></span>
+                                                                    </div>
+                            
+                                                                    <!-- <div class="border-right border-bottom py-1 px-2">
+                                                                    <strong>Father's Name: </strong>
+                                                                    
+                                                                    </div>
+                                                                    <div class="border-bottom py-1 px-2">
+                                                                    
+                                                                    <span><%=result.studentInfo.fatherName%></span>
+                                                                    </div>
+                            
+                                                                    <div class="border-right py-1 px-2">
+                                                                    <strong>Mother's Name: </strong>
+                                                                    
+                                                                    </div>
+                                                                    <div class="py-1 px-2">
+                                                                    
+                                                                    <span><%=result.studentInfo.name%></span>
+                                                                    </div> -->
+                                                                </div>
+                            
+                                                                <div class="custom-table custom-table-head-col-4 border-bottom border-right border-left">
+                                                                <div class="border-right py-1 px-2">
+                                                                
+                                                                    <strong>Group: </strong>
+                                                                
+                                                                </div>
+                                                                <div class="border-right py-1 px-2">
+                                                                    <span><%=result.classes.group?result.classes.group:'N/A'%></span>
+                                                                </div>
+                            
+                                                                <div class="border-right py-1 px-2">
+                                                                    
+                                                                    <strong>Type: </strong>
+                                                                
+                                                                </div>
+                                                                <div class="py-1 px-2">
+                                                                    
+                                                                    <span><%=result.types.toUpperCase()%></span>
+                                                                </div>
+                            
+                                                                
+                                                                </div>
+                                                                <div class="custom-table custom-table-head-col-4 border-bottom border-right border-left">
+                                                                <div class="border-right py-1 px-2">
+                                                                
+                                                                    <strong>Session: </strong>
+                                                                
+                                                                </div>
+                                                                <div class="border-right py-1 px-2">
+                                                                    <%=result.session%>
+                                                                </div>
+                            
+                                                                <div class="border-right py-1 px-2">
+                                                                    
+                                                                    <strong>Total Students : </strong>
+                                                                
+                                                                </div>
+                                                                <div class="py-1 px-2">
+                                                                    
+                                                                    <%=result.totalStudents%>
+                                                                </div>
+                            
+                                                                
+                                                                </div>
+                                                                <div class="custom-table custom-table-head-col-4 border-bottom border-right border-left">
+                                                                <div class="border-right py-1 px-2">
+                                                                
+                                                                    <strong>Working Days: </strong>
+                                                                
+                                                                </div>
+                                                                <div class="border-right py-1 px-2">
+                                                                    <%=result.workingDays%>
+                                                                </div>
+                            
+                                                                <div class="border-right py-1 px-2">
+                                                                    
+                                                                    <strong>Present Days : </strong>
+                                                                
+                                                                </div>
+                                                                <div class="py-1 px-2">
+                                                                    <%=result.presentDays%>
+                                                                    
+                                                                </div>
+                            
+                                                                
+                                                                </div>
+                                                                <div class="custom-table custom-table-head-col-4 border-bottom border-right border-left">
+                                                                    <div class="border-right py-1 px-2">
+                                                                    
+                                                                        <strong>Grade : </strong>
+                                                                    
+                                                                    </div>
+                                                                    <div class="border-right py-1 px-2">
+                                                                        <%=result.grade%>
+                                                                    </div>
+                                                                    <div class="border-right py-1 px-2">
+                                                                    
+                                                                        <strong>Grade Point : </strong>
+                                                                    
+                                                                    </div>
+                                                                    <div class="border-right py-1 px-2">
+                                                                        <%=result.gradePoint?result.gradePoint:'N/A'%>
+                                                                    </div>
+                                                                </div>
+            
+                                                                <div class="custom-table custom-table-head-col-4 border-bottom border-right border-left">
+                                                                    <div class="border-right py-1 px-2">
+                                                                    
+                                                                        <strong>Result : </strong>
+                                                                    
+                                                                    </div>
+                                                                    <div class="border-right py-1 px-2">
+                                                                        <%=Number(result.gradePoint)===0?'Failed':'Passed'%>
+                                                                    </div>
+                                                                    <div class="border-right py-1 px-2">
+                                                                    
+                                                                        <strong>Rank : </strong>
+                                                                    
+                                                                    </div>
+                                                                    <div class="border-right py-1 px-2">
+                                                                        <%=result.rank?result.rank:'N/A'%>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <!-- Subject Number -->
+                                                            <!-- Main Subject -->
+                                                            <h6 class="text-center my-2"><strong>Subjects</strong></h6>
+                                                            <div class="custom-table text-center custom-table-col-5 border-top border-right border-left border-bottom">
+                            
+                                                                <div class="border-right py-1 px-2">
+                                                                    <strong>Code</strong>
+                                                                </div>
+                            
+                                                                <div class="border-right py-1 px-2">
+                                                                    <strong>Subjects Name</strong>
+                                                                </div>
+                            
+                                                                <div class="border-right py-1 px-2">
+                                                                    <strong>Full Marks</strong>
+                                                                </div>
+                                                                <div class="border-right py-1 px-2">
+                                                                    <strong>Obtained Marks</strong>
+                                                                </div>
+                                                                <div class="py-1 px-2">
+                                                                    
+                                                                    <strong>Grade</strong>
+                                                                </div>
+                            
+                            
+                                                                
+                                                                <%for(let subject of result.subjects){%>
+                                                                <div class="border-top border-right py-1 px-2">
+                                                                    <span><%=subject.code%></span>
+                                                                </div>
+                            
+                                                                <div class="text-left border-top border-right py-1 px-2">
+                                                                    <span class="ml-2"><%=subject.name%></span>
+                                                                </div>
+                            
+                                                                <div class="border-top border-right py-1 px-2">
+                                                                    <span><%=subject.fullMarks%></span>
+                                                                </div>
+                                                                <div class="border-top border-right py-1 px-2">
+                                                                    <span><%=subject.obtainedMarks%></span>
+                                                                </div>
+                                                                <div class=" border-top py-1 px-2">
+                                                                    
+                                                                    <span><%=subject.gradePoint%></span>
+                                                                </div>
+                                                                <%}%>
+                                                                
+                                                                
+                                                            </div>
+                                                            <!-- Main Subject End -->
+                            
+                                                            <!-- Combination Subject -->
+                                                            <h6 class="text-center my-2"><strong>Combination Subjects</strong></h6>
+                                                            <div class="custom-table text-center custom-table-col-5 border-top border-right border-left border-bottom">
+                            
+                                                                <div class="border-right py-1 px-2">
+                                                                    <strong>Code</strong>
+                                                                </div>
+                            
+                                                                <div class="border-right py-1 px-2">
+                                                                    <strong>Subjects Name</strong>
+                                                                </div>
+                            
+                                                                <div class="border-right py-1 px-2">
+                                                                    <strong>Full Marks</strong>
+                                                                </div>
+                                                                <div class="border-right py-1 px-2">
+                                                                    <strong>Obtained Marks</strong>
+                                                                </div>
+                                                                <div class="py-1 px-2">
+                                                                    
+                                                                    <strong>Grade</strong>
+                                                                </div>
+                            
+                            
+                            
+                                                                
+                                                                <%result.subjectAandSubjectB.forEach((subject,ind)=>{%>
+                                                                    <div class="border-top border-right py-1 px-2">
+                                                                    <span><%=subject.code%></span>
+                                                                    </div>
+                            
+                                                                    <div class="text-left border-top border-right py-1 px-2">
+                                                                    <span class="ml-2"><%=subject.name%></span>
+                                                                    </div>
+                            
+                                                                    <div class="border-top border-right py-1 px-2">
+                                                                    <span><%=subject.fullMarks%></span>
+                                                                    </div>
+                                                                    <div class="border-top border-right py-1 px-2">
+                                                                    <span><%=subject.obtainedMarks%></span>
+                                                                    </div>
+                                                                
+                                                                    <!-- <div class=" border-top py-1 px-2">
+                                                                    <span><%=subject.gradePoint%></span>
+                                                                    </div> -->
+                                                                    
+                                                                    <%if(ind%2===1){%>
+                                                                    <div  style="transform: translateY(-12px);" class="py-1 px-2">
+                                                                        <span><%=subject.gradePoint%></span>
+                                                                    </div>
+                                                                
+                                                                    <%}else{%>
+                                                                        <div class=" border-top py-1 px-2">
+                                                                        
+                                                                        </div>
+                                                                        <%}%>
+                                                                
+                                                                    
+                                                                <%})%>
+                                                            </div>
+                                                            <!-- Combination Subject End -->
+                            
+                            
+                                                            <!-- Optional Subject -->
+                            
+                                                            <%if(result.optionalSubject.length!==0){%>
+                                                                <h6 class="text-center my-2"><strong>Optional Subjects</strong></h6>
+                                                            <div class="custom-table text-center custom-table-col-5 border-top border-right border-left border-bottom">
+                            
+                                                                <div class="border-right py-1 px-2">
+                                                                    <strong>Code</strong>
+                                                                </div>
+                            
+                                                                <div class="border-right py-1 px-2">
+                                                                <strong>Subjects Name</strong>
+                                                                </div>
+                            
+                                                                <div class="border-right py-1 px-2">
+                                                                <strong>Full Marks</strong>
+                                                                </div>
+                                                                <div class="border-right py-1 px-2">
+                                                                <strong>Obtained Marks</strong>
+                                                                </div>
+                                                                <div class="py-1 px-2">
+                                                                
+                                                                <strong>Grade</strong>
+                                                                </div>
+                            
+                            
+                            
+                                                            <%for(let subject of result.optionalSubject){%>
+                                                                <div class="border-top border-right py-1 px-2">
+                                                                <span><%=subject.code%></span>
+                                                                </div>
+                            
+                                                                <div class="text-left border-top border-right py-1 px-2">
+                                                                <span class="ml-2"><%=subject.name%></span>
+                                                                </div>
+                            
+                                                                <div class="border-top border-right py-1 px-2">
+                                                                <span><%=subject.fullMarks%></span>
+                                                                </div>
+                                                                <div class="border-top border-right py-1 px-2">
+                                                                <span><%=subject.obtainedMarks%></span>
+                                                                </div>
+                                                                <div class=" border-top py-1 px-2">
+                                                                
+                                                                <span><%=subject.gradePoint%></span>
+                                                                </div>
+                                                            <%}%>
+                            
+                                                            </div>
+                                                                <%}%>
+                                                            
+                                                            <!-- Optional Subject End -->
+                            
+                            
+                            
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        
+                                                        <button type="button" class="btn btn-secondary">Download</button>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <tr>
                                                 <th scope="row"><%=result.rank?result.rank:'N/A'%></th>
-                                                <td><%=result.studentinfo.name%></td>
-                                                <td><%=result.grade%></td>
+                                                <td><%=result.studentInfo.name%></td>
+                                                <td class="<%=result.grade.toLowerCase()==='f'?'text-danger':''%>"><%=result.grade%></td>
                                                 <td><%=result.gradePoint%></td>
                                                 <td><%=result.totalSubjectObtainedNumber%></td>
                                                 <td><%=result.totalGradePoint%></td>
-                                                <td><%=result.studentinfo.roll%></td>
-                                                <td>Pending</td>
+                                                <td><%=result.studentInfo.roll%></td>
+                                                <td class="<%=result.published?'text-success':'text-muted'%>"><%=result.published?'PUBLISHED':'UNPUBLISHED'%></td>
                                                 <td>
                                                     <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-                                                        <a href="#" class="btn border btn-light text-primary btn-sm">Preview</a>
-                                                       
+                                                        <!-- <a href="#" class="btn border btn-light text-primary btn-sm">Preview</a> -->
+                                                        <button class="btn border btn-light text-primary btn-sm"  data-toggle="modal" data-target="#resultModal<%=ind*100000%>" data-whatever="@mdo">Preview</button>
+
                                                         <a href="#" class="btn border btn-light text-dark btn-sm">Download</a>
                                                     </div>
                                                 </td>
