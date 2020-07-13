@@ -1,0 +1,36 @@
+.card__title{
+    border:3px solid #1e7e34;
+    color: #1e7e34;
+    padding:0.5rem;
+    border-radius: 8px 8px 0px 0px;
+}
+.card__body{
+    border:3px solid #1e7e34;
+    border-top:none;
+    border-radius:0px 0px 8px 8px;
+}
+.result__container{
+    border:4px dashed #1e7e34;
+    outline:3px solid #1e7e34;
+}
+.custom__table{
+    width:100%;
+}
+.custom__table>tbody>tr>td{
+    border:1px solid #dee2e6;
+    padding:4px 10px;
+    /* width:25%; */
+}
+.w-40{
+    width:40%;
+}
+.w-20{
+    width:20%;
+}
+.w-10{
+    width:10%;
+}
+
+.custom__table>tbody>tr>td:nth-child(){
+    
+}

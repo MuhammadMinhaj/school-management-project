@@ -215,7 +215,7 @@
                                                         </div>
                                                         <div class="border-right py-1 px-2">
                                                         
-                                                            <strong>Grade Point : </strong>
+                                                            <strong><%=result.classes.resultType.toLowerCase()==='gpa'?'GPA':result.classes.resultType.toLowerCase()==='cgpa'?'CGPA':'Grade Point'%> </strong>
                                                         
                                                         </div>
                                                         <div class="border-right py-1 px-2">
@@ -605,7 +605,7 @@
                                                                     </div>
                                                                     <div class="border-right py-1 px-2">
                                                                     
-                                                                        <strong>Grade Point : </strong>
+                                                                        <strong><%=result.classes.resultType.toLowerCase()==='gpa'?'GPA':result.classes.resultType.toLowerCase()==='cgpa'?'CGPA':'Grade Point'%> </strong>
                                                                     
                                                                     </div>
                                                                     <div class="border-right py-1 px-2">

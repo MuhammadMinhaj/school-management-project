@@ -17,6 +17,11 @@ const classRoute = require('./user/classRoute')
 const resultRoute = require('./user/resultRoute')
 // Web Explorer Related Routes
 const webRoute = require('./webRoute')
+const resultsPublicationRoute = require('./web/resultsPublicationRoute')
+
+
+// Api Route Imported
+const resultApiRoute = require('./api/resultApiRoute')
 
 const router = [
 	{
@@ -54,6 +59,14 @@ const router = [
 			// res.send('It\'s only project test')
 			res.render('pages/explorer/explorer.ejs')
 		},
+	},
+	{
+		path:'/results',
+		handler:resultsPublicationRoute
+	},
+	{
+		path:'/api',
+		handler:resultApiRoute
 	},
 	{
 		path: '/',

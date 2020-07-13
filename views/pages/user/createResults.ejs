@@ -92,7 +92,7 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-12">
+          <div class="col-sm-6">
             <div class="form-group">
               <label for="<%=student._id+4%>"><strong>Select Examination</strong></label>
              
@@ -110,6 +110,27 @@
                 <%=fieldError.examination%>
               </div>
             </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="<%=student._id+4%>"><strong>Select Examination Type</strong></label>
+             
+                <select id="<%=student._id+4%>" name="examinationType" class="<%=id.toString()===student._id.toString()&&fieldError.examinationType?'is-invalid':''%> custom-select">
+                    <option selected value="">...</option>
+                
+                    <%if(examinationType){%>
+                      <%examinationType.forEach((type,ind)=>{%>
+                        <option value="<%=type._id%>"><%=type.name%></option>
+                      <%})%>
+                    <%}%>
+                </select>
+         
+              <div class="invalid-feedback">
+                <%=fieldError.examinationType%>
+              </div>
+            </div>
+            
+
           </div>
           <!-- Subject List And Obtianed Marks -->
           <div class="col-sm-12">

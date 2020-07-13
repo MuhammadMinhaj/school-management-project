@@ -65,7 +65,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12">
+                    
+                    <div class="col-sm-6">
                         <div class="form-group">
                           <label for=""><strong>Select Examination</strong></label>
                           
@@ -84,7 +85,29 @@
                             <%=fieldError.examination%>
                           </div>
                         </div>
-                      </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for=""><strong>Select Examination Type</strong></label>
+                            
+                            <select id="" name="examinationType" class="<%=fieldError.examinationType?'is-invalid':''%> custom-select">
+                                <option value="">...</option>
+                            
+                                <%if(examinationType){%>
+                                    <%examinationType.forEach((type,ind)=>{%>
+                                    <option value="<%=type._id%>" <%=type._id.toString()===result.examinationType.toString()?'selected':''%>><%=type.name%></option>
+                                    <%})%>
+                                <%}%>
+
+                            </select>
+                        
+                            <div class="invalid-feedback">
+                            <%=fieldError.examinationType%>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <h5 class="text-center"><strong>Subject List</strong></h5>

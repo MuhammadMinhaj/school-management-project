@@ -53,12 +53,6 @@ if(pageBtns){
 // Multiple Page Collapse End
 
 
-
-
-
-
-
-
 // ANCHOR Menu Start
 let MENU_CREATE_URL = 'http://localhost:8080/administrator/menu-create'
 let GET_ALL_MENU_URIL = 'http://localhost:8080/administrator/menus'

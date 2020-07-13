@@ -4,10 +4,12 @@ const Request = require('../../models/Request')
 const Result = require('../../models/Result')
 const Student = require('../../models/Student')
 const Examination = require('../../models/Examination')
+const ExaminationType = require('../../models/ExaminationType')
 const Class = require('../../models/Class')
 
 
-async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb,requestModel,results){
+
+async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb,requestModel,results,examinationType){
     try{    
         let pages = await Page.find()
         let webModel = await WebModel.findOne()
@@ -23,16 +25,110 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb,requestM
                 webModel:modelOfWeb?modelOfWeb:webModel,
                 department:null,
                 requestModel:requestModel?requestModel:{},
-                results:results?results:{}
+                results:results?results:{},
+                examinationType:examinationType?examinationType:{}
         })
     }catch(e){
         console.log(e)
     }
 }
 
+exports.createResultsExaminationTypeGetController = async(req,res,next)=>{
+    try{
+        let examinationType = await ExaminationType.find()
+        renderPageHandler(req,res,'examinationType',null,null,null,null,null,examinationType)
+    }catch(e){
+        next(e)
+    }
+}
+exports.createResultsExaminationTypePostController = async(req,res,next)=>{
+    try{
+        let { name } = req.body
+
+        if(name.length===0){
+            req.flash('fail','Please Provied Examination Name')
+            return res.redirect('back')
+        }
+
+        let hasExaminationType = await ExaminationType.find()
+
+        if(hasExaminationType){
+            if(hasExaminationType.length>0){
+                for(let type of hasExaminationType){
+                    if(type.name.toString().toLowerCase()===name.toString().toLowerCase()){
+                        req.flash('fail','Already Created This Examination Type')
+                        return res.redirect('back')
+                    }
+                }
+            }
+        }
+
+        let createExaminationType = new ExaminationType({
+            name
+        })
+        let createdExaminationType = createExaminationType.save()
+        if(!createdExaminationType){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+        req.flash('success','Successfully Created Examination Type')
+        return res.redirect('back')
+    }catch(e){
+        next(e)
+    }
+}
+exports.updateResultsExaminationTypePostController = async(req,res,next)=>{
+    try{
+        let { id } = req.params
+        let { name } = req.body
+
+        if(name.length===0){
+            req.flash('fail','Please Provied Examination Name')
+            return res.redirect('back')
+        }
+
+        let hasExaminationType = await ExaminationType.find()
+
+        for(let type of hasExaminationType){
+            if(type.name.toString().toLowerCase()===name.toString().toLowerCase()){
+                req.flash('fail','Already Created This Examination Type')
+                return res.redirect('back')
+            }
+        }
+            
+        let updatedExaminationType = await ExaminationType.findOneAndUpdate({_id:id},{name},{new:true})
+        if(!updatedExaminationType){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+        req.flash('success','Successfully Created Examination Type')
+        return res.redirect('back')
+    }catch(e){
+        next(e)
+    }
+}
+exports.deleteResultsExaminationTypePostController = async(req,res,next)=>{
+    try{    
+        let { id } = req.params
+
+        let deletedExaminationType = await ExaminationType.findOneAndDelete({_id:id})
+        if(!deletedExaminationType){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+        req.flash('success','Successfully Deleted Examination Type')
+        res.redirect('back')
+    }catch(e){
+        next(e)
+    }
+}
+
+
+
 exports.resultsManagementGetController = async(req,res,next)=>{
     try{
         let request = await Request.find()
+        console.log(request)
         renderPageHandler(req,res,'resultsManagement',null,null,null,request)
     }catch(e){
         next(e)

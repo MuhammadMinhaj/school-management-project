@@ -145,6 +145,13 @@ const schema = new Schema({
         greadPoint:String
         }
     ],
+    studentInformation:{
+        classed:String,
+        section:String,
+        group:String,
+        roll:String,
+        id:String
+    },
     student:{
         type:Schema.Types.ObjectId,
         ref:'Student'
@@ -156,6 +163,10 @@ const schema = new Schema({
     examination:{
         type:Schema.Types.ObjectId,
         ref:'Examination'
+    },
+    examinationType:{
+        type:Schema.Types.ObjectId,
+        ref:'ExaminationType'
     },
     request:{
         type:Schema.Types.ObjectId,

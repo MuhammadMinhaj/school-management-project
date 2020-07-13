@@ -4,6 +4,7 @@ const Student = require('../../models/Student')
 const Result = require('../../models/Result')
 const WebModel = require('../../models/WebModel')
 const Examination = require('../../models/Examination')
+const ExaminationType = require('../../models/ExaminationType')
 const Request = require('../../models/Request')
 
 
@@ -12,7 +13,8 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,subject
         let classes = await Class.find({user:req.user._id})
         let webModel = await WebModel.findOne()
         let examination =  await Examination.find({classid:singleClass._id})
-    
+        let examinationType = await ExaminationType.find()
+
         let correntPage  = parseInt(req.query.page)||1
        
     
@@ -48,12 +50,15 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,subject
             subjectFieldValue:subjectFieldValue?subjectFieldValue:{},
             result:result?result:'',
             results:results?results:'',
-            searchValue:searchValue?searchValue:{}
+            searchValue:searchValue?searchValue:{},
+            examinationType:examinationType?examinationType:[],
         })
     }catch(e){
         console.log(e)
     }
 }
+
+
 
 function resultDiviededHandler(queryname,results){
 
@@ -93,24 +98,17 @@ exports.createResultGetController = async (req,res,next)=>{
         next(e)
     }
 }
+
 exports.createResultPostController = async(req,res,next)=>{
     try{
         let { classid,studentid } = req.params
-        let { workingdays,presentdays,session,type,examination,...others } = req.body 
+        let { workingdays,presentdays,session,type,examination,examinationType,...others } = req.body 
         
-        if(!examination){
-            req.flash('fail','Please Create Examination')
-            return res.redirect('back')
-        }
-
         let subjectFieldError = {}
         let fieldError = {}
         let hasClass = await Class.findOne({_id:classid})
-    
-        
-        
-        
-      
+ 
+ 
         if(!hasClass){
             return res.redirect('back')
         }
@@ -124,7 +122,8 @@ exports.createResultPostController = async(req,res,next)=>{
         presentdays.length===0?fieldError.presentdays='Please Provied Present Days':''
         session.length===0?fieldError.session='Please Provied Session':''
         type.length===0?fieldError.type='Please Provied Type':''
-        examination==='...'||examination.length===0?fieldError.examination = 'Please Select Examination':''
+        !examination?fieldError.examination = 'Please Select Examination':''
+        !examinationType?fieldError.examinationType = 'Please Select Examination Type':''
 
         let valueOfField = {
             workingdays,
@@ -139,6 +138,9 @@ exports.createResultPostController = async(req,res,next)=>{
            return renderPageHandler(req,res,'createResults','fail','Please Provied Full Info About Student For Make A Result',hasClass,subjectFieldError,fieldError,studentid,valueOfField)
         }
 
+
+
+        
         
          let createResult = new Result({
             totalStudents:hasClass.student.length,
@@ -146,7 +148,7 @@ exports.createResultPostController = async(req,res,next)=>{
             presentDays:presentdays,
             session:session,
             types:type,
-            submited:false
+            submited:false,
         })
 
         let valueOfSubjectFields = Object.entries(others)
@@ -223,7 +225,7 @@ exports.createResultPostController = async(req,res,next)=>{
         return res.redirect('back')
        }
 
-        await Student.findOneAndUpdate({_id:studentid},{
+        let updatedStudent = await Student.findOneAndUpdate({_id:studentid},{
         $push:{
             result:createdResult._id,
         },  
@@ -235,7 +237,15 @@ exports.createResultPostController = async(req,res,next)=>{
         await Result.findOneAndUpdate({_id:createdResult._id},{
         student:studentid,
         classid:hasClass._id,
-        examination:exam._id
+        examination:exam._id,
+        examinationType,
+        studentInformation:{
+            roll:updatedStudent.roll,
+            id:updatedStudent.studentId,
+            classed:hasClass.nameOfNumeric,
+            section:hasClass.section,
+            group:hasClass.group
+        }
        },{new:true})
 
        let addedAllSubjectInResult;
@@ -333,6 +343,9 @@ exports.editResultGetController = async(req,res,next)=>{
         let { id } = req.params
 
         let result = await Result.findOne({_id:id})
+
+     
+        
         // console.log(result)
         if(!result){
             return res.redirect('back')
@@ -348,11 +361,9 @@ exports.editResultGetController = async(req,res,next)=>{
 exports.editResultPostController = async(req,res,next)=>{
     try{
         let { id } = req.params
-        let { workingdays,presentdays,session,type,examination,...others } = req.body 
-        
+        let { workingdays,presentdays,session,type,examination,examinationType,...others } = req.body 
         
        
-        
         let result = await Result.findOne({_id:id})
 
         if(!result){
@@ -361,7 +372,7 @@ exports.editResultPostController = async(req,res,next)=>{
 
         let subjectFieldError = {}
         let fieldError = {}
-       
+            
         Object.entries(others).forEach((fields,ind)=>{
             if(!fields[1]){
                 subjectFieldError[fields[0]] = `Please Provied Obtained Marks Of ${fields[0]}`
@@ -372,9 +383,10 @@ exports.editResultPostController = async(req,res,next)=>{
         session.length===0?fieldError.session='Please Provied Session':''
         type.length===0?fieldError.type='Please Provied Type':''
         examination==='...'||examination.length===0?fieldError.examination = 'Please Select Examination':''
+        !examinationType?fieldError.examinationType = 'Please Select Examination Type':''
 
         if(Object.keys(subjectFieldError).length!==0||Object.keys(fieldError).length!==0){
-            req.flash('fail','Cannot Empty Subject Field')
+            req.flash('fail','Please Fill Up Every Subject Field')
             return res.redirect('back')
         }
 
@@ -459,13 +471,28 @@ exports.editResultPostController = async(req,res,next)=>{
             req.flash('fail','Internal Server Error')
         }
 
-        await Result.findOneAndUpdate({_id:updatedResults._id},{
-            examination:exam._id
+        let hasClass = await Class.findOne({_id:updatedSubjectOfResult.classid})
+        let hasStudent = await Student.findOne({_id:updatedSubjectOfResult.student})
+
+        let fifinalRe = await Result.findOneAndUpdate({_id:updatedResults._id},{
+            examination:exam._id,
+            examinationType,
+            studentInformation:{
+                classed:hasClass.nameOfNumeric,
+                section:hasClass.section,
+                group:hasClass.group,
+                roll:hasStudent.roll,
+                id:hasStudent.studentId
+            }
+         
            },{new:true})
     
         req.flash('success','Successfully Updated Result')
         res.redirect('back')
-        
+
+        console.log('Done')
+        console.log(fifinalRe)
+        console.log('Done')
     }catch(e){
         next(e)
     }
@@ -1302,16 +1329,19 @@ exports.resultsSubmitToAdminGetController = async(req,res,next)=>{
             }
             
         }
+        console.log('Final')
+        console.log(hasClass.group)
+        console.log(hasClass)
+        console.log('Final')
           
         let createSubmitReq = new Request({
             username:user.name,
             classname:hasClass.name,
             classSection:hasClass.section,
-            classGroup:hasClass.group,
+            classgroup:hasClass.group,
             status:'Pending',
             user:user._id,
             examination:option,
-            
             examTitle:exam.title,
             classes:hasClass._id
         })

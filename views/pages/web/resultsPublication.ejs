@@ -1,0 +1,198 @@
+<%-include('../../partials/head.ejs')%>
+
+
+<div style="margin:0px!important" class="row backgroundImage px-5 py-2 clearXPadding">
+    <div class="col-sm-12">
+        <div class="container">
+            <div class="card p-2">
+
+                <div class="card__title text-center">
+                    <h5 class="mt-1">JASA ONLINE BASED RESULTS PUBLICATION SYSTEM</h5>
+                </div>
+                <div class="card__body p-3">
+                   <div id="resultFindingForm" class="card p-3">
+                      <div id="alert__box"></div>
+                        <div class="form-row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Class (Required)</label>
+                                    <select id="class" name="class" class="custom-select">
+                                        <option value="" selected>Select Class</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                        <option value="4">Four</option>
+                                        <option value="5">Five</option>
+                                        <option value="6">Six</option>
+                                        <option value="7">Seven</option>
+                                        <option value="8">Eight</option>
+                                        <option value="9">Nine</option>
+                                        <option value="10">Ten</option>
+                                        <option value="11">Alim First Semester</option>
+                                        <option value="12">Alim Second Semester</option>
+                                        <option value="13">Fazil First Semester</option>
+                                        <option value="14">Fazil Second Semester</option>
+                                        <option value="15">Kamil First Semester</option>
+                                        <option value="16">Kamil Second Semester</option>
+                                        <option value="17">Kamil Third Semester</option>
+                                        <option value="18">Kamil Fourth Semester</option>
+                                    </select>
+                                    <div id="feedBackClass" class="invalid-feedback"></div>
+                                </div>
+                              </div>
+                              <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Section</label>
+                                    <select id="section" name="section" class="custom-select">
+                                        <option value="" selected>Select Section</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                    <div id="feedBackSection" class="invalid-feedback"></div>
+                                </div>
+                              </div>
+                              <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Group</label>
+                                    <select id="group" name="group" class="custom-select">
+                                        <option value="" selected>Select Group</option>
+                                        <option value="science">Science</option>
+                                        <option value="arts">Arts</option>
+                                        <option value="commerce">Commerce</option>
+                                    </select>
+                                    <div id="feedBackGroup" class="invalid-feedback"></div>
+                                </div>
+                              </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Examination (Required)</label>
+
+                                    
+                                    <select id="examination" name="examination" class="custom-select">
+                                        <option value="" selected>Select Examination</option>
+                                      <%if(examinationType){%>
+                                          <%for(let type of examinationType){%>
+                                            <option value="<%=type._id%>"><%=type.name%></option>
+                                            <%}%>
+                                        <%}%>
+                                        
+                                    
+                                    </select>
+                                    <div id="feedBackExamination" class="invalid-feedback"></div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Year (Required)</label>
+                                    <select id="year" class="custom-select">
+                                        <option value="" selected>Select Year</option>
+                                    <%for(let i = 2020;i<=2050;i++){%>
+                                        <option value="<%=i%>"><%=i%></option>
+                                    <%}%>
+                                    </select>
+                                    <div id="feedBackYear" class="invalid-feedback"></div>
+                                </div>   
+                              </div>
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label for="roll">Roll (Required)</label>
+                                    <input type="number" placeholder="Roll No" class="form-control" id="roll">
+                                    <small id="emailHelp" class="form-text text-muted">Must Be Provided Roll No</small>
+                                    <div id="feedBackRoll" class="invalid-feedback"></div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label for="id">Student Id (Required)</label>
+                                    <input type="number" placeholder="Id No"  class="form-control" id="id">
+                                    <small id="emailHelp" class="form-text text-muted">Must Be Provided Student Id</small>
+                                    <div id="feedBackId" class="invalid-feedback"></div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                <button id="submit_btn" class="btn btn-success border btn-sm w-100">Get Result</button>
+                                </div>
+                        </div>
+                   </div>
+
+                   <div id="showResult" style="display: none;">
+                      <div class="card mt-2 py-3">
+                          <div class="card p-2 m-auto" style="min-width:85%">
+                            <div class="result__container p-2">
+                              <div id="tableHeadParent" class="result__head text-center">
+                                  <div class="logo m-auto" style="max-width:80px;max-height:80px;">
+                                    <img id="logo" style="display: none;" width="80%" height="100%" alt="Logo">
+                                  </div>
+                                  
+                                  <div class="result__name">
+                                    <h5 id="title1" style="color:#1e7e34"></h5>
+                                    <h6 id="title2" style="color:#545b62"></h6>
+                                    <h6 id="title3" style="color:#d39e00"></h6>
+                                    <h6 id="title4" style="color:#0062cc"></h6>
+                                  </div>
+                              </div>
+                              <div class="result__body px-3">
+                                <table class="custom__table">
+                                    <tbody id="tableParentElement1">
+                                      <!-- <tr>
+                                        <td><h6 style="padding:0px;margin:0px;">Roll No:</h6></td>
+                                        <td>07</td>
+                                        <td><h6 style="padding:0px;margin:0px;">Student ID:</h6></td>
+                                        <td>Address</td>
+                                      </tr>
+                                      <tr>
+                                        <td><h6 style="padding:0px;margin:0px;">Name: </h6></td>
+                                        <td colspan="3">Muhammad Minhaj</td>
+                                      </tr>
+                                      <tr>
+                                        <td><h6 style="padding:0px;margin:0px;">Roll No:</h6></td>
+                                        <td>07</td>
+                                        <td><h6 style="padding:0px;margin:0px;">Student ID:</h6></td>
+                                        <td>Address</td>
+                                      </tr> -->
+                                    </tbody>
+                                </table>
+                                <span id="subjectsTitle"></span>
+                                <table class="custom__table text-center">
+                                  <tbody id="tableParentElement2">
+                                  
+                                  </tbody>
+                                </table>
+                                <span id="combinationSubjectTitle"></span>
+                                <!-- <h5 class="my-2 text-center">Combination Subjects</h5> -->
+                                <table class="custom__table text-center">
+                                  <tbody id="tableParentElement3">
+                                  
+                                  </tbody>
+                                </table>
+                                <!-- <h5 class="my-2 text-center">Optional Subjects</h5> -->
+                                <span id="optionalSubjectTitle"></span>
+                                <table class="custom__table text-center">
+                                  <tbody id="tableParentElement4">
+                                  
+                                  </tbody>
+                                </table>
+                              
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                   </div>
+                   <div style="display:none" id="loading__box" class="text-center">
+                     <h5>Finding Result...</h5>
+                    <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                   </div>
+                  
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%-include('../../partials/footer.ejs')%>
