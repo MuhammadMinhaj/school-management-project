@@ -75,4 +75,12 @@
     .remove__padding{
         padding:0px!important;
     }
+    
+    .card__image{
+        width:80%!important;
+        max-width:95%!important;
+    }
+    .custom__card__body{
+        width:100%;
+    }
 }
