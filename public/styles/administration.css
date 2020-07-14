@@ -53,8 +53,9 @@
 
 }
 .custom__card__body>p{
-    
-    font-size:16px
+    font-size:16px;
+    font-weight: bold;
+    color:#6c757d;
 }
 .line__container{
     display: flex;
@@ -69,4 +70,9 @@
     margin:0rem;
     margin-top:0.5rem!important;
     border-radius:10px;
+}
+@media (max-width:574px){
+    .remove__padding{
+        padding:0px!important;
+    }
 }
