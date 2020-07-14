@@ -31,6 +31,13 @@
     width:10%;
 }
 
-.custom__table>tbody>tr>td:nth-child(){
-    
+
+@media (max-width:576px){
+    .pedding__margin__zero{
+        padding:0px!important;
+        margin:0px!important;
+    }
+    .add__padding__y{
+        padding:1rem 0rem!important;
+    }
 }
