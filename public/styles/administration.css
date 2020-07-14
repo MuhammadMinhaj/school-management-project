@@ -83,4 +83,7 @@
     .custom__card__body{
         width:100%;
     }
+    .addMarginTop{
+        margin-top:0.5rem;
+    }
 }
