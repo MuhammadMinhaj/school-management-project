@@ -6,6 +6,7 @@
 @import './user/sidebar.css';
 @import './user/resultsdesign.css';
 @import './results.css';
+@import './administration.css';
 * {
 	margin: 0px;
 	padding: 0px;

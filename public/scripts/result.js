@@ -31,7 +31,10 @@ let loadingParentElement = document.getElementById('loading__box')
 
 let submitBtn = document.getElementById('submit_btn')
 
-submitBtn.addEventListener('click',formSubmitHandler)
+if(submitBtn){
+    submitBtn.addEventListener('click',formSubmitHandler)
+}
+
 
 
 // Alert Message Handler

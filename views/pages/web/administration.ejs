@@ -1,0 +1,79 @@
+<%-include('../../partials/head.ejs')%>
+<div class="row" style="margin:0px!important">
+    <div class="col-sm-12 p-4">
+        <h4 class="text-center mb-4">About Of Administration</h4>
+        
+        <div class="custom__container__card p-3">
+            <div class="row">
+
+            <%if(webModel.aboutOfAdmin){%>
+                <%for(let about of webModel.aboutOfAdmin){%>
+                    <div class="col-sm-6 py-3 px-4">
+                        <div class="custom__card p-2 py-3">
+                            <div class="card__image m-auto">
+                                <%if(about.image){%>
+                                    <img src="<%=about.image%>">
+                                    <%}else{%>
+                                <svg viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                </svg>
+                                <%}%>
+                            </div>
+                
+                            <div class="img__title">
+                                <h5><%=about.name%></h5>
+                                <h6><%=about.title?about.title:''%></h6>
+                                <h6><%=about.subtitle?about.subtitle:''%></h6>   
+                            </div>  
+                            <div class="line__container">
+                                <hr class="hr__style w-75">
+                                <hr class="hr__style w-50">
+                                <hr class="hr__style w-25">
+                            </div>
+                        <div class="custom__card__body max__height__scroll">
+                                <p><%=about.bio%></p>
+                        </div>
+                        
+
+                            
+                        </div>
+                    </div>
+                    <%}%>
+                <%}else{%>
+                    <%for(let i=1;i<=4;i++){%>
+                        <div class="col-sm-6 py-3 px-4">
+                            <div class="custom__card p-2 py-3">
+                                <div class="card__image m-auto">
+                                    <svg viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                    </svg>
+                                    <h5></h5>
+                                    
+                                </div>
+                    
+                                <div class="img__title">
+                                    <h5>Lorem ipsum dolor sit</h5>
+                                    <h6>Lorem ipsum dolor</h6>
+                                    <h6>Lorem ipsum dolor</h6>   
+                                </div>  <div class="line__container">
+                                    <hr class="hr__style w-75">
+                                    <hr class="hr__style w-50">
+                                    <hr class="hr__style w-25">
+                                </div>
+                            <div class="custom__card__body">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam quo sequi ipsum quos accusamus explicabo quia alias modi, praesentium non libero nesciunt tenetur eius, voluptatibus corporis ex? Doloremque, a. Iure accusantium voluptas doloribus illum consectetur optio. Non omnis autem amet, maxime nesciunt iusto quas, voluptas similique quod atque eos aperiam!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <%}%>
+                    <%}%>
+                
+        
+                
+            </div>
+        </div>
+            
+        
+    </div>
+</div>
+<%-include('../../partials/footer.ejs')%>

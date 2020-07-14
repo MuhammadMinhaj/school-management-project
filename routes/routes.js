@@ -16,12 +16,15 @@ const userRoute = require('./user/userRoute')
 const classRoute = require('./user/classRoute')
 const resultRoute = require('./user/resultRoute')
 // Web Explorer Related Routes
-const webRoute = require('./webRoute')
-const resultsPublicationRoute = require('./web/resultsPublicationRoute')
-
+const webRoute = require('./web/webRoute')
 
 // Api Route Imported
 const resultApiRoute = require('./api/resultApiRoute')
+
+// Root Page Controller Imported For Root Route 
+const {
+	indexPageGetController
+} = require('../controllers/web/webController')
 
 const router = [
 	{
@@ -54,23 +57,16 @@ const router = [
 		handler: adminAuthRoute,
 	},
 	{
-		path: '/test',
-		handler: (req, res, next) => {
-			// res.send('It\'s only project test')
-			res.render('pages/explorer/explorer.ejs')
-		},
-	},
-	{
-		path:'/results',
-		handler:resultsPublicationRoute
-	},
-	{
 		path:'/api',
 		handler:resultApiRoute
 	},
 	{
+		path:'/web',
+		handler:webRoute
+	},
+	{
 		path: '/',
-		handler: webRoute
+		handler: indexPageGetController,
 	},
 ]
 module.exports = app => {

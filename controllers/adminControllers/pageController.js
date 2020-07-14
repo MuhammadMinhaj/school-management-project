@@ -1,9 +1,37 @@
+const fs = require('fs')
+
 const Admin = require('../../models/Admin')
 const Menu = require('../../models/Menu')
 const Page = require('../../models/Page')
 const WebModel = require('../../models/WebModel')
 
 const { validationResult } = require('express-validator')
+
+async function pageRenderHandler(req,res,pagename,title){
+	let menu = await Menu.find()
+	let webModel = await WebModel.findOne()
+	let pages = await Page.find()
+	res.render(`pages/administrator/${pagename}`, {
+		title: title,
+		style: 'bg-light',
+		data: req.admin,
+		flashMessage: req.flash(),
+		menu,
+		pages,
+		webModel,
+		createdPage: {},
+		error: {},
+	})
+}
+
+function removeFilePathFromDirctory(path){
+	fs.unlink(path,error=>{
+		if(error){
+			return false
+		}
+		return true
+	})
+}
 
 exports.pageCreateGetController = async (req, res, next) => {
 	try {
@@ -252,6 +280,140 @@ exports.pageDeleteGetController = async (req, res, next) => {
 		req.flash('success', 'Successfully Deleted Page')
 		res.redirect('/administrator/page_create')
 	} catch (e) {
+		next(e)
+	}
+}
+
+exports.addTextAboutAdministratorGetController = async(req,res,next)=>{
+	try{
+		pageRenderHandler(req,res,'aboutAdmin','About Administrator')
+	}catch(e){
+		next(e)
+	}
+}
+	
+exports.addTextAboutAdministratorPostController = async(req,res,next)=>{
+	try{
+		let { name,title1,title2,bio } = req.body
+	
+		if(name.length===0||bio.length===0){
+			if(req.file){
+				removeFilePathFromDirctory(req.file.path)
+			}
+			req.flash('fail','Please Provied Name And Bio')
+			return res.redirect('back')
+		}
+		if(!req.file){
+			req.flash('fail','Please Uploads Image Of Administrator')
+			return res.redirect('back')
+		}
+
+		let webModel = await WebModel.findOne()
+
+		let addedAboutAdmin = await WebModel.findOneAndUpdate({_id:webModel._id},{
+			$push:{
+				aboutOfAdmin:{
+					image:`/uploads/${req.file.filename}`,
+					name,
+					title:title1,
+					subtitle:title2,
+					bio,
+				}
+			}
+		},{new:true})
+		
+		if(!addedAboutAdmin){
+			removeFilePathFromDirctory(req.file.path)
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+
+		req.flash('success','Successfully Added About Of Administrator')
+		res.redirect('back')
+
+		console.log(addedAboutAdmin)
+	}catch(e){
+		next(e)
+	}
+}
+
+exports.deleteTextAboutAdministratorGetController = async(req,res,next)=>{
+	try{
+		let { id } = req.params
+
+		let webModel = await WebModel.findOne()
+
+		let path;
+
+		for(let about of webModel.aboutOfAdmin){
+			if(about._id.toString()===id.toString()){
+				path = about.image
+			}
+		}
+
+		let deletedAboutOfAdmin = await WebModel.findOneAndUpdate({_id:webModel._id},{
+			$pull:{
+				aboutOfAdmin:{
+					_id:id
+				}
+			}
+		},{new:true})
+			
+		if(!deletedAboutOfAdmin){
+			req.flash('fail','Internal Server Error')
+			return redirect('back')
+		}
+
+		path?removeFilePathFromDirctory(`public/${path}`):null
+
+		req.flash('success','Successfully Deleted About Administrator Info')
+		res.redirect('back')
+		
+	}catch(e){
+		next(e)
+	}
+}
+
+exports.updateTextAboutAdministratorPostController = async(req,res,next)=>{
+	try{
+		let { name,title1,title2,bio } = req.body
+		let { id } = req.params
+	
+		if(name.length===0||bio.length===0){
+			if(req.file){
+				removeFilePathFromDirctory(req.file.path)
+			}
+			req.flash('fail','Please Provied Name And Bio')
+			return res.redirect('back')
+		}
+		
+		let webModel = await WebModel.findOne()
+
+		let path;
+		
+		for(let about of webModel.aboutOfAdmin){
+			if(about._id.toString()===id.toString()){
+				path = about.image 
+				about.image = req.file?`/uploads/${req.file.filename}`:path	
+				about.name = name 
+				about.title = title1 
+				about.subtitle = title2	
+				about.bio = bio 
+
+			}
+		}
+		
+		let updatedAboutAdminInfo = await WebModel.findOneAndUpdate({_id:webModel._id},webModel,{new:true})
+
+		if(!updatedAboutAdminInfo){
+			req.file?removeFilePathFromDirctory(req.file.path):null
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+		req.file?removeFilePathFromDirctory(`public/${path}`):null
+		req.flash('success','Successfully Updated About Of Administrator Info')
+		res.redirect('back')
+	}catch(e){
 		next(e)
 	}
 }

@@ -92,6 +92,15 @@ const schema = new Schema({
 			url:String
 		}
 	],
+	aboutOfAdmin:[
+		{
+			image:String,
+			name:String,
+			title:String,
+			subtitle:String,
+			bio:String
+		}
+	],
 	about:{
 		title:{
 			type:String,
