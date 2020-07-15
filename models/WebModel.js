@@ -101,6 +101,23 @@ const schema = new Schema({
 			bio:String
 		}
 	],
+	aboutOfTeacher:[
+		{
+			title:String,
+			user:[
+				{
+					name:String,
+					qualifications:String,
+					bio:String,
+					socialLinks:{
+						facebook:String,
+						phone:String,
+						email:String
+					}
+				}
+			]
+		}
+	],
 	about:{
 		title:{
 			type:String,
@@ -111,6 +128,7 @@ const schema = new Schema({
 			trim:true
 		}
 	}
+	
 })
 
 const WebModel = new model('WebModel', schema)

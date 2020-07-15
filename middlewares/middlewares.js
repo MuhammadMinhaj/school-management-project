@@ -1,5 +1,5 @@
 const express = require('express')
-// const morgan = require('morgan')
+const morgan = require('morgan')
 const flash = require('connect-flash')
 const session = require('express-session')
 const config = require('config')
@@ -46,8 +46,8 @@ const middlewares = [
 module.exports = app =>{
     middlewares.forEach(middleware=>{
         app.use(middleware)
-        // if(app.get('env').toLowerCase()==='development'){
-        //     app.use(morgan('dev'))
-        // }
+        if(app.get('env').toLowerCase()==='development'){
+            app.use(morgan('dev'))
+        }
     })
 }

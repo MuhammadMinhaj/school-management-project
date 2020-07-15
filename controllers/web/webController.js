@@ -35,3 +35,10 @@ exports.aboutAdministrationInfoGetController = async (req,res,next)=>{
         next(e)        
     }
 }
+exports.aboutTeachersInfoGetController = async(req,res,next)=>{
+    try{
+        renderPageHandler(req,res,'web/teachers','Teachers Info')
+    }catch(e){
+        next(e)
+    }
+}

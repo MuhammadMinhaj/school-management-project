@@ -6,6 +6,7 @@ const Page = require('../../models/Page')
 const WebModel = require('../../models/WebModel')
 
 const { validationResult } = require('express-validator')
+const Teacher = require('../../models/Teacher')
 
 async function pageRenderHandler(req,res,pagename,title){
 	let menu = await Menu.find()
@@ -413,6 +414,40 @@ exports.updateTextAboutAdministratorPostController = async(req,res,next)=>{
 		req.file?removeFilePathFromDirctory(`public/${path}`):null
 		req.flash('success','Successfully Updated About Of Administrator Info')
 		res.redirect('back')
+	}catch(e){
+		next(e)
+	}
+}
+
+exports.addAboutTeacherInfoGetController = async(req,res,next)=>{
+	try{
+		pageRenderHandler(req,res,'aboutTeacher.ejs','About Teachers')
+	}catch(e){
+		next(e)
+	}
+}
+exports.createTeacherGroupPostController = async(req,res,next)=>{
+	try{
+		let { name } = req.body
+		if(!name){
+			req.flash('fail','Please Provied Group Name')
+			return res.redirect('back')
+		}
+
+		let createGroup = new Teacher({
+			name
+		})
+
+		let createdGroup = await createGroup.save()
+
+		if(!createdGroup){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+
+		req.flash('success','Successfully Created Teacher Group')
+		res.redirect('back')
+		console.log(createdGroup)
 	}catch(e){
 		next(e)
 	}
