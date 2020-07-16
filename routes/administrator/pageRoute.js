@@ -18,7 +18,12 @@ const {
     deleteTextAboutAdministratorGetController,
     updateTextAboutAdministratorPostController,
     addAboutTeacherInfoGetController,
-    createTeacherGroupPostController
+    createTeacherGroupPostController,
+    updateTeacherGroupPostController,
+    deleteTeacherGroupGetController,
+    addTeacherInfoPostController,
+    updateTeacherInfoPostController,
+    deleteTeacherInfoGetController
 } = require('../../controllers/adminControllers/pageController')
 
 
@@ -37,8 +42,12 @@ router.get('/about/administrator/delete/:id',isAuthenticatedAdmin,deleteTextAbou
 
 router.post('/about/administrator/update/:id',isAuthenticatedAdmin,uploads.single('image'),updateTextAboutAdministratorPostController)
 
+router.get('/about/teachers',isAuthenticatedAdmin,addAboutTeacherInfoGetController)
+router.post('/create/teacher/group',isAuthenticatedAdmin,createTeacherGroupPostController)
+router.get('/teacher/group/delete/:id',isAuthenticatedAdmin,deleteTeacherGroupGetController)
+router.post('/teacher/group/update/:id',isAuthenticatedAdmin,updateTeacherGroupPostController)
 
-
-router.get('/about/teachers',addAboutTeacherInfoGetController)
-router.post('/create/teacher/group',createTeacherGroupPostController)
+router.post('/teacher/info/add',isAuthenticatedAdmin,uploads.single('image'),addTeacherInfoPostController)
+router.post('/teacher/info/update/:id',isAuthenticatedAdmin,uploads.single('image'),updateTeacherInfoPostController)
+router.get('/teacher/info/delete/:id',isAuthenticatedAdmin,uploads.single('image'),deleteTeacherInfoGetController)
 module.exports = router

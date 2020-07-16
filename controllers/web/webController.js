@@ -1,16 +1,20 @@
 let Menu = require('../../models/Menu')
 let WebModel = require('../../models/WebModel')
 const ExaminationType = require('../../models/ExaminationType')
+const Teacher = require('../../models/Teacher')
+
 
 async function renderPageHandler(req,res,pagename,title){
     let menu  = await Menu.find()
     let webModel = await WebModel.findOne()
     let examinationType = await ExaminationType.find()
+    let teachers = await Teacher.find()
     res.render(`pages/${pagename}`,{
         title,
         menu,
         webModel,
-        examinationType:examinationType?examinationType:[]
+        examinationType:examinationType?examinationType:[],
+        group:teachers?teachers:[]
     })
 }
 

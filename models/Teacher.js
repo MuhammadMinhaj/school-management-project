@@ -8,7 +8,7 @@ const schema = new Schema({
             name:String,
             qualifications:String,
             bio:String,
-            socialLinks:{
+            conactInfo:{
                 email:String,
                 phone:String,
                 website:String

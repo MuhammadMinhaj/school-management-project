@@ -12,6 +12,7 @@ async function pageRenderHandler(req,res,pagename,title){
 	let menu = await Menu.find()
 	let webModel = await WebModel.findOne()
 	let pages = await Page.find()
+	let groupOfTeachers = await Teacher.find()
 	res.render(`pages/administrator/${pagename}`, {
 		title: title,
 		style: 'bg-light',
@@ -22,16 +23,19 @@ async function pageRenderHandler(req,res,pagename,title){
 		webModel,
 		createdPage: {},
 		error: {},
+		groupOfTeachers
 	})
 }
 
 function removeFilePathFromDirctory(path){
-	fs.unlink(path,error=>{
-		if(error){
-			return false
-		}
-		return true
-	})
+	if(path){
+		fs.unlink(path,error=>{
+			if(error){
+				return false
+			}
+			return true
+		})
+	}
 }
 
 exports.pageCreateGetController = async (req, res, next) => {
@@ -448,6 +452,197 @@ exports.createTeacherGroupPostController = async(req,res,next)=>{
 		req.flash('success','Successfully Created Teacher Group')
 		res.redirect('back')
 		console.log(createdGroup)
+	}catch(e){
+		next(e)
+	}
+}
+
+exports.deleteTeacherGroupGetController = async(req,res,next)=>{
+	try{	
+		let { id } = req.params
+		let deletedGroup = await Teacher.findOneAndDelete({_id:id})
+		if(!deletedGroup){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+
+		for(let teacher of deletedGroup.teachers){
+			if(teacher){
+				removeFilePathFromDirctory(`public/${teacher.image}`)
+			}
+		}
+		req.flash('success','Successfully Deleted Teachers Group')
+		res.redirect('back')
+	}catch(e){
+		next(e)
+	}
+}
+
+exports.updateTeacherGroupPostController = async(req,res,next)=>{
+	try{
+		let { name } = req.body
+		let { id } = req.params
+		if(!name){
+			req.flash('fail','Please Provied Group Name')
+			return res.redirect('back')
+		}
+
+		let updatedGroup = await Teacher.findOneAndUpdate({_id:id},{name},{new:true})
+		if(!updatedGroup){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+
+		req.flash('success','Successfully Updated Teacher Group')
+		res.redirect('back')
+		console.log(updatedGroup)
+	}catch(e){
+		next(e)
+	}
+}
+
+exports.addTeacherInfoPostController = async(req,res,next)=>{
+	try{
+
+		let { name,qualifications,bio,email,phone,website,group } = req.body
+		let file = req.file
+
+		if(name.length===0||qualifications.length===0||group.length===0){
+			req.flash('fail','Please Provied Required Information')
+			file?removeFilePathFromDirctory(file.path):null
+			return res.redirect('back')
+		}
+
+		let addedTeacherInfo = await Teacher.findOneAndUpdate({_id:group},{
+			$push:{
+				teachers:{
+					image:file?`/uploads/${file.filename}`:'',
+					name,
+					qualifications,
+					bio,
+					conactInfo:{
+						email,
+						phone,
+						website
+					}
+				}
+			}
+		},{new:true})
+
+		if(!addedTeacherInfo){
+			file?removeFilePathFromDirctory(file.path):null
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+
+		req.flash('success','Successfully Added Teacher Information')
+		res.redirect('back')
+		console.log(addedTeacherInfo)
+	}catch(e){
+		next(e)
+	}
+}
+
+exports.updateTeacherInfoPostController = async(req,res,next)=>{
+	try{
+
+		let { name,qualifications,bio,email,phone,website,group } = req.body
+		let file = req.file
+		console.log(req.body)
+		console.log(req.params)
+		console.log(req.query)
+
+		let { id } = req.params
+		let { userid } = req.query
+
+		
+		if(name.length===0||qualifications.length===0||group.length===0){
+			req.flash('fail','Please Provied Required Information')
+			file?removeFilePathFromDirctory(file.path):null
+			return res.redirect('back')
+		}
+
+		let hasGroup = await Teacher.findOne({_id:id})
+		if(!hasGroup){
+			req.flash('fail','Somthing Went To Wrong')
+			return res.redirect('back')
+		}
+
+		let path;
+		for(let teacher of hasGroup.teachers){
+		
+			
+			if(teacher._id.toString()===userid.toString()){
+				path = teacher.image 
+				teacher.image = file?`/uploads/${file.filename}`:path 
+				teacher.name = name 
+				teacher.qualifications = qualifications
+				teacher.bio = bio 
+				teacher.conactInfo.email = email 
+				teacher.conactInfo.phone = phone 
+				teacher.conactInfo.website = website
+			}
+		
+		}
+
+	
+		// console.log(hasGroup)
+
+		let updatedTeacherInfo = await Teacher.findOneAndUpdate({_id:id},hasGroup,{new:true})
+
+
+		if(!updatedTeacherInfo){
+			file?removeFilePathFromDirctory(file.path):null
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+
+		file?removeFilePathFromDirctory(`public/${path}`):null
+
+		req.flash('success','Successfully Updated Teacher Information')
+		res.redirect('back')
+			console.log('updatedTeacherInfo')
+		console.log(updatedTeacherInfo)
+		console.log('updatedTeacherInfo')
+	
+	}catch(e){
+		next(e)
+	}
+}
+exports.deleteTeacherInfoGetController = async(req,res,next)=>{
+	try{
+		let { id } = req.params;
+		let { userid } = req.query
+
+		let hasGroup = await Teacher.findOne({_id:id})
+		if(!hasGroup){
+			req.flash('fail','Cannot Delete This,Cause Group Is Not Available')
+			return res.redirect('back')
+		}
+
+
+		let path 
+		for(let teacher of hasGroup.teachers){
+			path = teacher.image
+		}
+		let deletedTeacher = await Teacher.findOneAndUpdate({_id:id},{
+			$pull:{
+				teachers:{
+					_id:userid
+				}
+			}
+		},{new:true})
+
+		console.log(deletedTeacher)
+		if(!deletedTeacher){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+
+		path?removeFilePathFromDirctory(`public/${path}`):null
+
+		req.flash('success','Successfully Deleted Teacher Info From Group')
+		res.redirect('back')
 	}catch(e){
 		next(e)
 	}
