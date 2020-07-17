@@ -1,8 +1,8 @@
 
 
-<div style="margin:0px!important" class="row bg-dark">
-	<div class="col-md-2">
-		<div class="text-center py-5">
+<div style="margin:0px!important" class="row px-2 py-3 bg-dark">
+	<div class="addMargin__top addPadding__5 col-md-2">
+		<div class="styleCustomCard__footer text-center py-4">
 			<h2 class="footer-brand-title">
 				<span style="text-shadow: 2pt 1pt 1pt #0a0a0a;color:green;font-size:2.25rem;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
 					<span style="color:#575e64">J</span>
@@ -15,32 +15,42 @@
 			<img src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" style="max-width: 120px;" alt="JASA" class="jasa-logo mt-1" />
 		</div>
 	</div>
-	<div class="col-md-4">
-		<div class="p-5">
+	<div class="addMargin__top addPadding__5 col-md-4">
+		<div class="styleCustomCard__footer py-4 px-3">
 			<h3 class="footer-title">
 				<%=webModel.about.title?webModel.about.title:'No Title'%>
 			</h3>
 			<div class="footer-border mt-4"></div>
 			<p class="footer-about-text mt-1">
-				<%=webModel.about.body?webModel.about.body:'There is nothing to show'%>
+				<%let text = webModel.about.body.split('।') %>
+				<%for(let i = 0;i<5;i++){%>
+					<%=text[i]+'।'%>
+				<%}%>
+				<%if(webModel.about.body.split('।').length>5){%>
+					...<a href="/web/about" style="color: #007bff;font-family: arial">read more</a>
+					<%}%>
 			</p>
 		</div>
 	</div>
-	<div class="col-md-4">
-		<div class="p-5">
+	<div class="addMargin__top addPadding__5 col-md-4">
+		<div class="styleCustomCard__footer py-4 px-3">
 			<h3 class="footer-title">FEATURED LINKS</h3>
 			<div class="footer-border mt-4"></div>
 			<ul class="footer-link-container">
 				<%if(webModel.futuredLinks){%>
 					<%for(let link of webModel.futuredLinks){%>
 						<li class="mt-1">
-							<a href="<%=link.url%>" class="text-info"><%=link.name%></a>
+							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-play-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								<path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+							  </svg><a href="<%=link.url%>"><%=link.name%></a>
 						</li>
 					<%}%>
 					<%}else{%>
 						<%for(let i = 1;i<=5;i++){%>
 							<li class="mt-1">
-								<a href="#" class="text-info"><%=i%> Link</a>
+								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-play-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+								  </svg><a href="#"><%=i%> Link</a>
 							</li>
 						<%}%>
 					<%}%>
@@ -48,8 +58,8 @@
 			</ul>
 		</div>
 	</div>
-	<div class="col-md-2">
-		<div class="py-5 social-container">
+	<div class="addMargin__top addPadding__5 col-md-2">
+		<div class="styleCustomCard__footer py-4 social-container">
 			<h3 class="footer-title">SOCIAL LINKS</h3>
 			<div class="footer-border mt-4"></div>
 			<div class="social-links mt-2">

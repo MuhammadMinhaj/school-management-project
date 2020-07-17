@@ -21,13 +21,13 @@
 
             <div class="row scroll-style">
                 <div class="col-sm-12">
-                    <div class="row mt-2">
+                    <!-- <div class="row mt-2">
                         <div class="col-sm-12">
                             <div class="page-title border text-center p-1">
                                 <h5> Update Page </h5>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div id="alert-page-box">
 
                     </div>
@@ -87,8 +87,11 @@
                                         <div class="invalid-feedback"><%=error.body%></div>
                                     </div>
 
-                                    <input type="submit" value="Update" class="btn btn-primary btn-sm mb-1">
-                                    <a href="/administrator/page_delete/<%=updatePage._id%>" class="btn btn-danger btn-sm">Delete</a>
+                                    <div class="form-group">
+                                    <input type="submit" value="Update" class="btn btn-primary btn-sm mb-1 w-49">
+
+                                    <a href="/administrator/page_delete/<%=updatePage._id%>" class="btn btn-danger btn-sm w-50 ">Delete</a>
+                                    </div>
 
                                 </div>
 
