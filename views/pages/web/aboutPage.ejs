@@ -1,0 +1,19 @@
+<%-include('../../partials/head.ejs')%>
+<div class="row" style="margin:0px!important">
+    <div class="col-sm-12 p-5 remove__padding">
+        <h3 class="text-center mb-4 addMarginTop" style="color:#545b62"><%=webModel.about.title%></h3>
+        <div class="custom__container__card p-5 remove__padding">
+            <div class="row remove__margin">
+                <div class="col-sm-12">
+                    <%if(webModel.about){%>
+             
+                        <pre><span class="text-left text__pre__style"><%=webModel.about.body%></span></pre>
+               
+                        <%}%>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%-include('../../partials/footer.ejs')%>

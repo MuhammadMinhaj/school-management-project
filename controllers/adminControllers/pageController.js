@@ -647,3 +647,4 @@ exports.deleteTeacherInfoGetController = async(req,res,next)=>{
 		next(e)
 	}
 }
+

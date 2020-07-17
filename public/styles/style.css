@@ -65,9 +65,23 @@ p{
 a{
 	font-size: 1em;
 }
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
 .quoteIconStyle{
 	font-size:2.5vw;
 	color:#545b62;
+}
+.text__pre__style{
+	font-weight: bold;
+    font-size: 1.5em;
+    color: #545b62;
+	font-family: araial black;
 }
 
 .backgroundImage {

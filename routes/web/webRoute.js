@@ -4,7 +4,9 @@ const router = require('express').Router()
 const {
     resultsPublicationGetController,
     aboutAdministrationInfoGetController,
-    aboutTeachersInfoGetController
+    aboutTeachersInfoGetController,
+    aboutPageGetController,
+    dynamicPageRenderGetController
 } = require('../../controllers/web/webController')
 
 
@@ -13,4 +15,8 @@ router.get('/result',resultsPublicationGetController)
 
 router.get('/teachers',aboutTeachersInfoGetController)
 
+router.get('/about',aboutPageGetController)
+
+router.get('/:pagename',dynamicPageRenderGetController)
 module.exports = router
+

@@ -121,11 +121,11 @@ const schema = new Schema({
 	about:{
 		title:{
 			type:String,
-			trim:true
+			trim:false
 		},
 		body:{
 			type:String,
-			trim:true
+			trim:false
 		}
 	}
 	

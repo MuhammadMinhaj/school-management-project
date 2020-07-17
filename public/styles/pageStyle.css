@@ -1,3 +1,8 @@
+.text__para__bold{
+    font-weight: 500;
+    font-size:16px;
+    color:#545b62;
+}
 .custom__container__card{
     box-shadow:0pt -3pt 5pt 2px #00000021;
 }

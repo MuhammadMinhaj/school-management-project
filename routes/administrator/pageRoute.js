@@ -50,4 +50,5 @@ router.post('/teacher/group/update/:id',isAuthenticatedAdmin,updateTeacherGroupP
 router.post('/teacher/info/add',isAuthenticatedAdmin,uploads.single('image'),addTeacherInfoPostController)
 router.post('/teacher/info/update/:id',isAuthenticatedAdmin,uploads.single('image'),updateTeacherInfoPostController)
 router.get('/teacher/info/delete/:id',isAuthenticatedAdmin,uploads.single('image'),deleteTeacherInfoGetController)
+
 module.exports = router
