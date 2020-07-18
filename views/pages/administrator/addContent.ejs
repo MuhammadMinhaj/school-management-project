@@ -1,0 +1,87 @@
+<%-include('../../partials/admin/adminHead.ejs')%>
+
+   
+<div class="row">
+   <!-- Admin Brand and Dashboard Menu -->
+   <%- include('../../partials/admin/adminSidebar.ejs')%>
+   <!-- Dashboard Content -->
+   <div class="col-sm-10 ">
+      <!-- Admin Navbar Content -->
+      <%- include('../../partials/admin/adminNavbar.ejs')%>
+      <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+      
+      
+      <div class="row scroll-style">
+         
+         <div class="col-sm-12" style="background:#6c757d;">
+            
+            <div class="row">
+               <div class="w-100">
+                  <%-include('../../partials/Error/alert.ejs')%>
+               </div>
+               <div class="col-sm-12">
+                  <h4 class="menu-title p-1 text-center" style="color:#f8f9fa;text-transform:uppercase;font-weight:bold;"> Add Content </h4>
+               </div>
+            </div>
+            <div class="row py-2">
+               <div class="col-sm-12">
+                  <div class="custom-card p-3">
+                     <div class="row">
+                        <!-- Mission And Vission -->
+                        <div class="col-sm-6">
+                           <div class="p-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
+                              <h5 class="text-center text-success" style="font-weight:bold;">Mission & Vission</h5>
+                              <div class="latestNewsBody">
+                                 <form action="/administrator/mission&vission" method="POST">
+                                    
+                                    <div class="form-group">
+                                       <label style="font-weight:bold;" for="titleOfMission">Title</label>
+                                       <textarea class="form-control" name="title" id="titleOfMission"><%=webModel.missionAndvission.title%></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                       <label style="font-weight:bold;" for="textOfMission">Text</label>
+                                       <textarea class="form-control" rows="10" name="text" id="textOfMission"><%=webModel.missionAndvission.text%></textarea>
+                                    </div>
+                                    <button class="btn <%=webModel.missionAndvission.text?'btn-primary':'btn-success'%> btn-sm w-75"><%=webModel.missionAndvission.text?'Update':'Add'%></button>
+                                    <a href="/administrator/mission&vission/delete" style="width:24%" class="btn btn-info btn-sm <%=webModel.missionAndvission.text?'':'disabled'%>">Clear All</a>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                    <!-- Mission And Vission End -->
+
+                        <!-- Libray -->
+                        <div class="col-sm-6">
+                           <div class="p-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
+                              <h5 class="text-center text-success" style="font-weight:bold;">Libray</h5>
+                              <div class="latestNewsBody">
+                                 <form action="/administrator/libray" method="POST">
+                                    
+                                    <div class="form-group">
+                                       <label style="font-weight:bold;" for="titleOfLibray">Title</label>
+                                       <textarea class="form-control" name="title" id="titleOfLibray"><%=webModel.libray.title%></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                       <label style="font-weight:bold;" for="textOfLibray">Text</label>
+                                       <textarea class="form-control" rows="10" name="text" id="textOfLibray"><%=webModel.libray.text%></textarea>
+                                     
+                                    </div>
+                                    <button class="btn <%=webModel.libray.text?'btn-primary':'btn-success'%> btn-sm w-75"><%=webModel.libray.text?'Update':'Add'%></button>
+                                    <a href="/administrator/libray/delete " style="width:24%" class="btn btn-info btn-sm <%=webModel.libray.text?'':'disabled'%>">Clear All</a>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- Libray End -->
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<%-include('../../partials/admin/adminFooter.ejs')%>
+</body>
+</html>

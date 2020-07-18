@@ -1,83 +1,183 @@
 <%-include('../../partials/admin/adminHead.ejs')%>
-<div class="container-luid">
-   <div class="row">
-      <!-- Admin Brand and Dashboard Menu -->
-      <%- include('../../partials/admin/adminSidebar.ejs')%>
-      <!-- Dashboard Content -->
-      <div class="col-sm-10 ">
-         <!-- Admin Navbar Content -->
-         <%- include('../../partials/admin/adminNavbar.ejs')%>
-         <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
-         <div class="row scroll-style" style="background:#6c757d;">
-            <div class="w-100">
-               <%-include('../../partials/Error/alert.ejs')%>
-            </div>
-            <div class="col-sm-12">
-               <div class="row mt-2">
-                  <div class="col-sm-12">
-                     <h4 class="menu-title p-1 text-center">Links</h4>
-                  </div>
+
+<div class="row">
+   <!-- Admin Brand and Dashboard Menu -->
+   <%- include('../../partials/admin/adminSidebar.ejs')%>
+   <!-- Dashboard Content -->
+   <div class="col-sm-10 ">
+      <!-- Admin Navbar Content -->
+      <%- include('../../partials/admin/adminNavbar.ejs')%>
+      <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+      <div class="row scroll-style" style="background:#6c757d;">
+         <div class="w-100">
+            <%-include('../../partials/Error/alert.ejs')%>
+         </div>
+         <div class="col-sm-12">
+            <div class="row mt-2">
+               <div class="col-sm-12">
+                  <h4 class="menu-title p-1 text-center">Links</h4>
                </div>
-               <div class="row py-2">
-                  <div class="col-sm-12">
-                     <div class="custom-card p-2">
-                        <div class="row">
-                           <!-- Referer Links -->
-                           <div class="col-sm-6">
-                              <div class="px-4 py-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
-                                 <h5 class="text-center mb-3" style="font-weight:bold;color:#495057;">Reference Links</h5>
-                                 <div class="latestNewsBody">
-                                    <form action="/administrator/links/reference" method="POST">
-                                       <div class="form-row">
-                                          <div class="col-sm-6">
-                                             <div class="form-group">
-                                                <label style="font-weight:bold;" for="latestNewsText">Name</label>
-                                                <textarea type="text" placeholder="..." style="border:none;height:38px;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="name"></textarea>
-                                             </div>
+            </div>
+            <div class="row py-2">
+               <div class="col-sm-12">
+                  <div class="custom-card p-2">
+                     <div class="row">
+                        <!-- Referer Links -->
+                        <div class="col-sm-6">
+                           <div class="px-4 py-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
+                              <h5 class="text-center mb-3" style="font-weight:bold;color:#495057;">Reference Links</h5>
+                              <div class="latestNewsBody">
+                                 <form action="/administrator/links/reference" method="POST">
+                                    <div class="form-row">
+                                       <div class="col-sm-6">
+                                          <div class="form-group">
+                                             <label style="font-weight:bold;" for="latestNewsText">Name</label>
+                                             <textarea type="text" placeholder="..." style="border:none;height:38px;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="name"></textarea>
                                           </div>
-                                          <div class="col-sm-6">
-                                             <div class="form-group">
-                                                <label style="font-weight:bold;">URL</label>
-                                                <input type="text" placeholder="https://www.example.com" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="url">
+                                       </div>
+                                       <div class="col-sm-6">
+                                          <div class="form-group">
+                                             <label style="font-weight:bold;">URL</label>
+                                             <input type="text" placeholder="https://www.example.com" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="url">
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm w-100">Add</button>
+                                 </form>
+                              </div>
+                           </div>
+                           <!-- Table Section -->
+                           <div class="mt-2 p-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
+                              <div class="admin-show-scroll-style" style="height:265px!important;">
+                                 <%if(webModel.referenceLinks.length!==0){%>
+                                 <table class="table table-sm">
+                                    <thead>
+                                       <tr class="text-center">
+                                          <th scope="col">Name</th>
+                                          <th scope="col">URL</th>
+                                          <th scope="col">CONTROLLING</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       <%webModel.referenceLinks.forEach((referenceLink,ind)=>{%>
+                                       <!-- Modal -->
+                                       <div class="modal fade" id="referenceLinkModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog">
+                                             <div class="modal-content">
+                                                <div class="modal-header">
+                                                   <h5 class="modal-title" id="exampleModalLabel">Edit Breaking News</h5>
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                   <span aria-hidden="true">&times;</span>
+                                                   </button>
+                                                </div>
+                                                <form action="/administrator/links/reference/update/<%=referenceLink._id%>" method="POST">
+                                                   <div class="modal-body">
+                                                      <div class="form-group">
+                                                         <textarea name="name" placeholder="..." class="form-control"><%=referenceLink.name?referenceLink.name:''%></textarea>
+                                                      </div>
+                                                      <div class="form-group">
+                                                         <input type="text" name="url" value="<%=referenceLink.url?referenceLink.url:''%>" class="form-control" placeholder='URL'>
+                                                      </div>
+                                                   </div>
+                                                   <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                      <button class="btn btn-primary">Update</button>
+                                                   </div>
+                                                </form>
                                              </div>
                                           </div>
                                        </div>
-                                       <button class="btn btn-primary btn-sm w-100">Add</button>
-                                    </form>
-                                 </div>
+                                       <!-- Modal End -->
+                                       <tr class="text-center" style="line-height:250%;">
+                                          <td>
+                                             <%if(referenceLink.name.length>25){%>
+                                             <%=referenceLink.name.slice(0,26)+'...'%>
+                                             <%}else{%>
+                                             <%=referenceLink.name%>
+                                             <%}%>
+                                          </td>
+                                          <td class="text-muted">
+                                             <%if(referenceLink.url){%>
+                                             <%if(referenceLink.url.length>20){%>
+                                                   <%=referenceLink.url.slice(0,21)+'...'%>
+                                             <%}else{%>
+                                                   <%=referenceLink.url%>
+                                             <%}%>
+
+                                          <%}else{%>
+                                          N/A
+                                          <%}%>
+                                          </td>
+                                          <td class="webNameControllParent">
+                                          <a class="btn btn-sm" href="/administrator/links/reference/delete/<%=referenceLink._id%>">
+                                             <i class="fas fa-trash-alt text-danger"></i>
+                                          </a>
+                                             <button data-toggle="modal" data-target="#referenceLinkModal<%=ind%>" data-whatever="@mdo"  class="btn btn-sm">
+                                             <i class="fas fa-edit text-info"></i>
+                                             </button>
+                                          </td>
+                                       </tr>
+                                       <%})%>
+                                    </tbody>
+                                 </table>
+                                 <%}else{%>
+                                 <h6 class="text-muted text-center">There is nothing to show</h6>
+                                 <%}%>
                               </div>
-                              <!-- Table Section -->
-                              <div class="mt-2 p-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
-                                 <div class="admin-show-scroll-style" style="height:265px!important;">
-                                    <%if(webModel.referenceLinks.length!==0){%>
+                           </div>
+                           <!-- Table End -->
+                        </div>
+                        <!-- End R-Links -->
+                        <!-- Documents Links -->
+                        <div class="col-sm-6">
+                           <div class="px-4 pt-2 pb-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
+                              <h5 class="text-center" style="color:#495057;font-weight:bold;">Documents Links</h5>
+                              <div class="latestNewsBody">
+                                 <div class="admin-show-scroll-style" style="height:387px!important;">
+                                    <%if(webModel.documentsLinks.length!==0){%>
                                     <table class="table table-sm">
                                        <thead>
                                           <tr class="text-center">
                                              <th scope="col">Name</th>
-                                             <th scope="col">URL</th>
+                                             <th scope="col">Option</th>
+                                             <th scope="col">Documents</th>
                                              <th scope="col">CONTROLLING</th>
                                           </tr>
                                        </thead>
                                        <tbody>
-                                          <%webModel.referenceLinks.forEach((referenceLink,ind)=>{%>
-                                          <!-- Modal -->
-                                          <div class="modal fade" id="referenceLinkModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <%webModel.documentsLinks.forEach((dLink,ind)=>{%>
+                                          <!-- Update Document Modal -->
+                                          <div class="modal fade" id="documentUpdateModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                              <div class="modal-dialog">
                                                 <div class="modal-content">
                                                    <div class="modal-header">
-                                                      <h5 class="modal-title" id="exampleModalLabel">Edit Breaking News</h5>
+                                                      <h5 class="modal-title" id="exampleModalLabel">Update Documents</h5>
                                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                       <span aria-hidden="true">&times;</span>
                                                       </button>
                                                    </div>
-                                                   <form action="/administrator/links/reference/update/<%=referenceLink._id%>" method="POST">
+                                                   <form action="/administrator/links/documents/update/<%=dLink._id%>" enctype="multipart/form-data" method="POST">
                                                       <div class="modal-body">
                                                          <div class="form-group">
-                                                            <textarea name="name" placeholder="..." class="form-control"><%=referenceLink.name?referenceLink.name:''%></textarea>
+                                                            <textarea name="name" placeholder="Title..." class="form-control"><%=dLink.name%></textarea>
                                                          </div>
-                                                         <div class="form-group">
-                                                            <input type="text" name="url" value="<%=referenceLink.url?referenceLink.url:''%>" class="form-control" placeholder='URL'>
+                                                         <div class="form-group documentPreviewParent">
+                                                               <label style="font-weight:bold;" for="latestNewsText">Documents Name</label>
+                                                               <p><%=dLink.document.slice(24)%></p>
                                                          </div>
+
+                                                            <div class="form-group">
+                                                               <label style="font-weight:bold;" for="latestNewsText">Upload Documents</label>
+                                                               <div class="custom-file">
+                                                                  <input type="file" name="documents" class="custom-file-input documentInputField" id="customFile">
+                                                                  <label class="custom-file-label" for="customFile">Choose file</label>
+                                                               </div>
+                                                            </div>
+                                                            <select name="option" class="custom-select">
+                                                            <option value="direct" <%=dLink.option==='direct'?'selected':''%>>Direct</option>
+                                                            <option value="manual" <%=dLink.option==='manual'?'selected':''%>>Manual</option>
+                                                         </select>
+
                                                       </div>
                                                       <div class="modal-footer">
                                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -90,29 +190,23 @@
                                           <!-- Modal End -->
                                           <tr class="text-center" style="line-height:250%;">
                                              <td>
-                                                <%if(referenceLink.name.length>25){%>
-                                                <%=referenceLink.name.slice(0,26)+'...'%>
+                                                <%if(dLink.name.length>25){%>
+                                                <%=dLink.name.slice(0,26)+'...'%>
                                                 <%}else{%>
-                                                <%=referenceLink.name%>
+                                                <%=dLink.name%>
                                                 <%}%>
                                              </td>
                                              <td class="text-muted">
-                                                <%if(referenceLink.url){%>
-                                                <%if(referenceLink.url.length>20){%>
-                                                    <%=referenceLink.url.slice(0,21)+'...'%>
-                                                <%}else{%>
-                                                    <%=referenceLink.url%>
-                                                <%}%>
-
-                                            <%}else{%>
-                                             N/A
-                                            <%}%>
+                                                <%=dLink.option?dLink.option.toUpperCase():'N/A'%>
+                                             </td>
+                                             <td>
+                                                   <%=dLink.document?'Available':'N/A'%>
                                              </td>
                                              <td class="webNameControllParent">
-                                            <a class="btn btn-sm" href="/administrator/links/reference/delete/<%=referenceLink._id%>">
+                                                <a class="btn btn-sm" href="/administrator/links/documents/delete/<%=dLink._id%>">
                                                 <i class="fas fa-trash-alt text-danger"></i>
-                                            </a>
-                                                <button data-toggle="modal" data-target="#referenceLinkModal<%=ind%>" data-whatever="@mdo"  class="btn btn-sm">
+                                                </a>
+                                                <button data-toggle="modal" data-target="#documentUpdateModal<%=ind%>" data-whatever="@mdo"  class="btn btn-sm">
                                                 <i class="fas fa-edit text-info"></i>
                                                 </button>
                                              </td>
@@ -125,158 +219,63 @@
                                     <%}%>
                                  </div>
                               </div>
-                              <!-- Table End -->
-                           </div>
-                           <!-- End R-Links -->
-                           <!-- Documents Links -->
-                           <div class="col-sm-6">
-                              <div class="px-4 pt-2 pb-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
-                                 <h5 class="text-center" style="color:#495057;font-weight:bold;">Documents Links</h5>
-                                 <div class="latestNewsBody">
-                                    <div class="admin-show-scroll-style" style="height:387px!important;">
-                                       <%if(webModel.documentsLinks.length!==0){%>
-                                       <table class="table table-sm">
-                                          <thead>
-                                             <tr class="text-center">
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Option</th>
-                                                <th scope="col">Documents</th>
-                                                <th scope="col">CONTROLLING</th>
-                                             </tr>
-                                          </thead>
-                                          <tbody>
-                                             <%webModel.documentsLinks.forEach((dLink,ind)=>{%>
-                                             <!-- Update Document Modal -->
-                                             <div class="modal fade" id="documentUpdateModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                   <div class="modal-content">
-                                                      <div class="modal-header">
-                                                         <h5 class="modal-title" id="exampleModalLabel">Update Documents</h5>
-                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                         <span aria-hidden="true">&times;</span>
-                                                         </button>
-                                                      </div>
-                                                      <form action="/administrator/links/documents/update/<%=dLink._id%>" enctype="multipart/form-data" method="POST">
-                                                         <div class="modal-body">
-                                                            <div class="form-group">
-                                                               <textarea name="name" placeholder="Title..." class="form-control"><%=dLink.name%></textarea>
-                                                            </div>
-                                                            <div class="form-group documentPreviewParent">
-                                                                <label style="font-weight:bold;" for="latestNewsText">Documents Name</label>
-                                                                <p><%=dLink.document.slice(24)%></p>
-                                                            </div>
-
-                                                             <div class="form-group">
-                                                                <label style="font-weight:bold;" for="latestNewsText">Upload Documents</label>
-                                                                <div class="custom-file">
-                                                                   <input type="file" name="documents" class="custom-file-input documentInputField" id="customFile">
-                                                                   <label class="custom-file-label" for="customFile">Choose file</label>
-                                                                </div>
-                                                             </div>
-                                                             <select name="option" class="custom-select">
-                                                               <option value="direct" <%=dLink.option==='direct'?'selected':''%>>Direct</option>
-                                                               <option value="manual" <%=dLink.option==='manual'?'selected':''%>>Manual</option>
-                                                            </select>
-
-                                                         </div>
-                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button class="btn btn-primary">Update</button>
-                                                         </div>
-                                                      </form>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <!-- Modal End -->
-                                             <tr class="text-center" style="line-height:250%;">
-                                                <td>
-                                                   <%if(dLink.name.length>25){%>
-                                                   <%=dLink.name.slice(0,26)+'...'%>
-                                                   <%}else{%>
-                                                   <%=dLink.name%>
-                                                   <%}%>
-                                                </td>
-                                                <td class="text-muted">
-                                                   <%=dLink.option?dLink.option.toUpperCase():'N/A'%>
-                                                </td>
-                                                <td>
-                                                    <%=dLink.document?'Available':'N/A'%>
-                                                </td>
-                                                <td class="webNameControllParent">
-                                                   <a class="btn btn-sm" href="/administrator/links/documents/delete/<%=dLink._id%>">
-                                                   <i class="fas fa-trash-alt text-danger"></i>
-                                                   </a>
-                                                   <button data-toggle="modal" data-target="#documentUpdateModal<%=ind%>" data-whatever="@mdo"  class="btn btn-sm">
-                                                   <i class="fas fa-edit text-info"></i>
-                                                   </button>
-                                                </td>
-                                             </tr>
-                                             <%})%>
-                                          </tbody>
-                                       </table>
-                                       <%}else{%>
-                                       <h6 class="text-muted text-center">There is nothing to show</h6>
-                                       <%}%>
-                                    </div>
-                                 </div>
-                                 <!-- Create Document Modal -->
-                                 <div class="modal fade" id="documentLinkCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                       <div class="modal-content" style="background:#545b62;">
-                                          <div class="modal-header">
-                                             <h5 class="modal-title" style="color:#dee2e6ba;text-transform: uppercase;" id="exampleModalLabel">
-                                                <strong>Create Administrator</strong>
-                                             </h5>
-                                             <button type="button"  class="closeModalBtn" data-dismiss="modal" aria-label="Close">
-                                             <span aria-hidden="true">&times;</span>
-                                             </button>
-                                          </div>
-                                          <form action="/administrator/links/documents" enctype="multipart/form-data" method="POST">
-                                             <div class="modal-body">
-                                                <!--   Create Admin -->
-                                                <div class="card border-style" style="background:#6c757d;">
-                                                   <div class="latestNewsBody p-3">
-                                                      <div class="form-group">
-                                                         <label style="font-weight:bold;" for="latestNewsText">Title</label>
-                                                         <textarea type="text" style="border:none;height:50px;border-bottom:1px solid #00000059;border-radius:6px;" class="dateCustomStyle form-control" name="name"></textarea>
-                                                      </div>
-                                                      <div class="form-group">
-                                                         <label style="font-weight:bold;" for="latestNewsText">Upload Documents</label>
-                                                         <div class="custom-file">
-                                                            <input type="file" id="singleNoticeImgUploadFiled" name="documents" class="custom-file-input" id="customFile">
-                                                            <label class="custom-file-label" for="customFile">Choose file</label>
-                                                         </div>
-                                                      </div>
-                                                      <div class="form-group">
-                                                         <!-- <label style="font-weight:bold;">URL</label>
-                                                         <input type="text" placeholder="https://www.example.com" style="border:none;border-bottom:1px solid #00000059;border-radius:6px;" class="dateCustomStyle form-control" name="url"> -->
-
-                                                         <select name="option" class="custom-select">
-                                                            <option value="direct">Direct</option>
-                                                            <option value="manual">Manual</option>
-                                                         </select>
-
-                                                      </div>
-                                                      <!-- <div class="form-group">
-                                                         <label style="font-weight:bold;" for="latestNewsText">DATE</label>
-                                                         <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:6px;" class="dateCustomStyle form-control" name="date">
-                                                      </div> -->
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <div class="modal-footer">
-                                                <input type="submit" id="createAdminBtn" value="Create">
-                                             </div>
-                                          </form>
+                              <!-- Create Document Modal -->
+                              <div class="modal fade" id="documentLinkCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                 <div class="modal-dialog">
+                                    <div class="modal-content" style="background:#545b62;">
+                                       <div class="modal-header">
+                                          <h5 class="modal-title" style="color:#dee2e6ba;text-transform: uppercase;" id="exampleModalLabel">
+                                             <strong>Create Administrator</strong>
+                                          </h5>
+                                          <button type="button"  class="closeModalBtn" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                          </button>
                                        </div>
+                                       <form action="/administrator/links/documents" enctype="multipart/form-data" method="POST">
+                                          <div class="modal-body">
+                                             <!--   Create Admin -->
+                                             <div class="card border-style" style="background:#6c757d;">
+                                                <div class="latestNewsBody p-3">
+                                                   <div class="form-group">
+                                                      <label style="font-weight:bold;" for="latestNewsText">Title</label>
+                                                      <textarea type="text" style="border:none;height:50px;border-bottom:1px solid #00000059;border-radius:6px;" class="dateCustomStyle form-control" name="name"></textarea>
+                                                   </div>
+                                                   <div class="form-group">
+                                                      <label style="font-weight:bold;" for="latestNewsText">Upload Documents</label>
+                                                      <div class="custom-file">
+                                                         <input type="file" id="singleNoticeImgUploadFiled" name="documents" class="custom-file-input" id="customFile">
+                                                         <label class="custom-file-label" for="customFile">Choose file</label>
+                                                      </div>
+                                                   </div>
+                                                   <div class="form-group">
+                                                      <!-- <label style="font-weight:bold;">URL</label>
+                                                      <input type="text" placeholder="https://www.example.com" style="border:none;border-bottom:1px solid #00000059;border-radius:6px;" class="dateCustomStyle form-control" name="url"> -->
+
+                                                      <select name="option" class="custom-select">
+                                                         <option value="direct">Direct</option>
+                                                         <option value="manual">Manual</option>
+                                                      </select>
+
+                                                   </div>
+                                                   <!-- <div class="form-group">
+                                                      <label style="font-weight:bold;" for="latestNewsText">DATE</label>
+                                                      <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:6px;" class="dateCustomStyle form-control" name="date">
+                                                   </div> -->
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                             <input type="submit" id="createAdminBtn" value="Create">
+                                          </div>
+                                       </form>
                                     </div>
                                  </div>
-                                 <!-- End Modal -->
-                                 <button data-toggle="modal" data-target="#documentLinkCreate" class="w-100 adminCreateBtn bg-dark">Add</button>
                               </div>
+                              <!-- End Modal -->
+                              <button data-toggle="modal" data-target="#documentLinkCreate" class="w-100 adminCreateBtn bg-dark">Add</button>
                            </div>
-                           <!-- End D-Links -->
                         </div>
+                        <!-- End D-Links -->
                      </div>
                   </div>
                </div>
@@ -285,6 +284,7 @@
       </div>
    </div>
 </div>
+
 <%-include('../../partials/admin/adminFooter.ejs')%>
 <script>
     let previews = document.querySelectorAll('.documentPreviewParent')

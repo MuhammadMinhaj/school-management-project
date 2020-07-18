@@ -127,8 +127,24 @@ const schema = new Schema({
 			type:String,
 			trim:false
 		}
-	}
-	
+	},
+	missionAndvission:{
+		title:String,
+		text:String,
+	},
+	libray:{
+		title:String,
+		text:String,
+	},
+	contact:[
+		{
+			name:String,
+			email:String,
+			phone:String,
+			subject:String,
+			text:String
+		}
+	]
 })
 
 const WebModel = new model('WebModel', schema)

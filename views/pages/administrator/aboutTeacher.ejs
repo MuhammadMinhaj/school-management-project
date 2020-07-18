@@ -1,401 +1,399 @@
 <%-include('../../partials/admin/adminHead.ejs')%>
-<div class="container-luid">
-   
-   <div class="row">
-      <!-- Admin Brand and Dashboard Menu -->
-      <%- include('../../partials/admin/adminSidebar.ejs')%>
-      <!-- Dashboard Content -->
-      <div class="col-sm-10 ">
-         <!-- Admin Navbar Content -->
-         <%- include('../../partials/admin/adminNavbar.ejs')%>
-         <!-- Included Here Admin Controlling Systems Using as a row -->
-         <div class="row scroll-style">
-            
-            <div class="col-sm-12" style="background:#6c757d;">
-               
-               <div class="row">
-                  <div class="w-100">
-                     <%-include('../../partials/Error/alert.ejs')%>
-                  </div>
-                  <div class="col-sm-12">
-                     <h4 class="menu-title p-1 text-center" style="color:#f8f9fa;text-transform:uppercase;font-weight:bold;"> About Teacher </h4>
-                  </div>
-               </div>
-               <div class="row py-2">
-                  <div class="col-sm-12">
 
-                     <div class="custom-card p-3">
-                        <div class="row">
+<div class="row">
+   <!-- Admin Brand and Dashboard Menu -->
+   <%- include('../../partials/admin/adminSidebar.ejs')%>
+   <!-- Dashboard Content -->
+   <div class="col-sm-10 ">
+      <!-- Admin Navbar Content -->
+      <%- include('../../partials/admin/adminNavbar.ejs')%>
+      <!-- Included Here Admin Controlling Systems Using as a row -->
+      <div class="row scroll-style">
+         
+         <div class="col-sm-12" style="background:#6c757d;">
+            
+            <div class="row">
+               <div class="w-100">
+                  <%-include('../../partials/Error/alert.ejs')%>
+               </div>
+               <div class="col-sm-12">
+                  <h4 class="menu-title p-1 text-center" style="color:#f8f9fa;text-transform:uppercase;font-weight:bold;"> About Teacher </h4>
+               </div>
+            </div>
+            <div class="row py-2">
+               <div class="col-sm-12">
+
+                  <div class="custom-card p-3">
+                     <div class="row">
+                     
+
+                        <!-- Listed Aboud Administrators -->
+                        <div class="col-sm-12">
+
+                           <!-- Modal For Create Group  -->
+                        <div class="modal fade" id="createInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Create Group</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                              </button>
+                              </div>
+                              <form action="/administrator/create/teacher/group" method="POST">
+                              <div class="modal-body">
+                              
+                                 <div class="form-group">
+                                    <label style="font-weight:bold;" for="nameOfGroup">Name</label>
+                                    <textarea style="background:white;" class="latestNewsTitle" name="name" id="nameOfGroup"></textarea>
+                                 </div> 
+                              </div>
+                              <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary">Create</button>
+                              </div> 
+                           </form>
+                           </div>
+                        </div>
+                        </div>
+                           <!-- End Modal -->
+
                         
 
-                           <!-- Listed Aboud Administrators -->
-                           <div class="col-sm-12">
-
-                              <!-- Modal For Create Group  -->
-                           <div class="modal fade" id="createInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                           <div class="modal-dialog">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                 <h5 class="modal-title" id="exampleModalLabel">Create Group</h5>
-                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                 </button>
+                           <!-- Show Group Modal -->
+                           <div class="modal fade" id="showGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-lg">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Create Group</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    
+                                    <div class="modal-body">
+                                       <div class="card">
+                                          <table class="table text-center">
+                                             <thead>
+                                                <tr>
+                                                   <th scope="col">SL</th>
+                                                   <th scope="col">Name</th>
+                                                   <th scope="col">Controlling</th>
+                                                </tr>
+                                             </thead>
+                                             <tbody>
+                                                <%if(groupOfTeachers){%>
+                                                <%groupOfTeachers.forEach((group,ind)=>{%>
+                           <!-- Edit Group Modal -->
+                           <div class="modal fade" id="editGroupModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="editModalOfGroup" aria-hidden="true">
+                              <div class="modal-dialog">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="editModalOfGroup">Update Group</h5>
+                                    
+                                    </div>
+                                    <form action="/administrator/teacher/group/update/<%=group._id%>" method="POST">
+                                    <div class="modal-body">
+                                       <div class="form-group">
+                                          <label style="font-weight:bold;" for="nameOfGroup">Name</label>
+                                          <textarea style="background:white;" class="latestNewsTitle" name="name" id="nameOfGroup"><%=group.name%></textarea>
+                                       </div> 
+                                    </div>
+                                    <div class="modal-footer">
+                                    
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    </div> 
+                                 </form>
                                  </div>
-                                 <form action="/administrator/create/teacher/group" method="POST">
-                                 <div class="modal-body">
-                                 
-                                    <div class="form-group">
-                                       <label style="font-weight:bold;" for="nameOfGroup">Name</label>
-                                       <textarea style="background:white;" class="latestNewsTitle" name="name" id="nameOfGroup"></textarea>
+                              </div>
+                           </div>
+                        <!-- Edit Group Modal End -->
+                                                   <tr>
+                                                      <td><%=ind+1%></td>
+                                                      <td><%=group.name%></td>
+                                                      <td>
+                                                         <button data-toggle="modal" data-target="#editGroupModal<%=ind%>" data-whatever="@mdo"  class="btn border text-warning btn-sm">Edit</button>
+                                                         
+                                                         <a href="/administrator/teacher/group/delete/<%=group._id%>" class="btn btn-sm border text-danger">Delete</a>
+                                                      </td>
+                                                   </tr>
+                                                <%})%>
+                                                <%}%>
+                                             </tbody>
+                                             </table>
+                                       </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    
                                     </div> 
                                  </div>
-                                 <div class="modal-footer">
-                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                 <button type="submit" class="btn btn-primary">Create</button>
-                                 </div> 
-                              </form>
                               </div>
                            </div>
-                           </div>
-                              <!-- End Modal -->
+                           <!-- End -->
 
-                          
-
-                              <!-- Show Group Modal -->
-                              <div class="modal fade" id="showGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                 <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                       <div class="modal-header">
-                                       <h5 class="modal-title" id="exampleModalLabel">Create Group</h5>
+                           <!-- Modal For Add Teacher Info -->
+                           <div class="modal fade" id="addTeacherModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-lg">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h5 class="modal-title" id="exampleModalLabel">Add Teacher Information</h5>
                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
+                                       <span aria-hidden="true">&times;</span>
                                        </button>
-                                       </div>
-                                      
-                                       <div class="modal-body">
-                                          <div class="card">
-                                             <table class="table text-center">
-                                                <thead>
-                                                  <tr>
-                                                    <th scope="col">SL</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Controlling</th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
-                                                  <%if(groupOfTeachers){%>
-                                                   <%groupOfTeachers.forEach((group,ind)=>{%>
-                              <!-- Edit Group Modal -->
-                              <div class="modal fade" id="editGroupModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="editModalOfGroup" aria-hidden="true">
-                                 <div class="modal-dialog">
-                                    <div class="modal-content">
-                                       <div class="modal-header">
-                                       <h5 class="modal-title" id="editModalOfGroup">Update Group</h5>
-                                       
-                                       </div>
-                                       <form action="/administrator/teacher/group/update/<%=group._id%>" method="POST">
-                                       <div class="modal-body">
-                                          <div class="form-group">
-                                             <label style="font-weight:bold;" for="nameOfGroup">Name</label>
-                                             <textarea style="background:white;" class="latestNewsTitle" name="name" id="nameOfGroup"><%=group.name%></textarea>
-                                          </div> 
-                                       </div>
-                                       <div class="modal-footer">
-                                       
-                                       <button type="submit" class="btn btn-primary">Update</button>
-                                       </div> 
-                                    </form>
                                     </div>
-                                 </div>
-                              </div>
-                           <!-- Edit Group Modal End -->
-                                                      <tr>
-                                                         <td><%=ind+1%></td>
-                                                         <td><%=group.name%></td>
-                                                         <td>
-                                                            <button data-toggle="modal" data-target="#editGroupModal<%=ind%>" data-whatever="@mdo"  class="btn border text-warning btn-sm">Edit</button>
-                                                            
-                                                            <a href="/administrator/teacher/group/delete/<%=group._id%>" class="btn btn-sm border text-danger">Delete</a>
-                                                         </td>
-                                                      </tr>
+                                    <form action="/administrator/teacher/info/add" enctype="multipart/form-data" method="POST">
+                                       <div class="modal-body">
+                                          <div class="latestNewsBody">
+                                                <div class="form-group">
+                                                   <div style="max-width:190px" class="m-auto text-center border">
+                                                      <img style="display: none;" class="aboutAdminImagePreview" src="#" alt="Image" style="width:100%">
+
+                                                      <svg  style="color:#0000002b"  width="8em" height="8em"  viewBox="0 0 16 16" class="updateDefaultImgIcon bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                         <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                                      </svg>
+                                                   </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                   <label style="font-weight:bold;" for="latestNewsText">Upload Image</label>
+                                                   <div class="custom-file">
+                                                      <input type="file" name="image" class="custom-file-input aboutAdminImageUploadField" id="addTeacherImage">
+                                                      <label class="custom-file-label" for="addTeacherImage">Choose file</label>
+                                                   </div>
+                                                </div>
+                                                
+                                             
+                                             
+                                             <div class="form-group">
+                                                <label style="font-weight:bold;" for="addTechName">Name (Required)</label>
+                                                <textarea style="background:white;" class="latestNewsTitle" name="name" id="addTechName"></textarea>
+                                             </div> 
+
+                                             <div class="form-group">
+                                                <label style="font-weight:bold;" for="addTechTitle">Qualifications (Required)</label>
+                                                <textarea style="background:white;" class="latestNewsTitle" name="qualifications" id="addTechTitle"></textarea>
+                                             </div> 
+                                             
+                                             <div class="form-group">
+                                                <label style="font-weight:bold;" for="addTechText">Bio</label>
+                                                <textarea style="background:white;height:150px;" class="latestNewsText" name="bio" id="addTechText"></textarea>
+                                             </div>
+                                             
+                                          <div class="form-group">
+                                             <label style="font-weight:bold;" for="emailOfTech">Email</label>
+                                             <input type="text" class="form-control" id="emailOfTech" placeholder="example@example.com" name="email">
+                                          </div>
+                                          <div class="form-group">
+                                             <label style="font-weight:bold;" for="phoneOfTech">Phone</label>
+                                             <input type="text" class="form-control" id="phoneOfTech" placeholder="+088" name="phone">
+                                          </div>
+                                          <div class="form-group">
+                                             <label style="font-weight:bold;" for="webOfTech">Website</label>
+                                             <input type="text" class="form-control" id="webOfTech" placeholder="https://example.com" name="website">
+                                          </div>
+                                          <div class="form-group">
+                                             <label style="font-weight:bold;" for="selectGroup">Select Group (Required)</label>
+                                             <select name="group" class="custom-select" id="selectGroup"> 
+                                                <option value="" selected>Select One</option>
+                                                <%if(groupOfTeachers){%>
+                                                   <%groupOfTeachers.forEach((group,ind)=>{%>
+                                                      <option value="<%=group._id%>"><%=group.name%></option>
                                                    <%})%>
                                                    <%}%>
-                                                </tbody>
-                                              </table>
+                                                </select>
+                                          </div>
                                           </div>
                                        </div>
                                        <div class="modal-footer">
-                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                     
-                                       </div> 
-                                    </div>
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <button class="btn btn-primary">Update</button>
+                                       </div>
+                                    </form>
                                  </div>
                               </div>
-                              <!-- End -->
+                           </div>
+                           <!-- Modal End -->
 
-                              <!-- Modal For Add Teacher Info -->
-                            <div class="modal fade" id="addTeacherModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                   <div class="modal-content">
-                                      <div class="modal-header">
-                                         <h5 class="modal-title" id="exampleModalLabel">Add Teacher Information</h5>
-                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                         <span aria-hidden="true">&times;</span>
-                                         </button>
-                                      </div>
-                                      <form action="/administrator/teacher/info/add" enctype="multipart/form-data" method="POST">
-                                         <div class="modal-body">
-                                            <div class="latestNewsBody">
-                                                  <div class="form-group">
-                                                     <div style="max-width:190px" class="m-auto text-center border">
-                                                        <img style="display: none;" class="aboutAdminImagePreview" src="#" alt="Image" style="width:100%">
+                           <!-- Table Section -->
+                           <div class="p-2 mt-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa">
+                              <div class="d-flex justify-content-between">
 
-                                                        <svg  style="color:#0000002b"  width="8em" height="8em"  viewBox="0 0 16 16" class="updateDefaultImgIcon bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                                        </svg>
-                                                    </div>
-                                                  </div>
+                        <span></span>
+                              
+                                 <div class="btn-group mb-2" role="group" aria-label="Basic example">
 
-                                                  <div class="form-group">
-                                                     <label style="font-weight:bold;" for="latestNewsText">Upload Image</label>
-                                                     <div class="custom-file">
-                                                        <input type="file" name="image" class="custom-file-input aboutAdminImageUploadField" id="addTeacherImage">
-                                                        <label class="custom-file-label" for="addTeacherImage">Choose file</label>
-                                                     </div>
-                                                  </div>
-                                                 
-                                                
-                                                
-                                               <div class="form-group">
-                                                  <label style="font-weight:bold;" for="addTechName">Name (Required)</label>
-                                                  <textarea style="background:white;" class="latestNewsTitle" name="name" id="addTechName"></textarea>
-                                               </div> 
 
-                                               <div class="form-group">
-                                                  <label style="font-weight:bold;" for="addTechTitle">Qualifications (Required)</label>
-                                                  <textarea style="background:white;" class="latestNewsTitle" name="qualifications" id="addTechTitle"></textarea>
-                                               </div> 
-                                              
-                                               <div class="form-group">
-                                                  <label style="font-weight:bold;" for="addTechText">Bio</label>
-                                                  <textarea style="background:white;height:150px;" class="latestNewsText" name="bio" id="addTechText"></textarea>
-                                               </div>
-                                               
-                                             <div class="form-group">
-                                                <label style="font-weight:bold;" for="emailOfTech">Email</label>
-                                                <input type="text" class="form-control" id="emailOfTech" placeholder="example@example.com" name="email">
-                                             </div>
-                                             <div class="form-group">
-                                                <label style="font-weight:bold;" for="phoneOfTech">Phone</label>
-                                                <input type="text" class="form-control" id="phoneOfTech" placeholder="+088" name="phone">
-                                             </div>
-                                             <div class="form-group">
-                                                <label style="font-weight:bold;" for="webOfTech">Website</label>
-                                                <input type="text" class="form-control" id="webOfTech" placeholder="https://example.com" name="website">
-                                             </div>
-                                             <div class="form-group">
-                                                <label style="font-weight:bold;" for="selectGroup">Select Group (Required)</label>
-                                                <select name="group" class="custom-select" id="selectGroup"> 
-                                                   <option value="" selected>Select One</option>
-                                                   <%if(groupOfTeachers){%>
-                                                      <%groupOfTeachers.forEach((group,ind)=>{%>
-                                                         <option value="<%=group._id%>"><%=group.name%></option>
-                                                      <%})%>
-                                                      <%}%>
-                                                 </select>
-                                             </div>
-                                            </div>
-                                         </div>
-                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button class="btn btn-primary">Update</button>
-                                         </div>
-                                      </form>
-                                   </div>
-                                </div>
-                             </div>
-                             <!-- Modal End -->
+                                    <button data-toggle="modal" data-target="#createInfoModal" data-whatever="@mdo"  class="btn border text-primary ">Create Group</button>
 
-                              <!-- Table Section -->
-                              <div class="p-2 mt-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa">
-                                <div class="d-flex justify-content-between">
+                                    <button data-toggle="modal" data-target="#showGroupModal" data-whatever="@mdo"  class="btn border text-warning">Group</button>
 
-                         <span></span>
+                                    <button data-toggle="modal" data-target="#addTeacherModal" data-whatever="@mdo"  class="btn border text-success">Add</button>
+
+                                 </div>
+                                    
                                  
-                                    <div class="btn-group mb-2" role="group" aria-label="Basic example">
+                              </div> 
 
-
-                                       <button data-toggle="modal" data-target="#createInfoModal" data-whatever="@mdo"  class="btn border text-primary ">Create Group</button>
-
-                                       <button data-toggle="modal" data-target="#showGroupModal" data-whatever="@mdo"  class="btn border text-warning">Group</button>
-
-                                       <button data-toggle="modal" data-target="#addTeacherModal" data-whatever="@mdo"  class="btn border text-success">Add</button>
-
-                                    </div>
-                                     
-                                  
-                                </div> 
-
-                                
-                               
-                                 <%if(groupOfTeachers){%>
-                                 <%groupOfTeachers.forEach((group,ind1)=>{%>
-                                
-                                       <h6 class="mb-2 px-3 py-2 border" style="color:#1e7e34;"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                          <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
-                                        </svg><strong><%=group.name%></strong></h6>
-                          
-                                 <table class="table text-center table-sm">
-                                    <thead>
-                                       <tr class="text-center">
-                                          <th scope="col">Image</th>
-                                          <th scope="col">Name</th>
-                                          <th scope="col">Email</th>
-                                          <th scope="col">Phone</th>
-                                          <th scope="col">CONTROLLING</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody>
-                                       <%if(group.teachers){%>
-                                          <%group.teachers.forEach((teacher,ind2)=>{%>
-                                             <!-- Modal -->
-                                       <div class="modal fade" id="teacherAboutModal<%=teacher._id.toString()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog modal-lg">
-                                             <div class="modal-content">
-                                                <div class="modal-header">
-                                                   <h5 class="modal-title" id="exampleModalLabel">Update About Of Administrator</h5>
-                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                   <span aria-hidden="true">&times;</span>
-                                                   </button>
-                                                </div>
-                                                <form action="/administrator/teacher/info/update/<%=group._id%>?userid=<%=teacher._id%>" enctype="multipart/form-data" method="POST">
-                                                   <div class="modal-body">
-                                                      <div class="latestNewsBody">
-
-                                                         <%if(teacher.image){%>
-                                                            <div class="form-group">
-                                                               <div style="max-width:190px" class="m-auto text-center border">
-                                                                  <img class="aboutAdminImagePreview" src="<%=teacher.image%>" alt="Image" style="width:100%">
-                                                               </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                               <label style="font-weight:bold;" for="latestNewsText">Update Image</label>
-                                                               <div class="custom-file">
-                                                                  <input type="file"  name="image" class="aboutAdminImageUploadField custom-file-input" id="customFile">
-                                                                  <label class="custom-file-label" for="customFile">Choose file</label>
-                                                               </div>
-                                                            </div>
-                                                            <%}else{%>
-                                                            <div class="form-group">
-                                                               <div style="max-width:190px" class="m-auto text-center border">
-                                                                  <img  style="display: none;" class="aboutAdminImagePreview" src="<%=teacher.image%>" alt="Image" style="width:100%">
-
-                                                                  <svg  style="color:#0000002b"  width="8em" height="8em"  viewBox="0 0 16 16" class="updateDefaultImgIcon bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                      <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                                                  </svg>
-                                                              </div>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                               <label style="font-weight:bold;" for="latestNewsText">Upload Image</label>
-                                                               <div class="custom-file">
-                                                                  <input type="file" name="image" class="custom-file-input aboutAdminImageUploadField" id="customFile">
-                                                                  <label class="custom-file-label" for="customFile">Choose file</label>
-                                                               </div>
-                                                            </div>
-                                                            <%}%>
-
-                                                         <div class="form-group">
-                                                            <label style="font-weight:bold;" for="latestNewsTitle">Name</label>
-                                                            <textarea style="background:white;" class="latestNewsTitle" name="name" id="latestNewsTitle"><%=teacher.name%></textarea>
-                                                         </div> 
-                                                         <div class="form-group">
-                                                            <label style="font-weight:bold;" for="latestNewsTitle">Qualifications</label>
-                                                            <textarea style="background:white;" class="latestNewsTitle" name="qualifications" id="latestNewsTitle"><%=teacher.qualifications%></textarea>
-                                                         </div> 
-                                                       
-
-                                                         <div class="form-group">
-                                                            <label style="font-weight:bold;" for="latestNewsText">Bio</label>
-                                                            <textarea style="background:white;height:150px;" class="latestNewsText" name="bio" id="latestNewsText"><%=teacher.bio%></textarea>
-                                                         </div>
-                                                         <div class="form-group">
-                                                            <label style="font-weight:bold;" for="emailOfTech">Email</label>
-                                                            <input type="text" class="form-control" value="<%=teacher.conactInfo.email%>" id="emailOfTech" placeholder="example@example.com" name="email">
-                                                         </div>
-                                                         <div class="form-group">
-                                                            <label style="font-weight:bold;" for="phoneOfTech">Phone</label>
-                                                            <input type="text" class="form-control" id="phoneOfTech" placeholder="+088" value="<%=teacher.conactInfo.phone%>" name="phone">
-                                                         </div>
-                                                         <div class="form-group">
-                                                            <label style="font-weight:bold;" for="webOfTech">Website</label>
-                                                            <input type="text" class="form-control" id="webOfTech" placeholder="https://example.com" value="<%=teacher.conactInfo.website%>" name="website">
-                                                         </div>
-                                                         <div class="form-group">
-                                                            <label style="font-weight:bold;" for="selectGroup">Select Group (Required)</label>
-                                                            <select name="group" class="custom-select" id="selectGroup"> 
-                                                               <option value="">Select One</option>
-                                                               <%if(groupOfTeachers){%>
-                                                                  <%groupOfTeachers.forEach((group2,ind)=>{%>
-                                                                     <option value="<%=group2._id%>" <%=group._id.toString()===group2._id.toString()?'selected':''%>><%=group2.name%></option>
-                                                                  <%})%>
-                                                                  <%}%>
-                                                             </select>
-                                                         </div>
-                                                         
-                                                      </div>
-                                                   </div>
-                                                   <div class="modal-footer">
-                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                      <button class="btn btn-primary">Update</button>
-                                                   </div>
-                                                </form>
+                              
+                              
+                              <%if(groupOfTeachers){%>
+                              <%groupOfTeachers.forEach((group,ind1)=>{%>
+                              
+                                    <h6 class="mb-2 px-3 py-2 border" style="color:#1e7e34;"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                       <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
+                                       </svg><strong><%=group.name%></strong></h6>
+                        
+                              <table class="table text-center table-sm">
+                                 <thead>
+                                    <tr class="text-center">
+                                       <th scope="col">Image</th>
+                                       <th scope="col">Name</th>
+                                       <th scope="col">Email</th>
+                                       <th scope="col">Phone</th>
+                                       <th scope="col">CONTROLLING</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <%if(group.teachers){%>
+                                       <%group.teachers.forEach((teacher,ind2)=>{%>
+                                          <!-- Modal -->
+                                    <div class="modal fade" id="teacherAboutModal<%=teacher._id.toString()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                       <div class="modal-dialog modal-lg">
+                                          <div class="modal-content">
+                                             <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Update About Of Administrator</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
                                              </div>
+                                             <form action="/administrator/teacher/info/update/<%=group._id%>?userid=<%=teacher._id%>" enctype="multipart/form-data" method="POST">
+                                                <div class="modal-body">
+                                                   <div class="latestNewsBody">
+
+                                                      <%if(teacher.image){%>
+                                                         <div class="form-group">
+                                                            <div style="max-width:190px" class="m-auto text-center border">
+                                                               <img class="aboutAdminImagePreview" src="<%=teacher.image%>" alt="Image" style="width:100%">
+                                                            </div>
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsText">Update Image</label>
+                                                            <div class="custom-file">
+                                                               <input type="file"  name="image" class="aboutAdminImageUploadField custom-file-input" id="customFile">
+                                                               <label class="custom-file-label" for="customFile">Choose file</label>
+                                                            </div>
+                                                         </div>
+                                                         <%}else{%>
+                                                         <div class="form-group">
+                                                            <div style="max-width:190px" class="m-auto text-center border">
+                                                               <img  style="display: none;" class="aboutAdminImagePreview" src="<%=teacher.image%>" alt="Image" style="width:100%">
+
+                                                               <svg  style="color:#0000002b"  width="8em" height="8em"  viewBox="0 0 16 16" class="updateDefaultImgIcon bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                     <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                                               </svg>
+                                                            </div>
+                                                         </div>
+
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsText">Upload Image</label>
+                                                            <div class="custom-file">
+                                                               <input type="file" name="image" class="custom-file-input aboutAdminImageUploadField" id="customFile">
+                                                               <label class="custom-file-label" for="customFile">Choose file</label>
+                                                            </div>
+                                                         </div>
+                                                         <%}%>
+
+                                                      <div class="form-group">
+                                                         <label style="font-weight:bold;" for="latestNewsTitle">Name</label>
+                                                         <textarea style="background:white;" class="latestNewsTitle" name="name" id="latestNewsTitle"><%=teacher.name%></textarea>
+                                                      </div> 
+                                                      <div class="form-group">
+                                                         <label style="font-weight:bold;" for="latestNewsTitle">Qualifications</label>
+                                                         <textarea style="background:white;" class="latestNewsTitle" name="qualifications" id="latestNewsTitle"><%=teacher.qualifications%></textarea>
+                                                      </div> 
+                                                      
+
+                                                      <div class="form-group">
+                                                         <label style="font-weight:bold;" for="latestNewsText">Bio</label>
+                                                         <textarea style="background:white;height:150px;" class="latestNewsText" name="bio" id="latestNewsText"><%=teacher.bio%></textarea>
+                                                      </div>
+                                                      <div class="form-group">
+                                                         <label style="font-weight:bold;" for="emailOfTech">Email</label>
+                                                         <input type="text" class="form-control" value="<%=teacher.conactInfo.email%>" id="emailOfTech" placeholder="example@example.com" name="email">
+                                                      </div>
+                                                      <div class="form-group">
+                                                         <label style="font-weight:bold;" for="phoneOfTech">Phone</label>
+                                                         <input type="text" class="form-control" id="phoneOfTech" placeholder="+088" value="<%=teacher.conactInfo.phone%>" name="phone">
+                                                      </div>
+                                                      <div class="form-group">
+                                                         <label style="font-weight:bold;" for="webOfTech">Website</label>
+                                                         <input type="text" class="form-control" id="webOfTech" placeholder="https://example.com" value="<%=teacher.conactInfo.website%>" name="website">
+                                                      </div>
+                                                      <div class="form-group">
+                                                         <label style="font-weight:bold;" for="selectGroup">Select Group (Required)</label>
+                                                         <select name="group" class="custom-select" id="selectGroup"> 
+                                                            <option value="">Select One</option>
+                                                            <%if(groupOfTeachers){%>
+                                                               <%groupOfTeachers.forEach((group2,ind)=>{%>
+                                                                  <option value="<%=group2._id%>" <%=group._id.toString()===group2._id.toString()?'selected':''%>><%=group2.name%></option>
+                                                               <%})%>
+                                                               <%}%>
+                                                            </select>
+                                                      </div>
+                                                      
+                                                   </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                   <button class="btn btn-primary">Update</button>
+                                                </div>
+                                             </form>
                                           </div>
                                        </div>
-                                       <!-- Modal End -->
-                                       <tr class="text-center" style="line-height:250%;"> 
-                                          <td>
-                                             
-                                             <%if(teacher.image){%>
-                                                <img style="width:4em;height:4em;box-shadow: 0pt 0pt 3pt 1pt #0000003b;" src="<%=teacher.image%>" alt="">
-                                                <%}else{%>
-                                                   <svg style="width:4em;height:4em;box-shadow: 0pt 0pt 3pt 1pt #0000003b;color: #6c757d" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                      <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                                    </svg>
-                                                   <%}%>
-                                          </td>
-                                          <td>
-                                             <%=teacher.name%>
-                                          </td>
-                                          <td class="<%=teacher.conactInfo.email?'':'text-muted'%>">
-                                             <%=teacher.conactInfo.email?teacher.conactInfo.email:'N/A'%>
-                                          </td>
-                                          <td class="<%=teacher.conactInfo.phone?'':'text-muted'%>">
-                                             <%=teacher.conactInfo.phone?teacher.conactInfo.phone:'N/A'%>
-                                          </td>
-                                         
-                                          <td class="webNameControllParent">
-                                             <a class="btn btn-sm" href="/administrator/teacher/info/delete/<%=group._id%>?userid=<%=teacher._id%>">
-                                             <i class="fas fa-trash-alt text-danger"></i>
-                                             </a>
-                                             <button data-toggle="modal" data-target="#teacherAboutModal<%=teacher._id.toString()%>" data-whatever="@mdo"  class="btn btn-sm">
-                                             <i class="fas fa-edit text-info"></i>
-                                             </button>
-                                          </td>
-                                       </tr>
-                                          <%})%>
-                                       <%}%>
-                                    </tbody>
-                                 </table>
-                                 <%})%>
-                                 <%}else{%>
-                                 <h6 class="text-muted text-center">There is nothing to show</h6>
-                                 <%}%>
-                              </div>
+                                    </div>
+                                    <!-- Modal End -->
+                                    <tr class="text-center" style="line-height:250%;"> 
+                                       <td>
+                                          
+                                          <%if(teacher.image){%>
+                                             <img style="width:4em;height:4em;box-shadow: 0pt 0pt 3pt 1pt #0000003b;" src="<%=teacher.image%>" alt="">
+                                             <%}else{%>
+                                                <svg style="width:4em;height:4em;box-shadow: 0pt 0pt 3pt 1pt #0000003b;color: #6c757d" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                   <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                                   </svg>
+                                                <%}%>
+                                       </td>
+                                       <td>
+                                          <%=teacher.name%>
+                                       </td>
+                                       <td class="<%=teacher.conactInfo.email?'':'text-muted'%>">
+                                          <%=teacher.conactInfo.email?teacher.conactInfo.email:'N/A'%>
+                                       </td>
+                                       <td class="<%=teacher.conactInfo.phone?'':'text-muted'%>">
+                                          <%=teacher.conactInfo.phone?teacher.conactInfo.phone:'N/A'%>
+                                       </td>
+                                       
+                                       <td class="webNameControllParent">
+                                          <a class="btn btn-sm" href="/administrator/teacher/info/delete/<%=group._id%>?userid=<%=teacher._id%>">
+                                          <i class="fas fa-trash-alt text-danger"></i>
+                                          </a>
+                                          <button data-toggle="modal" data-target="#teacherAboutModal<%=teacher._id.toString()%>" data-whatever="@mdo"  class="btn btn-sm">
+                                          <i class="fas fa-edit text-info"></i>
+                                          </button>
+                                       </td>
+                                    </tr>
+                                       <%})%>
+                                    <%}%>
+                                 </tbody>
+                              </table>
+                              <%})%>
+                              <%}else{%>
+                              <h6 class="text-muted text-center">There is nothing to show</h6>
+                              <%}%>
                            </div>
-                           <!-- Listed About Administrators End -->
                         </div>
+                        <!-- Listed About Administrators End -->
                      </div>
                   </div>
                </div>
@@ -404,6 +402,7 @@
       </div>
    </div>
 </div>
+
 <%-include('../../partials/admin/adminFooter.ejs')%>
 <script>
    let aboutAdminImagePreview = document.querySelectorAll('.aboutAdminImagePreview')

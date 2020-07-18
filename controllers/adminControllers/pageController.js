@@ -648,3 +648,104 @@ exports.deleteTeacherInfoGetController = async(req,res,next)=>{
 	}
 }
 
+exports.addContentGetController = async(req,res,next)=>{
+	try{
+		pageRenderHandler(req,res,'addContent.ejs','Add Content')
+	}catch(e){
+		next(e)
+	}
+}
+exports.addMissionAndVissionPostController = async(req,res,next)=>{
+	try{
+		let { title,text } = req.body
+	
+
+		if(title.length===0&&text.length===0){
+			req.flash('fail','Please Filup Mission And Vission')
+		}
+		let webModel = await WebModel.findOne()
+		let addMissionAndVission = await WebModel.findOneAndUpdate({_id:webModel._id},{
+			missionAndvission:{
+				title,
+				text
+			}
+		},{new:true})
+
+		if(!addMissionAndVission){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+		let hasLibrayInfo  = webModel.missionAndvission.text?'Updated':'Added'
+		req.flash('success',`Successfully ${hasLibrayInfo} Mission And Vission`)
+		return res.redirect('back')
+
+	}catch(e){
+		next(e)
+	}
+}
+exports.addLibrayInfoPostController = async(req,res,next)=>{
+	try{
+		let { title,text } = req.body
+	
+		if(title.length===0&&text.length===0){
+			req.flash('fail','Please Provied About Libray')
+		}
+		let webModel = await WebModel.findOne()
+
+		let addAboutLibray = await WebModel.findOneAndUpdate({_id:webModel._id},{
+			libray:{
+				title,
+				text
+			}
+		},{new:true})
+		if(!addAboutLibray){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+		let hasLibrayInfo  = webModel.libray.text?'Updated':'Added'
+		req.flash('success',`Successfully ${hasLibrayInfo} Libray Info`)
+		return res.redirect('back')
+	}catch(e){
+		next(e)
+	}
+}
+exports.clearAllAboutMissionAndVission= async(req,res,next)=>{
+	try{
+		let webModel = await WebModel.findOne()
+
+		let clearInfo  =await WebModel.findOneAndUpdate({_id:webModel._id},{
+			missionAndvission:{
+				title:'',
+				text:''
+			}
+		},{new:true})
+		if(!clearInfo){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+		req.flash('success','Successfully Deleted Mission And Vission Info')
+		return res.redirect('back')
+	}catch(e){
+		next(e)
+	}
+}
+exports.clearAllAboutLibray= async(req,res,next)=>{
+	try{
+		let webModel = await WebModel.findOne()
+
+		let clearInfo  =await WebModel.findOneAndUpdate({_id:webModel._id},{
+			libray:{
+				title:'',
+				text:''
+			}
+		},{new:true})
+		if(!clearInfo){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+		req.flash('success','Successfully Deleted Libray Info')
+		return res.redirect('back')
+	}catch(e){
+		next(e)
+	}
+}

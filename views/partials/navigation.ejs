@@ -15,26 +15,55 @@
 					<ul class="navbar-nav mr-auto">
 
 						<%if(menu){%>
-						<%for(let m of menu){%>
-						<%if(m.dropDown.length===0){%>
-						<li class="nav-item left-Animation">
-							<a class="nav-link" href="<%=m.href%>"><%=m.name%></a>
-						</li>
-						<%}else{%>
+						
+							<%menu.forEach((m,ind)=>{%>
+								<%if(ind+1===menu.length){%>
+									<%if(m.dropDown.length===0){%>
+										<li class="nav-item left-Animation">
+											<a class="nav-link" style="border-right:none!important" href="<%=m.href%>"><%=m.name%></a>
+										</li>
+										<%}else{%>
+			
+										<li class="nav-item">
+											<a style="cursor:pointer;border-right:none!important" class="nav-link dropDownToggler dropdown-toggle"><%=m.name%></a>
+											<ul class="dropDown-style drop-hide">
+												<%for(let d of m.dropDown){%>
+												<li>
+													<a href="<%=d.href%>"><%=d.name%></a>
+												</li>
+												<%}%>
+											</ul>
+										</li>
+									<%}%>
 
-						<li class="nav-item">
-							<a style="cursor:pointer" class="nav-link dropDownToggler dropdown-toggle"><%=m.name%></a>
-							<ul class="dropDown-style drop-hide">
-								<%for(let d of m.dropDown){%>
-								<li>
-									<a href="<%=d.href%>"><%=d.name%></a>
-								</li>
+								<%}else{%>
+									<%if(m.dropDown.length===0){%>
+										<li class="nav-item left-Animation">
+											<a class="nav-link" href="<%=m.href%>"><%=m.name%></a>
+										</li>
+										<%}else{%>
+			
+										<li class="nav-item">
+											<a style="cursor:pointer" class="nav-link dropDownToggler dropdown-toggle"><%=m.name%></a>
+											<ul class="dropDown-style drop-hide">
+												<%for(let d of m.dropDown){%>
+												<li>
+													<a href="<%=d.href%>"><%=d.name%></a>
+												</li>
+												<%}%>
+											</ul>
+										</li>
+			
+										<%}%>
 								<%}%>
-								</ul>
-							</li>
+							
 
-							<%}%>
-								<%}%>
+						<%})%>
+
+							
+
+						
+
 					<%}%>
 
 

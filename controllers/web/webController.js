@@ -55,7 +55,27 @@ exports.aboutPageGetController = async(req,res,next)=>{
 		next(e)
 	}
 }
-
+exports.librayPageGetController = (req,res,next)=>{
+    try{
+        renderPageHandler(req,res,'web/libray','Mission & Vission')
+    }catch(e){
+        next(e)
+    }
+}
+exports.missionAndVissionPageGetController = (req,res,next)=>{
+    try{
+        renderPageHandler(req,res,'web/missionAndVission','Mission & Vission')
+    }catch(e){
+        next(e)
+    }
+}
+exports.contactPageGetController = async(req,res,next)=>{
+    try{
+        renderPageHandler(req,res,'web/contact','Contact Us')
+    }catch(e){
+        next(e)
+    }
+} 
 exports.dynamicPageRenderGetController = async(req,res,next)=>{
     try{
         let { pagename } = req.params

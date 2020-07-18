@@ -365,15 +365,53 @@ pre {
 /* Imortance Links End */
 
 /* Contact Us */
-.contactTextContainer {
-	color: #dae0e5;
+.custom__border{
+	border-right:1px solid #adb5bd
 }
-.contactTitle {
-	border-bottom: 2px solid white;
-	width: 80%;
-	padding-bottom: 20px;
-	font-weight: bold;
+.contact__page__title{
+	text-align: center;
+	text-transform: uppercase;
 }
+.contact__page__title>h4{
+	color:#dae0e5;
+	
+}
+.contact__page__title>h5{
+	color:#adb5bd;
+}
+.contact_page_item{
+	color:white
+}
+.contact_page_item{
+    text-align:center;
+    border: 1px solid #a7afb98a;
+    margin:5px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0pt 0pt 3pt 0pt #00000026;
+    transition:all 0.75s;
+    cursor: pointer;
+}
+.contact_page_item:hover{
+    background: #adb5bd21;
+    transform: scale(0.99)
+}
+.contact_page_item>i{
+    font-size: 3vw;
+    color: #21953b;
+}
+.contact_page_item>p{
+    margin-left:10px;
+	margin-bottom:0px!important;
+	color:#dae0e5;
+}
+/* .contact_page_item>i{
+    font-size: 3vw;
+    color: #1e7e34e0;
+} */
+
+
+
 .locationOfUniversity {
 	width: 100%;
 	height: 350px;
@@ -396,6 +434,9 @@ pre {
 	}
 	.addMargin{
 		margin-top:10px!important;
+	}
+	.custom__border__remove{
+		border:none!important;
 	}
 	h6{
 		font-size:4.25vw;
@@ -469,7 +510,9 @@ pre {
 		text-transform: uppercase;
 		font-weight: bold;
 	} */
-	
+	.contact_page_item>i{
+		font-size: 9vw;
+	}
 	.hiddenTitle{
 		display: none;
 	}

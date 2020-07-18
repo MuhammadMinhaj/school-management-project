@@ -1,149 +1,148 @@
 <%-include('../../partials/admin/adminHead.ejs')%>
-<div class="container-luid">
-   <div class="row">
-      <!-- Admin Brand and Dashboard Menu -->
-      <%- include('../../partials/admin/adminSidebar.ejs')%>
-      <!-- Dashboard Content -->
-      <div class="col-sm-10 ">
-         <!-- Admin Navbar Content -->
-         <%- include('../../partials/admin/adminNavbar.ejs')%>
-         <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
-         <div class="row scroll-style">
-            <div class="col-sm-12" style="background:#6c757d">
-               <div class="row">
-                  <div class="w-100">
-                     <%-include('../../partials/Error/alert.ejs')%>
-                  </div>
-                  <div class="col-sm-12">
-                     <h4 class="menu-title p-1 text-center" style="color:white;text-transform:uppercase;font-weight:bold;"> News </h4>
-                  </div>
+
+<div class="row">
+   <!-- Admin Brand and Dashboard Menu -->
+   <%- include('../../partials/admin/adminSidebar.ejs')%>
+   <!-- Dashboard Content -->
+   <div class="col-sm-10 ">
+      <!-- Admin Navbar Content -->
+      <%- include('../../partials/admin/adminNavbar.ejs')%>
+      <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+      <div class="row scroll-style">
+         <div class="col-sm-12" style="background:#6c757d">
+            <div class="row">
+               <div class="w-100">
+                  <%-include('../../partials/Error/alert.ejs')%>
                </div>
-               <div class="row py-2">
-                  <div class="col-sm-12">
-                     <div class="custom-card p-3">
-                        <div class="row">
-                           <!-- Latest News -->
-                           <div class="col-sm-6">
-                              <div class="p-2 h-100" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
-                                 <h5 class="text-center text-danger">Latest New's</h5>
-                                 <div class="latestNewsBody">
-                                    <form action="/administrator/news/latest" method="POST">
-                                       <div class="form-group">
-                                          <label style="font-weight:bold;" for="latestNewsTitle">Title</label>
-                                          <textarea class="latestNewsTitle" name="title" id="latestNewsTitle"><%=webModel.latestNews.title?webModel.latestNews.title:''%></textarea>
-                                       </div>
-                                       <div class="form-group">
-                                          <label style="font-weight:bold;" for="latestNewsText">Text</label>
-                                          <textarea class="latestNewsText" name="text" id="latestNewsText"><%=webModel.latestNews.text?webModel.latestNews.text:''%></textarea>
-                                       </div>
-                                       <div class="form-group">
-                                          <label style="font-weight:bold;" for="latestNewsText">Date</label>
-                                          <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="date" value="<%=webModel.latestNews.date?webModel.latestNews.date:''%>">
-                                       </div>
-                                       <button class="btn btn-primary btn-sm <%=webModel.latestNews.title?'w-75':'w-100'%>"><%=webModel.latestNews.title?'Update':'Publish'%></button>
-                                       <%if(webModel.latestNews.title){%>
-                                       <a href="/administrator/news/delete/latest" class="btn btn-info btn-sm" style="width:20%;">Clear All</a>
-                                       <%}%>
-                                    </form>
-                                 </div>
+               <div class="col-sm-12">
+                  <h4 class="menu-title p-1 text-center" style="color:white;text-transform:uppercase;font-weight:bold;"> News </h4>
+               </div>
+            </div>
+            <div class="row py-2">
+               <div class="col-sm-12">
+                  <div class="custom-card p-3">
+                     <div class="row">
+                        <!-- Latest News -->
+                        <div class="col-sm-6">
+                           <div class="p-2 h-100" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
+                              <h5 class="text-center text-danger">Latest New's</h5>
+                              <div class="latestNewsBody">
+                                 <form action="/administrator/news/latest" method="POST">
+                                    <div class="form-group">
+                                       <label style="font-weight:bold;" for="latestNewsTitle">Title</label>
+                                       <textarea class="latestNewsTitle" name="title" id="latestNewsTitle"><%=webModel.latestNews.title?webModel.latestNews.title:''%></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                       <label style="font-weight:bold;" for="latestNewsText">Text</label>
+                                       <textarea class="latestNewsText" name="text" id="latestNewsText"><%=webModel.latestNews.text?webModel.latestNews.text:''%></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                       <label style="font-weight:bold;" for="latestNewsText">Date</label>
+                                       <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="date" value="<%=webModel.latestNews.date?webModel.latestNews.date:''%>">
+                                    </div>
+                                    <button class="btn btn-primary btn-sm <%=webModel.latestNews.title?'w-75':'w-100'%>"><%=webModel.latestNews.title?'Update':'Publish'%></button>
+                                    <%if(webModel.latestNews.title){%>
+                                    <a href="/administrator/news/delete/latest" class="btn btn-info btn-sm" style="width:20%;">Clear All</a>
+                                    <%}%>
+                                 </form>
                               </div>
                            </div>
-                           <!-- Breaking News -->
-                           <div class="col-sm-6">
-                              <div class="p-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa">
-                                 <h5 class="text-center text-danger">Breaking New's</h5>
-                                 <div class="latestNewsBody">
-                                    <form action="/administrator/breaking-news" method="POST">
-                                       <div class="form-group">
-                                          <textarea name="title" placeholder="Title..." class="form-control"></textarea>
-                                       </div>
-                                       <div class="form-group">
-                                          <input type="url" name="url" class="form-control" placeholder='URL'>
-                                       </div>
-                                       <button class="btn btn-primary btn-sm w-100">Publish</button>
-                                    </form>
-                                 </div>
+                        </div>
+                        <!-- Breaking News -->
+                        <div class="col-sm-6">
+                           <div class="p-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa">
+                              <h5 class="text-center text-danger">Breaking New's</h5>
+                              <div class="latestNewsBody">
+                                 <form action="/administrator/breaking-news" method="POST">
+                                    <div class="form-group">
+                                       <textarea name="title" placeholder="Title..." class="form-control"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                       <input type="url" name="url" class="form-control" placeholder='URL'>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm w-100">Publish</button>
+                                 </form>
                               </div>
-                              <!-- Table Section -->
-                              <div class="mt-2 p-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
-                                 <div class="admin-show-scroll-style" style="height:250px!important;">
-                                    <%if(webModel.breakingNews.length!==0){%>
-                                    <table class="table table-sm">
-                                       <thead>
-                                          <tr class="text-center">
-                                             <th scope="col">Title</th>
-                                             <th scope="col">URL</th>
-                                             <th scope="col">CONTROLLING</th>
-                                          </tr>
-                                       </thead>
-                                       <tbody>
-                                          <%webModel.breakingNews.forEach((news,ind)=>{%>
-                                          <!-- Modal -->
-                                          <div class="modal fade" id="newsModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                             <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                   <div class="modal-header">
-                                                      <h5 class="modal-title" id="exampleModalLabel">Edit Breaking News</h5>
-                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                      <span aria-hidden="true">&times;</span>
-                                                      </button>
-                                                   </div>
-                                                   <form action="/administrator/breaking-news/update/<%=ind%>" method="POST">
-                                                      <div class="modal-body">
-                                                         <div class="form-group">
-                                                            <textarea name="title" placeholder="Title..." class="form-control"><%=news.title%></textarea>
-                                                         </div>
-                                                         <div class="form-group">
-                                                            <input type="url" name="url" value="<%=news.url?news.url:''%>" class="form-control" placeholder='URL'>
-                                                         </div>
-                                                      </div>
-                                                      <div class="modal-footer">
-                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                         <button class="btn btn-primary">Update</button>
-                                                      </div>
-                                                   </form>
+                           </div>
+                           <!-- Table Section -->
+                           <div class="mt-2 p-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
+                              <div class="admin-show-scroll-style" style="height:250px!important;">
+                                 <%if(webModel.breakingNews.length!==0){%>
+                                 <table class="table table-sm">
+                                    <thead>
+                                       <tr class="text-center">
+                                          <th scope="col">Title</th>
+                                          <th scope="col">URL</th>
+                                          <th scope="col">CONTROLLING</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       <%webModel.breakingNews.forEach((news,ind)=>{%>
+                                       <!-- Modal -->
+                                       <div class="modal fade" id="newsModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog">
+                                             <div class="modal-content">
+                                                <div class="modal-header">
+                                                   <h5 class="modal-title" id="exampleModalLabel">Edit Breaking News</h5>
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                   <span aria-hidden="true">&times;</span>
+                                                   </button>
                                                 </div>
+                                                <form action="/administrator/breaking-news/update/<%=ind%>" method="POST">
+                                                   <div class="modal-body">
+                                                      <div class="form-group">
+                                                         <textarea name="title" placeholder="Title..." class="form-control"><%=news.title%></textarea>
+                                                      </div>
+                                                      <div class="form-group">
+                                                         <input type="url" name="url" value="<%=news.url?news.url:''%>" class="form-control" placeholder='URL'>
+                                                      </div>
+                                                   </div>
+                                                   <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                      <button class="btn btn-primary">Update</button>
+                                                   </div>
+                                                </form>
                                              </div>
                                           </div>
-                                          <!-- Modal End -->
-                                          <tr class="text-center" style="line-height:250%;">
-                                             <td>
-                                                <%if(news.title.length>25){%>
-                                                <%=news.title.slice(0,26)+'...'%>
-                                                <%}else{%>
-                                                <%=news.title%>
-                                                <%}%>
-                                             </td>
-                                             <td class="text-muted">
-                                                <%if(news.url){%>
-                                                <%if(news.url.length>20){%>
-                                                <%=news.url.slice(0,21)+'...'%>
-                                                <%}else{%>
-                                                <%=news.url%>
-                                                <%}%>
-                                                <%}else{%>
-                                                N/A
-                                                <%}%>
-                                             </td>
-                                             <td class="webNameControllParent">
-                                                <a class="btn btn-sm" href="/administrator/breaking-news/delete/<%=ind%>">
-                                                <i class="fas fa-trash-alt text-danger"></i>
-                                                </a>
-                                                <button data-toggle="modal" data-target="#newsModal<%=ind%>" data-whatever="@mdo"  class="btn btn-sm">
-                                                <i class="fas fa-edit text-info"></i>
-                                                </button>
-                                             </td>
-                                          </tr>
-                                          <%})%>
-                                       </tbody>
-                                    </table>
-                                    <%}else{%>
-                                    <h6 class="text-muted text-center">There is nothing to show</h6>
-                                    <%}%>
-                                 </div>
+                                       </div>
+                                       <!-- Modal End -->
+                                       <tr class="text-center" style="line-height:250%;">
+                                          <td>
+                                             <%if(news.title.length>25){%>
+                                             <%=news.title.slice(0,26)+'...'%>
+                                             <%}else{%>
+                                             <%=news.title%>
+                                             <%}%>
+                                          </td>
+                                          <td class="text-muted">
+                                             <%if(news.url){%>
+                                             <%if(news.url.length>20){%>
+                                             <%=news.url.slice(0,21)+'...'%>
+                                             <%}else{%>
+                                             <%=news.url%>
+                                             <%}%>
+                                             <%}else{%>
+                                             N/A
+                                             <%}%>
+                                          </td>
+                                          <td class="webNameControllParent">
+                                             <a class="btn btn-sm" href="/administrator/breaking-news/delete/<%=ind%>">
+                                             <i class="fas fa-trash-alt text-danger"></i>
+                                             </a>
+                                             <button data-toggle="modal" data-target="#newsModal<%=ind%>" data-whatever="@mdo"  class="btn btn-sm">
+                                             <i class="fas fa-edit text-info"></i>
+                                             </button>
+                                          </td>
+                                       </tr>
+                                       <%})%>
+                                    </tbody>
+                                 </table>
+                                 <%}else{%>
+                                 <h6 class="text-muted text-center">There is nothing to show</h6>
+                                 <%}%>
                               </div>
-                              
                            </div>
+                           
                         </div>
                      </div>
                   </div>
@@ -153,6 +152,7 @@
       </div>
    </div>
 </div>
+
 <%-include('../../partials/admin/adminFooter.ejs')%>
 </body>
 </html>

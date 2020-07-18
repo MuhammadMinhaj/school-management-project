@@ -10,10 +10,11 @@
 }
 /* Menu Style */
 .navigation > ul > li > a {
-	color: white !important;
+	color: #dae0e5 !important;
 	border-right: 1px dashed green;
-	font-family: Georgia;
-	font-family: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: 600;
 }
 /* Hover Effect Of Navigation  */
 .navigation > ul > li:hover {
