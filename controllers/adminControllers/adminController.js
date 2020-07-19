@@ -4,6 +4,25 @@ const { validationResult } = require('express-validator')
 const Page = require('../../models/Page')
 const WebModel = require('../../models/WebModel')
 
+async function pageRenderHandler(req,res,pagename,title){
+	let webModel = await WebModel.findOne()
+	let pages = await Page.find()
+
+	res.render(`pages/administrator/${pagename}`, {
+		title: title,
+		style: 'bg-light',
+		data: req.admin,
+		flashMessage: req.flash(),
+		menu,
+		pages,
+		webModel,
+		createdPage: {},
+		error: {},
+		groupOfTeachers
+	})
+}
+
+
 exports.adminAccountGetController = async (req, res, next) => {
 	try {
 		let admin = await Admin.findOne({ _id: req.admin._id })
