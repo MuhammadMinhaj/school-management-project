@@ -136,15 +136,13 @@ const schema = new Schema({
 		title:String,
 		text:String,
 	},
-	contact:[
-		{
-			name:String,
-			email:String,
-			phone:String,
-			subject:String,
-			text:String
-		}
-	]
+	contact:{
+		status:Boolean
+	},
+	publicEmail:{
+		email:String,
+		password:String
+ 	}
 })
 
 const WebModel = new model('WebModel', schema)

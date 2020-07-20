@@ -166,28 +166,10 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				)
 				if (updatedPassword) {
 					req.flash('success', 'Sucessfully Updated Password')
-					return res.render('pages/administrator/changePassword.ejs', {
-						title: 'Updated Password',
-						style: 'bg-light',
-						data: admin,
-						error: {},
-						pages,
-						webModel,
-						createdPage: {},
-						flashMessage: req.flash(),
-					})
+					return res.redirect('back')
 				}
 				req.flash('fail', ' Internal Server Error')
-				return res.render('pages/administrator/changePassword.ejs', {
-					title: 'Internal Server Error',
-					style: 'bg-light',
-					error: {},
-					data: admin,
-					pages,
-					webModel,
-					createdPage: {},
-					flashMessage: req.flash(),
-				})
+				return res.redirect('back')
 			}
 			req.flash('fail', "Old Password Dosn't Matched")
 			return res.render('pages/administrator/changePassword.ejs', {
@@ -226,40 +208,13 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 			)
 			if (updatedPassword) {
 				req.flash('success', 'Successfully Updated Password')
-				return res.render('pages/administrator/changePassword.ejs', {
-					title: 'Updated Password',
-					style: 'bg-light',
-					error: {},
-					data: admin,
-					pages,
-					webModel,
-					createdPage: {},
-					flashMessage: req.flash(),
-				})
+				return res.redirect('back')
 			}
 			req.flash('fail', 'Internal Server Error')
-			return res.render('pages/administrator/changePassword.ejs', {
-				title: 'Internal Server Error',
-				style: 'bg-light',
-				error: {},
-				data: admin,
-				pages,
-				webModel,
-				createdPage: {},
-				flashMessage: req.flash(),
-			})
+			return res.redirect('back')
 		}
 		req.flash('fail', 'Invalid Creadentials')
-		return res.render('pages/administrator/changePassword.ejs', {
-			title: 'Invalid Creadentials',
-			style: 'bg-light',
-			error: {},
-			data: admin,
-			pages,
-			webModel,
-			createdPage: {},
-			flashMessage: req.flash(),
-		})
+		return res.redirect('back')
 	} catch (e) {
 		next(e)
 	}

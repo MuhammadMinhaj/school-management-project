@@ -1,4 +1,5 @@
 import result from './result';
+import contact from './contact'
 
 let btns = document.querySelectorAll('.dropDownToggler')
 let dropMenus = document.querySelectorAll('.dropDown-style')

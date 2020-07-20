@@ -1,0 +1,55 @@
+.pre__custom__style{
+    font-family: Arial, Helvetica, sans-serif;
+    white-space: pre-wrap;
+    font-size: 16px;
+    color:#212529
+}
+.bold__text__style{
+    font-size: 15px;
+}
+.crossBtn{
+    /* border: 1px solid #00000021; */
+    box-shadow: 0pt 0pt 3pt 0pt #00000038;
+    border-radius: 6px;
+    color: #f60707;
+    outline: none;
+    border: none;
+    transition: all 0.5s;
+    background: #f8f9fa;
+}
+.crossBtn:hover{
+    transform: scale(0.97);
+    background: #4950572b;
+}
+.crossBtn:focus{
+    outline:none!important
+}
+.custom__input__style{
+    width: 100%;
+    padding: 6px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #adb5bd9e;
+    transition: all 0.5s;
+    resize: none;
+}
+.circulerStyle {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 12px;
+    box-shadow: 0pt 0pt 3pt 0pt #00000057;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+.circulerStyle:hover{
+    background:black;
+    color:#fff;
+
+}
+.status__btn{
+    color:#fff;
+}
+.status__btn:hover{
+    color:#fff;
+    text-decoration: none;
+}

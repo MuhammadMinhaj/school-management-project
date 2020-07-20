@@ -3,7 +3,7 @@ const WebModel = require('../../models/WebModel')
 const ExaminationType = require('../../models/ExaminationType')
 const Teacher = require('../../models/Teacher')
 const Page = require('../../models/Page')
-
+const Contact = require('../../models/Contact')
 
 async function renderPageHandler(req,res,pagename,title,page){
     let menu  = await Menu.find()
@@ -76,6 +76,46 @@ exports.contactPageGetController = async(req,res,next)=>{
         next(e)
     }
 } 
+exports.contactPagePostController = async(req,res,next)=>{
+    try{
+        let { name,email,subject,message } = req.body
+        let webModel = await WebModel.findOne()
+
+        if(!webModel.contact.status){
+            res.json({error:'Contact Has Been Deactivated!'})
+            return false
+        }
+
+        if(name.length===0||email.length===0||subject.length===0||message.length===0){
+            res.json({error:'Invalid Credentials'})
+            return false
+        }
+       
+
+
+        let d = new Date()
+        let correntMonth = d.getMonth()+1
+        
+        let contactInfo = new Contact({
+            name,
+            email,
+            subject,
+            message,
+            date:`${d.getDate()+1}/${correntMonth}/${d.getFullYear()}`
+        })
+        let sendInfo = await contactInfo.save()
+
+        if(!sendInfo){
+            res.json({error:'Internal Server Error'})
+            return false
+        }
+        console.log(sendInfo)
+        res.json({message:'We Have Received Your Email,Please Wait For Our Feedback.'})
+    }catch(e){
+        next(e)
+    }
+
+}
 exports.dynamicPageRenderGetController = async(req,res,next)=>{
     try{
         let { pagename } = req.params

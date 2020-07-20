@@ -219,7 +219,7 @@
 .contact__item{
     text-align:center;
     border: 1px solid #a7afb98a;
-    margin:5px;
+    margin-top:15px;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0pt 0pt 3pt 0pt #00000026;
@@ -231,12 +231,48 @@
     transform: scale(0.99)
 }
 .contact__item>i{
-    font-size: 3vw;
+    font-size: min(3vw,40px);
     color: #1e7e34e0;
 }
 .contact__item>p{
     margin-left:10px;
     margin-bottom:0px!important;
+}
+.custom__contact__input{
+	width: 100%;
+	padding:6px;
+	outline: none;
+	border: none;
+    border-bottom: 1px solid #adb5bd9e;
+    transition: all 0.5s;
+    resize: none
+
+}
+.custom__contact__input:focus{
+    border-bottom:1px solid #545b62;
+    
+}
+.submit__btn{
+    
+    width:30%;
+    padding:10px 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius:8px;
+    transition: all 0.25s;
+    border:1px solid #495057;
+    background:#dae0e5;
+    color:#495057;
+
+}
+.submit__btn:hover{
+    color:#1e7e34;
+    border:1px solid #1e7e34;
+    transform:scale(0.99)
+
+}
+.submit__btn:focus{
+    outline: none;
+    box-shadow:0pt 0pt 3pt 0pt #0062cc
 }
 @media (max-width:574px){
     .remove__padding{
@@ -276,5 +312,10 @@
     }
     .contact__item>i{
         font-size: 9vw;
+    }
+    .submit__btn{
+        width:45%;
+        display: block;
+        margin: auto;
     }
 }

@@ -9,6 +9,7 @@ const departmentRoute = require('./administrator/departmentRoute')
 const linksRoute = require('./administrator/linksRoute')
 const createTeacherRoute = require('./administrator/createTeacherRoute')
 const resultManagementRoute = require('./administrator/resultManagementRoute')
+const emailsRoute = require('./administrator/emailsRoute')
 
 // All Imported User Related  Routes
 const userAuthRoute = require('./user/authRoute')
@@ -39,7 +40,8 @@ const router = [
 			departmentRoute,
 			linksRoute,
 			createTeacherRoute,
-			resultManagementRoute
+			resultManagementRoute,
+			emailsRoute
 		],
 	},
 	{

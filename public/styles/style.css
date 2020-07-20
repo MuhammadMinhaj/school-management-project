@@ -397,7 +397,7 @@ pre {
     transform: scale(0.99)
 }
 .contact_page_item>i{
-    font-size: 3vw;
+    font-size:min(3vw,40px);
     color: #21953b;
 }
 .contact_page_item>p{
@@ -405,6 +405,7 @@ pre {
 	margin-bottom:0px!important;
 	color:#dae0e5;
 }
+
 /* .contact_page_item>i{
     font-size: 3vw;
     color: #1e7e34e0;

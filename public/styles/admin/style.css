@@ -10,6 +10,7 @@
 @import './notice.css';
 @import './multipleStyle.css';
 @import '../user/resultsdesign.css';
+@import './emails.css';
 /* Defaullt Scroll Style */
 @media (min-width:576px){
     html{
