@@ -691,54 +691,8 @@ exports.socialLinksUpdatePostController = async(req,res,next)=>{
 		next(e)
 	}
 }
-exports.aboutTextCreatePostController = async(req,res,next)=>{
-	try{
-	
-		let admin = await Admin.findOne({ _id: req.admin._id })
-		let pages = await Page.find()
-		let webModel = await WebModel.findOne()
-		let { title,body } = req.body
 
-		function pageRenderHandler(msgOpt, msg,webModel) {
-			if (msg) req.flash(msgOpt, msg)
-			return res.render('pages/administrator/setting.ejs', {
-				style: 'bg-light',
-				title: 'Administrator Setting',
-				data: admin,
-				flashMessage: req.flash(),
-				pages,
-				createdPage: {},
-				upSliderImgErr: {},
-				webNameError: {},
-				webNameList:webModel.name,
-				webModel:webModel
-			})
-		}
 
-		let msg;
-		if(!webModel.about.title){
-			msg = 'Successfully Added About Text'
-		}
-		if(title.length===0||body.length===0){
-			return pageRenderHandler('fail','Cannot Be Empty Field',webModel)
-		}
-
-		let addedAboutText = await WebModel.findOneAndUpdate({_id:webModel._id},{
-			about:{
-				title,
-				body
-			}
-		},{
-			new:true
-		})
-		if(!addedAboutText){
-			return pageRenderHandler('fail','Internal Server Error',webModel)
-		}
-		 pageRenderHandler('success',msg||'Successfully Updated About Text',addedAboutText)
-	}catch(e){
-		next(e)
-	}
-}
 exports.futuredLinksCreatePostController = async(req,res,next)=>{
 	try{
 		let admin = await Admin.findOne({ _id: req.admin._id })
@@ -913,6 +867,66 @@ exports.futuredLinksUpdatePostController = async(req,res,next)=>{
 		}
 		pageRenderHandler('success','Successfully Updated Futured Links',updatedLinks)
 
+	}catch(e){
+		next(e)
+	}
+}
+
+exports.addPublicMailPostController = async(req,res,next)=>{
+	try{
+		let { email,password } = req.body
+
+		if(email.length===0||password.length===0){
+			req.flash('fail','Please Provied Email And Password')
+			return res.redirect('back')
+		}
+
+		let webModel = await WebModel.findOne()
+
+		let msg 
+		if(webModel.publicEmail.email){
+			msg = 'Updated'
+		}else{
+			msg = 'Added'
+		}
+		let addedPublicMail = await WebModel.findOneAndUpdate({_id:webModel._id},{
+			publicEmail:{
+				email,
+				password
+			}
+		},{new:true})
+
+		if(!addedPublicMail){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+
+		req.flash('success',`Successfully ${msg} Public Mail`)
+		res.redirect('back')
+	}catch(e){
+		next(e)
+	}
+}
+
+exports.removePublicMailGetController = async(req,res,next)=>{
+	try{
+
+		let webModel = await WebModel.findOne()
+
+		let removedPublicMail = await WebModel.findOneAndUpdate({_id:webModel._id},{
+			publicEmail:{
+				email:'',
+				password:''
+			}
+		},{new:true})
+
+		if(!removedPublicMail){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+
+		req.flash('success',`Successfully Remove Public Mail`)
+		res.redirect('back')
 	}catch(e){
 		next(e)
 	}

@@ -2,15 +2,15 @@
 
 
 <div style="margin:0px!important" class="row backgroundImage px-5 py-2 pedding__margin__zero">
-    <div class="col-sm-12">
+    <div class="col-sm-12 pedding__margin__zero">
         <div class="container pedding__margin__zero add__padding__y">
             <div class="card p-2">
 
-                <div class="card__title text-center">
+                <div class="printForRemove card__title text-center">
                     <h5 class="mt-1">JASA ONLINE BASED RESULTS PUBLICATION SYSTEM</h5>
                 </div>
-                <div class="card__body p-3">
-                   <div id="resultFindingForm" class="card p-3">
+                <div class="card__body p-3 addResultPadding">
+                   <div id="resultFindingForm" class="printForRemove card p-3">
                       <div id="alert__box"></div>
                         <div class="form-row">
                             <div class="col-sm-4">
@@ -117,58 +117,55 @@
                         </div>
                    </div>
 
-                   <div id="showResult" style="display: none;">
-                      <div class="card mt-2 py-3">
-                          <div class="card p-2 m-auto" style="min-width:85%">
-                            <div class="result__container p-2">
+                   <div id="printBtnContainer" style="display: none;" class="text-center printForRemove ">
+                      <a class="printToBackBtn" href="">Back To Search</a>
+                       <a class="printBtn" href="javascript:window.print()">Print</a>
+                   </div>
+                   
+                    
+                   <div id="showResult" class="printForSetStyle" style="display: none;">
+                      <div class="printForSetStyle pedding__margin__zero mt-2 py-3">
+                          <div class="card printForSetStyle printContainer resultElementModileView p-2 m-auto w-75 maxWidth" id="printResult" >
+                            
+                            <div class="printForSetStyle resultElementModileView result__container p-2">
                               <div id="tableHeadParent" class="result__head text-center">
                                   <div class="logo m-auto" style="max-width:80px;max-height:80px;">
                                     <img id="logo" style="display: none;" width="80%" height="100%" alt="Logo">
                                   </div>
                                   
                                   <div class="result__name">
-                                    <h5 id="title1" style="color:#1e7e34"></h5>
-                                    <h6 id="title2" style="color:#545b62"></h6>
-                                    <h6 id="title3" style="color:#d39e00"></h6>
-                                    <h6 id="title4" style="color:#0062cc"></h6>
+                                    <h4 id="title1" style="color:#1e7e34"></h4>
+                                    <h5 id="title2" style="color:#545b62"></h5>
+                                    <h5 id="title3" style="color:#d39e00"></h5>
+                                    <h5 id="title4" style="color:#0062cc"></h5>
                                   </div>
                               </div>
-                              <div class="result__body px-3">
+                              <div class="result__body resultElementModileView px-3">
+                                <!-- Student Info For Table -->
                                 <table class="custom__table">
                                     <tbody id="tableParentElement1">
-                                      <!-- <tr>
-                                        <td><h6 style="padding:0px;margin:0px;">Roll No:</h6></td>
-                                        <td>07</td>
-                                        <td><h6 style="padding:0px;margin:0px;">Student ID:</h6></td>
-                                        <td>Address</td>
-                                      </tr>
-                                      <tr>
-                                        <td><h6 style="padding:0px;margin:0px;">Name: </h6></td>
-                                        <td colspan="3">Muhammad Minhaj</td>
-                                      </tr>
-                                      <tr>
-                                        <td><h6 style="padding:0px;margin:0px;">Roll No:</h6></td>
-                                        <td>07</td>
-                                        <td><h6 style="padding:0px;margin:0px;">Student ID:</h6></td>
-                                        <td>Address</td>
-                                      </tr> -->
+                                    
                                     </tbody>
                                 </table>
+                                   <!-- Subject Info For Table -->
                                 <span id="subjectsTitle"></span>
                                 <table class="custom__table text-center">
                                   <tbody id="tableParentElement2">
                                   
                                   </tbody>
                                 </table>
+
+                                   <!-- Combination Subject Info For Table -->
+
                                 <span id="combinationSubjectTitle"></span>
-                                <!-- <h5 class="my-2 text-center">Combination Subjects</h5> -->
                                 <table class="custom__table text-center">
                                   <tbody id="tableParentElement3">
                                   
                                   </tbody>
                                 </table>
-                                <!-- <h5 class="my-2 text-center">Optional Subjects</h5> -->
+  
                                 <span id="optionalSubjectTitle"></span>
+                                   <!-- Optional Subject Info For Table -->
                                 <table class="custom__table text-center">
                                   <tbody id="tableParentElement4">
                                   
@@ -180,7 +177,8 @@
                           </div>
                       </div>
                    </div>
-                   <div style="display:none" id="loading__box" class="text-center">
+
+                   <div style="display:none" id="loading__box" class="printForRemove text-center">
                      <h5>Finding Result...</h5>
                     <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
                       <span class="sr-only">Loading...</span>

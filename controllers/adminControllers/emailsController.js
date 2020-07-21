@@ -58,21 +58,24 @@ exports.sentMailsPostController = async(req,res,next)=>{
 
         let webModel = await WebModel.findOne()
 
+        if(!webModel.publicEmail.email||!webModel.publicEmail.password){
+            req.flash('fail','Please Add Public Mail From Setting Pannel')
+            return res.redirect('back')
+        }
+
         let hasClient  = await Contact.findOne({_id:id})
     
         if(!hasClient){
             req.flash('fail','Client Is Not Available')
             return res.redirect('back')
         }
-        
         let transporter = nodemailer.createTransport({
             service:'gmail',
             auth:{
-                user:'test.projects24@gmail.com',
-                pass:'mdminhaj24ctg24'
+                user:webModel.publicEmail.email,
+                pass:webModel.publicEmail.password
             }
         })
-
         let sendMailToClient = await transporter.sendMail({
             from:'test.projects24@gmail.com',
             to:hasClient.email,

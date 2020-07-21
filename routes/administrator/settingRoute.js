@@ -21,10 +21,11 @@ const {
     socialLinksCreatePostController,
     socialLinksDeleteGetController,
     socialLinksUpdatePostController,
-    aboutTextCreatePostController,
     futuredLinksCreatePostController,
     futuredLinksDeleteGetController,
-    futuredLinksUpdatePostController
+    futuredLinksUpdatePostController,
+    addPublicMailPostController,
+    removePublicMailGetController
 }   = require('../../controllers/adminControllers/settingController')
 
 function redirectPageController(req,res,next){
@@ -56,12 +57,12 @@ router.get('/setting/links/delete/:id',isAuthenticatedAdmin,socialLinksDeleteGet
 router.post('/setting/links/update/:id',isAuthenticatedAdmin,socialLinksUpdatePostController)
 router.get('/setting/links/update/:id',isAuthenticatedAdmin,redirectPageController)
 
-router.get('/setting/about/text/add',isAuthenticatedAdmin,redirectPageController)
-router.post('/setting/about/text/add',isAuthenticatedAdmin,aboutTextCreatePostController)
 
 router.get('/setting/futured/links/create',isAuthenticatedAdmin,redirectPageController)
 router.post('/setting/futured/links/create',isAuthenticatedAdmin,futuredLinksCreatePostController)
 router.get('/setting/futured/links/delete/:id',isAuthenticatedAdmin,futuredLinksDeleteGetController)
 router.get('/setting/futured/links/update/:id',isAuthenticatedAdmin,redirectPageController)
 router.post('/setting/futured/links/update/:id',isAuthenticatedAdmin,futuredLinksUpdatePostController)
+router.post('/setting/add/public/mail',isAuthenticatedAdmin,addPublicMailPostController)
+router.get('/setting/remove/public/mail',isAuthenticatedAdmin,removePublicMailGetController)
 module.exports = router

@@ -1,4 +1,6 @@
 import axios from 'axios'
+import jquery from 'jquery'
+
 
 let HOST_URI = 'http://localhost:8080'
 
@@ -111,7 +113,9 @@ function formSubmitHandler(){
 }
 
 let GET_RESULT_URI = `${HOST_URI}/api/result/get`
-
+// let downloadBtn = document.getElementById('downloadResult')
+ let printBtnContainer = document.getElementById('printBtnContainer')
+ 
 function getResultRequestHandler(Class,section,group,exam,year,roll,id){
 
     axios.get(`${GET_RESULT_URI}?Class=${Class}&&section=${section}&&group=${group}&&exam=${exam}&&year=${year}&&roll=${roll}&&id=${id}`)
@@ -144,7 +148,12 @@ function getResultRequestHandler(Class,section,group,exam,year,roll,id){
                 })
             }
             showResult.style.display = 'block'
+           
             createResultElement(res.data.result)
+
+           
+            printBtnContainer.style.display='block'
+            
             loadingParentElement.style.display='none'
             resultFindingForm.remove()
         }
@@ -154,6 +163,9 @@ function getResultRequestHandler(Class,section,group,exam,year,roll,id){
     })
 }
 
+
+
+
 // Result Views Elements
 
 let title1,title2,title3,title4,logo;
@@ -162,6 +174,9 @@ title2 = document.getElementById('title2')
 title3 = document.getElementById('title3')
 title4 = document.getElementById('title4')
 logo = document.getElementById('logo')
+
+
+
 
 // let headParentElement = document.getElementById('tableHeadParent')
 
@@ -182,7 +197,8 @@ function createTDElement(text,classname,attrProps,attrVal,head,everyClassName){
         classname||everyClassName?TD.className = `${classname?classname:''} ${everyClassName?everyClassName:''}`:null
         
         attrProps?TD.setAttribute(attrProps,attrVal):null
-        let h6 = document.createElement('h6')
+        let h6 = document.createElement('span')
+        h6.style.fontWeight = '600'
         h6.innerText = text
         h6.style.padding='0px'
         h6.style.margin='0px'
@@ -257,9 +273,10 @@ function createResultElement(data){
     let optionalSubjectTitleParent = document.getElementById('optionalSubjectTitle')
 
 
-    let h5 = document.createElement('h5')
+    let h5 = document.createElement('h6')
     h5.innerText = 'Subjects'
-    h5.className = 'my-2 text-center'
+    h5.style.fontWeight = '600'
+    h5.className = 'my-2 text-center resultSubTitle'
     subjectsTitleParent.appendChild(h5)
     create3ColRow(bodyParentElement2,'Code','Subjects Name','Full Marks','Obtained Marks','Grade',true)
     for(let s of data.subjects){
@@ -267,9 +284,10 @@ function createResultElement(data){
     }
 
     if(data.subjectAandSubjectB.length>0){
-        let h5 = document.createElement('h5')
+        let h5 = document.createElement('h6')
         h5.innerText = 'Combination Subjects'
-        h5.className = 'my-2 text-center'
+        h5.style.fontWeight = '600'
+        h5.className = 'my-2 text-center resultSubTitle'
         combinationSubjectTitleParent.appendChild(h5)
 
         create3ColRow(bodyParentElement3,'Code','Subjects Name','Full Marks','Obtained Marks','Grade',true)
@@ -279,9 +297,10 @@ function createResultElement(data){
     }
     
     if(data.optionalSubject.length>0){
-        let h5 = document.createElement('h5')
+        let h5 = document.createElement('h6')
         h5.innerText = 'Optional Subjects'
-        h5.className = 'my-2 text-center'
+        h5.style.fontWeight = '600'
+        h5.className = 'my-2 text-center resultSubTitle'
         optionalSubjectTitleParent.appendChild(h5)
         create3ColRow(bodyParentElement4,'Code','Subjects Name','Full Marks','Obtained Marks','Grade',true)
         for(let s of data.optionalSubject){

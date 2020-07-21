@@ -90,6 +90,7 @@
                            </div>
                         </div>
                         <!-- Website Name End -->
+
                         <!-- Website Logo -->
                         <div class="col-sm-6">
                            <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
@@ -292,6 +293,7 @@
                            </div>
                         </div>
                         <!-- Slider End -->
+
                         <!-- Website Social Links -->
                         <div class="col-sm-6">
                            <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
@@ -430,40 +432,9 @@
                         </div>
                         <!-- Website Social Links End -->
                      </div>
+                     
                      <div class="row p-3">
-                        <!-- About Text -->
-                        <div class="col-sm-6">
-                           <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
-                              <h6 class="slider-title setting-title-radius">About Us</h6>
-                              <div class="card-body">
-                                 <form action="/administrator/setting/about/text/add" method="POST">
-                                    <div class="form-row">    
-                                       <div class="col-sm-12">
-                                          <strong>Name</strong> 
-                                       </div>
-                                       <div class="col-sm-12">
-                                             <input type="text" value="<%=webModel.about.title||''%>" style="font-weight:bold;" name="title" class="aboutInputStyle">
-                                       </div>
-                                       
-                                       <div class="col-sm-12 mt-2">
-                                          <strong>Text</strong> 
-                                       </div>
-                                       <div class="col-sm-12">
-                                             <textarea name="body" 
-                                                rows="8"
-                                             class="aboutInputStyle"><%=webModel.about.body||''%></textarea>
-                                             
-                                       </div>
-                                       
-                                       <div class="col-sm-2 mt-2">
-                                          <button class="btn <%=webModel.about.title?'btn-primary':'btn-success'%>"><%=webModel.about.title?'Update':'Add'%></button>
-                                       </div>
-                                    </div>
-                                 </form>
-
-                              </div>
-                           </div>
-                        </div>
+                       
                         <!-- Futured Links -->
                         <div class="col-sm-6">
                            <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
@@ -475,14 +446,14 @@
                                              <strong>Name</strong> 
                                           </div>
                                           <div class="col-sm-12">
-                                                <input type="text" placeholder="..." name="name" class="futuredLinkInputStyle">
+                                                <input type="text" placeholder="..." name="name" class="form-control">
                                           </div>
                                        
                                           <div class="col-sm-12 mt-2">
                                              <strong>URL</strong> 
                                           </div>
                                           <div class="col-sm-12">
-                                          <input type="text"  placeholder="https://example.com/" name="url" class="futuredLinkInputStyle">
+                                          <input type="text"  placeholder="https://example.com/" name="url" class="form-control">
                                        </div>
                                        
                                        <div class="col-sm-2 mt-2">
@@ -526,14 +497,14 @@
                                                                <strong>Name</strong> 
                                                             </div>
                                                             <div class="col-sm-12">
-                                                                  <input type="text" placeholder="..." value="<%=link.name%>" name="name" class="futuredLinkInputStyle">
+                                                                  <input type="text" placeholder="..." value="<%=link.name%>" name="name" class="form-control">
                                                             </div>
                                                          
                                                             <div class="col-sm-12 mt-2">
                                                                <strong>URL</strong> 
                                                             </div>
                                                             <div class="col-sm-12">
-                                                               <input type="text"  placeholder="https://example.com" value="<%=link.url%>" name="url" class="futuredLinkInputStyle">
+                                                               <input type="text"  placeholder="https://example.com" value="<%=link.url%>" name="url" class="form-control">
                                                             </div>
                                                          </div>
                                                    </div>
@@ -569,6 +540,56 @@
                                        </table>
                                     </div>
                                  </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- Public Email -->
+                        <div class="col-sm-6">
+                           <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
+                              <h6 class="slider-title setting-title-radius">Public Email Setting</h6>
+                              <div class="card-body">
+                                    
+                                    <form action="/administrator/setting/add/public/mail" method="POST">
+                                       <div class="form-group">
+                                          <label for=""><strong>Email</strong></label>
+                                          <input type="text" name="email" placeholder="example@example.com" class="form-control">
+                                       </div>
+                                       <div class="form-group">
+                                          <label for=""><strong>Password</strong></label>
+                                          <input type="password" name="password" placeholder="Password" class="form-control">
+                                       </div>
+                                       <div class="form-group"> 
+                                          <button type="submit" class="btn btn-sm btn-light text-primary w-50">Add</button>
+
+                                          <a href="/administrator/setting/remove/public/mail" style="width:49%" class="btn btn-sm btn-light text-danger">Remove</a>
+                                       </div>
+                                    </form>
+
+                                    <div class="card px-3 pt-3">
+                                          <p>
+                                             <strong>Email: </strong>
+                                             <%=webModel.publicEmail.email||'example@example.com'%>
+                                          </p>
+                                          
+                                          <p>
+                                             <strong>Password: </strong>
+                                             <%=webModel.publicEmail.password?'xxxxxxxx':'*******'%>
+                                          </p>
+                                    </div>
+
+                                    <div class="border p-2 rounded form-group mt-3">
+                                       <h5 class="text-center text-danger" >ATTENTION!</h5>
+                                       <p><strong>Step-1: </strong> 2-Step Verification disabled from your google account
+                                      </p>
+                                       <p><strong>Step-2: </strong> Allow less secure apps from your google account</p>
+                                          
+                                       <div class="form-group">
+                                          <a href="https://myaccount.google.com/lesssecureapps" style="width:49%" class="btn btn-sm btn-secondary">Allow less secure </a>
+
+                                          <a href="https://myaccount.google.com/lesssecureapps" style="width:49%" class="btn btn-sm btn-secondary">2-Step Verification</a>
+                                       </div>
+
+                                    </div>
                               </div>
                            </div>
                         </div>

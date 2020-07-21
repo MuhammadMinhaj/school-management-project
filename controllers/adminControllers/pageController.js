@@ -749,3 +749,38 @@ exports.clearAllAboutLibray= async(req,res,next)=>{
 		next(e)
 	}
 }
+
+exports.aboutTextAddPostController = async(req,res,next)=>{
+	try{
+	
+		let webModel = await WebModel.findOne()
+		let { title,body } = req.body
+
+		let msg;
+		if(!webModel.about.title){
+			msg = 'Successfully Added About Text'
+		}
+		if(title.length===0||body.length===0){
+			req.flash('fail','Cannot Be Empty Field')
+			return res.redirect('back')
+		}
+
+		let addedAboutText = await WebModel.findOneAndUpdate({_id:webModel._id},{
+			about:{
+				title,
+				body
+			}
+		},{
+			new:true
+		})
+		if(!addedAboutText){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+
+		req.flash('success',msg||'Successfully Updated About Text')
+		res.redirect('back')
+	}catch(e){
+		next(e)
+	}
+}

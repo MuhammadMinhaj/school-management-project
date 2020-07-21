@@ -102,20 +102,7 @@
 .aboutInputStyle:focus{
     border-bottom: 1px solid #d39e00;
 }
-.futuredLinkInputStyle{
-    display: block;
-    width: 100%;
-    /* background: #0000000a; */
-    border: none;
-    border-bottom: 1px solid #0000001f;
-    outline: none;
-    padding:3px;
-    font-size:16px;
-    border-radius: 6px;
-}
-.futuredLinkInputStyle:focus{
-    border-bottom: 1px solid #d39e00;
-}
+
 
 textarea {
     border: none;

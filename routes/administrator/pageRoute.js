@@ -28,7 +28,8 @@ const {
     addMissionAndVissionPostController,
     addLibrayInfoPostController,
     clearAllAboutMissionAndVission,
-    clearAllAboutLibray
+    clearAllAboutLibray,
+    aboutTextAddPostController
 } = require('../../controllers/adminControllers/pageController')
 
 
@@ -68,5 +69,6 @@ router.get('/teacher/info/delete/:id',isAuthenticatedAdmin,uploads.single('image
 
 router.get('/teacher/info/delete/:id',isAuthenticatedAdmin,uploads.single('image'),deleteTeacherInfoGetController)
 
+router.post('/about/text/add',isAuthenticatedAdmin,aboutTextAddPostController)
 
 module.exports = router

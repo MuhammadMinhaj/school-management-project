@@ -73,11 +73,48 @@
                            </div>
                         </div>
                         <!-- Libray End -->
+            
+                        <div class="col-sm-6 mt-3">
+                           <div class="p-2" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
+                              <h5 class="text-center text-success" style="font-weight:bold;">About Content</h5>
+                              <div class="latestNewsBody">
+                                 <form action="/administrator/about/text/add" method="POST">
+                                  
+                                       <div class="form-group">
+                                          <strong>Title</strong> 
+                                       </div>
+                                       <div class="form-group">
+                                            
+                                          <textarea  name="title" class="form-control" rows="2"><%=webModel.about.title||''%></textarea>
+                                       </div>
+                                       
+                                       <div class="form-group">
+                                          <strong>Text</strong> 
+                                       </div>
+                                       <div class="form-group">
+
+                                       <textarea name="body" rows="10"class="form-control"><%=webModel.about.body||''%>
+                                       </textarea>
+               
+                                       </div>
+                                       
+                                      
+                                <button class="btn btn-sm w-75 <%=webModel.about.title?'btn-primary':'btn-success'%>"><%=webModel.about.title?'Update':'Add'%></button>
+
+                                <a href="/administrator/about/delete " style="width:24%" class="btn btn-info btn-sm <%=webModel.libray.text?'':'disabled'%>">Clear All</a>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
                      </div>
                   </div>
                </div>
+              
             </div>
          </div>
+
+         
+
       </div>
    </div>
 </div>

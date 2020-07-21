@@ -16,6 +16,9 @@ let emailError = document.getElementById('contactEmailError')
 let subjectError = document.getElementById('contactSubjectError') 
 let messageError = document.getElementById('contactMessageError')
 
+
+
+if(submit){
 name.addEventListener('keypress',()=>{
     name.classList.contains('is-invalid')?name.classList.remove('is-invalid'):''
 })
@@ -27,7 +30,8 @@ subject.addEventListener('keypress',()=>{
 })
 message.addEventListener('keypress',()=>{
     message.classList.contains('is-invalid')?message.classList.remove('is-invalid'):''
-})
+}) 
+
 submit.addEventListener('click',(event)=>{
     event.preventDefault()
     let valueOfName = name.value 
@@ -86,3 +90,5 @@ submit.addEventListener('click',(event)=>{
             console.log(e)
         })
 })
+
+}

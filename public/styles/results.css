@@ -10,8 +10,13 @@
     border-radius:0px 0px 8px 8px;
 }
 .result__container{
-    border:4px dashed #1e7e34;
-    outline:3px solid #1e7e34;
+    /* border:4px dashed #1e7e34;
+    outline:3px solid #1e7e34; */
+    /* font-size:56px; */
+    font-family:arial;
+    border-width: 30px;
+    border-style: solid;
+    border-image: url('/uploads/myfreame.svg') 6% round;
 }
 .custom__table{
     width:100%;
@@ -31,12 +36,98 @@
     width:10%;
 }
 
+#title1{
+    font-weight: bold;
+    /* font-size:min(5vw,18px) */
+}
+#title2{
+    font-weight: 600;
+
+}
+#title3{
+    font-weight: 600;
+
+}
+#title4{
+    font-weight: 600;
+
+}
+.printBtnContainer{
+    margin:4rem;
+}
+.printBtn{
+    padding: 0.35rem 3rem;
+    border-radius: 5px;
+    background: #d39e00;
+    color: #f8f9fa;
+    transition: all 0.5s;
+    display: inline-block;
+}
+.printToBackBtn{
+    padding: 0.35rem 0.5rem;
+    background: #6c757d;
+    border-radius: 5px;
+    color: #f8f9fa;
+    transition: all 0.5s;
+    display: inline-block;
+
+  
+
+}
+.printBtn:hover{
+    transform: scale(0.97);
+    text-decoration: none;
+    color:#f8f9fa;
+    background:#c39305;
+    
+
+}
+.printToBackBtn:hover{
+    text-decoration: none;
+    transform: scale(0.97);
+    color:#f8f9fa;
+    background:#5d6368;
+
+
+}
+
 @media (max-width:576px){
+
     .pedding__margin__zero{
         padding:0px!important;
         margin:0px!important;
     }
-    .add__padding__y{
-        padding:1rem 0rem!important;
+    .addResultPadding{
+        padding:10px!important;
+    }
+   
+    #title1{
+       font-size: 5vw;
+    }
+    #title2{
+        font-size: 3vw;
+    
+    }
+    #title3{
+        font-size: 3vw;
+    
+    }
+    #title4{
+        font-size: 2vw;
+    
+    }
+    table>tbody>tr>td{
+        font-size: 2vw!important;
+    }
+    .resultElementModileView{
+        padding:0px!important;
+        margin:0px!important;
+    }
+    .maxWidth{
+        width:100%!important;
+    }
+    .resultSubTitle{
+        font-size: 3vw!important;
+        margin:0px!important;
     }
 }

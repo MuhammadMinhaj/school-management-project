@@ -26,6 +26,12 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 	try {
 		let menu = await Menu.find()
 		let webModel = await WebModel.findOne()
+
+		if(!webModel.publicEmail.email||!webModel.publicEmail.password){
+			req.flash('fail','Sorry! Change password system is not available')
+			return res.redirect('back')
+		}
+
 		let { email } = req.body
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
@@ -61,13 +67,13 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 		let transporter = nodemailer.createTransport({
 			service: 'gmail',
 			auth: {
-				user: 'test.projects24@gmail.com',
-				pass: 'mdminhaj24ctg24',
+				user: webModel.publicEmail.email,
+				pass: webModel.publicEmail.password,
 			},
 		})
 		let sendMailToClint = await transporter.sendMail({
-			from: 'test.projects24@gmail.com',
-			to: 'mdminhajctg24@gmail.com',
+			from: webModel.publicEmail.email,
+			to: email,
 			subject: '[JASA] Confirmation Link Of Reset Password',
 
 			html: `
