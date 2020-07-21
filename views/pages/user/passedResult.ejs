@@ -80,18 +80,18 @@
                   <%if(results.length!==0){%>
                     <%results.sort((a,b)=>{return a.rank-b.rank}).forEach((result,ind)=>{%>
                       <!-- Results Modal -->
-                      <div class="modal fade" id="resultModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                          <div class="modal-content">
-                            <div class="modal-header">
+                      <div class="modal fade resultForGapNone" id="resultModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg resultForGapNone">
+                          <div class="modal-content resultForGapNone">
+                            <div class="modal-header resultForElementNone">
                               <h5 class="modal-title" id="exampleModalLabel">Results</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body resultForGapNone">
                               
-                              <div class="card p-2">
+                              <div class="printOfStudentResult card p-2">
                                 <div class="result-content p-1">
                                    <div class="result-header text-center">
                                         <div class="result-logo m-auto" style="max-width:80px;height:80px;">
@@ -99,12 +99,12 @@
                                         </div>
                                         <%webModel.name.forEach((name,indOfWebModel)=>{%>
                                               <%if(name.lang.toLowerCase()==='english'){%>
-                                                <h5 class="res-large" style="color:#1e7e34"><%=name.name%></h5>
+                                                <h4 id="title1" style="color:#1e7e34"><%=name.name%></h4>
                                                 <%}%>
                                         <%})%>
-                                              <h6 style="color:#6c757d;font-weight: bolder;">SHOLASHAHAR,CHATTOGRAM</h6>
-                                              <h5 style="color:#d39e00"><%=result.exam.title%></h5>
-                                              <h5 style="color:#0062cc">Class <%=result.classes.name%> Branch <%=result.classes.section%></h5>
+                                              <h5 id="title2" style="color:#6c757d">SHOLASHAHAR,CHATTOGRAM</h5>
+                                              <h5 id="title3" style="color:#d39e00"><%=result.exam.title%></h5>
+                                              <h5 id="title4" style="color:#0062cc">Class <%=result.classes.name%> Branch <%=result.classes.section%></h5>
                                    </div>
                                    <div class="result-body p-3">
                                     <div class="custom-table custom-table-head-col-4 border-top border-right border-left">
@@ -442,7 +442,7 @@
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                               
-                              <button type="button" class="btn btn-secondary">Download</button>
+                              <a href="javascript:window.print()" class="btn btn-secondary">Print</a>
                             </div>
                           </div>
                         </div>
@@ -459,7 +459,6 @@
                         <td><%=result.studentInfo.roll%></td>
                         <td class="d-flex justify-content-center">
                           <button class="btn btn-secondary btn-sm mr-1"  data-toggle="modal" data-target="#resultModal<%=ind%>" data-whatever="@mdo">Preview</button>
-                          <button class="btn btn-secondary btn-sm">Download</button>
                         </td>
                       
                     </tr>

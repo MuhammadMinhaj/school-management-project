@@ -1,7 +1,7 @@
 .result-content{
-    border:4px dashed #1e7e34;
-    outline:4px solid #1e7e34;
-   
+    border-width: 30px;
+    border-style: solid;
+    border-image: url('/uploads/myfreame.svg') 6% round;
 }
 html{
     font-size:1em!important;

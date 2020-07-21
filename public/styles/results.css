@@ -24,7 +24,7 @@
 .custom__table>tbody>tr>td{
     border:1px solid #dee2e6;
     padding:4px 10px;
-    /* width:25%; */
+    width:25%;
 }
 .w-40{
     width:40%;

@@ -45,3 +45,18 @@
 .fileBrowserStyle::after{
     background: transparent;
 }
+#title1{
+    font-weight: bold;
+}
+#title2{
+    font-weight: 600;
+
+}
+#title3{
+    font-weight: 600;
+
+}
+#title4{
+    font-weight: 600;
+
+}
