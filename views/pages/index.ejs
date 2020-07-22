@@ -322,77 +322,24 @@
 </div>
 
 <div style="margin:0px!important" class="row px-5 pb-5 clearXPadding backgroundImage">
-    <div class="col-sm-3 mb-3">
-    <div class="departmentContainer py-5">
-        <h5>হাফিযুল কোরআন</h5>
-        <div class="tringleOfDepart">
-          <i class="fas fa-arrow-right"></i>
-        </div>
-    </div>
-    </div>
+  
+<%if(webModel.departments){%>
+  <%webModel.departments.forEach((d,ind)=>{%>
+      <div class="col-sm-3 mb-3">
+        <a href="/web/department/<%=d.name%>" class="departmentLink">
+        <div class="departmentContainer py-5">
 
-    <div class="col-sm-3 mb-3">
-    <div class="departmentContainer py-5">
-        <h5>ইবতেদায়ী</h5>
-        <div class="tringleOfDepart">
-          <i class="fas fa-arrow-right"></i>
+            <h5><%=d.name%></h5>
+            <div class="tringleOfDepart">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+            
         </div>
-    </div>
-    </div>
+        </a>
+      </div>
+    <%})%>
+  <%}%>
 
-    <div class="col-sm-3 mb-3">
-    <div class="departmentContainer py-5">
-        <h5>দাখিল</h5>
-        <div class="tringleOfDepart">
-          <i class="fas fa-arrow-right"></i>
-        </div>
-    </div>
-    </div>
-
-    <div class="col-sm-3 mb-3">
-    <div class="departmentContainer py-5">
-        <h5>আলিম</h5>
-        <div class="tringleOfDepart">
-          <i class="fas fa-arrow-right"></i>
-        </div>
-    </div>
-    </div>
-
-    <div class="col-sm-3 mb-3">
-    <div class="departmentContainer py-5">
-        <h5>ফাযিল</h5>
-        <div class="tringleOfDepart">
-          <i class="fas fa-arrow-right"></i>
-        </div>
-    </div>
-    </div>
-
-    <div class="col-sm-3 mb-3">
-    <div class="departmentContainer py-5">
-        <h5>কামিল</h5>
-        <div class="tringleOfDepart">
-          <i class="fas fa-arrow-right"></i>
-        </div>
-    </div>
-    </div>
-
-    <div class="col-sm-3 mb-3">
-    <div class="departmentContainer py-5">
-        <h5>অনার্স-মাস্টার্স</h5>
-        <div class="tringleOfDepart">
-          <i class="fas fa-arrow-right"></i>
-        </div>
-    </div>
-    </div>
-
-    <div class="col-sm-3 mb-3">
-    <div class="departmentContainer py-5">
-        <h5>কামিল</h5>
-        <div class="tringleOfDepart">
-          <i class="fas fa-arrow-right"></i>
-        </div>
-    </div>
-    </div>
 </div>
 <!-- Department Of Jasa End -->
 
@@ -586,7 +533,7 @@
 <!-- Contact Us End -->
 
 
-
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae laudantium quidem voluptatum a necessitatibus ea dolorum iure optio, impedit voluptates.
 
 <!-- <a href="/auth/login" class="nav-link py-5">Login Admin</a> -->
 <!-- Footer Section -->

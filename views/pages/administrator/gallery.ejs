@@ -1,0 +1,218 @@
+<%-include('../../partials/admin/adminHead.ejs')%>
+
+   
+<div class="row">
+   <!-- Admin Brand and Dashboard Menu -->
+   <%- include('../../partials/admin/adminSidebar.ejs')%>
+   <!-- Dashboard Content -->
+   <div class="col-sm-10 ">
+      <!-- Admin Navbar Content -->
+      <%- include('../../partials/admin/adminNavbar.ejs')%>
+      <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+      
+      
+      <div class="row scroll-style">
+         
+         <div class="col-sm-12" style="background:#6c757d;">
+            
+            <div class="row">
+               <div class="w-100">
+                  <%-include('../../partials/Error/alert.ejs')%>
+               </div>
+               <div class="col-sm-12">
+                  <h4 class="menu-title p-1 text-center" style="color:#f8f9fa;text-transform:uppercase;font-weight:bold;"> Emails Managemnet </h4>
+               </div>
+            </div>
+            <div class="row py-2">
+               <div class="col-sm-12">
+                  <div class="custom-card p-3">
+                     <div class="row">
+                        <div class="col-sm-12">
+                     <!-- Add Image Modal -->
+                  
+                    <div class="modal fade" id="addGalleryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Gallery</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>    
+                            <form action="/administrator/gallery" method="POST" enctype="multipart/form-data">
+                            <div class="modal-body">
+                        
+                                <div class="form-group">
+                                <label for="message-text" class="col-form-label">Title</label>
+                                <textarea class="form-control" name="title" id="message-text"></textarea>
+                                </div>
+
+                                
+                                <div class="form-group">
+                                    <img class="noticeImagePreview" style="width:100%;max-height:350px;">
+                                </div>
+                                <div class="form-group">
+                                    <label style="font-weight:bold;" for="latestNewsText">Upload Image</label>
+                                    <div class="custom-file">
+                                        <input type="file" name="image" class="custom-file-input noticeImageUploadField" id="customFile">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                </div>
+                                 
+                          
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Add Gallery</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                     </div> 
+                    <!-- Add Image Modal End-->
+                    <button  class="btn btn-secondary mb-2 status__btn"  data-toggle="modal" data-target="#addGalleryModal" data-whatever="@mdo">Add Image</button>         
+
+                            <div class="card">
+                                <table class="table text-center">
+                                    <thead class="thead-dark">
+                                      <tr>
+                                        <th scope="col">1</th>
+                                        <th scope="col">Images</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Controlling</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%if(webModel.gallery){%>
+                                            <%webModel.gallery.forEach((g,ind)=>{%>
+                        <!-- Update Image Modal -->
+                        <div class="modal fade" id="updateGallery<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Update Gallery</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>    
+                                <form action="/administrator/gallery/update/<%=g._id%>" method="POST" enctype="multipart/form-data">
+                                <div class="modal-body">
+                            
+                                    <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Title</label>
+                                    <textarea class="form-control" name="title" id="message-text"><%=g.title%></textarea>
+                                    </div>
+    
+                                    
+                                    <%if(g.image){%>
+                                        <div class="form-group">
+                                           <label style="font-weight:bold;" for="latestNewsText">Update Image</label>
+                                           <img class="noticeImagePreview" src="<%=g.image%>" alt="Image" style="width:100%;max-height:350px;">
+                                        </div>
+                                        <div class="form-group">
+                                           <div class="custom-file">
+                                              <input type="file"  name="image" class="noticeImageUploadField custom-file-input" id="customFile">
+                                              <label class="custom-file-label" for="customFile">Choose file</label>
+                                           </div>
+                                        </div>
+                                        <%}else{%>
+                                        <div class="form-group">
+                                           <img class="noticeImagePreview" style="width:100%;max-height:350px;">
+                                        </div>
+                                        <div class="form-group">
+                                           <label style="font-weight:bold;" for="latestNewsText">Upload Image</label>
+                                           <div class="custom-file">
+                                              <input type="file" name="image" class="custom-file-input noticeImageUploadField" id="customFile">
+                                              <label class="custom-file-label" for="customFile">Choose file</label>
+                                           </div>
+                                        </div>
+                                        <%}%>
+                                        
+                                
+                                </div>
+    
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Add Gallery</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                        </div> 
+                        <!-- Update Image Modal End -->
+                                            <tr>
+                                                <td><%=ind+1%></td> 
+                                                <td>
+                                                    <div style="max-width:200px" class="m-auto">
+                                                        <img src="<%=g.image%>" class="img-fluid img-thumbnail" alt="...">
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align: middle!important;">
+                                                    <div>
+                                                        <%=g.title%>
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align: middle!important;">
+                                                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                                        <div class="btn-group m-auto" role="group" aria-label="First group">
+                                                          <a href="/administrator/gallery/delete/<%=g._id%>" class="btn btn-sm text-danger btn-secondary">Delete</a>
+                                                          <button type="button" class="btn btn-sm text-warning btn-secondary" data-toggle="modal" data-target="#updateGallery<%=ind%>" data-whatever="@mdo">Edit</button>
+                                            
+                                                        </div>
+                                                </td>
+                                            </tr>
+                                            <%})%>
+                                            <%}%>
+                                   
+                                    </tbody>
+                                
+                                </table>
+                                  
+                            </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<%-include('../../partials/admin/adminFooter.ejs')%>
+
+
+<script>
+    let noticeImagePreview = document.querySelectorAll('.noticeImagePreview')
+    let noticeImageUploadField = document.querySelectorAll('.noticeImageUploadField')
+    
+    noticeImageUploadField.forEach((field,fIndex)=>{
+        field.addEventListener('change',(e)=>{
+            noticeImagePreview.forEach((preview,pIndex)=>{
+                if(fIndex===pIndex){
+                    preview.src=URL.createObjectURL(e.target.files[0])
+                }
+            })
+        })	
+    })
+    
+    let noticeImgPreviewParent = document.getElementById('noticeImgPreviewParent')
+    // let singleNoticeImagePreview = document.getElementById('singleNoticeImagePreview')
+    let singleNoticeImgUploadFiled = document.getElementById('singleNoticeImgUploadFiled')
+    
+    singleNoticeImgUploadFiled.addEventListener('change',(e)=>{
+        let preview = document.createElement('img')
+        preview.style.width = '100%'
+        preview.style.maxHeight = '350px'
+        preview.src = URL.createObjectURL(e.target.files[0])
+    
+        noticeImgPreviewParent.appendChild(preview)
+    
+    })
+    
+    
+ </script>
+
+</body>
+</html>

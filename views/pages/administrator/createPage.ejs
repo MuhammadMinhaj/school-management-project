@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Post</label>
-                                    <textarea name="body" id="summernotePageBody" class="<%=error.body?'is-invalid':''%>"></textarea>
+                                    <textarea name="body" id="summerNoteTextEditor" class="<%=error.body?'is-invalid':''%>"></textarea>
                                     <div class="invalid-feedback"><%=error.body%></div>
                                 </div>
                                 
@@ -92,7 +92,7 @@
 
 <%-include('../../partials/admin/adminFooter.ejs')%>
 
-<script>
+<!-- <script>
     var summernote = $('#summernotePageBody')
 summernote.summernote({
 	styleTags: [
@@ -137,7 +137,7 @@ summernote.summernote({
 		['view', ['codeview', 'help']],
 	],
 })
-</script>
+</script> -->
 
 </body>
 

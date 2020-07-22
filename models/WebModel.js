@@ -21,10 +21,12 @@ const schema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Menu',
 	},
-	gallery: {
-		type: Schema.Types.ObjectId,
-		ref: 'Gallery',
-	},
+	gallery: [
+		{
+			title:String,
+			image:String
+		}
+	],
 	breakingNews:[
 		{
 			title:String,

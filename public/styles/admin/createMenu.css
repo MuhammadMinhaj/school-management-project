@@ -11,8 +11,8 @@
 .menu-title {
 	font-family: roboto;
 	font-weight: bold;
-	letter-spacing: 4px;
-	color: #dee2e6;
+	text-transform: uppercase;
+	color: #343a40;
 }
 .menu-title > h5 {
 	font-size: 20px;

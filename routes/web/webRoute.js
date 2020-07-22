@@ -10,7 +10,9 @@ const {
     missionAndVissionPageGetController,
     dynamicPageRenderGetController,
     contactPageGetController,
-    contactPagePostController
+    contactPagePostController,
+    departmentPageGetController,
+    galleryGetController
 } = require('../../controllers/web/webController')
 
 
@@ -18,6 +20,7 @@ router.get('/administration',aboutAdministrationInfoGetController)
 router.get('/result',resultsPublicationGetController)
 
 router.get('/teachers',aboutTeachersInfoGetController)
+router.get('/gallery',galleryGetController)
 
 router.get('/about',aboutPageGetController)
 router.get('/libray',librayPageGetController)
@@ -26,5 +29,7 @@ router.get('/contact',contactPageGetController)
 router.post('/contact',contactPagePostController)
 
 router.get('/:pagename',dynamicPageRenderGetController)
+router.get('/department/:name',departmentPageGetController)
+
 module.exports = router
 

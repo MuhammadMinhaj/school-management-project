@@ -5,7 +5,7 @@ const Teacher = require('../../models/Teacher')
 const Page = require('../../models/Page')
 const Contact = require('../../models/Contact')
 
-async function renderPageHandler(req,res,pagename,title,page){
+async function renderPageHandler(req,res,pagename,title,page,department){
     let menu  = await Menu.find()
     let webModel = await WebModel.findOne()
     let examinationType = await ExaminationType.find()
@@ -16,7 +16,8 @@ async function renderPageHandler(req,res,pagename,title,page){
         webModel,
         examinationType:examinationType?examinationType:[],
         group:teachers?teachers:[],
-        page
+        page,
+        department
     })
 }
 exports.indexPageGetController = async(req,res,next)=>{
@@ -137,6 +138,35 @@ exports.dynamicPageRenderGetController = async(req,res,next)=>{
        renderPageHandler(req,res,'web/dynamicPage',pagename.toUpperCase()
        ,hasPage)
     
+    }catch(e){
+        next(e)
+    }
+}
+exports.departmentPageGetController = async(req,res,next)=>{
+    try{
+        let { name } = req.params
+        
+
+        let webModel = await WebModel.findOne()
+
+        let hasDepartment;
+        for(let d of webModel.departments){
+            if(d.name.toString().toLowerCase().trim()===name.toString().toLowerCase().trim()){
+                hasDepartment = d
+            }
+        }
+
+        if(!hasDepartment){
+            return res.redirect('back')
+        }
+        renderPageHandler(req,res,'web/department',name.toUpperCase(),null,hasDepartment)
+    }catch(e){
+        next(e)
+    }
+}
+exports.galleryGetController = async(req,res,next)=>{
+    try{
+        renderPageHandler(req,res,'web/gallery.ejs','JAMEA AHMADIA SUNNIA ALIA KAMIL MADRASAH')
     }catch(e){
         next(e)
     }

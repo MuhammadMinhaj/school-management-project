@@ -208,7 +208,7 @@ function dropDownEditHandler(menu, editBtnParent, editBtn, name, action, index) 
 // DropDown Update With Ajax Request
 function dropDownUpdateHandler(name, action, nameField, actionField, updateBtn, editBtn, index) {
 	if (nameField.value.length === 0 || actionField.value.length === 0) {
-		return dropDownAlertBox.appendChild(alertMessage('fail', 'Invalid Creadentials200', 2000, 'w-50 py-1 m-auto'))
+		return dropDownAlertBox.appendChild(alertMessage('fail', 'Invalid Creadentials', 2000, 'w-50 py-1 m-auto'))
 	}
 	axios
 		.put(`${UPDATE_DROPDOWN_URI}/${id}`, {

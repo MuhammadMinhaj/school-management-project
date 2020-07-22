@@ -29,7 +29,11 @@ const {
     addLibrayInfoPostController,
     clearAllAboutMissionAndVission,
     clearAllAboutLibray,
-    aboutTextAddPostController
+    aboutTextAddPostController,
+    galleryGetController,
+    addGalleryPostController,
+    updatedGalleryPostController,
+    deleteGalleryGetController
 } = require('../../controllers/adminControllers/pageController')
 
 
@@ -70,5 +74,9 @@ router.get('/teacher/info/delete/:id',isAuthenticatedAdmin,uploads.single('image
 router.get('/teacher/info/delete/:id',isAuthenticatedAdmin,uploads.single('image'),deleteTeacherInfoGetController)
 
 router.post('/about/text/add',isAuthenticatedAdmin,aboutTextAddPostController)
+router.get('/gallery',isAuthenticatedAdmin,galleryGetController)
+router.post('/gallery',isAuthenticatedAdmin,uploads.single('image'),addGalleryPostController)
+router.post('/gallery/update/:id',isAuthenticatedAdmin,uploads.single('image'),updatedGalleryPostController)
+router.get('/gallery/delete/:id',isAuthenticatedAdmin,deleteGalleryGetController)
 
 module.exports = router

@@ -113,6 +113,18 @@ exports.departmentCreatePostController = async(req,res,next)=>{
             }
         }
         
+        let hasAlreadyFoundDepartment;
+        for(let d of webModel.departments){
+            if(d.name.toString().toLowerCase().trim()===name.toString().toLowerCase().trim()){
+                hasAlreadyFoundDepartment = d.name
+            }
+        }
+
+        if(hasAlreadyFoundDepartment){
+            req.flash('fail',`This department has been created by  the name Of ( ${hasAlreadyFoundDepartment} )`)
+            return res.redirect('back')
+        }
+
         let createdDepartmentInfo = await WebModel.findOneAndUpdate({_id:webModel._id},{
             $push:{
                 departments:{
@@ -195,7 +207,6 @@ exports.departmentUpdatePostController = async(req,res,next)=>{
 
         if(!file){
             if(name.length===0||title.length===0||text.length===0||date.length===0||url.length===0){
-                
                 return renderPageHandler(req,res,'departmentUpdate','fail','Cannot Be Empty Field',webModel,foundedDepartment)  
             }
         }
@@ -214,13 +225,34 @@ exports.departmentUpdatePostController = async(req,res,next)=>{
             }
         }
         
+
+        let hasAlreadyFoundDepartment;
+        for(let d of webModel.departments){
+            if(d._id.toString()!==id.toString()){
+                if(d.name.toString().toLowerCase().trim()===name.toString().toLowerCase().trim()){
+                    hasAlreadyFoundDepartment = d.name
+                }
+            }
+            
+        }
+
+        if(hasAlreadyFoundDepartment){
+            if(file){
+                removeFilePath(file.filename,next)
+            }
+            req.flash('fail',`This department has been created by  the name Of ( ${hasAlreadyFoundDepartment} )`)
+            return res.redirect('back')
+        }
+
+        
+
         foundedDepartment.name = name 
         foundedDepartment.url = url 
         foundedDepartment.title = title 
         foundedDepartment.text = text?text:'' 
         foundedDepartment.date = makeDateHandler(date);
         foundedDepartment.numberDate = date 
-        foundedDepartment.image = file?file.filename:''
+        foundedDepartment.image = file?file.filename:hasImage
 
         let updatedDepartment = await WebModel.findOneAndUpdate({_id:webModel._id},webModel,{new:true})
 
@@ -233,7 +265,7 @@ exports.departmentUpdatePostController = async(req,res,next)=>{
             return renderPageHandler(req,res,'departmentUpdate','fail','Internal Server Error',webModel,foundedDepartment)
         }
 
-        if(hasImage){
+        if(file){
             removeFilePath(hasImage,next)
         }
         renderPageHandler(req,res,'departmentUpdate','success','Successfully Updated Department Info',updatedDepartment,foundedDepartment)

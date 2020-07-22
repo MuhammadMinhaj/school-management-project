@@ -291,16 +291,18 @@ exports.dropDownUpdatePutController = async (req, res, next) => {
 				message: 'Menu Not Found',
 			})
 		}
-
 		let error = {}
-		hasMenu.dropDown.forEach(d => {
-			if (d.name === name || d.href === action) {
-				error.message = 'Already Used Menu Name or Action'
+		hasMenu.dropDown.forEach((d,indOfd)=> {
+			if(indOfd.toString()!==ind.toString()){
+				if (d.name === name || d.href === action) {
+					error.message = 'Already Used Menu Name or Action'
+				}
 			}
+			
 		})
 		if (Object.keys(error).length !== 0) {
 			return res.json({
-				message: 'Already Used Menu',
+				message: error.message,
 			})
 		}
 

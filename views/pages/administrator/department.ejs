@@ -9,9 +9,6 @@
       <!-- Admin Navbar Content -->
       <%- include('../../partials/admin/adminNavbar.ejs')%>
       <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
-
-      
-
       
       <div class="row scroll-style" style="background:#6c757d;">
          <div class="w-100">
@@ -44,11 +41,12 @@
                                           <label style="font-weight:bold;" for="latestNewsText">TITLE</label>
                                           <textarea type="text" style="border:none;height:50px;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="title"></textarea>
                                        </div>
-
+                                       
                                        <div class="form-group">
-                                          <label style="font-weight:bold;" for="latestNewsText">TEXT</label>
-                                          <textarea type="text" style="border:none;height:150px;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="text"></textarea>
-                                       </div>
+                                          <label for="exampleInputPassword1">Text</label>
+                                          <textarea name="text" id="summerNoteTextEditor"></textarea>
+                                      </div>
+
                                        <div class="form-group">
                                           <label style="font-weight:bold;">URL</label>
                                           <input type="text" placeholder="https://www.example.com" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="url">
@@ -86,13 +84,13 @@
 
 
 <script>
-       let noticeImgPreviewParent = document.getElementById('noticeImgPreviewParent')
+   let noticeImgPreviewParent = document.getElementById('noticeImgPreviewParent')
    // let singleNoticeImagePreview = document.getElementById('singleNoticeImagePreview')
    let singleNoticeImgUploadFiled = document.getElementById('singleNoticeImgUploadFiled')
    
    singleNoticeImgUploadFiled.addEventListener('change',(e)=>{
        let preview = document.createElement('img')
-       preview.style.width = '100%'
+       preview.style.maxWidth = '100%'
        preview.style.maxHeight = '350px'
        preview.src = URL.createObjectURL(e.target.files[0])
    
@@ -100,5 +98,7 @@
    
    })
 </script>
+
+
 </body>
 </html>

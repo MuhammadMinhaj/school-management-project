@@ -749,7 +749,6 @@ exports.clearAllAboutLibray= async(req,res,next)=>{
 		next(e)
 	}
 }
-
 exports.aboutTextAddPostController = async(req,res,next)=>{
 	try{
 	
@@ -780,6 +779,124 @@ exports.aboutTextAddPostController = async(req,res,next)=>{
 
 		req.flash('success',msg||'Successfully Updated About Text')
 		res.redirect('back')
+	}catch(e){
+		next(e)
+	}
+}
+exports.galleryGetController = async(req,res,next)=>{
+	try{
+		pageRenderHandler(req,res,'gallery.ejs','Gallery')
+	}catch(e){
+		next(e)
+	}
+}
+exports.addGalleryPostController = async(req,res,next)=>{
+	try{
+		console.log(req.body)
+		console.log(req.file)
+
+		let { title } = req.body 
+		let file = req.file 
+
+		let webModel = await WebModel.findOne()
+
+		if(!file){
+			req.flash('fail','Please Select Image')
+			return res.redirect('back')
+		}
+
+		let addedGalleryImg = await WebModel.findOneAndUpdate({_id:webModel._id},{
+			$push:{
+				gallery:{
+					title,
+					image:`/uploads/${file.filename}`
+				}
+			}
+		},{new:true})
+
+		if(!addedGalleryImg){
+			removeFilePathFromDirctory(file.path)
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+		console.log(addedGalleryImg)
+		req.flash('success','Successfully Added Image')
+		res.redirect('back')
+
+	}catch(e){
+		next(e)
+	}
+}
+
+exports.updatedGalleryPostController = async(req,res,next)=>{
+	try{
+		let { id } = req.params
+		let { title } = req.body 
+		let file = req.file
+
+		let webModel = await WebModel.findOne()
+
+		let path;
+		for(let g of webModel.gallery){
+			
+			if(g._id.toString()===id.toString()){
+				path = g.image 
+				g.title = title
+				g.image = file?`/uploads/${file.filename}`:path 
+			}
+		}
+
+		let updatedGallery = await WebModel.findOneAndUpdate({_id:webModel._id},webModel,{new:true})
+		console.log(updatedGallery)
+		if(!updatedGallery){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+
+		if(file){
+			removeFilePathFromDirctory(`public/${path}`)
+		}
+		req.flash('success','Successfully Updated Gallery')
+		res.redirect('back')
+
+
+	}catch(e){
+		next(e)
+	}
+}
+
+exports.deleteGalleryGetController = async(req,res,next)=>{
+	try{	
+		let { id } = req.params
+
+		let webModel = await WebModel.findOne()
+		let path;
+		
+		for(let g of webModel.gallery){
+			if(g._id.toString()===id.toString()){
+				path = g.image 
+			}
+		}
+
+		let deletedImgFromModel = await WebModel.findOneAndUpdate({_id:webModel._id},{
+			$pull:{
+				gallery:{
+					_id:id 
+				}
+			}
+		},{new:true})
+
+		if(!deletedImgFromModel){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+
+		if(path){
+			removeFilePathFromDirctory(`public/${path}`)
+		}
+		req.flash('success','Successfully Deleted Image')
+		res.redirect('back')
+		
 	}catch(e){
 		next(e)
 	}
