@@ -1,0 +1,124 @@
+<%-include('../../partials/admin/adminHead.ejs')%>
+
+   
+<div class="row">
+   <!-- Admin Brand and Dashboard Menu -->
+   <%- include('../../partials/admin/adminSidebar.ejs')%>
+   <!-- Dashboard Content -->
+   <div class="col-sm-10 ">
+      <!-- Admin Navbar Content -->
+      <%- include('../../partials/admin/adminNavbar.ejs')%>
+      <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+      
+      
+      <div class="row scroll-style">
+         
+         <div class="col-sm-12" style="background:#6c757d;">
+            
+            <div class="row">
+               <div class="w-100">
+                  <%-include('../../partials/Error/alert.ejs')%>
+               </div>
+               <div class="col-sm-12">
+                  <h4 class="menu-title p-1 text-center" style="color:#f8f9fa;text-transform:uppercase;font-weight:bold;"> Category </h4>
+               </div>
+            </div>
+            <div class="row py-2">
+               <div class="col-sm-12">
+                  <div class="custom-card p-3">
+                    
+           
+                    <div class="p-2 mt-2 admin-show-scroll-style" style="height:450px!important;border:1px solid #0000001c;border-radius:8px;background:#f8f9fa">
+         
+           
+                    <form action="/administrator/news/category/create" method="POST">
+                        <div class="form-row mb-2">
+                            <div class="col-sm-9">
+                            <input type="text" name="name" class="form-control" placeholder="Category name...">
+                            </div>
+                            <div class="col-sm-3">
+                            <input type="submit" value="Create" class="btn btn-primary w-100">
+                            </div>
+                        </div>
+                    </form>
+                           
+                
+                        <%if(category.length!==0){%>
+                        <div class="card mt-3">
+                            <table class="table table-sm">
+                            <thead>
+                            <tr class="text-center">
+                                <th scope="col">CATEGORY NAME</th>
+                                <th scope="col">SUB CATEGORY</th>
+                                <th scope="col">CONTROLLING</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <%category.forEach((c,ind)=>{%>
+                            <!-- Modal -->
+                            <div class="modal fade" id="categoryModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Update Category</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <form action="/administrator/news/category/update/<%=c._id%>" method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="name">Name</label>
+                                                <input type="text" class="form-control" value="<%=c.name%>" name="name">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button class="btn btn-primary">Update</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal End -->
+                            <tr class="text-center" style="line-height:250%;">
+                                <td>
+                                    <%=c.name%>
+                                </td>
+                       
+                                <td class="text-muted">
+                                    N/A
+                                </td>
+                                <td class="webNameControllParent">
+                                    <a class="btn btn-sm" href="/administrator/news/category/delete/<%=c._id%>">
+                                    <i class="fas fa-trash-alt text-danger"></i>
+                                    </a>
+                                    <button data-toggle="modal" data-target="#categoryModal<%=ind%>" data-whatever="@mdo"  class="btn btn-sm">
+                                    <i class="fas fa-edit text-info"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <%})%>
+                            </tbody>
+                        </table>
+                        </div>
+                        
+                        <%}else{%>
+                        <h6 class="text-muted text-center">There is nothing to show</h6>
+                        <%}%>
+                    </div>
+                 
+               
+                  
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<%-include('../../partials/admin/adminFooter.ejs')%>
+
+</body>
+</html>

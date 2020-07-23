@@ -2,11 +2,13 @@ const WebModel = require('../../models/WebModel')
 const Admin = require('../../models/Admin')
 const Page = require('../../models/Page')
 const fs = require('fs')
+const Category = require('../../models/Category')
 
 async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb,singleDepartment){
     try{    
         let pages = await Page.find()
         let webModel = await WebModel.findOne()
+        let category = await Category.find()
         if(msg) req.flash(msgOpt,msg)
         return res.render(`pages/administrator/${pagename}`, {
                 title: 'Notice',
@@ -17,7 +19,8 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb,singleDe
                 createdPage:{},
                 flashMessage: req.flash(),
                 webModel:modelOfWeb?modelOfWeb:webModel,
-                department:singleDepartment?singleDepartment:null
+                department:singleDepartment?singleDepartment:null,
+                category
         })
     }catch(e){
         console.log(e)

@@ -9,10 +9,10 @@
 }
 
 .menu-title {
-	font-family: roboto;
+	font-family: arial;
 	font-weight: bold;
 	text-transform: uppercase;
-	color: #343a40;
+	color: #adb5bd;
 }
 .menu-title > h5 {
 	font-size: 20px;

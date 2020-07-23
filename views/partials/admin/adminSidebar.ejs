@@ -76,7 +76,15 @@
                                 <li>
                                     <a href="/administrator/news">News</a>
                                 </li>
+                                <%if(category.length!==0){%>
+                                    <%for(let c of category){%>
+                                        <li>
+                                            <a href="/administrator/news/category/item/<%=c._id%>"><%=c.name%></a>
+                                        </li>
+                                        <%}%>
+                                <%}%>
                             </ul>
+                            <a href="/administrator/news/category" class="page-create-btn">Category</a>
                         </div>
                     </div>
                 </div>

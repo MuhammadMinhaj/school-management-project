@@ -7,12 +7,13 @@ const Page = require('../../models/Page')
 const WebModel = require('../../models/WebModel')
 const User = require('../../models/User')
 const Admin = require('../../models/Admin')
-
+const Category = require('../../models/Category')
 async function renderPageHandler(req,res,pagename,msgOpt,msg,Usermodel,error,errorData){
     try{    
         let pages = await Page.find()
         let webModel = await WebModel.findOne()
         let users = await User.find()
+        let category = await Category.find()
         if(msg) req.flash(msgOpt,msg)
         return res.render(`pages/administrator/${pagename}`, {
                 title: 'Notice',
@@ -26,7 +27,8 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,Usermodel,error,err
                 webModel,
                 errorData:errorData?errorData:{}
                 ,
-                contacts:[]
+                contacts:[],
+                category
         })
     }catch(e){
         console.log(e)

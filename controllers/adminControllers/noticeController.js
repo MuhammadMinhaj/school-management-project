@@ -2,12 +2,15 @@ const fs = require('fs')
 
 const Page = require('../../models/Page')
 const WebModel = require('../../models/WebModel')
+const Category = require('../../models/Category')
+const Notice = require('../../models/Notice')
 
-
-async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb){
+async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb,categoryItem,items){
     try{    
         let pages = await Page.find()
         let webModel = await WebModel.findOne()
+        let category =await Category.find()
+        
         if(msg) req.flash(msgOpt,msg)
         return res.render(`pages/administrator/${pagename}`, {
                 title: 'Notice',
@@ -17,7 +20,10 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb){
                 pages,
                 createdPage:{},
                 flashMessage: req.flash(),
-                webModel:modelOfWeb?modelOfWeb:webModel
+                webModel:modelOfWeb?modelOfWeb:webModel,
+                category,
+                categoryItem,
+                items
         })
     }catch(e){
         console.log(e)
@@ -366,6 +372,305 @@ exports.noticeUpdatePostController = async(req,res,next)=>{
             }
         }
         renderPageHandler(req,res,'notice','success','Successfully Updated Notice')
+    }catch(e){
+        next(e)
+    }
+}
+
+
+// Category Controllers 
+exports.createCategoryGetController = async(req,res,next)=>{
+    try{
+        renderPageHandler(req,res,'category.ejs')
+    }catch(e){
+        next(e)
+    }
+}
+
+exports.createCategoryPostController = async(req,res,next)=>{
+    try{
+        let { name } = req.body
+        
+      
+        if(!name){
+            req.flash('fail',`Please provied category name.`)
+            return res.redirect('back')
+        }
+        let category = await Category.findOne({name})
+        console.log(category)
+        if(category){
+            req.flash('fail',`This category already created by the name of ( ${name} )`)
+            return res.redirect('back')
+        }
+        let createCategory = new Category({name})
+        let createdCategory = await createCategory.save()
+        if(!createdCategory){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+
+        req.flash('success',`Successfully created category by the name of ( ${name} )`)
+        res.redirect('back')
+        console.log(createdCategory)
+    }catch(e){
+        next(e)
+    }
+}
+
+exports.updateCategoryPostController = async(req,res,next)=>{
+    try{ 
+        let { id } = req.params
+        let { name } = req.body 
+
+        if(!name){
+            req.flash('fail',`Please provied category name.`)
+            return res.redirect('back')
+        }
+        let getAllCategory = await Category.find()
+
+        let hasCategory = false 
+        for(let c of getAllCategory){
+            if(c._id.toString()!==id.toString()){
+                if(c.name.toString().toLowerCase()===name.toString().toLowerCase()){
+                    hasCategory = true 
+                }
+            }
+        }
+        if(hasCategory){
+            req.flash('fail',`This category already created by the name of ( ${name} )`)
+            return res.redirect('back')
+        }
+       let updatedCategory = await Category.findOneAndUpdate({_id:id},{name},{new:true})
+       if(!updatedCategory){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+       }
+       req.flash('success','Successfully updated category name')
+       res.redirect('back')
+    }catch(e){
+        next(e)
+    }
+}
+
+exports.deleteCategoryGetController = async(req,res,next)=>{
+    try{
+        let { id } = req.params
+        
+        let notice = await Notice.find({category:id})
+        
+        let deletedCategory = await Category.findOneAndDelete({_id:id})
+
+        if(!deletedCategory){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+        if(notice.length!==0){
+            for(let n of notice){
+                let deletedNoticeFromCategory = await Notice.findOneAndDelete({_id:n._id})
+                if(!deletedNoticeFromCategory){
+                    req.flash('fail','Internal Server Error')
+                    return res.redirect('back')
+                }
+                if(deletedNoticeFromCategory.file){
+                    fs.unlink(`public/${deletedNoticeFromCategory.file}`,error=>{
+                        if(error){
+                            return next(error)
+                        }
+                    })
+                }
+            }
+        }
+        req.flash('success',`Successfully deleted category and also deleted all notice of ( ${deletedCategory.name} ) category`)
+        res.redirect('back')
+    }catch(e){
+        next(e)
+    }
+}
+
+// Notice Controllers
+exports.categoryItemGetController = async(req,res,next)=>{
+    try{
+        let { id } = req.params 
+        let category = await Category.findOne({_id:id})
+        if(!category){
+            return res.redirect('back')
+        }
+        let items = await Notice.find({category:id})
+        renderPageHandler(req,res,'itemOfCategory.ejs',null,null,null,category,items)
+    }catch(e){
+        next(e)
+    }
+}
+
+exports.createNoticePostController = async(req,res,next)=>{
+    try{
+        let { id } = req.params
+        let { title,text,date } = req.body
+        let file = req.file 
+        console.log(req.body)
+        console.log(req.params)
+        console.log(req.file)        
+        
+        if(title.length===0||text.length===0||date.length===0){
+            if(file){
+                fs.unlink(`public/uploads/${file.filename}`,error=>{
+                    if(error){
+                        return next(error)
+                    }
+                })
+            }
+            req.flash('fail','Please Provied Minimum Required Fields')
+            return res.redirect('back')
+        }
+
+        
+        let counterDoc = await Notice.countDocuments()
+        let lastItem = await Notice.find()
+        lastItem = lastItem[counterDoc-1]
+
+        let createNotice = new Notice({
+            title,
+            text,
+            date,
+            file:file?`/uploads/${file.filename}`:'',
+            category:id,
+            status:false,
+            id:lastItem?Number(lastItem.id)+1:1
+        })
+
+        let createdNotice = await createNotice.save()
+
+        if(!createdNotice){
+            if(file){
+                fs.unlink(`public/uploads/${file.filename}`,error=>{
+                    if(error){
+                        return next(error)
+                    }
+                })
+            }
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+
+        // await Notice.findOneAndUpdate({_id:createdNotice._id},{$inc:{id:1}},{new:true})
+
+        req.flash('success','Successfully created notice')
+        res.redirect('back')
+        console.log(createdNotice)   
+    }catch(e){
+        next(e)
+    }
+}
+exports.noticeStatusGetController = async(req,res,next)=>{
+    try{
+        let { id } = req.params 
+        let { status } = req.query 
+
+        let hasNotice = await Notice.findOne({_id:id})
+        if(!hasNotice){
+            req.flash('fail','Cannot find notice')
+            return res.redirect('back')
+        }
+        let msg;
+
+        if(status.toLowerCase()==='active'){
+            let notice = await Notice.findOneAndUpdate({_id:id},{status:true},{new:true})
+            if(!notice){
+                req.flash('fail','Internal Server Error')
+                return res.redirect('back')
+            }
+            msg = 'Successfully Activited Notice'
+        }
+        
+        if(status.toLowerCase()==='inactive'){
+            let notice = await Notice.findOneAndUpdate({_id:id},{status:false},{new:true})
+            if(!notice){
+                req.flash('fail','Internal Server Error')
+                return res.redirect('back')
+            }
+            msg = 'Successfully Inactivied Notice'
+        }
+
+        req.flash('success',msg)
+        res.redirect('back')
+    }catch(e){
+        next(e)
+    }
+}
+exports.updateNoticePostController = async(req,res,next)=>{
+    try{
+        let { id } = req.params
+        let { title,text,date } = req.body
+        let file = req.file
+        if(title.length===0||text.length===0||date.length===0){
+            if(file){
+                fs.unlink(`public/${deletedNoticeOfOneCategory.file}`,error=>{
+                    if(error){
+                        return next(error)
+                    }
+                })
+            }
+            req.flash('fail','Please Provied Minimum Required Fields')
+            return res.redirect('back')
+        }
+
+        let hasNotice = await Notice.findOne({_id:id})
+
+
+        let updatedNotice = await Notice.findOneAndUpdate({_id:id},{
+            title,
+            text,
+            date,
+            file:file?`/uploads/${file.filename}`:hasNotice.file 
+        },{new:true})
+
+        
+        if(!updatedNotice){
+            if(file){
+                fs.unlink(`public/uploads/${file.filename}`,error=>{
+                    if(error){
+                        return next(error)
+                    }
+                })
+            }
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+
+        if(file){
+            if(hasNotice.file){
+                fs.unlink(`public/${hasNotice.file}`,error=>{
+                    if(error){
+                        return next(error)
+                    }
+                })
+            }
+            
+        }
+        req.flash('success','Successfully updated notice')
+        res.redirect('back')
+    }catch(e){
+        next(e)
+    }
+}
+exports.deleteNoticeGetController = async(req,res,next)=>{
+    try{
+        let { id } = req.params
+
+        let deletedNotice = await Notice.findOneAndDelete({_id:id})
+        if(!deletedNotice){
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+        }
+        if(deletedNotice.file){
+            fs.unlink(`public/${deletedNotice.file}`,error=>{
+                if(error){
+                    return next(error)
+                }
+            })
+        }
+        req.flash('success','Successfully Deleted Notice')
+        res.redirect('back')
     }catch(e){
         next(e)
     }

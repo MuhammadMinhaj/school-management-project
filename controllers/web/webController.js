@@ -4,12 +4,16 @@ const ExaminationType = require('../../models/ExaminationType')
 const Teacher = require('../../models/Teacher')
 const Page = require('../../models/Page')
 const Contact = require('../../models/Contact')
+const Category = require('../../models/Category')
+const Notice = require('../../models/Notice')
 
 async function renderPageHandler(req,res,pagename,title,page,department){
     let menu  = await Menu.find()
     let webModel = await WebModel.findOne()
     let examinationType = await ExaminationType.find()
     let teachers = await Teacher.find()
+    let category = await Category.find()
+    let notice = await Notice.find()
     res.render(`pages/${pagename}`,{
         title,
         menu,
@@ -17,7 +21,9 @@ async function renderPageHandler(req,res,pagename,title,page,department){
         examinationType:examinationType?examinationType:[],
         group:teachers?teachers:[],
         page,
-        department
+        department,
+        category,
+        notice
     })
 }
 exports.indexPageGetController = async(req,res,next)=>{
@@ -166,7 +172,15 @@ exports.departmentPageGetController = async(req,res,next)=>{
 }
 exports.galleryGetController = async(req,res,next)=>{
     try{
-        renderPageHandler(req,res,'web/gallery.ejs','JAMEA AHMADIA SUNNIA ALIA KAMIL MADRASAH')
+        renderPageHandler(req,res,'web/gallery.ejs','Gallery')
+    }catch(e){
+        next(e)
+    }
+}
+
+exports.noticeGetController = async(req,res,next)=>{
+    try{    
+        renderPageHandler(req,res,'web/notice.ejs','Notice')
     }catch(e){
         next(e)
     }
