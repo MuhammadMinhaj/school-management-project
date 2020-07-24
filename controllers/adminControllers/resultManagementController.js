@@ -6,6 +6,7 @@ const Student = require('../../models/Student')
 const Examination = require('../../models/Examination')
 const ExaminationType = require('../../models/ExaminationType')
 const Class = require('../../models/Class')
+const Category = require('../../models/Category')
 
 
 
@@ -13,6 +14,7 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb,requestM
     try{    
         let pages = await Page.find()
         let webModel = await WebModel.findOne()
+        let category = await Category.find()
         if(msg) req.flash(msgOpt,msg)
         return res.render(`pages/administrator/${pagename}`, {
                 title: 'Links',
@@ -26,7 +28,8 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb,requestM
                 department:null,
                 requestModel:requestModel?requestModel:{},
                 results:results?results:{},
-                examinationType:examinationType?examinationType:{}
+                examinationType:examinationType?examinationType:{},
+                category
         })
     }catch(e){
         console.log(e)

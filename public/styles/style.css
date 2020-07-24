@@ -8,6 +8,7 @@
 @import './results.css';
 @import './pageStyle.css';
 @import './gallery.css';
+@import './notice.css';
 * {
 	margin: 0px;
 	padding: 0px;

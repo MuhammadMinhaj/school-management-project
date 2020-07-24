@@ -13,6 +13,7 @@ const {
     contactPagePostController,
     departmentPageGetController,
     galleryGetController,
+    noticeCategoryGetController,
     noticeGetController
 } = require('../../controllers/web/webController')
 
@@ -22,7 +23,8 @@ router.get('/result',resultsPublicationGetController)
 
 router.get('/teachers',aboutTeachersInfoGetController)
 router.get('/gallery',galleryGetController)
-router.get('/notice',noticeGetController)
+router.get('/notice',noticeCategoryGetController)
+router.get('/notice/:id',noticeGetController)
 
 router.get('/about',aboutPageGetController)
 router.get('/libray',librayPageGetController)

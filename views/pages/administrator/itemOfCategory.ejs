@@ -45,24 +45,29 @@
                                      <div class="modal-body">
                                         <div class="latestNewsBody">
                                            <div class="form-group">
-                                              <label style="font-weight:bold;" for="latestNewsTitle">Title</label>
-                                              <textarea style="background:white;" class="latestNewsTitle" name="title" id="latestNewsTitle"></textarea>
+                                              <label style="font-weight:bold;" for="title">Title</label>
+                                              <textarea style="background:white;" class="latestNewsTitle" name="title" id="title"></textarea>
                                            </div>
-                                           <div class="form-group">
+                                           <!-- <div class="form-group">
                                               <label style="font-weight:bold;" for="latestNewsText">Text</label>
                                               <textarea style="background:white;height:150px;" class="latestNewsText" name="text" id="latestNewsText"></textarea>
-                                           </div>
+                                           </div> -->
+                                           <div class="form-group">
+                                             <label for="noteOfSummer" style="font-weight: bold;">Text</label>
+                                             <textarea name="text" id="noteOfSummer" class="summerNoteTextEditor"  ></textarea>
+                                             <div class="invalid-feedback"><%=error.body%></div>
+                                         </div>
                                            
                                            <div class="form-group">
-                                              <label style="font-weight:bold;" for="latestNewsText">Date</label>
-                                              <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="date" value="">
+                                              <label style="font-weight:bold;" for="date">Date</label>
+                                              <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" id="date" class="dateCustomStyle form-control" name="date" value="">
                                            </div>
                                            
                                            <div class="form-group">
                                               <img class="noticeImagePreview" style="width:100%;max-height:350px;">
                                            </div>
                                            <div class="form-group">
-                                              <label style="font-weight:bold;" for="latestNewsText">Upload Image</label>
+                                              <label style="font-weight:bold;" for="customFile">Upload Image</label>
                                               <div class="custom-file">
                                                  <input type="file" name="file" class="custom-file-input noticeImageUploadField" id="customFile">
                                                  <label class="custom-file-label" for="customFile">Choose file</label>
@@ -73,7 +78,7 @@
                                      </div>
                                      <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button class="btn btn-primary">Update</button>
+                                        <button class="btn btn-primary">Create</button>
                                      </div>
                                   </form>
                                </div>
@@ -112,27 +117,30 @@
                                                    <div class="modal-body">
                                                       <div class="latestNewsBody">
                                                          <div class="form-group">
-                                                            <label style="font-weight:bold;" for="latestNewsTitle">Title</label>
-                                                            <textarea style="background:white;" class="latestNewsTitle" name="title" id="latestNewsTitle"><%=notice.title%></textarea>
+                                                            <label style="font-weight:bold;" for="titleNotice<%=ind%>">Title</label>
+                                                            <textarea style="background:white;" class="latestNewsTitle" name="title" id="titleNotice<%=ind%>"><%=notice.title%></textarea>
                                                          </div>
+                                                       
+
                                                          <div class="form-group">
-                                                            <label style="font-weight:bold;" for="latestNewsText">Text</label>
-                                                            <textarea style="background:white;height:150px;" class="latestNewsText" name="text" id="latestNewsText"><%=notice.text%></textarea>
-                                                         </div>
+                                                            <label style="font-weight: bold;">Text</label>
+                                                            <textarea name="text"  class="showText summerNoteTextEditor" ><%=notice.text%></textarea>
+                                                            
+                                                        </div>
                                                          
                                                          <div class="form-group">
-                                                            <label style="font-weight:bold;" for="latestNewsText">Date</label>
-                                                            <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="date" value="<%=notice.date%>">
+                                                            <label style="font-weight:bold;" for="noticeDate<%=ind%>">Date</label>
+                                                            <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="date" id="noticeDate<%=ind%>" value="<%=notice.date%>">
                                                          </div>
                                                          <%if(notice.file){%>
                                                          <div class="form-group">
-                                                            <label style="font-weight:bold;" for="latestNewsText">Update Image</label>
+                                                            <label style="font-weight:bold;" for="noticeImage<%=ind%>">Update Image</label>
                                                             <img class="noticeImagePreview" src="<%=notice.file%>" alt="Image" style="width:100%;max-height:350px;">
                                                          </div>
                                                          <div class="form-group">
                                                             <div class="custom-file">
-                                                               <input type="file"  name="file" class="noticeImageUploadField custom-file-input" id="customFile">
-                                                               <label class="custom-file-label" for="customFile">Choose file</label>
+                                                               <input type="file" id="noticeImage<%=ind%>" name="file" class="noticeImageUploadField custom-file-input" id="customFile<%=ind%>">
+                                                               <label class="custom-file-label" for="customFile<%=ind%>">Choose file</label>
                                                             </div>
                                                          </div>
                                                          <%}else{%>
@@ -140,10 +148,10 @@
                                                             <img class="noticeImagePreview" style="width:100%;max-height:350px;">
                                                          </div>
                                                          <div class="form-group">
-                                                            <label style="font-weight:bold;" for="latestNewsText">Upload Image</label>
+                                                            <label style="font-weight:bold;" for="customFileImg<%=ind%>">Upload Image</label>
                                                             <div class="custom-file">
-                                                               <input type="file" name="file" class="custom-file-input noticeImageUploadField" id="customFile">
-                                                               <label class="custom-file-label" for="customFile">Choose file</label>
+                                                               <input type="file" name="file" class="custom-file-input noticeImageUploadField" id="customFileImg<%=ind%>">
+                                                               <label class="custom-file-label" for="customFileImg<%=ind%>">Choose file</label>
                                                             </div>
                                                          </div>
                                                          <%}%>
@@ -221,6 +229,9 @@
    let noticeImagePreview = document.querySelectorAll('.noticeImagePreview')
    let noticeImageUploadField = document.querySelectorAll('.noticeImageUploadField')
    
+
+   
+
    noticeImageUploadField.forEach((field,fIndex)=>{
        field.addEventListener('change',(e)=>{
            noticeImagePreview.forEach((preview,pIndex)=>{
@@ -234,16 +245,18 @@
    let noticeImgPreviewParent = document.getElementById('noticeImgPreviewParent')
    // let singleNoticeImagePreview = document.getElementById('singleNoticeImagePreview')
    let singleNoticeImgUploadFiled = document.getElementById('singleNoticeImgUploadFiled')
-   
-   singleNoticeImgUploadFiled.addEventListener('change',(e)=>{
-       let preview = document.createElement('img')
-       preview.style.width = '100%'
-       preview.style.maxHeight = '350px'
-       preview.src = URL.createObjectURL(e.target.files[0])
-   
-       noticeImgPreviewParent.appendChild(preview)
-   
-   })
+   if(singleNoticeImgUploadFiled){
+      singleNoticeImgUploadFiled.addEventListener('change',(e)=>{
+            let preview = document.createElement('img')
+            preview.style.width = '100%'
+            preview.style.maxHeight = '350px'
+            preview.src = URL.createObjectURL(e.target.files[0])
+         
+            noticeImgPreviewParent.appendChild(preview)
+         
+         })
+   }
+  
    
    
 </script>

@@ -1,0 +1,216 @@
+<%-include('../../partials/head.ejs')%>
+<div class="row" style="margin:0px!important">
+    <div class="col-sm-12 clearXPadding">
+        <h3 class="text-center my-3 addMarginTop" style="color:#545b62">Notice</h3>
+        <div class="custom__container__card px-4 py-5">
+       
+            <div class="row">
+                
+                <div class="col-sm-3">
+                    <h5 class="n-title">
+                        <svg style="color:#495057" width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-tags-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 7.586 1H3zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                            <path d="M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
+                          </svg>
+                        Category</h5>
+                    <div class="list-group custom-category-wrapper" id="list-tab" role="tablist">
+                    <%let firstHeadText;%>
+                    <%if(category.length!==0){%>
+                        <%category.forEach((c,ind)=>{%>
+                            <%if(ind===0){%>
+                                <%firstHeadText = c.name%>
+                                 <a class="clickItem custom-category-item list-group-item-action <%=searchContent?'':'active'%>" id="list-messages-list<%=ind%>" data-toggle="list" href="#list-messages<%=ind%>" role="tab" aria-controls="messages" data-content="<%=c.name%>"><%=c.name%></a>
+                            <%}else{%>
+                                <a class="clickItem custom-category-item list-group-item-action" id="list-messages-list<%=ind%>" data-toggle="list" href="#list-messages<%=ind%>" role="tab" aria-controls="messages" data-content="<%=c.name%>"><%=c.name%></a>
+                            <%}%>
+                            
+                        <%})%>
+                    <%}%>
+                    
+                   
+                    </div>
+                </div>
+                <div class="col-sm-9">
+
+                    <h5 class="n-title">
+                        <svg style="color:#495057" width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-bell-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                          </svg>
+                        Timeline</h5>
+
+                    <div class="category-content-wrapper">
+
+                        <div class="category-content-header">
+                            <div class="row">
+                                <div class="col-sm-6">
+                        <p id="showText" class="category-content-title">
+                            <%if(searchContent){%>
+                                Search For  ( <span style="color:#ffc107;"><%=searchContent.length%></span> )
+                                <%}else{%>
+                                    <%=firstHeadText%>
+                                    <%}%>
+                        </p>
+                                </div>
+                                <div class="col-sm-6">
+                                <form action="/web/notice" method="GET" class="form-inline search-content" style="float:right">
+
+                                    <input  class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search for..." aria-label="Search" name="search">
+
+                                <button class="btn btn-sm btn-outline-light my-2 my-sm-0" type="submit">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                                    </svg>
+                                </button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="category-content-body tab-content" id="nav-tabContent">
+
+                        <%if(category.length!==0){%>
+                            <%category.forEach((c,indOfc)=>{%>
+                                <%if(indOfc===0){%>
+
+                            <%if(searchContent){%>
+
+                                <div class="tab-pane fade show active"  role="tabpanel" aria-labelledby="list-messages-list">
+                                    <ul  class="list-group list-group-flush">
+                                    <%if(searchContent.length!==0){%>
+                                            <%searchContent.forEach((n,ind)=>{%>
+                                                <li class="list-group-item content-group-item">
+                                                    <div class="list-date"><%=n.date%></div>
+                                                    <a href="/web/notice/<%=n.id%>" class="list-text">
+                                                        <svg viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
+                                                        </svg>
+                                                    
+                                                
+                                                        <%if(n.title){%>
+                                                            <%if(n.title.length>200){%>
+                                                        <%=n.title.slice(0,201)+'...'%>
+                                                            <%}else{%>
+                                                            <%=n.title%>
+                                                            <%}%>
+                                                            <%}else{%>
+                                                            <span class="text-muted">N/A</span>
+                                                            <%}%>
+                                                        
+                                                    </a>
+                                                    
+                                                </li>
+                                            <%})%>
+                                        <%}else{%>
+                                            <li class="list-group-item text-center">
+                                                <h4 class="text-muted pt-5">No Data Found For:</h4>
+                                                <h4 class="text-muted pb-5">((...<%=searchValue.search%>...))</h4>
+                                            </li>
+                                        <%}%>
+                                        
+                                      </ul>
+                                </div>
+                        <%}%>
+                       
+                                <div class="tab-pane fade show <%=searchContent?'':'active'%>" id="list-messages<%=indOfc%>" role="tabpanel" aria-labelledby="list-messages-list<%=indOfc%>">
+
+                                    <ul  class="list-group list-group-flush">
+                                    <%if(notice.length!==0){%>
+                                            <%notice.forEach((n,ind)=>{%>
+                                            <%if(n.category.toString()===c._id.toString()){%>
+                                            
+                                            <li class="list-group-item content-group-item">
+                                                <div class="list-date"><%=n.date%></div>
+                                                <a href="/web/notice/<%=n.id%>" class="list-text">
+                                                   <svg viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
+                                                  </svg>
+                                               
+                                         
+                                                    <%if(n.title){%>
+                                                        <%if(n.title.length>200){%>
+                                                        <%=n.title.slice(0,201)+'...'%>
+                                                        <%}else{%>
+                                                        <%=n.title%>
+                                                        <%}%>
+                                                        <%}else{%>
+                                                        <span class="text-muted">N/A</span>
+                                                        <%}%>
+                                                 
+                                                </a>
+                                                
+                                            </li>
+
+                                                <%}%>
+                                            <%})%>
+                                        <%}%>
+                                        
+                                      </ul>
+                                </div>
+                                                        
+
+                                <%}else{%>
+                                <div class="tab-pane fade" id="list-messages<%=indOfc%>" role="tabpanel" aria-labelledby="list-messages-list<%=indOfc%>">
+                                    <ul  class="list-group list-group-flush">
+                                    <%if(notice.length!==0){%>
+                                        <%notice.forEach((n,ind)=>{%>
+                                        <%if(n.category.toString()===c._id.toString()){%>
+
+                                            <li class="list-group-item content-group-item">
+                                                    <div class="list-date"><%=n.date%></div>
+                                                <a href="/web/notice/<%=n.id%>" class="list-text">
+                                                    <svg  viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
+                                                    </svg>
+                                                  
+                                                    
+                                                    <%if(n.title){%>
+                                                        <%if(n.title.length>200){%>
+                                                        <%=n.title.slice(0,201)+'...'%>
+                                                        <%}else{%>
+                                                        <%=n.title%>
+                                                        <%}%>
+                                                        <%}else{%>
+                                                        <span class="text-muted">N/A</span>
+                                                        <%}%>
+                                                     
+                                                </a>
+                                               
+                                            </li>
+                                             
+                                                  
+                                        
+                                            <%}%>
+                                        <%})%>
+                                    <%}%>
+                                    </ul>
+                                </div>
+                              <%}%>
+                        <%})%>
+                    <%}%>
+
+                        </div> 
+                       
+                    </div>
+                    
+                </div>
+            </div>
+              
+        </div>
+    </div>
+</div>
+<%-include('../../partials/footer.ejs')%>
+<script>
+    let btns = document.querySelectorAll('.clickItem')
+    let showText = document.getElementById('showText')
+
+    btns.forEach((btn,ind)=>{
+        btn.addEventListener('click',()=>{
+            showText.innerText = btn.dataset.content
+        })
+    })
+
+</script>
+</body>
+</html>

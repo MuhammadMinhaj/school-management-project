@@ -1,5 +1,7 @@
 
-let summernote = $('#summerNoteTextEditor')
+// let summernote = $('#summerNoteTextEditor')
+let summernote = $('.summerNoteTextEditor')
+
 summernote.summernote({
 	styleTags: [
 		'p',

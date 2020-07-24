@@ -7,13 +7,14 @@ const Contact = require('../../models/Contact')
 const Category = require('../../models/Category')
 const Notice = require('../../models/Notice')
 
-async function renderPageHandler(req,res,pagename,title,page,department){
+async function renderPageHandler(req,res,pagename,title,page,department,searchContent,singleNotice){
     let menu  = await Menu.find()
     let webModel = await WebModel.findOne()
     let examinationType = await ExaminationType.find()
     let teachers = await Teacher.find()
     let category = await Category.find()
     let notice = await Notice.find()
+
     res.render(`pages/${pagename}`,{
         title,
         menu,
@@ -23,7 +24,10 @@ async function renderPageHandler(req,res,pagename,title,page,department){
         page,
         department,
         category,
-        notice
+        notice,
+        searchContent,
+        searchValue:req.query,
+        singleNotice
     })
 }
 exports.indexPageGetController = async(req,res,next)=>{
@@ -178,9 +182,27 @@ exports.galleryGetController = async(req,res,next)=>{
     }
 }
 
+exports.noticeCategoryGetController = async(req,res,next)=>{
+    try{    
+        let { search } = req.query 
+        let searchFor;
+        if(search){
+            let notice = await Notice.find({ "title": { "$regex": search, "$options": "i" }})
+            searchFor = notice 
+        }
+        console.log(searchFor)
+        renderPageHandler(req,res,'web/noticeCategory.ejs','Notice',null,null,searchFor)
+    }catch(e){
+        next(e)
+    }
+}
+
 exports.noticeGetController = async(req,res,next)=>{
     try{    
-        renderPageHandler(req,res,'web/notice.ejs','Notice')
+        let { id } = req.params
+        let notice = await Notice.findOne({id:id})
+
+        renderPageHandler(req,res,'web/notice.ejs','Notice',null,null,null,notice)
     }catch(e){
         next(e)
     }

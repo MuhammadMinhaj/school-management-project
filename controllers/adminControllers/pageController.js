@@ -7,12 +7,14 @@ const WebModel = require('../../models/WebModel')
 
 const { validationResult } = require('express-validator')
 const Teacher = require('../../models/Teacher')
+const Category = require('../../models/Category')
 
 async function pageRenderHandler(req,res,pagename,title){
 	let menu = await Menu.find()
 	let webModel = await WebModel.findOne()
 	let pages = await Page.find()
 	let groupOfTeachers = await Teacher.find()
+	let category = await Category.find()
 	res.render(`pages/administrator/${pagename}`, {
 		title: title,
 		style: 'bg-light',
@@ -23,7 +25,8 @@ async function pageRenderHandler(req,res,pagename,title){
 		webModel,
 		createdPage: {},
 		error: {},
-		groupOfTeachers
+		groupOfTeachers,
+		category 
 	})
 }
 
@@ -47,6 +50,7 @@ exports.pageCreateGetController = async (req, res, next) => {
 		let menu = await Menu.find()
 		let webModel = await WebModel.findOne()
 		let pages = await Page.find()
+		let category = await Category.find()
 		res.render('pages/administrator/createPage.ejs', {
 			title: 'Create Menu',
 			style: 'bg-light',
@@ -57,6 +61,7 @@ exports.pageCreateGetController = async (req, res, next) => {
 			webModel,
 			createdPage: {},
 			error: {},
+			category 
 		})
 	} catch (e) {
 		next(e)
@@ -139,7 +144,7 @@ exports.pageUpdateGetController = async (req, res, next) => {
 		let menu = await Menu.find()
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
-
+		let category = await Category.find()
 		let updatePage = await Page.findOne({ _id: req.params.pageId })
 
 		if (!updatePage) {
@@ -157,6 +162,7 @@ exports.pageUpdateGetController = async (req, res, next) => {
 			updatePage,
 			createdPage: {},
 			error: {},
+			category
 		})
 	} catch (e) {
 		next(e)
@@ -173,6 +179,7 @@ exports.pageUpdatePostController = async (req, res, next) => {
 
 		let menu = await Menu.find()
 		let pages = await Page.find()
+		let category = await Category.find()
 		let webModel = await WebModel.findOne()
 		let updatePage = await Page.findOne({ _id: pageId })
 
@@ -197,6 +204,7 @@ exports.pageUpdatePostController = async (req, res, next) => {
 				},
 				createdPage: {},
 				error: error.mapped(),
+				category
 			})
 		}
 		// update page
@@ -229,6 +237,7 @@ exports.pageUpdatePostController = async (req, res, next) => {
 				},
 				createdPage: {},
 				error: {},
+				category
 			})
 		}
 		req.flash('success', 'Successfully Updated Page')
@@ -243,6 +252,7 @@ exports.pageUpdatePostController = async (req, res, next) => {
 			updatePage: updatedPage,
 			createdPage: {},
 			error: {},
+			category
 		})
 	} catch (e) {
 		next(e)

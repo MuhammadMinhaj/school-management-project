@@ -4,76 +4,17 @@
         <h3 class="text-center my-3 addMarginTop" style="color:#545b62">Notice</h3>
         <div class="custom__container__card px-4 py-5">
        
-            <div class="row">
-                
-                <div class="col-4">
-                    <!-- <h5>Catagory</h5> -->
-                    <div class="list-group" id="list-tab" role="tablist">
-                    
-                    <%if(category.length!==0){%>
-                        <%category.forEach((c,ind)=>{%>
-                            <%if(ind===0){%>
-                                 <a class="list-group-item list-group-item-action active" id="list-messages-list<%=ind%>" data-toggle="list" href="#list-messages<%=ind%>" role="tab" aria-controls="messages"><%=c.name%></a>
-                            <%}else{%>
-                                <a class="list-group-item list-group-item-action" id="list-messages-list<%=ind%>" data-toggle="list" href="#list-messages<%=ind%>" role="tab" aria-controls="messages"><%=c.name%></a>
-                            <%}%>
-                            
-                        <%})%>
-                    <%}%>
-                    
-                   
-                    </div>
-                </div>
-                <div class="col-8">
-              
-                    <div class="card p-3">
-                     
-                        <div class="tab-content" id="nav-tabContent">
-
-                        <%if(category.length!==0){%>
-                            <%category.forEach((c,indOfc)=>{%>
-                                <%if(indOfc===0){%>
-
-                                <div class="tab-pane fade show active" id="list-messages<%=indOfc%>" role="tabpanel" aria-labelledby="list-messages-list<%=indOfc%>">
-                                    <ul class="list-group list-group-flush">
-                                    <%if(notice.length!==0){%>
-                                            <%notice.forEach((n,ind)=>{%>
-                                            <%if(n.category.toString()===c._id.toString()){%>
-
-                                            <li class="list-group-item"><%=n.title%></li>
-
-                                                <%}%>
-                                            <%})%>
-                                        <%}%>
-                                        
-                                      </ul>
-                                </div>
-
-                                <%}else{%>
-                                <div class="tab-pane fade" id="list-messages<%=indOfc%>" role="tabpanel" aria-labelledby="list-messages-list<%=indOfc%>">
-                                    <%if(notice.length!==0){%>
-                                        <%notice.forEach((n,ind)=>{%>
-                                        <%if(n.category.toString()===c._id.toString()){%>
-
-                                            <li class="list-group-item"><%=n.title%></li>
-                                        
-                                            <%}%>
-                                        <%})%>
-                                    <%}%>
-                                    
-                                </div>
-                              <%}%>
-                        <%})%>
-                    <%}%>
-
-                        </div> 
-                    </div>
-                </div>
-            </div>
-              
+           
+              <div class="notice__title mb-2">
+                  <%=singleNotice.title%>
+              </div>
+              <div class="notice px-5 py-4">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit iusto inventore amet repudiandae repellendus culpa similique porro earum? Corrupti iure, incidunt sequi exercitationem amet commodi odit dicta at delectus enim blanditiis fugit cumque eligendi dolore inventore consequatur molestias fugiat voluptas accusantium repudiandae laboriosam explicabo qui ipsa aliquam! Neque, tenetur eligendi!</p>
+              </div>
         </div>
     </div>
 </div>
 <%-include('../../partials/footer.ejs')%>
+
 </body>
 </html>
