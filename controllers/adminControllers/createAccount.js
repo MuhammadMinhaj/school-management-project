@@ -1,8 +1,9 @@
-let { validationResult } = require('express-validator')
-let bcrypt = require('bcrypt')
-let Admin = require('../../models/Admin')
-let Page = require('../../models/Page')
-let WebModel = require('../../models/WebModel')
+const { validationResult } = require('express-validator')
+const bcrypt = require('bcrypt')
+const Admin = require('../../models/Admin')
+const Page = require('../../models/Page')
+const WebModel = require('../../models/WebModel')
+const Category = require('../../models/Category')
 exports.createAdminGetController = async (req, res, next) => {
 	try {
 		let hasAdmin = await Admin.findOne({ _id: req.admin._id, email: req.admin.email })
@@ -13,6 +14,8 @@ exports.createAdminGetController = async (req, res, next) => {
 		let contactsAdmin = await Admin.find()
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+		let category = await Category.find()
+
 		res.render('pages/administrator/adminCreateAccount.ejs', {
 			title: 'Create Admin',
 			error: {},
@@ -25,6 +28,7 @@ exports.createAdminGetController = async (req, res, next) => {
 			createdPage:{},
 			contacts: contactsAdmin.slice(1),
 			index: 1,
+			category
 		})
 	} catch (e) {
 		next(e)
@@ -36,6 +40,8 @@ exports.createAdminPostController = async (req, res, next) => {
 		let contactsAdmin = await Admin.find()
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+		let category = await Category.find()
+
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Invalid Creadentials')
 			return res.render('pages/administrator/adminCreateAccount.ejs', {
@@ -50,6 +56,7 @@ exports.createAdminPostController = async (req, res, next) => {
 				createdPage:{},
 				contacts: contactsAdmin.slice(1),
 				index: 1,
+				category
 			})
 		}
 
@@ -68,6 +75,7 @@ exports.createAdminPostController = async (req, res, next) => {
 			password: hashedPassword,
 			dateOfBirthday: birthday,
 			gender,
+			
 		})
 		let createdAdmin = await newAdmin.save()
 		if (!createdAdmin) {
@@ -84,6 +92,7 @@ exports.createAdminPostController = async (req, res, next) => {
 				createdPage:{},
 				contacts: contactsAdmin.slice(1),
 				index: 1,
+				category
 			})
 		}
 		req.flash('success', 'Successfully Created Admin')
@@ -158,6 +167,8 @@ exports.createdAdminUpdateGetController = async (req, res, next) => {
 		}
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+		let category = await Category.find()
+
 		res.render('pages/administrator/createdAdminUpdate.ejs', {
 			title: 'Update Admin',
 			style: 'bg-light',
@@ -169,6 +180,7 @@ exports.createdAdminUpdateGetController = async (req, res, next) => {
 			createdPage:{},
 			flashMessage: req.flash(),
 			id,
+			category
 		})
 	} catch (e) {
 		next(e)
@@ -186,6 +198,8 @@ exports.createdAdminUpdateController = async (req, res, next) => {
 	try {
 		let webModel = await WebModel.findOne()
 		let pages = await Page.find()
+		let category = await Category.find()
+
 
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
@@ -201,6 +215,7 @@ exports.createdAdminUpdateController = async (req, res, next) => {
 				createdPage:{},
 				flashMessage: req.flash(),
 				id,
+				category
 			})
 		}
 		let checkUpdatedAdmin = await Admin.findOne({ _id: id })
@@ -217,6 +232,7 @@ exports.createdAdminUpdateController = async (req, res, next) => {
 				createdPage:{},
 				flashMessage: req.flash(),
 				id,
+				category
 			})
 		}
 		let hasUpdatedAdmin = await Admin.findOneAndUpdate(
@@ -255,6 +271,7 @@ exports.createdAdminUpdateController = async (req, res, next) => {
 			createdPage:{},
 			flashMessage: req.flash(),
 			id,
+			category
 		})
 	} catch (e) {}
 }

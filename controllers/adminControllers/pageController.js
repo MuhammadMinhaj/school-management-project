@@ -80,6 +80,8 @@ exports.pageCreatePostController = async (req, res, next) => {
 		let menu = await Menu.find()
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
+
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Invalid Creadentials')
 			return res.render('pages/administrator/createPage.ejs', {
@@ -92,6 +94,7 @@ exports.pageCreatePostController = async (req, res, next) => {
 				webModel,
 				createdPage: {},
 				error: error.mapped(),
+				category
 			})
 		}
 		let { title, body, menuName } = req.body
@@ -115,6 +118,7 @@ exports.pageCreatePostController = async (req, res, next) => {
 				webModel,
 				createdPage: {},
 				error: {},
+				category
 			})
 		}
 
@@ -129,6 +133,7 @@ exports.pageCreatePostController = async (req, res, next) => {
 			webModel,
 			createdPage,
 			error: {},
+			category
 		})
 	} catch (e) {
 		next(e)
@@ -276,6 +281,7 @@ exports.pageDeleteGetController = async (req, res, next) => {
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
 		let deletedPage = await Page.findOneAndDelete({ _id: pageId })
+	    let category = await Category.find()
 
 		if (!deletedPage) {
 			req.flash('fail', 'Internal Server Error')
@@ -290,6 +296,7 @@ exports.pageDeleteGetController = async (req, res, next) => {
 				updatePage: hasPage,
 				createdPage: {},
 				error: {},
+				category
 			})
 		}
 		req.flash('success', 'Successfully Deleted Page')
@@ -558,9 +565,6 @@ exports.updateTeacherInfoPostController = async(req,res,next)=>{
 
 		let { name,qualifications,bio,email,phone,website,group } = req.body
 		let file = req.file
-		console.log(req.body)
-		console.log(req.params)
-		console.log(req.query)
 
 		let { id } = req.params
 		let { userid } = req.query
@@ -802,8 +806,7 @@ exports.galleryGetController = async(req,res,next)=>{
 }
 exports.addGalleryPostController = async(req,res,next)=>{
 	try{
-		console.log(req.body)
-		console.log(req.file)
+
 
 		let { title } = req.body 
 		let file = req.file 

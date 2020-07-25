@@ -4,6 +4,8 @@ const WebModel = require('../../models/WebModel')
 const bcrypt = require('bcrypt')
 const { validationResult } = require('express-validator')
 const Page = require('../../models/Page')
+const Category = require('../../models/Category')
+
 
 exports.adminLoginGetController = async (req, res, next) => {
 	try {
@@ -111,6 +113,8 @@ exports.adminChangePasswordGetController = async (req, res, next) => {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+		let category = await Category.find()
+
 		res.render('pages/administrator/changePassword.ejs', {
 			title: 'Change-Password',
 			style: 'bg-light',
@@ -120,6 +124,7 @@ exports.adminChangePasswordGetController = async (req, res, next) => {
 			webModel,
 			createdPage: {},
 			flashMessage: {},
+			category
 		})
 	} catch (e) {
 		next(e)
@@ -132,6 +137,8 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+		let category = await Category.find()
+
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Invalid Creadentials')
@@ -144,6 +151,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				webModel,
 				createdPage: {},
 				flashMessage: req.flash(),
+				category
 			})
 		}
 
@@ -181,6 +189,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				webModel,
 				createdPage: {},
 				flashMessage: req.flash(),
+				category
 			})
 		}
 		if (admin.password !== oldPassword) {
@@ -194,6 +203,7 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				webModel,
 				createdPage: {},
 				flashMessage: req.flash(),
+				category
 			})
 		}
 		if (newPassword === confirmPassword && newPassword.length >= 5 <= 16 && confirmPassword.length >= 5 <= 16) {

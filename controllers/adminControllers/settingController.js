@@ -2,6 +2,7 @@ let { validationResult } = require('express-validator')
 let WebModel = require('../../models/WebModel')
 let Admin = require('../../models/Admin')
 let Page = require('../../models/Page')
+const Category = require('../../models/Category')
 let fs = require('fs')
 
 exports.settingGetController = async (req, res, next) => {
@@ -9,6 +10,8 @@ exports.settingGetController = async (req, res, next) => {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
+
 		console.log(webModel)
 		res.render('pages/administrator/setting.ejs', {
 			style: 'bg-light',
@@ -21,6 +24,7 @@ exports.settingGetController = async (req, res, next) => {
 			webNameError: {},
 			webNameList: webModel.name,
 			webModel,
+			category
 		})
 	} catch (e) {
 		next(e)
@@ -37,6 +41,7 @@ exports.webNameSetPostController = async (req, res, next) => {
 	try {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
+	    let category = await Category.find()
 
 		let { language, webname } = req.body
 		let WebNameerror = {}
@@ -59,7 +64,8 @@ exports.webNameSetPostController = async (req, res, next) => {
 				upSliderImgErr: {},
 				webNameError: error ? error : {},
 				webNameList: webModel.name,
-				webModel
+				webModel,
+				category
 			})
 		}
 
@@ -106,7 +112,8 @@ exports.webNameSetPostController = async (req, res, next) => {
 			upSliderImgErr: {},
 			webNameError: {},
 			webNameList: createdWebName.name,
-			webModel
+			webModel,
+			category
 		})
 	} catch (e) {
 		next(e)
@@ -118,6 +125,7 @@ exports.webNameDeleteGetController = async (req, res, next) => {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
 
 		let hasDeletedName
 		webModel.name.forEach(n => {
@@ -153,7 +161,8 @@ exports.webNameDeleteGetController = async (req, res, next) => {
 				upSliderImgErr: {},
 				webNameError: {},
 				webNameList: deletedName ? deletedName.name : webModel.name,
-				webModel
+				webModel,
+				category
 			})
 		}
 		if (!deletedName) {
@@ -247,6 +256,7 @@ exports.webLogoDeleteGetController = async(req,res,next)=>{
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
 
 		function pageRenderHandler(msgOpt, msg) {
 			if (msg) req.flash(msgOpt, msg)
@@ -260,7 +270,8 @@ exports.webLogoDeleteGetController = async(req,res,next)=>{
 				upSliderImgErr: {},
 				webNameError: {},
 				webNameList:webModel.name,
-				webModel
+				webModel,
+				category
 			})
 		}
 		if(!webModel.logo){
@@ -288,6 +299,7 @@ exports.sliderUploadPostController = async (req, res, next) => {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
 
 		function pageRenderHandler(msgOpt, msg,webModel) {
 			if (msg) req.flash(msgOpt, msg)
@@ -301,7 +313,8 @@ exports.sliderUploadPostController = async (req, res, next) => {
 				upSliderImgErr: {},
 				webNameError: {},
 				webNameList:webModel.name,
-				webModel:webModel
+				webModel:webModel,
+				category
 			})
 		}
 		if(!req.file){
@@ -353,6 +366,7 @@ exports.sliderDeleteGetController = async(req,res,next)=>{
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
 
 		function pageRenderHandler(msgOpt, msg,webModel) {
 			if (msg) req.flash(msgOpt, msg)
@@ -366,7 +380,8 @@ exports.sliderDeleteGetController = async(req,res,next)=>{
 				upSliderImgErr: {},
 				webNameError: {},
 				webNameList:webModel.name,
-				webModel:webModel
+				webModel:webModel,
+				category
 			})
 		}
 
@@ -418,6 +433,7 @@ exports.sliderEditInfoPostController = async(req,res,next)=>{
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
 
 		function pageRenderHandler(msgOpt, msg,webModel) {
 			if (msg) req.flash(msgOpt, msg)
@@ -431,7 +447,8 @@ exports.sliderEditInfoPostController = async(req,res,next)=>{
 				upSliderImgErr: {},
 				webNameError: {},
 				webNameList:webModel.name,
-				webModel:webModel
+				webModel:webModel,
+				category
 			})
 		}
 
@@ -469,6 +486,7 @@ exports.sliderTextDeleteGetController = async(req,res,next)=>{
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
 
 		function pageRenderHandler(msgOpt, msg,webModel) {
 			if (msg) req.flash(msgOpt, msg)
@@ -482,7 +500,8 @@ exports.sliderTextDeleteGetController = async(req,res,next)=>{
 				upSliderImgErr: {},
 				webNameError: {},
 				webNameList:webModel.name,
-				webModel:webModel
+				webModel:webModel,
+				category
 			})
 		}
 
@@ -516,6 +535,8 @@ exports.socialLinksCreatePostController = async(req,res,next)=>{
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
+
 		let { name,icon,action,color } = req.body
 
 		
@@ -531,7 +552,8 @@ exports.socialLinksCreatePostController = async(req,res,next)=>{
 				upSliderImgErr: {},
 				webNameError: {},
 				webNameList:webModel.name,
-				webModel:webModel
+				webModel:webModel,
+				category
 			})
 		}
 
@@ -581,6 +603,7 @@ exports.socialLinksDeleteGetController = async(req,res,next)=>{
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
 
 		function pageRenderHandler(msgOpt, msg,webModel) {
 			if (msg) req.flash(msgOpt, msg)
@@ -594,7 +617,8 @@ exports.socialLinksDeleteGetController = async(req,res,next)=>{
 				upSliderImgErr: {},
 				webNameError: {},
 				webNameList:webModel.name,
-				webModel:webModel
+				webModel:webModel,
+				category
 			})
 		}
 
@@ -633,6 +657,8 @@ exports.socialLinksUpdatePostController = async(req,res,next)=>{
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
+
 		let { name,icon,action,color } = req.body
 		let { id } = req.params
 		function pageRenderHandler(msgOpt, msg,webModel) {
@@ -647,7 +673,8 @@ exports.socialLinksUpdatePostController = async(req,res,next)=>{
 				upSliderImgErr: {},
 				webNameError: {},
 				webNameList:webModel.name,
-				webModel:webModel
+				webModel:webModel,
+				category
 			})
 		}
 
@@ -698,6 +725,8 @@ exports.futuredLinksCreatePostController = async(req,res,next)=>{
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
+
 		let { name,url } = req.body
 
 		function pageRenderHandler(msgOpt, msg,webModel) {
@@ -712,7 +741,8 @@ exports.futuredLinksCreatePostController = async(req,res,next)=>{
 				upSliderImgErr: {},
 				webNameError: {},
 				webNameList:webModel.name,
-				webModel:webModel
+				webModel:webModel,
+				category
 			})
 		}
 		if(name.length===0||url.length===0){
@@ -760,6 +790,8 @@ exports.futuredLinksDeleteGetController = async(req,res,next)=>{
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
+		
 
 		function pageRenderHandler(msgOpt, msg,webModel) {
 			if (msg) req.flash(msgOpt, msg)
@@ -773,7 +805,8 @@ exports.futuredLinksDeleteGetController = async(req,res,next)=>{
 				upSliderImgErr: {},
 				webNameError: {},
 				webNameList:webModel.name,
-				webModel:webModel
+				webModel:webModel,
+				category
 			})
 		}
 
@@ -814,6 +847,8 @@ exports.futuredLinksUpdatePostController = async(req,res,next)=>{
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
+
 		let { name,url } = req.body
 		let { id } = req.params
 		function pageRenderHandler(msgOpt, msg,webModel) {
@@ -828,7 +863,8 @@ exports.futuredLinksUpdatePostController = async(req,res,next)=>{
 				upSliderImgErr: {},
 				webNameError: {},
 				webNameList:webModel.name,
-				webModel:webModel
+				webModel:webModel,
+				category
 			})
 		}
 

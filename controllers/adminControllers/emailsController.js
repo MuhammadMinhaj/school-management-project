@@ -3,11 +3,12 @@ const nodemailer = require('nodemailer')
 const WebModel = require('../../models/WebModel')
 const Page = require('../../models/Page')
 const Contact = require('../../models/Contact')
-
+const Category = require('../../models/Category')
 async function pageRenderHandler(req,res,pagename,title){
 	let webModel = await WebModel.findOne()
 	let pages = await Page.find()
 	let contact = await Contact.find()
+	let category = await Category.find()
 
 	res.render(`pages/administrator/${pagename}`, {
 		title: title,
@@ -19,6 +20,7 @@ async function pageRenderHandler(req,res,pagename,title){
 		createdPage: {},
         error: {},
         contacts:contact,
+        category
 	})
 }
 

@@ -221,7 +221,7 @@
   <div class="col-sm-12">
     <div class="row">
 
-      <div class="col-sm-6">
+      <div class="col-sm-5">
     
           <div class="newsMainContainer">
          
@@ -242,7 +242,7 @@
         
       </div>
 
-      <div class="col-sm-6 addMargin">
+      <div class="col-sm-7 addMargin">
         <div class="noticeMainContainer">
           <div class="noticeTitle">
               <h5>
@@ -251,41 +251,54 @@
           </div>
           <div class="card p-2 maxHeightSet" style="border-radius: 0px!important;">
               <ul class="wrapperNoticeContainer">
-                  <%webModel.notice.reverse().forEach((notice,ind)=>{%>
+                  <%notice.reverse().forEach((n,ind)=>{%>
                     <%if(ind===0){%>
                       <li style="border-top:none!important">
+                        <a href="/web/notice/<%=n.id%>">
                         <div class="noticeDateContainer" style="background:#ad1523;
                         box-shadow:0pt 2pt 1pt #196129">
-                          <span><%=notice.date.date%> <span><%=notice.date.month%></span></span>
+                          <span><%=n.date.date%> <span><%=n.date.month%></span></span>
                           <br>
-                          <span><%=notice.date.year%></span>
+                          <span><%=n.date.year%></span>
                         </div>
                         <div class="noticeTextContainer">
                           <h6 style="margin:0px!important;">
                       
-                            <%=notice.title%>
-                        tesy
+                            <%=n.title%>
+                        
                           </h6>
                         
                         </div>
+                      </a>
                     </li>
                     <%}else{%>
 
                     <li>
+                      <a href="/web/notice/<%=n.id%>">
                       <div class="noticeDateContainer">
-                        <span><%=notice.date.date%> <span><%=notice.date.month%></span></span>
+                        <span><%=n.date.date%> <span><%=n.date.month%></span></span>
                         <br>
-                        <span><%=notice.date.year%></span>
+                        <span><%=n.date.year%></span>
                       </div>
                       <div class="noticeTextContainer">
                         <h6 style="margin:0px!important;">
                     
-                          <%=notice.title%>
-                      tesy
+                       
+                          <%if(n.title){%>
+                            <%if(n.title.length>150){%>
+                        <%=n.title.slice(0,151)+'...'%>
+                            <%}else{%>
+                            <%=n.title%>
+                            <%}%>
+                            <%}else{%>
+                            <span class="text-muted">N/A</span>
+                            <%}%>
+                      
                         </h6>
                       
                       </div>
-                  </li>
+                    </a>
+                    </li>
                       
                       <%}%>
 
@@ -293,9 +306,13 @@
                   <%})%>
             
               </ul>
-
+              
+          </div>
+          <div class="text-center py-2">
+            <a href="/web/notice" class="noticeMoreBtn">See more</a>
           </div>
         </div>
+        
       </div>
 
     </div>
@@ -485,6 +502,16 @@
 
 </div>
 <!-- Important Links End -->
+
+<div style="margin:0px!important" class="row pb-5 clearXPadding backgroundImage">
+  <div class="col-sm-1"></div>
+  
+  <div class="col-sm-10 removeXPadding">
+      <h3 class="text-center mb-4"> ASSEMBLY OF JASA</h3>
+        <iframe  class="videoFrame" width="99%" src="https://www.youtube-nocookie.com/embed/iEKcr94aD10" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <div class="col-sm-1"></div>
+</div>
 
 <!-- Contact Us -->
 <div class="row px-5 py-5 clearXPadding" style="margin:0px!important;background:#343a40;border-bottom:5px solid #f8f9fa12">

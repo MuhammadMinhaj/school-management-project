@@ -3,12 +3,15 @@ const bcrypt = require('bcrypt')
 const { validationResult } = require('express-validator')
 const Page = require('../../models/Page')
 const WebModel = require('../../models/WebModel')
+const Category = require('../../models/Category')
+
 
 exports.adminAccountGetController = async (req, res, next) => {
 	try {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+		let category = await Category.find()
 
 		res.render('pages/administrator/account.ejs', {
 			title: 'Administraotr Account',
@@ -19,6 +22,7 @@ exports.adminAccountGetController = async (req, res, next) => {
 			webModel,
 			createdPage:{},
 			error: {},
+			category,
 		})
 	} catch (e) {
 		next(e)
@@ -26,6 +30,7 @@ exports.adminAccountGetController = async (req, res, next) => {
 }
 exports.adminAccountPostController = async (req, res, next) => {
 	try {
+		let category = await Category.find()
 		let { name, username, email, phone, dateOfBirthday, gender } = req.body
 		let data = {
 			name,
@@ -49,6 +54,7 @@ exports.adminAccountPostController = async (req, res, next) => {
 				webModel,
 				createdPage:{},
 				flashMessage: req.flash(),
+				category
 			})
 		}
 
@@ -65,6 +71,7 @@ exports.adminAccountPostController = async (req, res, next) => {
 			createdPage:{},
 			data: updatedAdmin,
 			flashMessage: req.flash(),
+			category
 		})
 	} catch (e) {
 		next(e)
@@ -76,6 +83,7 @@ exports.createAdminSecurityPasswordGetController = async (req, res, next) => {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+		let category = await Category.find()
 		if (admin) {
 			res.render('pages/administrator/securityPassword.ejs', {
 				title: admin.securityPassword ? 'Update Security Password' : 'Create Security Password',
@@ -86,6 +94,7 @@ exports.createAdminSecurityPasswordGetController = async (req, res, next) => {
 				webModel,
 				createdPage:{},
 				flashMessage: req.flash(),
+				category
 			})
 		}
 	} catch (e) {
@@ -99,6 +108,8 @@ exports.createAdminSecurityPasswordPostController = async (req, res, next) => {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+		let category = await Category.find()
+
 
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
@@ -112,6 +123,7 @@ exports.createAdminSecurityPasswordPostController = async (req, res, next) => {
 				webModel,
 				createdPage:{},
 				flashMessage: req.flash(),
+				category
 			})
 		}
 		let message = admin.securityPassword ? 'Successfully Updated Security Password' : 'Successfully Created Security Password'
@@ -139,6 +151,7 @@ exports.createAdminSecurityPasswordPostController = async (req, res, next) => {
 			webModel,
 			createdPage:{},
 			flashMessage: req.flash(),
+			category
 		})
 	} catch (e) {
 		next(e)
@@ -150,6 +163,8 @@ exports.loginAdminSecurityPasswordGetController = async (req, res, next) => {
 		let admin = req.admin
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+		let category = await Category.find()
+
 		if (admin) {
 			res.render('pages/administrator/loginSecurityPassword.ejs', {
 				title: 'Login Security Password',
@@ -160,6 +175,7 @@ exports.loginAdminSecurityPasswordGetController = async (req, res, next) => {
 				createdPage:{},
 				flashMessage: req.flash(),
 				data: admin,
+				category
 			})
 		}
 	} catch (e) {
@@ -172,6 +188,8 @@ exports.loginAdminSecurityPasswordPostController = async (req, res, next) => {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+		let category = await Category.find()
+
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
 			return res.render('pages/administrator/loginSecurityPassword.ejs', {
@@ -183,6 +201,7 @@ exports.loginAdminSecurityPasswordPostController = async (req, res, next) => {
 				webModel,
 				createdPage:{},
 				data: admin,
+				category
 			})
 		}
 		let reCheckedSecurityPassword = await bcrypt.compare(securityPassword, admin.securityPassword)

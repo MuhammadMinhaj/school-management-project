@@ -2,8 +2,7 @@
 <div class="row" style="margin:0px!important">
     <div class="col-sm-12 clearXPadding">
         <h3 class="text-center my-3 addMarginTop" style="color:#545b62">Notice</h3>
-        <div class="custom__container__card px-4 py-5">
-       
+        <div class="custom__container__card clearXPadding addYPadding px-4 py-5">
             <div class="row">
                 
                 <div class="col-sm-3">
@@ -81,7 +80,7 @@
                                     <%if(searchContent.length!==0){%>
                                             <%searchContent.forEach((n,ind)=>{%>
                                                 <li class="list-group-item content-group-item">
-                                                    <div class="list-date"><%=n.date%></div>
+                                                    <div class="list-date"><%=n.date.date%>-<%=n.date.month%>-<%=n.date.year%></div>
                                                     <a href="/web/notice/<%=n.id%>" class="list-text">
                                                         <svg viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
@@ -121,7 +120,7 @@
                                             <%if(n.category.toString()===c._id.toString()){%>
                                             
                                             <li class="list-group-item content-group-item">
-                                                <div class="list-date"><%=n.date%></div>
+                                                <div class="list-date"><%=n.date.date%>-<%=n.date.month%>-<%=n.date.year%></div>
                                                 <a href="/web/notice/<%=n.id%>" class="list-text">
                                                    <svg viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
@@ -195,8 +194,7 @@
                     </div>
                     
                 </div>
-            </div>
-              
+            </div> 
         </div>
     </div>
 </div>

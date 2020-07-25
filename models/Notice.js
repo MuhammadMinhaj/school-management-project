@@ -10,8 +10,9 @@ const schema = new Schema({
         trim:true 
     },
     date:{
-        type:String,
-        trim:true 
+        date:String,
+        month:String,
+        year:String
     },
     status:Boolean,
     file:String,

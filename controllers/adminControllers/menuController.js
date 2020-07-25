@@ -2,11 +2,14 @@ const Admin = require('../../models/Admin')
 const Menu = require('../../models/Menu')
 const Page = require('../../models/Page')
 const WebModel = require('../../models/WebModel')
+const Category = require('../../models/Category')
 
 exports.menuCreateGetController = async (req, res, next) => {
 	try {
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+	    let category = await Category.find()
+
 		res.render('pages/administrator/createMenu', {
 			title: 'Create Menu',
 			style: 'bg-light',
@@ -16,6 +19,7 @@ exports.menuCreateGetController = async (req, res, next) => {
 			webModel,
 			createdPage:{},
 			flashMessage: req.flash(),
+			category
 		})
 	} catch (e) {
 		next(e)

@@ -221,16 +221,18 @@ pre {
 .wrapperNoticeContainer {
 	list-style: none;
 }
-.wrapperNoticeContainer > li {
+.wrapperNoticeContainer > li>a {
 	display: flex;
 	border-top: 1px solid #00000024;
 	/* border-bottom: 1px solid #00000024; */
 	padding-bottom: 0.25rem;
 	transition: all 0.25s;
+	color: #343a40;
 }
-.wrapperNoticeContainer > li:hover {
+.wrapperNoticeContainer > li>a:hover {
 	background: #6c757d47;
 	cursor: pointer;
+	text-decoration: none;
 }
 
 .noticeDateContainer {
@@ -252,6 +254,24 @@ pre {
 	padding: 0.25rem;
 	margin: 0.25rem;
 	border-radius: 10px;
+}
+.noticeMoreBtn{
+	color: #545b62;
+	border: 1px solid #545b62;
+	padding: 0.30rem 1rem;
+	text-align: center;
+	border-radius: 6px;
+	text-decoration: none;
+	font-family: arial;
+	font-weight: bold;
+	max-width: 50%;
+	/* margin: auto; */
+	transition: all 0.5s;
+}
+.noticeMoreBtn:hover{
+	transform: scale(0.99);
+	text-decoration: none;
+	border: 1px solid #0ff;
 }
 .maxHeightSet {
 	max-height: 28rem;
@@ -413,16 +433,34 @@ pre {
 	border-radius: 15px;
 }
 
+/* Jasa Videos */
+
+.videoFrame{
+	border-radius: 8px;
+	border: 8px solid #495057;
+	box-shadow: 0pt 0pt 4pt 1pt #0000006b;
+	height: 450px;
+}
+
 /* Responsive design */
 @media (max-width: 576px) {
 	.clearXPadding{
 		padding-left:10px!important;
 		padding-right:10px!important;
 	}
+	.removeXPadding{
+		padding-left:0px!important;
+		padding-right:0px!important;
+	}
 	.clearYPadding{
 		padding-top:0px!important;
 		padding-bottom:0px!important;
 	}
+	.addYPadding{
+        padding-top:10px!important;
+        padding-bottom:10px!important;
+	}
+	
 	.responsiveModePadd{
 		padding:15px!important;
 	}
@@ -449,6 +487,9 @@ pre {
 	}
 	.text-size-para{
 		font-size: 3.50vw;
+	}
+	.videoFrame{
+		height: 210px;
 	}
 	.creatorTextContainer {
 		position: relative;

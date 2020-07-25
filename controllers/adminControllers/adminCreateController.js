@@ -1,12 +1,16 @@
 const { validationResult } = require('express-validator')
 const bcrypt = require('bcrypt')
 const Admin = require('../../models/Admin')
+const Category = require('../../models/Category')
 
 exports.adminCreateGetController = async (req, res, next) => {
+	
 		if(!req.session.isLoggedIn||!req.admin){
 			return res.redirect('/auth/login')
 		}
 	try {
+		let category = await Category.find()
+
 		let checkAdmin = await Admin.findOne({ _id: req.admin._id, email: req.admin.email })
 		if (!checkAdmin) {
 			return res.redirect('/auth/login')
@@ -17,6 +21,7 @@ exports.adminCreateGetController = async (req, res, next) => {
 			error: {},
 			flashMessage: {},
 			data: req.admin,
+			category,
 		})
 	} catch (e) {
 		next(e)
@@ -25,6 +30,7 @@ exports.adminCreateGetController = async (req, res, next) => {
 exports.contactsAdminGetController = async (req, res, next) => {
 	try {
 		let checkAdmin = await Admin.findOne({ _id: req.admin._id, email: req.admin.email })
+
 		if (!checkAdmin) {
 			return res.redirect('/auth/login')
 		}
@@ -90,6 +96,7 @@ exports.adminCreatePostController = async (req, res, next) => {
 		})
 	}
 	try {
+		let category = await Category.find()
 		let admin = await Admin.findOne({ _id: req.admin._id, email: req.admin.email })
 		if (!admin) {
 			req.flash('fail', 'Please Login')
@@ -105,6 +112,7 @@ exports.adminCreatePostController = async (req, res, next) => {
 			password: hashedPassword,
 			dateOfBirthday: birthday,
 			gender,
+			category
 		})
 		let createdAdmin = await newAdmin.save()
 		if (!createdAdmin) {
@@ -115,6 +123,7 @@ exports.adminCreatePostController = async (req, res, next) => {
 				error: {},
 				flashMessage: req.flash(),
 				data: req.admin,
+				category
 			})
 		}
 		res.json({

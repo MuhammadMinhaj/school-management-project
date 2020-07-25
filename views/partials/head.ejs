@@ -70,9 +70,11 @@
 						<%if(webModel.breakingNews.length!==0){%>
 							<%for(let news of webModel.breakingNews){%>
 									<%if(news.url.length!==0){%>
-										<a class="mr-3" href="<%=news.url%>"><%=news.title%></a>
+										<a class="mr-3" href="<%=news.url%>" style="font-family: arial;
+											font-weight: 600"><%=news.title%></a>
 									<%}else{%>
-										<span class="mr-3"><%=news.title%></span>
+										<span class="mr-3" style="font-family: arial;
+										font-weight: 600"><%=news.title%></span>
 										<%}%>
 								<%}%>
 						<%}else{%>

@@ -531,7 +531,7 @@ exports.createNoticePostController = async(req,res,next)=>{
         let createNotice = new Notice({
             title,
             text,
-            date,
+            date:makeDateHandler(date),
             file:file?`/uploads/${file.filename}`:'',
             category:id,
             status:false,
@@ -620,7 +620,7 @@ exports.updateNoticePostController = async(req,res,next)=>{
         let updatedNotice = await Notice.findOneAndUpdate({_id:id},{
             title,
             text,
-            date,
+            date:makeDateHandler(date),
             file:file?`/uploads/${file.filename}`:hasNotice.file 
         },{new:true})
 
