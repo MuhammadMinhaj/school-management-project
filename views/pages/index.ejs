@@ -221,7 +221,7 @@
   <div class="col-sm-12">
     <div class="row">
 
-      <div class="col-sm-5">
+      <div class="col-sm-4">
     
           <div class="newsMainContainer">
          
@@ -242,7 +242,7 @@
         
       </div>
 
-      <div class="col-sm-7 addMargin">
+      <div class="col-sm-8 addMargin">
         <div class="noticeMainContainer">
           <div class="noticeTitle">
               <h5>
@@ -273,6 +273,9 @@
                     </li>
                     <%}else{%>
 
+                      <%if(ind<10){%>
+
+                     
                     <li>
                       <a href="/web/notice/<%=n.id%>">
                       <div class="noticeDateContainer">
@@ -299,7 +302,7 @@
                       </div>
                     </a>
                     </li>
-                      
+                         <%}%>
                       <%}%>
 
               
