@@ -19,9 +19,31 @@
     </div>
     <div class="col-sm-4 ">
         <div class="admin-head-icon">
-            <button class="btn btn-dark btn-sm"><i class="fas fa-bell"></i></button>
+            <button class="btn btn-dark btn-sm" id="shorthNoticeBtn"><i class="fas fa-bell"></i></button>
+            <div class="dropdown-menu" id="shorhNoticeToggle">
+
+                <div class="setting-account text-danger">
+                    <svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-bell-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                      </svg>
+                    Notice
+                </div>
+                <form action="/administrator/notice/send" method="POST">
+                <div class="setting-application p-1">
+                    <div class="form-group pt-2">
+                        <textarea class="form-control" name="notice" id="exampleFormControlTextarea1" rows="3"></textarea>
+                      </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-sm btn-primary w-75">Submit</button>
+            
+                </div>
+                </form>
+                
+            </div>
+            
             <button class="btn btn-dark btn-sm"><i class="fas fa-comment-dots"></i></button>
-            <button class="btn btn-dark btn-sm"><i class="fas fa-envelope"></i></button>
+            <button class="btn btn-dark btn-sm"><a href="/administrator/emails"><i class="fas fa-envelope"></i></a></button>
             <button class="btn btn-dark btn-sm setting"><i class="fas fa-cog"></i></button>
             <div class="dropdown-menu  setting-menu">
 

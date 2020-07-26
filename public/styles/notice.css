@@ -1,4 +1,6 @@
-
+@page {
+    size: A4;
+}
 @media print {
     body * {
         visibility: hidden;

@@ -30,6 +30,7 @@ async function renderPageHandler(req,res,pagename,title,page,department,searchCo
         singleNotice
     })
 }
+
 exports.indexPageGetController = async(req,res,next)=>{
     try{
         renderPageHandler(req,res,'index.ejs','JAMEA AHMADIA SUNNIA ALIA KAMIL MADRASAH')

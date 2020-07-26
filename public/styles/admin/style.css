@@ -18,7 +18,7 @@
     }
     .scroll-style{
         height:563px;
-        overflow-y: scroll;
+        overflow-y: auto;
         scroll-behavior: smooth;
         margin-right:1px;
     }

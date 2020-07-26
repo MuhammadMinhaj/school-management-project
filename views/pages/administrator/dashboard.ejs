@@ -12,12 +12,218 @@
         <%-include('../../partials/admin/adminNavbar.ejs')%>
 
         <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
-        <div class="row">
+        <div class="row scroll-style">
 
             <div class="w-100">
                 <%-include('../../partials/Error/alert.ejs')%>
             </div>
 
+            <div class="col-sm-12">
+                <div class="container">
+                     <h3 style="font-weight: bold;color:#495057" class="border-bottom py-2 text-center">DASEBOARD</h3>
+
+      
+           
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="4" height="5" x="1" y="10" rx="1"/>
+                                    <rect width="4" height="9" x="6" y="6" rx="1"/>
+                                    <rect width="4" height="14" x="11" y="1" rx="1"/>
+                                    <path fill-rule="evenodd" d="M0 14.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
+                                </svg>
+                                visitors
+                            </div>
+                            <div class="dashboard-card-body">
+                                1000
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-stickies-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M0 1.5A1.5 1.5 0 0 1 1.5 0H13a1 1 0 0 1 1 1H1.5a.5.5 0 0 0-.5.5V14a1 1 0 0 1-1-1V1.5z"/>
+                                    <path fill-rule="evenodd" d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zm6 8.5v4.396c0 .223.27.335.427.177l5.146-5.146a.25.25 0 0 0-.177-.427H10.5a1 1 0 0 0-1 1z"/>
+                                  </svg>
+                                Results
+                            </div>
+                            <div class="dashboard-card-body">
+                                1000
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header">
+                                <i class="fas fa-users"></i>
+                                Students
+                            </div>
+                            <div class="dashboard-card-body">
+                                1000
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header">
+                                <i class="fas fa-user-friends"></i>
+                                Teachers
+                            </div>
+                            <div class="dashboard-card-body">
+                                1000
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-8 mt-3">
+                        <div class="dashboard-big-card">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <a href="/administrator/page_create">
+                                    <div class="dashboard-small-card text-center">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-break-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M0 10.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
+                                            <path d="M12 1H4a2 2 0 0 0-2 2v6h12V3a2 2 0 0 0-2-2zm2 11H2v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1z"/>
+                                          </svg>
+                                          <span class="small-card-hr "></span>
+                                          
+                                        Page
+                                    </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a href="/administrator/news/category">
+                                    <div class="dashboard-small-card">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tags-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M3 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 7.586 1H3zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                            <path d="M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
+                                          </svg>
+                                          <span class="small-card-hr "></span>
+                                          
+                                        Category
+                                    </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a href="/administrator/department">
+                                    <div class="dashboard-small-card">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-easel-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.473.337a.5.5 0 0 0-.946 0L6.954 2h2.092L8.473.337zM12.15 11h-1.058l1.435 4.163a.5.5 0 0 0 .946-.326L12.15 11zM8.5 11h-1v2.5a.5.5 0 0 0 1 0V11zm-3.592 0H3.85l-1.323 3.837a.5.5 0 1 0 .946.326L4.908 11zM1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3z"/>
+                                          </svg>
+                                          <span class="small-card-hr "></span>
+                                          
+                                        Department
+                                    </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a href="/administrator/links">
+                                    <div class="dashboard-small-card">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-link-45deg" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                            <path d="M5.712 6.96l.167-.167a1.99 1.99 0 0 1 .896-.518 1.99 1.99 0 0 1 .518-.896l.167-.167A3.004 3.004 0 0 0 6 5.499c-.22.46-.316.963-.288 1.46z"/>
+                                            <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z"/>
+                                            <path d="M10 9.5a2.99 2.99 0 0 0 .288-1.46l-.167.167a1.99 1.99 0 0 1-.896.518 1.99 1.99 0 0 1-.518.896l-.167.167A3.004 3.004 0 0 0 10 9.501z"/>
+                                          </svg>
+                                          <span class="small-card-hr "></span>
+                                          
+                                        Links 
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-3">
+                                    <a href="/administrator/emails">
+                                    <div class="dashboard-small-card">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                                          </svg>
+                                          <span class="small-card-hr "></span>
+                                          
+                                        Emails 
+                                    </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a href="/administrator/results/create/examination">
+                                    <div class="dashboard-small-card">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.57 6.033H5.25C5.22 4.147 6.68 3.5 8.006 3.5c1.397 0 2.673.73 2.673 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.355H7.117l-.007-.463c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.901 0-1.358.603-1.358 1.384zm1.251 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927z"/>
+                                          </svg>
+                                          <span class="small-card-hr "></span>
+                                          
+                                        Examination 
+                                    </div>
+                                </a>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a href="/administrator/results/management">
+                                    <div class="dashboard-small-card">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-steps" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M.5 0a.5.5 0 0 1 .5.5v15a.5.5 0 0 1-1 0V.5A.5.5 0 0 1 .5 0z"/>
+                                            <rect width="5" height="2" x="2" y="1" rx=".5"/>
+                                            <rect width="8" height="2" x="4" y="5" rx=".5"/>
+                                            <path d="M6 9.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-6a.5.5 0 0 1-.5-.5v-1zm2 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1z"/>
+                                          </svg>
+                                          <span class="small-card-hr "></span>
+                                          
+                                        Requiest 
+                                    </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a href="/administrator/user/create">
+                                    <div class="dashboard-small-card">
+                                        <i class="fas fa-users"></i>
+                                        <span class="small-card-hr "></span>
+                                        
+                                        Teachers 
+                                    </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-12 mt-4">
+                                    <a href="/administrator/setting">
+                                    <div class="dashboard-setting">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 0 0-5.86 2.929 2.929 0 0 0 0 5.858z"/>
+                                          </svg>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mt-3">
+                        <div class="dashboard-big-card">
+                           
+                            <div class="dashboard-notice-header">
+                                <svg width="1.25em" height="1.20em" viewBox="0 0 16 16" class="bi bi-bell-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                                </svg>
+                                Notice
+                            </div>
+                            <div class="dashboard-notice-body">
+                                <textarea name="notice" cols="30" rows="8"></textarea>                                
+                            </div>
+                            <div class="dashboard-notice-footer">
+                                <button>Send</button>
+                            </div>
+                       
+                        </div>
+                    </div>
+                    
+                </div>
+            
+                 
+                    
+            
+                </div>
+               
+            </div>
         </div>
     </div>
 </div>

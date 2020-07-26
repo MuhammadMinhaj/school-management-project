@@ -178,7 +178,8 @@ html {
 	padding: 21px 0px;
 }
 .admin-content-head-administrator {
-	font-family: Georgia;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
 }
 
 .admin-content-head-administrator > button {
@@ -199,14 +200,20 @@ html {
 	color: #ffffff94;
 }
 .admin-head-icon {
-	font-family: Georgia;
+	font-family: Arial, Helvetica, sans-serif;
 }
 .admin-head-icon > button {
 	border: 1px solid black;
 }
 
-.admin-head-icon > button > i {
+.admin-head-icon > button> i {
 	font-size: 17px;
+	color: #f8f9fa;
+}
+.admin-head-icon > button>a> i {
+	font-size: 17px;
+	color: #f8f9fa;
+	
 }
 .admin-head-icon > form {
 	display: inline-block;
@@ -216,3 +223,136 @@ html {
 }
 
 /* Admin Dashboard Content Body */
+.dashboard-card{
+	/* border: 13px solid black; */
+	padding: 0.5rem;
+	text-align: center;
+	box-shadow: 0pt 0pt 3pt 0pt #6200ea8c;
+	border-radius: 15px;
+	transition: all 0.5s;
+	cursor: pointer;
+}
+.dashboard-card-header{
+	background: #6200ea;
+	color: #eee;
+	padding: 0.5rem;
+	font-size: 1em;
+	font-family: arial;
+	border-radius: 5px 5px 0px 0px;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+.dashboard-card-body{
+	background: #6200ea12;
+	padding: 1.5rem;
+	font-size: 2em;
+	font-family: arial;
+	color: #6200ea;
+	border-radius: 0px 0px 5px 5px;
+	font-weight: 600;
+}
+.dashboard-card:hover{
+	box-shadow: 0pt 0pt 3pt 0pt #007bffc7;
+	transform: scale(0.97);
+}
+.dashboard-big-card{
+	padding: 0.5rem;
+	box-shadow: 0pt 0pt 3pt 0pt #6200ea8c;
+	border-radius: 10px;
+	transition: all 0.5s;
+	cursor: pointer;
+}
+.dashboard-small-card{
+	padding: 1.5rem 0rem;
+	text-align: center;
+	/* box-shadow: 0pt 0pt 3pt 0pt #6200ea63; */
+	border-radius: 8px;
+	transition: all 0.5s;
+	cursor: pointer;
+	background: #033a55d9;
+	color: #f8f9fa;
+	font-family: arial;
+	font-weight: 600;
+	border: 3px solid #6200ea;
+	text-transform: uppercase;
+}
+.dashboard-small-card:hover{
+	transform: scale(0.97);
+}
+.dashboard-small-card>svg{
+	font-size: 2em;
+	margin-bottom: 5px;
+	color: #dee2e6de;
+	
+}
+.dashboard-small-card>i{
+	font-size: 2em;
+	color: #dee2e6de;
+}
+.small-card-hr{
+	border-bottom: 2px solid #f8f9fa73;
+	width: 50%;
+	display: block;
+	margin: auto;
+}
+.dashboard-setting{
+	text-align: center;
+	border-radius: 4px;
+	transition: all 0.5s;
+	cursor: pointer;
+	background: #033a55d9;
+	color: #f8f9fa;
+	font-family: arial;
+	font-weight: 600;
+	border: 3px solid #6200ea;
+	text-transform: uppercase;
+}
+.dashboard-setting:hover{
+	transform: scale(0.98);
+	background:#033a55;
+}
+.dashboard-notice-header{
+	text-align: center;
+	background: #6200ea;
+	color: #f8f9fa;
+	text-transform: uppercase;
+	/* margin-bottom:0.5rem; */
+	font-family: arial;
+	font-weight: bold;
+	border-radius: 6px 6px 0px 0px;
+	padding: 0.25rem 0rem;
+}
+.dashboard-notice-body{border: 2px solid #6200ea;padding: 0.5rem;}
+.dashboard-notice-body>textarea{
+	/* border: 1px solid #343a4030; */
+	width:100%;
+	box-shadow: 0pt 0pt 3pt 1pt #00000026;
+	border-radius: 8px;
+	padding: 0.75rem 0.75rem 0.5rem 0.75rem;
+	font-family: arial;
+	font-weight: bold;
+}
+.dashboard-notice-footer{
+	border-right: 2px solid #6200ea;
+	padding: 0.25rem;
+	border-left: 2px solid #6200ea;
+	border-bottom: 2px solid #6200ea;
+	border-radius: 0px 0px 5px 5px;
+}
+.dashboard-notice-footer>button{
+	border:none;
+	background: #6200ea;
+	color: #f8f9fa;
+	font-family: arial;
+	width: 100%;
+	border-radius: 4px;
+	font-weight: bold;
+	transition: all 0.5s;
+}
+.dashboard-notice-footer>button:focus{
+	outline:none;
+}
+.dashboard-notice-footer>button:hover{
+	background:#250d9d;
+	transform: scale(0.98);
+}

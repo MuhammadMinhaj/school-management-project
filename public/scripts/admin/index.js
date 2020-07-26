@@ -7,4 +7,5 @@ import { Short } from '../../../utils/scriptsShoctCode/sorthCodeClass'
 let { $,toggler, } = new Short
 
 toggler($('.setting'),$('.setting-menu'))
+toggler($('#shorthNoticeBtn'),$('#shorhNoticeToggle'))
 

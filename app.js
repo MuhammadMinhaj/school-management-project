@@ -1,10 +1,12 @@
-
 require('dotenv').config()
 const path = require('path')
 const express = require('express')
 const mongoose = require('mongoose')
 const config = require('config')
 
+// Models
+const Menu = require('./models/Menu')
+const WebModel = require('./models/WebModel')
 
 // All Routes Registared
 const setRoutes = require('./routes/routes')
@@ -50,9 +52,20 @@ setRoutes(app)
 // })
 
 
-app.get('*',(req,res,next)=>{
-    res.send('<h1 style="text-align:center">404 Page Not Found</h1>')
+
+
+app.get('*',async(req,res,next)=>{
+
+    let menu  = await Menu.find()
+    let webModel = await WebModel.findOne()
+    res.render('pages/404.ejs',{
+        title:'404 Page Not Found',
+        menu,
+        webModel,
+    })
+
 })
+
 
 mongoose.connect(BASE_URL,{
     useNewUrlParser:true,

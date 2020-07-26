@@ -35,3 +35,11 @@ btns.forEach((btn, indBtn) => {
 		})
 	})
 })
+
+let showText = document.querySelectorAll('.showText')
+if(showText){
+	showText.forEach(text=>{
+		text.innerHTML = text.dataset.content
+	})
+}
+
