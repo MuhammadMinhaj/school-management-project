@@ -4,6 +4,7 @@ const flash = require('connect-flash')
 const session = require('express-session')
 const config = require('config')
 const MongoDbStore = require('connect-mongodb-session')(session)
+const useragent = require('express-useragent')
 
 // Set Locals
 const setLocals = require('./setLocals')
@@ -41,7 +42,8 @@ const middlewares = [
     flash(),
     setLocals(),
     bindAdminWithRequest(),
-    bindUserWithRequest()
+    bindUserWithRequest(),
+    useragent.express()
 ]
 module.exports = app =>{
     middlewares.forEach(middleware=>{
