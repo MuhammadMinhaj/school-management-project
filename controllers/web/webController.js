@@ -6,6 +6,9 @@ const Page = require('../../models/Page')
 const Contact = require('../../models/Contact')
 const Category = require('../../models/Category')
 const Notice = require('../../models/Notice')
+const Visitor = require('../../models/Visitor')
+
+const OS = require('os')
 
 async function renderPageHandler(req,res,pagename,title,page,department,searchContent,singleNotice){
     let menu  = await Menu.find()
@@ -33,6 +36,8 @@ async function renderPageHandler(req,res,pagename,title,page,department,searchCo
 
 exports.indexPageGetController = async(req,res,next)=>{
     try{
+        let visitor = await Visitor.find()
+        console.log(OS.hostname())
         renderPageHandler(req,res,'index.ejs','JAMEA AHMADIA SUNNIA ALIA KAMIL MADRASAH')
     }catch(e){
         next(e)

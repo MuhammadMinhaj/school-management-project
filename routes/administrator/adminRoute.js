@@ -19,7 +19,11 @@ const createdAdminUpdateValidator = require('../../validators/admin/createdAdmin
 // Import Authentication
 const { isAuthenticatedAdmin, isAuthenticatedSecurity, isUnauthenticatedSecurity } = require('../../middlewares/adminAuthMiddleware')
 
-const { adminDashboardGetController } = require('../../controllers/adminControllers/dashboardController')
+const { 
+	adminDashboardGetController,
+	dashboradNoticePostController,
+	clearNoticeGetController
+ } = require('../../controllers/adminControllers/dashboardController')
 
 // ANCHOR Administrator Some Functionality Controller
 const {
@@ -40,6 +44,8 @@ const {
 	} = require('../../controllers/adminControllers/createAccount')
 
 router.get('/dashboard', isAuthenticatedAdmin, adminDashboardGetController)
+router.post('/dashboard/notice', isAuthenticatedAdmin, dashboradNoticePostController)
+router.get('/dashboard/notice/clear', isAuthenticatedAdmin, clearNoticeGetController)
 
 router.get('/security-password', isAuthenticatedAdmin, createAdminSecurityPasswordGetController)
 router.post('/security-password', isAuthenticatedAdmin, securityPasswordValidator, createAdminSecurityPasswordPostController)

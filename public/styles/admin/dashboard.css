@@ -344,7 +344,7 @@ html {
 	background: #6200ea;
 	color: #f8f9fa;
 	font-family: arial;
-	width: 100%;
+	width: 60%;
 	border-radius: 4px;
 	font-weight: bold;
 	transition: all 0.5s;
@@ -355,4 +355,21 @@ html {
 .dashboard-notice-footer>button:hover{
 	background:#250d9d;
 	transform: scale(0.98);
+}
+.dashboard-notice-footer>a{
+	background: #bd2130;
+	color: #f8f9fa;
+	font-family: arial;
+	width: 37%;
+	border-radius: 4px;
+	font-weight: bold;
+	transition: all 0.5s;
+	display: inline-block;
+	text-align: center;
+	padding: 1px 0px;
+}
+.dashboard-notice-footer>a:hover{
+	background: #880c18;
+	transform: scale(0.98);
+	text-decoration: none;
 }

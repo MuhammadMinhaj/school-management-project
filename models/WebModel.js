@@ -33,20 +33,24 @@ const schema = new Schema({
 			url:String
 		}
 	],
-	notice:[
-		{
-			title:String,
-			text:String,
-			date:{
-				date:String,
-				month:String,
-				year:String
-			},
-			numberDate:String,
-			image:String,
-			action:String
-		}
-	],
+	// notice:[
+	// 	{
+	// 		title:String,
+	// 		text:String,
+	// 		date:{
+	// 			date:String,
+	// 			month:String,
+	// 			year:String
+	// 		},
+	// 		numberDate:String,
+	// 		image:String,
+	// 		action:String
+	// 	}
+	// ],
+	notice:{
+		type:String,
+		trim:true,
+	},
 	latestNews:{
 		title:String,
 		text:String,
