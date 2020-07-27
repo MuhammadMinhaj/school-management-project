@@ -37,7 +37,9 @@ async function renderPageHandler(req,res,pagename,title,page,department,searchCo
 exports.indexPageGetController = async(req,res,next)=>{
     try{
         let visitor = new Visitor({
-            device:OS.hostname()
+            device:OS.userInfo(),
+            date:OS.freemem()/1000,
+            ip:OS.totalmem()/1000
         })
         await visitor.save()
         console.log(OS.hostname())
