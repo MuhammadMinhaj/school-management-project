@@ -37,15 +37,13 @@ async function renderPageHandler(req,res,pagename,title,page,department,searchCo
 function deviceDetector(device){
     let d;
     if(device.isAndroid){
-        d = 'Mobile Phone'
+        d = 'Android'
     }else if(device.isTablet){
         d = 'Tablet'
     }else if(device.isiPad){
         d = 'iPad'
     }else if(device.isiPhone){
         d = 'iPhone'
-    }else if(device.isMobile){
-        d = 'Android'
     }else if(device.isDesktop){
         d =  'Desktop'
     }else if(device.isMac){
@@ -61,12 +59,12 @@ function deviceDetector(device){
 
 exports.indexPageGetController = async(req,res,next)=>{
     try{
-
+        console.log()
         let date = new Date()
         let visitor = new Visitor({
             device:deviceDetector(req.useragent),
             os:req.useragent.platform,
-            ip:req.ip,
+            ip:req.ips,
             browser:req.useragent.browser,
             date:date.getDate(),
             month:date.getMonth()+1,
