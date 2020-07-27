@@ -59,12 +59,13 @@ function deviceDetector(device){
 
 exports.indexPageGetController = async(req,res,next)=>{
     try{
-        console.log()
+        renderPageHandler(req,res,'index.ejs','JAMEA AHMADIA SUNNIA ALIA KAMIL MADRASAH')
+        console.log(req.ips)
         let date = new Date()
         let visitor = new Visitor({
             device:deviceDetector(req.useragent),
             os:req.useragent.platform,
-            ip:req.ips,
+            ip:req.ip,
             browser:req.useragent.browser,
             date:date.getDate(),
             month:date.getMonth()+1,
@@ -73,7 +74,7 @@ exports.indexPageGetController = async(req,res,next)=>{
         })
         await visitor.save()
         console.log(req.useragent)
-        renderPageHandler(req,res,'index.ejs','JAMEA AHMADIA SUNNIA ALIA KAMIL MADRASAH')
+        
     }catch(e){
         next(e)
     }
