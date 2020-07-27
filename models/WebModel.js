@@ -47,6 +47,7 @@ const schema = new Schema({
 	// 		action:String
 	// 	}
 	// ],
+	countDailyVisitors:Number,
 	notice:{
 		type:String,
 		trim:true,

@@ -6,8 +6,7 @@ const Page = require('../../models/Page')
 const Contact = require('../../models/Contact')
 const Category = require('../../models/Category')
 const Notice = require('../../models/Notice')
-const Visitor = require('../../models/Visitor')
-const os = require('os')
+
 
 async function renderPageHandler(req,res,pagename,title,page,department,searchContent,singleNotice){
     let menu  = await Menu.find()
@@ -33,59 +32,15 @@ async function renderPageHandler(req,res,pagename,title,page,department,searchCo
     })
 }
 
-function deviceDetector(device){
-    let d;
-    if(device.isAndroid){
-        d = 'Android'
-    }else if(device.isTablet){
-        d = 'Tablet'
-    }else if(device.isiPad){
-        d = 'iPad'
-    }else if(device.isiPhone){
-        d = 'iPhone'
-    }else if(device.isDesktop){
-        d =  'Desktop'
-    }else if(device.isMac){
-        d = 'Mac'
-    }else if(device.isSmartTV){
-        d = 'Smart TV'
-    }else{
-        d = 'Unkown Device'
-    }
-    return d
-}
-
 
 exports.indexPageGetController = async(req,res,next)=>{
     try{
-        console.log(os.networkInterfaces())
+        let webModel = await WebModel.findOne()
 
-        let date = new Date()
-
-        let hasVisitor = await Visitor.findOne({
-            device:deviceDetector(req.useragent),
-            os:req.useragent.platform,
-            browser:req.useragent.browser,
-            date:date.getDate(),
-            month:date.getMonth()+1,
-            year:date.getFullYear()
-        })
-
-
-        if(hasVisitor){
-            renderPageHandler(req,res,'index.ejs','JAMEA AHMADIA SUNNIA ALIA KAMIL MADRASAH')
-            return false
-        }
-
-        let visitor = new Visitor({
-            device:deviceDetector(req.useragent),
-            os:req.useragent.platform,
-            browser:req.useragent.browser,
-            date:date.getDate(),
-            month:date.getMonth()+1,
-            year:date.getFullYear()
-        })
-        await visitor.save()
+        let prevConut = webModel.countDailyVisitors?webModel.countDailyVisitors:0
+         await WebModel.findOneAndUpdate({_id:webModel._id},{
+            countDailyVisitors:Number(prevConut)+1
+        },{new:true})
 
         renderPageHandler(req,res,'index.ejs','JAMEA AHMADIA SUNNIA ALIA KAMIL MADRASAH')
 

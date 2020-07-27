@@ -8,6 +8,11 @@ const Result = require('../../models/Result')
 
 
 
+setInterval(async()=>{
+	let webModel = await WebModel.findOne()
+	await WebModel.findOneAndUpdate({_id:webModel._id},{countDailyVisitors:null},{new:true})
+},1000*60*60*24)
+
 
 // Administrator Dashboard
 exports.adminDashboardGetController = async (req, res, next) => {
@@ -24,7 +29,6 @@ exports.adminDashboardGetController = async (req, res, next) => {
 		let students = await Student.countDocuments()
 		let results = await Result.find({submited:true,session:d.getFullYear().toString(),published:true}).countDocuments()
 		
-	
 		res.render('pages/administrator/dashboard.ejs', {
 			style: 'bg-light',
 			title: 'Administrator Dashboard',

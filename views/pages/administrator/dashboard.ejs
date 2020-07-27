@@ -37,7 +37,7 @@
                                 visitors
                             </div>
                             <div class="dashboard-card-body">
-                                1000
+                                <%=webModel.countDailyVisitors||'00'%>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 Results
                             </div>
                             <div class="dashboard-card-body">
-                                <%=results%>
+                                <%=results||'00'%>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                                 Students
                             </div>
                             <div class="dashboard-card-body">
-                                <%=students%>
+                                <%=students||'00'%>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                                 Teachers
                             </div>
                             <div class="dashboard-card-body">
-                                <%=teachers%>
+                                <%=teachers||'00'%>
                             </div>
                         </div>
                     </div>
