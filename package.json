@@ -46,7 +46,6 @@
     "mongoose": "^5.9.10",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.6",
-    "public-ip": "^4.0.2",
     "style-loader": "^1.2.1",
     "summernote": "^0.8.18",
     "swiper": "^5.4.1",
