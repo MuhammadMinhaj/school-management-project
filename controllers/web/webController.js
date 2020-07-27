@@ -61,19 +61,19 @@ exports.indexPageGetController = async(req,res,next)=>{
     try{
         
         console.log(req.ips)
-        let date = new Date()
-        let visitor = new Visitor({
-            device:deviceDetector(req.useragent),
-            os:req.useragent.platform,
-            ip:req.ip,
-            browser:req.useragent.browser,
-            date:date.getDate(),
-            month:date.getMonth()+1,
-            year:date.getFullYear()
+        // let date = new Date()
+        // let visitor = new Visitor({
+        //     device:deviceDetector(req.useragent),
+        //     os:req.useragent.platform,
+        //     ip:req.ip,
+        //     browser:req.useragent.browser,
+        //     date:date.getDate(),
+        //     month:date.getMonth()+1,
+        //     year:date.getFullYear()
 
-        })
-        await visitor.save()
-        console.log(req.useragent)
+        // })
+        // await visitor.save()
+        console.log(OS.networkInterfaces())
         renderPageHandler(req,res,'index.ejs','JAMEA AHMADIA SUNNIA ALIA KAMIL MADRASAH')
     }catch(e){
         next(e)
