@@ -7,8 +7,7 @@ const Contact = require('../../models/Contact')
 const Category = require('../../models/Category')
 const Notice = require('../../models/Notice')
 const Visitor = require('../../models/Visitor')
-
-const OS = require('os')
+const publicIp = require('public-ip');
 
 async function renderPageHandler(req,res,pagename,title,page,department,searchContent,singleNotice){
     let menu  = await Menu.find()
@@ -59,21 +58,18 @@ function deviceDetector(device){
 
 exports.indexPageGetController = async(req,res,next)=>{
     try{
-        
-        console.log(req.ips)
-        // let date = new Date()
-        // let visitor = new Visitor({
-        //     device:deviceDetector(req.useragent),
-        //     os:req.useragent.platform,
-        //     ip:req.ip,
-        //     browser:req.useragent.browser,
-        //     date:date.getDate(),
-        //     month:date.getMonth()+1,
-        //     year:date.getFullYear()
-
-        // })
-        // await visitor.save()
-        console.log(OS.networkInterfaces())
+        let publicIpAddress = await publicIp.v4()
+        let date = new Date()
+        let visitor = new Visitor({
+            device:deviceDetector(req.useragent),
+            os:req.useragent.platform,
+            ip:publicIpAddress,
+            browser:req.useragent.browser,
+            date:date.getDate(),
+            month:date.getMonth()+1,
+            year:date.getFullYear()
+        })
+        await visitor.save()
         renderPageHandler(req,res,'index.ejs','JAMEA AHMADIA SUNNIA ALIA KAMIL MADRASAH')
     }catch(e){
         next(e)
