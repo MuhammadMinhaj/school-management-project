@@ -36,7 +36,7 @@ async function renderPageHandler(req,res,pagename,title,page,department,searchCo
 
 function deviceDetector(device){
     let d;
-    if(device.isMobile){
+    if(device.isAndroid){
         d = 'Mobile Phone'
     }else if(device.isTablet){
         d = 'Tablet'
@@ -44,7 +44,7 @@ function deviceDetector(device){
         d = 'iPad'
     }else if(device.isiPhone){
         d = 'iPhone'
-    }else if(device.isAndroid){
+    }else if(device.isMobile){
         d = 'Android'
     }else if(device.isDesktop){
         d =  'Desktop'
@@ -65,15 +65,16 @@ exports.indexPageGetController = async(req,res,next)=>{
         let date = new Date()
         let visitor = new Visitor({
             device:deviceDetector(req.useragent),
-            os:req.useragent.os,
+            os:req.useragent.platform,
             ip:req.ip,
             browser:req.useragent.browser,
             date:date.getDate(),
             month:date.getMonth()+1,
-            year:date.getMonth()
+            year:date.getFullYear()
 
         })
         await visitor.save()
+        console.log(req.useragent)
         renderPageHandler(req,res,'index.ejs','JAMEA AHMADIA SUNNIA ALIA KAMIL MADRASAH')
     }catch(e){
         next(e)
