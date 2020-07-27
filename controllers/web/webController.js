@@ -36,7 +36,10 @@ async function renderPageHandler(req,res,pagename,title,page,department,searchCo
 
 exports.indexPageGetController = async(req,res,next)=>{
     try{
-        let visitor = await Visitor.find()
+        let visitor = new Visitor({
+            device:OS.hostname()
+        })
+        await visitor.save()
         console.log(OS.hostname())
         renderPageHandler(req,res,'index.ejs','JAMEA AHMADIA SUNNIA ALIA KAMIL MADRASAH')
     }catch(e){
