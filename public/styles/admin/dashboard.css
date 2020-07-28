@@ -233,7 +233,7 @@ html {
 	cursor: pointer;
 }
 .dashboard-card-header{
-	background: #6200ea;
+	background: linear-gradient(45deg, #6200eaa6, #0062ccd9);
 	color: #eee;
 	padding: 0.5rem;
 	font-size: 1em;
@@ -313,7 +313,7 @@ html {
 }
 .dashboard-notice-header{
 	text-align: center;
-	background: #6200ea;
+	background: linear-gradient(45deg, #6200eaa6, #0062ccd9);
 	color: #f8f9fa;
 	text-transform: uppercase;
 	/* margin-bottom:0.5rem; */
@@ -341,7 +341,7 @@ html {
 }
 .dashboard-notice-footer>button{
 	border:none;
-	background: #6200ea;
+	background: linear-gradient(45deg, #6200eacc, #0062ccd6);
 	color: #f8f9fa;
 	font-family: arial;
 	width: 60%;
@@ -353,7 +353,7 @@ html {
 	outline:none;
 }
 .dashboard-notice-footer>button:hover{
-	background:#250d9d;
+	background: linear-gradient(45deg, #6200eae6, #0062cce6);
 	transform: scale(0.98);
 }
 .dashboard-notice-footer>a{

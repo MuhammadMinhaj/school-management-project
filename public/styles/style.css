@@ -9,6 +9,7 @@
 @import './pageStyle.css';
 @import './gallery.css';
 @import './notice.css';
+@import './user/dashboard.css';
 * {
 	margin: 0px;
 	padding: 0px;

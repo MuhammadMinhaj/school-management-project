@@ -32,7 +32,6 @@ async function renderPageHandler(req,res,pagename,title,page,department,searchCo
     })
 }
 
-
 exports.indexPageGetController = async(req,res,next)=>{
     try{
         let webModel = await WebModel.findOne()

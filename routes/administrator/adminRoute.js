@@ -14,8 +14,6 @@ const createdAdminUpdateValidator = require('../../validators/admin/createdAdmin
 // Import All Controller of Administrator
 
 
-
-
 // Import Authentication
 const { isAuthenticatedAdmin, isAuthenticatedSecurity, isUnauthenticatedSecurity } = require('../../middlewares/adminAuthMiddleware')
 

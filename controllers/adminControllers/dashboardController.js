@@ -13,6 +13,54 @@ setInterval(async()=>{
 	await WebModel.findOneAndUpdate({_id:webModel._id},{countDailyVisitors:null},{new:true})
 },1000*60*60*24)
 
+let routingInfo =  [
+	{
+		name:'Home',
+		route:'/'
+	},
+	{
+		name:'Administration Login',
+		route:'/auth/login'
+	},
+	{
+		name:'User Login',
+		route:'/user/auth/login'
+	},
+	{
+		name:'Libray',
+		route:'/web/libray'
+	},
+	{
+		name:'Department',
+		route:'/web/department/ (Your department name)'
+	},
+	{
+		name:'Gallery',
+		route:'/web/gallery	'
+	},
+	{
+		name:'Teachers',
+		route:'/web/teachers'
+	},
+	{
+		name:'Notice',
+		route:'/web/notice'
+	},
+	{
+		name:'Administration',
+		route:'/web/administration'
+	},
+	{
+		name:'Results',
+		route:'/web/result'
+	},
+	{
+		name:'Contact',
+		route:'/web/contact'
+	},
+	
+]
+
 
 // Administrator Dashboard
 exports.adminDashboardGetController = async (req, res, next) => {
@@ -29,6 +77,7 @@ exports.adminDashboardGetController = async (req, res, next) => {
 		let students = await Student.countDocuments()
 		let results = await Result.find({submited:true,session:d.getFullYear().toString(),published:true}).countDocuments()
 		
+		
 		res.render('pages/administrator/dashboard.ejs', {
 			style: 'bg-light',
 			title: 'Administrator Dashboard',
@@ -40,7 +89,8 @@ exports.adminDashboardGetController = async (req, res, next) => {
 			category,
 			teachers,
 			students,
-			results
+			results,
+			routingInfo
 		})
 	} catch (e) {
 		next(e)
