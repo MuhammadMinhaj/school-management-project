@@ -120,7 +120,6 @@ exports.createUserPostController = async(req,res,next)=>{
 
         let hasPassword  = await bcrypt.hash(password,11)
         
-
         let user = new User({
             name,
             username,
@@ -133,12 +132,13 @@ exports.createUserPostController = async(req,res,next)=>{
         })
 
         let createdUser = await user.save()
-        console.log(createdUser)
         if(!createdUser){
-            return renderPageHandler(req,res,'createTeacher','fail','Internal Server Error')
+            req.flash('fail','Internal Server Error')
+            res.redirect('back')
         }
 
-        renderPageHandler(req,res,'createTeacher','success','Successfully Created User')
+        req.flash('success','Successfully Created User')
+        res.redirect('back')
     }catch(e){
         next(e)
     }
@@ -173,7 +173,8 @@ exports.updateUserPostController = async(req,res,next)=>{
                 if(file){
                     removeFilePath(file.filename,next)
                 }
-                return renderPageHandler(req,res,'createTeacher','fail','Please provied security password if you want to change user password')
+                req.flash('fail','Please provied security password if you want to change user password')
+                return res.redirect('back')
             }
         
         }
@@ -203,12 +204,14 @@ exports.updateUserPostController = async(req,res,next)=>{
             if(file){
                 removeFilePath(file.filename,next)
             }
-            return renderPageHandler(req,res,'createTeacher','fail','Internal Server Error')
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
         if(file){
            if(previousImage) removeFilePath(previousImage,next)
         }
-        renderPageHandler(req,res,'createTeacher','success','Successfully Updated User')
+        req.flash('success','Successfully Updated User')
+        res.redirect('back')
     }catch(e){
         next(e)
     }
@@ -224,10 +227,10 @@ exports.deleteUserGetController = async(req,res,next)=>{
             return res.redirect('/administrator/user/create')
         }
         
-        console.log(user)
         if(user.picture)removeFilePath(user.picture,next)
         
-        renderPageHandler(req,res,'createTeacher','success','Successfully Deleted User')
+        req.flash('success','Successfully Deleted User')
+        res.redirect('back')
     }catch(e){
         next(e)
     }

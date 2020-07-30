@@ -71,7 +71,9 @@ exports.isAuthenticatedUser = (req,res,next)=>{
 	if(!req.session.userIsLoggedIn){
 		return res.redirect('/user/auth/login')
 	}
+	
 	next()
+	
 }
 exports.isUnAuthenticatedUser = (req,res,next)=>{
 	if(req.session.userIsLoggedIn){

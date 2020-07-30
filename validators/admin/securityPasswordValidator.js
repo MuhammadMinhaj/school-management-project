@@ -13,17 +13,17 @@ module.exports = [
 				if (admin.password !== 'admin') {
 					let checkedPassword = await bcrypt.compare(value, admin.password)
 					if (!checkedPassword) {
-						return Promise.reject("1 Administrator Login Password Dosen't Matched")
+						return Promise.reject("Administrator Login Password Dosen't Matched")
 					}
 				} else {
 					if (value !== admin.password) {
-						return Promise.reject("2 Administrator Login Password Dosen't Matched")
+						return Promise.reject("Administrator Login Password Dosen't Matched")
 					}
 				}
 			} else {
 				let checkedPassword = await bcrypt.compare(value, admin.securityPassword)
 				if (!checkedPassword) {
-					return Promise.reject("01  Old Security Password Dosen't Macthed")
+					return Promise.reject("Old Security Password Dosen't Macthed")
 				}
             }
             return true

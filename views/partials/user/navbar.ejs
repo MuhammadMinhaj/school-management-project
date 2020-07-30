@@ -8,8 +8,14 @@
       </div>
       <div class="sidebar-header">
         <div class="user-pic">
-          <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+
+            <%if(user.picture){%>
+              <img class="img-responsive img-rounded" src="/uploads/images/<%=user.picture%>"
             alt="User picture">
+              <%}else{%>
+                <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                alt="User picture">
+                <%}%>
         </div>
         <div class="user-info">
           <span class="user-name"><strong><%=user.name%></strong>
@@ -141,28 +147,7 @@
               <span>Status</span>
             </a>
           </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fas fa-window-close"></i>
-              <span>Rejected Results</span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-
-                <%if(classes){%>
-                  <%if(classes.length!==0){%>
-                    <%classes.forEach((c,ind)=>{%>
-                      <li>
-                        <a href="/user/results/<%=c._id%>">Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
-                      </li>
-                    <%})%>
-                    <%}%>
-                  <%}%>
-               
-
-              </ul>
-            </div>
-          </li>
+          
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fas fa-check text-success"></i>
@@ -208,37 +193,32 @@
             </div>
           </li>
      
-          <li class="header-menu">
-            <span>Upcomming Futured</span>
-          </li>
-
-          <li>
-
-            <a href="#">
-              <i class="fa fa-book"></i>
-              <span>Futured</span>
-              <span class="badge badge-pill badge-primary">Comming Soon</span>
-            </a>
-          </li>
+          
         </ul>
       </div>
       <!-- sidebar-menu  -->
     </div>
+
     <!-- sidebar-content  -->
     <div class="sidebar-footer">
-      <a href="#">
+      
+      <div class="btn-group">
+        <div class="dropdown-menu px-1 text-muted text-center" style="width: 250px;">
+         <%=webModel.notice?webModel.notice:'Welcome'%>
+        </div>
+      </div>      
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-bell"></i>
-        <span class="badge badge-pill badge-warning notification">3</span>
+        <%if(webModel.notice){%>
+          <span class="badge badge-pill badge-warning notification">1</span>
+          <%}%>
       </a>
-      <a href="#">
-        <i class="fa fa-envelope"></i>
-        <span class="badge badge-pill badge-success notification">7</span>
-      </a>
-      <a href="#">
+
+      <a href="/user/profile">
         <i class="fa fa-cog"></i>
         <span class="badge-sonar"></span>
       </a>
-      <a href="#">
+      <a href="/user/auth/logout">
         <i class="fa fa-power-off"></i>
       </a>
     </div>

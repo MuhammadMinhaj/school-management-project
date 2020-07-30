@@ -5,7 +5,8 @@ const accountValidator = require('../../validators/admin/accountValidator')
 // Validator Of Administrator Security Password
 const securityPasswordValidator = require('../../validators/admin/securityPasswordValidator')
 // Login Security Password Validator
-const loginSecurityPasswordValidator = require('../../validators/admin/loginSecurityPasswordValidator')
+
+
 // Admin Create Validator
 const adminCreateValidator = require('../../validators/admin/createAdminValidator')
 // created Admin Update Validator 
@@ -49,7 +50,7 @@ router.get('/security-password', isAuthenticatedAdmin, createAdminSecurityPasswo
 router.post('/security-password', isAuthenticatedAdmin, securityPasswordValidator, createAdminSecurityPasswordPostController)
 
 router.get('/login-security-password', isAuthenticatedAdmin, isUnauthenticatedSecurity, loginAdminSecurityPasswordGetController)
-router.post('/login-security-password', isAuthenticatedAdmin, loginSecurityPasswordValidator, loginAdminSecurityPasswordPostController)
+router.post('/login-security-password', isAuthenticatedAdmin, loginAdminSecurityPasswordPostController)
 
 router.get('/account', isAuthenticatedAdmin, isAuthenticatedSecurity, adminAccountGetController)
 router.post('/account', isAuthenticatedAdmin, accountValidator, adminAccountPostController)

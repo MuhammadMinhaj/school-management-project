@@ -25,43 +25,38 @@
                   <div class="col-sm-12">
                      <div class="custom-card p-3 px-5">
                         <div class="row">
-                           <!-- Notice -->
                            <div class="col-sm-12">
                               <div class="px-4 py-3 h-100" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
-                                 <!-- <h5 class="text-center text-danger" style="font-weight:bold;">Notice</h5> -->
                                  <div class="latestNewsBody">
                                     <form action="/administrator/department" enctype="multipart/form-data" method="POST">
                                     
                                        <div class="form-group">
-                                          <label style="font-weight:bold;" for="latestNewsText">Name</label>
+                                          <label for="latestNewsText"><h6>Name ( Required )</h6></label>
                                           <input type="text" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="name">
                                        </div>
 
                                        <div class="form-group mt-4">
-                                          <label style="font-weight:bold;" for="latestNewsText">TITLE</label>
+                                          <label for="latestNewsText"><h6>Title ( Required )</h6></label>
                                           <textarea type="text" style="border:none;height:50px;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="title"></textarea>
                                        </div>
                                        
                                        <div class="form-group">
-                                          <label for="exampleInputPassword1">Text</label>
+                                          <label for="exampleInputPassword1"><h6>Text</h6></label>
                                           <textarea name="text" class="summerNoteTextEditor"></textarea>
                                       </div>
 
-                                       <div class="form-group">
-                                          <label style="font-weight:bold;">URL</label>
-                                          <input type="text" placeholder="https://www.example.com" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="url">
-                                       </div>
-                                       <div class="form-group" id="noticeImgPreviewParent">
-                                          <label style="font-weight:bold;" for="latestNewsText">UPLOAD IMAGE</label>
+                                       <div>
+                                          <img src="" id="departmentImgPreview" alt="">
                                        </div>
                                        <div class="form-group">
+                                          <label for="latestNewsText"><h6>Upload Image</h6></label>
                                           <div class="custom-file">
                                              <input type="file" id="singleNoticeImgUploadFiled" name="image" class="custom-file-input" id="customFile">
                                              <label class="custom-file-label" for="customFile">Choose file</label>
                                           </div>
                                        </div>
                                        <div class="form-group">
-                                          <label style="font-weight:bold;" for="latestNewsText">DATE</label>
+                                          <label for="latestNewsText"><h6>Date ( Required )</h6></label>
                                           <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="date">
                                        </div>
                                        <button class="btn btn-primary btn-sm w-100">Create</button>
@@ -69,7 +64,6 @@
                                  </div>
                               </div>
                            </div>
-                           <!-- Notice End -->
                         </div>
                      </div>
                   </div>
@@ -84,18 +78,12 @@
 
 
 <script>
-   let noticeImgPreviewParent = document.getElementById('noticeImgPreviewParent')
-   // let singleNoticeImagePreview = document.getElementById('singleNoticeImagePreview')
+   let preview = document.getElementById('departmentImgPreview')
    let singleNoticeImgUploadFiled = document.getElementById('singleNoticeImgUploadFiled')
-   
    singleNoticeImgUploadFiled.addEventListener('change',(e)=>{
-       let preview = document.createElement('img')
-       preview.style.maxWidth = '100%'
+       preview.style.width = '100%'
        preview.style.maxHeight = '350px'
        preview.src = URL.createObjectURL(e.target.files[0])
-   
-       noticeImgPreviewParent.appendChild(preview)
-   
    })
 </script>
 

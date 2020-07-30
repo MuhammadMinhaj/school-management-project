@@ -6,56 +6,48 @@ const { validationResult } = require('express-validator')
 const Page = require('../../models/Page')
 const Category = require('../../models/Category')
 
-
-exports.adminLoginGetController = async (req, res, next) => {
-	try {
+async function pageRenderHandler(req,res,pagename,title,error,model){
 		let menu = await Menu.find()
 		let webModel = await WebModel.findOne()
-		res.render('pages/administrator/login.ejs', {
-			title: 'Administrator Login',
+
+		return res.render(`pages/administrator/${pagename}`, {
+			title:title,
 			style: 'bg-dark',
-			error: {},
+			error: error?error:{},
 			menu,
-			flashMessage: {},
-			webModel
+			flashMessage: req.flash(),
+			webModel,
+
+			createdPage: {},
+			category:model?model.category:{},
+			pages:model?model.pages:{},
+			data: model?model.admin:{},
 		})
-	} catch (e) {
-		next(e)
-	}
+	
+}
+
+exports.adminLoginGetController = async (req, res, next) => {
+		pageRenderHandler(req,res,'login','Login')
 }
 exports.adminLoginPostController = async (req, res, next) => {
 	try {
-		let menu = await Menu.find()
-		let webModel = await WebModel.findOne()
 		let { email, password } = req.body
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Wrong Information')
-			return res.render('pages/administrator/login.ejs', {
-				title: 'Wrong Info',
-				style: 'bg-dark',
-				error: error.mapped(),
-				menu,
-				flashMessage: req.flash(),
-				webModel
-			})
+			
+			pageRenderHandler(req,res,'login','Wrong Info',error.mapped())
+			return false
 		}
 
 		let admin = await Admin.findOne({ email })
 		// If Admin Not Founded In Database Then Work This Condition
 		if (!admin) {
 			req.flash('fail', 'Invalid Creadentials')
-			return res.render('pages/administrator/login.ejs', {
-				title: 'Admin Not Founded',
-				style: 'bg-dark',
-				error: {},
-				menu,
-				flashMessage: req.flash(),
-				webModel
-			})
+			return res.redirect('back')
 		}
 
-		// If Administrator Password Dose Not (admin) Then Work This Condition
+		// If Administrator Password Dose Not Macthed (admin) Then Work This Condition
 		if (admin.password !== 'admin') {
 			let checkedPassword = await bcrypt.compare(password, admin.password)
 			if (checkedPassword && admin.email === email) {
@@ -70,14 +62,7 @@ exports.adminLoginPostController = async (req, res, next) => {
 				})
 			}
 			req.flash('fail', 'Invalid Creadentials')
-			return res.render('pages/administrator/login.ejs', {
-				title: 'Invalid Creadentials',
-				style: 'bg-dark',
-				error: {},
-				menu,
-				flashMessage: req.flash(),
-				webModel
-			})
+			return res.redirect('back')
 		}
 
 		// If Administrator Password Is (admin) Then Work This Condition
@@ -95,14 +80,7 @@ exports.adminLoginPostController = async (req, res, next) => {
 		}
 		// Failed To Loggin With Default Password
 		req.flash('fail', 'Invalid Creadentials')
-		return res.render('pages/administrator/login.ejs', {
-			title: 'Default Password Login Failed',
-			style: 'bg-dark',
-			error: {},
-			menu,
-			flashMessage: req.flash(),
-			webModel
-		})
+		return res.redirect('back')
 	} catch (e) {
 		next(e)
 	}
@@ -112,20 +90,15 @@ exports.adminChangePasswordGetController = async (req, res, next) => {
 	try {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
-		let webModel = await WebModel.findOne()
 		let category = await Category.find()
 
-		res.render('pages/administrator/changePassword.ejs', {
-			title: 'Change-Password',
-			style: 'bg-light',
-			error: {},
-			data: admin,
+		let model = {
+			admin,
 			pages,
-			webModel,
-			createdPage: {},
-			flashMessage: {},
 			category
-		})
+		}
+
+		pageRenderHandler(req,res,'changePassword','Change Password',null,model)
 	} catch (e) {
 		next(e)
 	}
@@ -136,23 +109,19 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 	try {
 		let admin = await Admin.findOne({ _id: req.admin._id })
 		let pages = await Page.find()
-		let webModel = await WebModel.findOne()
 		let category = await Category.find()
 
+		let model = {
+			admin,
+			pages,	
+			category
+		}
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Invalid Creadentials')
-			return res.render('pages/administrator/changePassword.ejs', {
-				title: 'Change-Password',
-				style: 'bg-light',
-				error: error.mapped(),
-				data: admin,
-				pages,
-				webModel,
-				createdPage: {},
-				flashMessage: req.flash(),
-				category
-			})
+			pageRenderHandler(req,res,'changePassword','Change Password',error.mapped(),model)
+			return false 
+
 		}
 
 		let hashedPassword = await bcrypt.hash(newPassword, 11)
@@ -180,31 +149,12 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 				return res.redirect('back')
 			}
 			req.flash('fail', "Old Password Dosn't Matched")
-			return res.render('pages/administrator/changePassword.ejs', {
-				title: "Old Password Dosn't Matched",
-				style: 'bg-light',
-				error: {},
-				data: admin,
-				pages,
-				webModel,
-				createdPage: {},
-				flashMessage: req.flash(),
-				category
-			})
+			return res.redirect('back')
+
 		}
 		if (admin.password !== oldPassword) {
 			req.flash('fail', "Old Password Dosn't Matched")
-			return res.render('pages/administrator/changePassword.ejs', {
-				title: 'Change-Password',
-				style: 'bg-light',
-				error: {},
-				data: admin,
-				pages,
-				webModel,
-				createdPage: {},
-				flashMessage: req.flash(),
-				category
-			})
+			return res.redirect('back')
 		}
 		if (newPassword === confirmPassword && newPassword.length >= 5 <= 16 && confirmPassword.length >= 5 <= 16) {
 			let updatedPassword = await Admin.findOneAndUpdate(
@@ -231,11 +181,23 @@ exports.adminChangePasswordPostController = async (req, res, next) => {
 }
 // Administrator Logout Handlerer
 exports.adminLogoutGetController = (req, res, next) => {
-	req.session.destroy(error => {
-		if (error) {
-			return next(error)
-		}
 
+	delete req.session.admin
+	delete req.session.isLoggedIn
+
+	// Logout for I used this method for remove specific user form session 
+	req.session.save(function(err) {
+		if(err){
+			next(err)
+		}
 		res.redirect('/auth/login')
 	})
+
+	// When use a destroy method then it will be deleted user and admin from the session. That's why login user or admin when wanted logout then anyone clicks on logout button then removes user and admin deleted from the session
+
+	// req.session.destroy(error => {
+	// 	if (error) {
+	// 		return next(error)
+	// 	}
+	// })
 }

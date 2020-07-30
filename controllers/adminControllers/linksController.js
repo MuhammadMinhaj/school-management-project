@@ -34,61 +34,9 @@ function removeDocumentPath(path,next){
         }
     })
 }
-function makeDateHandler(d){
-    let splitDate = d.slice(8)
-    let splitMonth = d.slice(6).slice(0,1)
-    let splitYear = d.slice(0,4)
-    let month;
-    switch(parseInt(splitMonth)){
-        case 1 :
-            month = 'January'
-            break;
-        case 2 :
-            month = 'February'
-            break;
-        case 3 :
-            month = 'March' 
-            break;
-        case 4 :
-            month = 'April'
-            break;
-        case 5 :
-            month = 'May'
-            break;
-        case 6 :
-            month = 'June'
-            break;
-        case 7 :
-            month = 'July'
-            break;
-        case 8 :
-            month = 'August'
-            break 
-        case 9 : 
-            month = 'September'
-            break;
-        case 10 :
-            month = 'October'
-            break;
-        case 11 :
-            month = 'November'
-            break;
-        case 12:
-            month = 'December'
-    }
-    let correctDate = {
-        date:splitDate,
-        month,
-        year:splitYear
-    }
-    return correctDate
-}
-exports.linksGetController = async(req,res,next)=>{
-    try{
+
+exports.linksGetController = (req,res,next)=>{
         renderPageHandler(req,res,'links')
-    }catch(e){
-        next(e)
-    }
 }
 exports.createReferenceLinksPostController = async(req,res,next)=>{
     try{
@@ -111,9 +59,11 @@ exports.createReferenceLinksPostController = async(req,res,next)=>{
         },{new:true})
 
         if(!createdRefernceLinks){
-            return renderPageHandler(req,res,'links','fail','Internal Server Error')
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
-        renderPageHandler(req,res,'links','success','Successfully Added Reference Link',createdRefernceLinks)
+        req.flash('success','Successfully Added Reference Link')
+        res.redirect('back')
     }catch(e){
         next(e)
     }
@@ -138,9 +88,11 @@ exports.referenceLinksUpdatePostController = async(req,res,next)=>{
         let updatedRefernceLinks = await WebModel.findOneAndUpdate({_id:webModel._id},webModel,{new:true})
 
         if(!updatedRefernceLinks){
-            return renderPageHandler(req,res,'links','fail','Internal Server Error')
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
-        renderPageHandler(req,res,'links','success','Successfully Updated Reference Link',updatedRefernceLinks)
+        req.flash('success','Successfully Updated Reference Link')
+        res.redirect('back')
     }catch(e){
         next(e)
     }
@@ -160,9 +112,11 @@ exports.referenceLinksDeleteGetController = async(req,res,next)=>{
         },{new:true})
 
         if(!deletedReferenceLink){
-            return renderPageHandler(req,res,'links','fail','Internal Server Error')
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
-        res.redirect('/administrator/links')
+        req.flash('success','Successfully Deleted Reference Link')
+        res.redirect('back')
     }catch(e){
         next(e)
     }
@@ -175,14 +129,18 @@ exports.uploadsDocumentLinksPostController = async(req,res,next)=>{
        
         if(name.length===0||option.length===0){
             if(!file){
-                return renderPageHandler(req,res,'links','fail','Please Include Document')
+                req.flash('fail','Please Upload Document')
+                return res.redirect('back')
             }else{
                 removeDocumentPath(file.filename,next)
-                return renderPageHandler(req,res,'links','fail','Please Provied Name')
+                
+                req.flash('fail','Please Provied Name')
+                return res.redirect('back')
             }
         }
         if(!file){
-            return renderPageHandler(req,res,'links','fail','Please Include Document')
+            req.flash('fail','Please Upload Document')
+            return res.redirect('back')
         }
         
   
@@ -202,9 +160,11 @@ exports.uploadsDocumentLinksPostController = async(req,res,next)=>{
 
         if(!includedDocuments){
             removeDocumentPath(file.filename,next)
-            return renderPageHandler(req,res,'links','fail','Internal Server Error')
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
-        renderPageHandler(req,res,'links','success','Successfully Included Document')
+        req.flash('success','Successfully Uploaded Document')
+        return res.redirect('back')
 
     }catch(e){
         next(e)
@@ -219,7 +179,9 @@ exports.documentLinksUpdatePostController = async(req,res,next)=>{
                 if(file){
                     removeDocumentPath(file.filename,next)
                 }
-                return renderPageHandler(req,res,'links','fail','Please Provied Name')
+                
+            req.flash('fail','Please Provied Name')
+            return res.redirect('back')
         }
 
   
@@ -235,7 +197,7 @@ exports.documentLinksUpdatePostController = async(req,res,next)=>{
         })
         if(!foundedDocument){
             removeDocumentPath(file.filename,next)
-            return res.redirect('/administrator/links')
+            return res.redirect('back')
         }
         foundedDocument.name = name 
         foundedDocument.option = option 
@@ -244,14 +206,16 @@ exports.documentLinksUpdatePostController = async(req,res,next)=>{
         let updatedDocument = await WebModel.findOneAndUpdate({_id:webModel._id},webModel,{new:true})
         if(!updatedDocument){
             removeDocumentPath(file.filename,next)
-            return renderPageHandler(req,res,'links','fail','Internal Server Error')
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
 
         if(file){
             removeDocumentPath(previousDocumentPath,next) 
         }
-        renderPageHandler(req,res,'links','success','Successfully Updated Document')
-
+      
+        req.flash('success','Successfully Updated Document')
+        res.redirect('back')
     }catch(e){
         next(e)
     }
@@ -278,10 +242,13 @@ exports.documentsLinksDeleteGetController = async(req,res,next)=>{
         },{new:true})
 
         if(!deletedReferenceLink){
-            return renderPageHandler(req,res,'links','fail','Internal Server Error')
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
         removeDocumentPath(willDeletedDocPath,next)
-        res.redirect('/administrator/links')
+
+        req.flash('success','Successfully Deleted Documents')
+        res.redirect('back')
     }catch(e){
         next(e)
     }

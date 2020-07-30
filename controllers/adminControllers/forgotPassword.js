@@ -46,7 +46,7 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 				webModel
 			})
 		}
-		// ANCHOR Cheked Is Email Found Or Not
+		// Cheked Is Email Found Or Not
 		let admin = await Admin.findOne({ email: email })
 		if (!admin) {
 			req.flash('fail', 'Invalid Creadentials')
@@ -63,7 +63,7 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 		let token = jwt.sign({ email: admin.email, id: admin._id }, 'minhajislam', {
 			expiresIn: '1h',
 		})
-		// ANCHOR Reset Password Confirmation Email Sent To Server in Clint
+		// Reset Password Confirmation Email Sent To Server in Clint
 		let transporter = nodemailer.createTransport({
 			service: 'gmail',
 			auth: {
@@ -90,11 +90,10 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 		})
 		// Need to Handler this Error
 
-		if (sendMailToClint.response) {
-			console.log('Success')
-		} else {
-			console.log('Fail')
-		}
+		if (!sendMailToClint.response) {
+			req.flash('fail','Invalid Creadentials')
+			return res.redirect('back')
+		} 
 		res.render('pages/administrator/confirmationEmail.ejs', {
 			title: 'Confirmation Email',
 			style: 'bg-light',
@@ -147,30 +146,14 @@ exports.resetPasswordPostController = async (req, res, next) => {
 		jwt.verify(token, 'minhajislam', async (err, info) => {
 			if (err) {
 				req.flash('fail', 'Reset password token has expired,Please try to new request')
-				return res.render('pages/administrator/resetPassword.ejs', {
-					title: 'Reset Password',
-					style: 'bg-light',
-					error: {},
-					menu,
-					webModel,
-					flashMessage: req.flash(),
-					url: req.originalURL,
-				})
+				return res.redirect('back')
 			}
 			if (info) {
 				let { email, id } = info
 				let admin = await Admin.findOne({ _id: id, email: email })
 				if (!admin) {
 					req.flash('fail', 'Admin is not founded')
-					return res.render('pages/administrator/resetPassword.ejs', {
-						title: 'Reset Password',
-						style: 'bg-light',
-						error: {},
-						menu,
-						webModel,
-						flashMessage: req.flash(),
-						url: req.originalURL,
-					})
+					return res.redirect('back')
 				}
 				let hashedPassword = await bcrypt.hash(password, 11)
 				let updatedPassword = await Admin.findOneAndUpdate(
@@ -181,15 +164,7 @@ exports.resetPasswordPostController = async (req, res, next) => {
 				)
 				if (!updatedPassword) {
 					req.flash('fail', 'Internal Server Error')
-					return res.render('pages/administrator/resetPassword.ejs', {
-						title: 'Reset Password',
-						style: 'bg-light',
-						error: {},
-						menu,
-						webModel,
-						flashMessage: req.flash(),
-						url: req.originalURL,
-					})
+					return res.redirect('back')
 				}
 				req.flash('success', 'Successfully Updated Password.Please Login Now')
 				res.redirect('/auth/login')

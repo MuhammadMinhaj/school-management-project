@@ -13,7 +13,6 @@ const schema = new Schema({
         required:true
     },
     menu:String,
-    image:String
 })
 
 const Page = new model('Page',schema)

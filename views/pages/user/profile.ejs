@@ -1,0 +1,213 @@
+<%-include('../../partials/user/head.ejs')%>
+
+
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+
+  <!-- Navbar -->
+  <%-include('../../partials/user/navbar.ejs')%>
+  <!-- Navbar End -->
+
+  <!-- sidebar-wrapper  -->
+<main class="page-content">
+  <div class="container-fluid">
+      <h4 style="color: #545b62;font-weight: 600;text-align:center">Profile</h4>
+      <hr>
+    <div>
+        <%-include('../../partials/Error/alert.ejs')%>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <form action="/user/profile/update/<%=user._id%>" method="POST" enctype="multipart/form-data">
+        <div class="card px-5 py-3">
+             
+                
+
+              <div class="form-group">
+                <div id="parentProfilePicPreview" class="p-1 mb-2">
+                <div class="editProfilePicsEditBtn" id="editProfilePicsEditBtn">
+                    <i class="fas fa-edit"></i>
+                </div>
+                
+                        
+                        <%if(user.picture){%>
+                      <img id="proflePicsPreviewer" src="/uploads/images/<%=user.picture%>" style="border-radius:6px;width:100%" alt="">
+                    
+                          <%}else{%>
+                            <i style="font-size:7rem;color:#343a40" id="defaultProfileIcon" class="fas fa-user-tie"></i>
+                          <%}%>
+
+                          <img id="proflePicsPreviewer" style="border-radius:6px;display: none;width:100%" alt="">
+                </div>
+
+              </div>
+                
+              <div id="profilePicUploadField" class="form-group" style="display: none;">
+                <label for="">Upload</label>
+                  <div class="custom-file">
+                  
+                      <input type="file" class="custom-file-input" name="picture" id="customFile">
+                      <label class="custom-file-label fileBrowserStyle" for="customFile">Choose file</label>
+                  </div>
+              </div>
+              
+              <div class="form-group">
+                  <label for="name">Name: </label>
+                  <input type="text" id="name" value="<%=user.name%>" class="form-control form-control-sm" placeholder="name" name="name">
+              </div>
+              <div class="form-group">
+                  <label for="username">Username: </label>
+                  <input type="text" value="<%=user.username%>" id="username" class="form-control form-control-sm" placeholder="username" name="username">
+              </div>
+              <div class="form-group">
+                  <label for="email">Email: </label>
+                  <input type="text" value="<%=user.email%>" id="email" class="form-control form-control-sm" placeholder="example@example.com" name="email">
+              </div>
+              <div class="form-group">
+                  <label for="phone">Phone: </label>
+                  <input type="text" id="phone" value="<%=user.phone%>" class="form-control form-control-sm" placeholder="+880" name="phone">
+              </div>
+              <!-- <div class="form-group">
+                <label for="customFile">Upload</label>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="customFile">
+                  <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+              </div>             -->
+              <div class="form-group">
+                  <label>Gender: </label>
+
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="mail" value="mail" <%=user.gender.toLowerCase()==='mail'?'checked':''%> name="radio" class="custom-control-input">
+                    <label class="custom-control-label" for="mail">Mail</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="femail" value="femail" <%=user.gender.toLowerCase()==='femail'?'checked':''%> name="radio" class="custom-control-input">
+                    <label class="custom-control-label" for="femail">Femail</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="others" value="others" <%=user.gender.toLowerCase()==='others'?'checked':''%> name="radio" class="custom-control-input">
+                    <label class="custom-control-label" for="others">Others</label>
+                  </div>
+                  
+              </div>
+              <div class="form-group d-flex justify-content-between">
+                <input type="submit" class="btn btn-success btn-sm" style="width:49%" value="Update"> 
+                <button type="button" class="change-password-btn w-50 btn btn-sm border text-primary">Change-Password</button>
+              </div>
+
+        </div>
+      </form>
+      
+        <!--  Password Change -->
+      <div class="change-password-card" style="display: none;">
+        <form action="/user/profile/change/password/<%=user._id%>" method="POST">           
+        <div class="card p-5 mt-2">
+          <div class="form-group">
+              <label for="">Old Password</label>
+              <input type="text" class="form-control form-control-sm" name="oldPassword">
+              
+          </div>
+          <div class="form-group">
+              <label for="">New Password</label>
+              <input type="text" class="form-control form-control-sm" name="password">
+      
+          </div>
+          <div class="form-group">
+              <label for="">Confirm Password</label>
+              <input type="text" class="form-control form-control-sm" name="confirmPassword">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success w-50 btn-sm">Update</button>
+          </div>
+        </div>
+        </form> 
+      </div>
+      <!-- Password Change End -->
+    </div>
+  </div>
+
+
+
+</main>
+</div>
+
+
+
+
+<%-include('../../partials/user/footer.ejs')%>
+
+<script>
+  let parentPreview = document.getElementById('parentProfilePicPreview')
+let editBtn = document.getElementById('editProfilePicsEditBtn')
+
+let field = document.getElementById('profilePicUploadField')
+
+let previewer = document.getElementById('proflePicsPreviewer')
+let defaultIcon = document.getElementById('defaultProfileIcon') 
+
+// Change Password Modal
+let changePasswordBtn = document.querySelectorAll('.change-password-btn')
+let changePassswordCard = document.querySelectorAll('.change-password-card')
+
+
+changePasswordBtn.forEach((cpBtn,cbInd)=>{
+    changePassswordCard.forEach((cpCard,cpInd)=>{
+
+        if(cbInd===cpInd){
+            cpBtn.addEventListener('click',()=>{
+
+            let cssCahngePasswordCard = getComputedStyle(cpCard)
+
+                if(cssCahngePasswordCard.display==='none'){
+                    cpCard.style.display = 'block'
+                }else{
+                    cpCard.style.display = 'none'
+                }
+
+            })
+        }
+
+    })
+})
+
+
+parentPreview.addEventListener('mouseover',()=>{
+    editBtn.style.display = 'block'
+    editBtn.addEventListener('click',editHandler)
+    parentPreview.addEventListener('mouseout',()=>{
+        editBtn.style.display = 'none'
+    })
+
+})
+
+function editHandler(){
+    let fieldCssStyle = getComputedStyle(field)
+        if(fieldCssStyle.display==='none'){
+            field.style.display = 'block'
+            
+            field.addEventListener('change',uploadHandler)
+
+        }else{
+            field.style.display = 'none'
+        }
+}
+
+function uploadHandler(e){
+    let source = URL.createObjectURL(e.target.files[0])
+    previewer.src = source 
+    previewer.style.display = 'block'
+    defaultIcon.remove()
+}
+
+
+
+</script>
+
+</body>
+
+</html>

@@ -231,6 +231,16 @@ html {
 	border-radius: 15px;
 	transition: all 0.5s;
 	cursor: pointer;
+	animation-name:animationY__topTranslate;
+	animation-duration: 1s;
+}
+@keyframes animationY__topTranslate{
+	to{
+		transform: translateY(0px);
+	}from{
+		transform: translateY(-300px);
+
+	}
 }
 .dashboard-card-header{
 	background: linear-gradient(45deg, #6200eaa6, #0062ccd9);
@@ -261,7 +271,9 @@ html {
 	border-radius: 10px;
 	transition: all 0.5s;
 	cursor: pointer;
+	
 }
+
 .dashboard-small-card{
 	padding: 1.5rem 0rem;
 	text-align: center;
@@ -275,6 +287,16 @@ html {
 	font-weight: 600;
 	border: 3px solid #6200ea;
 	text-transform: uppercase;
+	animation-name:animationX_leftTranslate;
+	animation-duration: 1s;
+}
+@keyframes animationX_leftTranslate{
+	to{
+		transform: translateX(0px);
+	}from{
+		transform: translateX(-800px);
+
+	}
 }
 .dashboard-small-card:hover{
 	transform: scale(0.97);
@@ -322,7 +344,12 @@ html {
 	border-radius: 6px 6px 0px 0px;
 	padding: 0.25rem 0rem;
 }
-.dashboard-notice-body{border: 2px solid #6200ea;padding: 0.5rem;}
+.dashboard-notice-body{
+	border-left: 2px solid #6200ea;
+	border-right: 2px solid #6200ea;
+	padding: 0.5rem;
+
+}
 .dashboard-notice-body>textarea{
 	/* border: 1px solid #343a4030; */
 	width:100%;
@@ -332,6 +359,7 @@ html {
 	font-family: arial;
 	font-weight: bold;
 }
+
 .dashboard-notice-footer{
 	border-right: 2px solid #6200ea;
 	padding: 0.25rem;

@@ -3,9 +3,11 @@ const User = require('../../models/User')
 const Student = require('../../models/Student')
 const Examination = require('../../models/Examination')
 const Result = require('../../models/Result')
+const WebModel = require('../../models/WebModel')
 
-async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,errorData,examination){
+async function renderPageHandler(req,res,pagename,singleClass,examination){
     try{    
+        let webModel = await WebModel.findOne()
         let classes = await Class.find({user:req.user._id})
         let correntPage = parseInt(req.query.page||1)
         let itemPerPage = 5
@@ -39,12 +41,12 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,errorDa
             }
         }
       
-        if(msg) req.flash(msgOpt,msg)
         return res.render(`pages/user/${pagename}`,{
             title: 'Notice',
             error: {},
             user:req.user,
             classes,
+            webModel,
             examination:examination?examination:{},
             students,
             totalPage,
@@ -54,33 +56,27 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,errorDa
             didSearch,
             singleClass:singleClass?singleClass:{},
             flashMessage: req.flash(),
-            errorData
+            errorData:req.body
         })
     
     }catch(e){
         console.log(e)
     }
 }
-exports.createClassGetController = async(req,res,next)=>{
-    try{
-        renderPageHandler(req,res,'createClass')
-    }catch(e){
-        next(e)
-    } 
+exports.createClassGetController = (req,res,next)=>{
+     renderPageHandler(req,res,'createClass')
 }
 exports.createClassPostController = async(req,res,next)=>{
     try{
- 
         let { name,numeric,section,group,resultType,resultCalculateType } = req.body
-
-        console.log(req.body)
-
         if(name.length===0||numeric.length===0||section.length===0||resultType.length===0||resultCalculateType.length===0){
-            return renderPageHandler(req,res,'createClass','fail','Invalid Creadentials')
+            req.flash('fail','Invalid Creadentials')
+            return res.redirect('back')
         }
         if(numeric>=9){
             if(!group){
-                return renderPageHandler(req,res,'createClass','fail','Please Select Group For Grater Then Or Equal Class 9')
+                req.flash('fail','Please Select Group For Grater Then Or Equal Class 9')
+                return res.redirect('back')
             }
         }
         // Check Unique
@@ -108,7 +104,8 @@ exports.createClassPostController = async(req,res,next)=>{
             })
         }
         if(hasClass){
-            return renderPageHandler(req,res,'createClass','fail',hasClass)
+            req.flash('fail',hasClass)
+            return res.redirect('back')
         }
         
         let createClass = new Class({
@@ -122,15 +119,16 @@ exports.createClassPostController = async(req,res,next)=>{
         })
         let createdClass = await createClass.save()
         if(!createdClass){
-            return renderPageHandler(req,res,'createClass','fail','Internal Server Error')
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
         await User.findOneAndUpdate({_id:req.user._id},{
             $push:{
                 classes:createdClass._id
             }
         })
-        renderPageHandler(req,res,'createClass','success','Successfully Created Class')
-
+        req.flash('success','Successfully Created Class')
+        res.redirect('back')
     }catch(e){
         next(e)
     }
@@ -140,9 +138,10 @@ exports.updateClassGetController = async(req,res,next)=>{
         let { id } = req.params
         let hasClass = await Class.findOne({_id:id})
         if(!hasClass){
-            res.redirect('/user/class/create')
+            res.redirect('back')
         }
-        renderPageHandler(req,res,'updateClass',null,null,hasClass)
+        renderPageHandler(req,res,'updateClass',hasClass)
+        
     }catch(e){
         next(e)
     }
@@ -151,9 +150,6 @@ exports.updateClassPostController = async(req,res,next)=>{
     try{
         let { name,numeric,section,group,resultType,resultCalculateType } = req.body
         let { id } = req.params 
-        console.log(req.body)
-        console.log(req.params)  
-      
 
         // Check Unique
         let hasClass = await Class.findOne({_id:id})
@@ -162,11 +158,14 @@ exports.updateClassPostController = async(req,res,next)=>{
         }
 
         if(name.length===0||numeric.length===0||section.length===0||resultType.length===0||resultCalculateType.length===0){
-            return renderPageHandler(req,res,'updateClass','fail','Invalid Creadentials',hasClass)
+            req.flash('fail','Invalid Creadentials')
+            return res.redirect('back')
         }
         if(numeric>=9){
             if(!group){
-                return renderPageHandler(req,res,'updateClass','fail','Please Select Group For Grater Then Or Equal Class 9',hasClass)
+               
+                req.flash('fail','Please Select Group For Grater Then Or Equal Class 9')
+                return res.redirect('back')
             }
         }
         
@@ -195,7 +194,8 @@ exports.updateClassPostController = async(req,res,next)=>{
             })
         }
         if(hasClassError){
-            return renderPageHandler(req,res,'updateClass','fail',hasClassError,hasClass)
+            req.flash('fail',hasClassError)
+            return res.redirect('back')
         }
         
         let updatedClass = await Class.findOneAndUpdate({_id:id},{
@@ -210,11 +210,13 @@ exports.updateClassPostController = async(req,res,next)=>{
         })
 
         if(!updatedClass){
-            return renderPageHandler(req,res,'updateClass','fail','Internal Server Error',hasClass)
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
 
-        renderPageHandler(req,res,'updateClass','success','Successfully Updated Class',updatedClass)
 
+        req.flash('success','Successfully Updated Class')
+        return res.redirect('back')
 
     }catch(e){
         next(e)
@@ -226,12 +228,13 @@ exports.deleteClassGetController = async(req,res,next)=>{
         
         let hasClass = await Class.findOne({_id:id})
         if(!hasClass){
-            return res.redirect('/user/class/create')
+            return res.redirect('back')
         }
 
         let deletedClass = await Class.findOneAndDelete({_id:id})
         if(!deletedClass){
-            renderPageHandler(req,res,'createClass','fail','Internal Server Error')
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
         await User.findOneAndUpdate({_id:req.user._id},{
             $pull:{
@@ -256,10 +259,11 @@ exports.classSubjectAddPostController = async (req,res,next)=>{
      
         let hasClass = await Class.findOne({_id:id})
         if(!hasClass){
-            res.redirect('/user/class/create')
+            res.redirect('back')
         }
         if(name.length===0||option==='...'||passedmarks.length===0||fullmarks.length===0){
-            return renderPageHandler(req,res,'updateClass','fail','Please Provied Full Info',hasClass)
+            req.flash('fail','Please Provied Full Info')
+            return res.redirect('back')
         }
         
         let hasError;
@@ -272,7 +276,8 @@ exports.classSubjectAddPostController = async (req,res,next)=>{
             })
         }
         if(hasError){
-            return renderPageHandler(req,res,'updateClass','fail',hasError,hasClass)
+            req.flash('fail',hasError)
+            return res.redirect('back')
         }
 
         let addedSubjectOnClass;
@@ -303,7 +308,8 @@ exports.classSubjectAddPostController = async (req,res,next)=>{
         
 
         if(!addedSubjectOnClass){
-            return renderPageHandler(req,res,'updateClass','fail','Internal Server Error',hasClass)
+            req.flash('fail','Please Provied Full Info')
+            return res.redirect('back')
         }
         
         req.flash('success','Successfully Added Subject')
@@ -321,7 +327,7 @@ exports.classSubjectUpdatePostController = async (req,res,next)=>{
 
         let hasClass = await Class.findOne({_id:classId})
         if(!hasClass){
-            res.redirect('/user/class/create')
+            res.redirect('back')
         }
         if(name.length===0||option==='...'||passedmarks.length===0||fullmarks.length===0){
 
@@ -388,7 +394,7 @@ exports.classSubjectRemoveGetController = async(req,res,next)=>{
         let hasClass = await Class.findOne({_id:classId})
         if(!hasClass){
             req.flash('fail','Please Create Class')
-            return res.redirect('/user/class/create')
+            return res.redirect('back')
         }
 
         let deletedSubject;
@@ -415,7 +421,8 @@ exports.classSubjectRemoveGetController = async(req,res,next)=>{
         
 
         if(!deletedSubject){
-            return renderPageHandler(req,res,'updateClass','fail','Internal Server Error',hasClass)
+            req.flash('fail','Please Provied Full Info')
+            return res.redirect('back')
         }
         req.flash('success','Successfully Deleted Subject')
         res.redirect('back')
@@ -430,7 +437,7 @@ exports.createStudentGetController = async(req,res,next)=>{
         if(!hasSingleClass){
             return res.redirect('back')
         }
-        renderPageHandler(req,res,'studentClass',null,null,hasSingleClass)
+        renderPageHandler(req,res,'studentClass',hasSingleClass)
     }catch(e){
         next(e)
     }
@@ -446,7 +453,8 @@ exports.createStudentPostController = async(req,res,next)=>{
         } 
         
         if(name.length===0||fathername.length===0||mothername.length===0||guardianphone.length===0||dateofbirthday.length===0||roll.length===0||studentid.length===0){
-            return renderPageHandler(req,res,'studentClass','fail','Please Fill Up Full Form',hasSingleClass,req.body)
+            req.flash('fail','Please Provied Full Info')
+            return res.redirect('back')
         }
 
         let getAllStudents = await Student.find({classId:classid})
@@ -607,12 +615,9 @@ exports.classExamCreateGetController = async(req,res,next)=>{
         if(!hasClass){
             return res.redirect('back')
         }
-
         let hasExam = await Examination.find({classid:hasClass._id})
-        console.log('Finded Exam')
-        console.log(hasExam)
 
-        renderPageHandler(req,res,'classExamCreate',null,null,hasClass,null,hasExam)
+        renderPageHandler(req,res,'classExamCreate',hasClass,hasExam)
     }catch(e){
         next(e)
     }

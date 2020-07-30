@@ -8,7 +8,6 @@ const {
 
 const {
     settingGetController,
-    settingRedirectGetController,
     webNameSetPostController,
     webNameDeleteGetController,
     webNameUpdatePutController,
@@ -28,15 +27,11 @@ const {
     removePublicMailGetController
 }   = require('../../controllers/adminControllers/settingController')
 
-function redirectPageController(req,res,next){
-    return res.redirect('/administrator/setting')
-}
-
 
 router.get('/setting',isAuthenticatedAdmin,settingGetController)
-router.get('/setting/:name',isAuthenticatedAdmin,settingRedirectGetController)
 
-// Some Web Functionality
+// Some Web Functionality Routes
+
 router.post('/setting/web_name',isAuthenticatedAdmin,webNameSetPostController)
 router.get('/setting/web_name_delete/:lang',isAuthenticatedAdmin,webNameDeleteGetController)
 router.put('/setting/web_name_update/:lang',isAuthenticatedAdmin,webNameUpdatePutController)
@@ -47,21 +42,16 @@ router.get('/setting/web_logo/delete',isAuthenticatedAdmin,webLogoDeleteGetContr
 router.post('/setting/slider-upload',isAuthenticatedAdmin,uploads.single('slider-img'),sliderUploadPostController)
 router.get('/setting/slider-delete/:id',isAuthenticatedAdmin,sliderDeleteGetController)
 
-router.get('/setting/slider-update/:id',isAuthenticatedAdmin,redirectPageController)
 router.get('/setting/slider-text-delete/:id',isAuthenticatedAdmin,sliderTextDeleteGetController)
 router.post('/setting/slider-update/:id',isAuthenticatedAdmin,sliderEditInfoPostController)
 
-router.get('/setting/links/create',isAuthenticatedAdmin,redirectPageController)
 router.post('/setting/links/create',isAuthenticatedAdmin,socialLinksCreatePostController)
 router.get('/setting/links/delete/:id',isAuthenticatedAdmin,socialLinksDeleteGetController)
 router.post('/setting/links/update/:id',isAuthenticatedAdmin,socialLinksUpdatePostController)
-router.get('/setting/links/update/:id',isAuthenticatedAdmin,redirectPageController)
 
 
-router.get('/setting/futured/links/create',isAuthenticatedAdmin,redirectPageController)
 router.post('/setting/futured/links/create',isAuthenticatedAdmin,futuredLinksCreatePostController)
 router.get('/setting/futured/links/delete/:id',isAuthenticatedAdmin,futuredLinksDeleteGetController)
-router.get('/setting/futured/links/update/:id',isAuthenticatedAdmin,redirectPageController)
 router.post('/setting/futured/links/update/:id',isAuthenticatedAdmin,futuredLinksUpdatePostController)
 router.post('/setting/add/public/mail',isAuthenticatedAdmin,addPublicMailPostController)
 router.get('/setting/remove/public/mail',isAuthenticatedAdmin,removePublicMailGetController)

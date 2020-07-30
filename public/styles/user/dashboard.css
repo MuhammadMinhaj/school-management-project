@@ -14,6 +14,17 @@
     background: #106da4;
     color: #f8f9fa;
     border: 1px solid #dee2e6;
+    animation-name: translateYAnimation;
+    animation-duration: 1s;
+}
+
+@keyframes translateYAnimation{
+    from{
+        transform: translateY(-300px);
+    }to{
+        transform: translateY(0px);
+
+    }
 }
 .user_card>h6{
     /* border: 1px solid #ffc107bf; */
@@ -29,7 +40,7 @@
 .user_card>h5{
     border: 1px solid #f8f9fa45;
     display: inline-block;
-    padding: 1.5rem;
+    padding: 1.5vw;
     border-radius: 10%;
     font-weight: 600;
     text-transform: uppercase;
@@ -37,6 +48,11 @@
     color: #f8f9fa;
     font-size: 2em;
     width: 50%;
+    transition:all 0.5s;
+    cursor: pointer;
+}
+.user_card>h5:hover{
+    transform: scale(1.1);
 }
 .user_left_card{
     border: 1px solid #ffc107;
@@ -55,6 +71,16 @@
     transition: all 0.5s;
     cursor: pointer;
     display: block;
+    animation-name: translateXAnimation;
+    animation-duration: 1s;
+}
+@keyframes translateXAnimation{
+    from{
+        transform: translateX(-500px);
+    }to{
+        transform: translateX(0px);
+
+    }
 }
 .user_small_card:hover{
     transform: scale(0.97);
@@ -99,6 +125,17 @@
     font-weight: 600;
     background: #f8f9fa14;
     color: #f8f9fa;
+    animation-name: translateX__RightAnimation;
+    animation-duration: 1s;
+}
+
+@keyframes translateX__RightAnimation{
+    from{
+        transform: translateX(500px);
+    }to{
+        transform: translateX(0px);
+
+    }
 }
 .user-list-group-item:hover{
     cursor: pointer;
@@ -115,6 +152,60 @@
     text-decoration: none;
    
 }
+.profile__pic{
+    max-width: 150px;
+    height: auto;
+    box-shadow: 0pt 0pt 3pt 1pt rgba(0, 0, 0, 0.226);
+    margin:auto;
+}
+.profile_font_Img{
+    font-size: 9em;
+    color: #6c757d;
+}
+.profile__img{
+    width: 100%;
+    height:auto;
+}
+#parentProfilePicPreview{
+    position: relative;
+    /* border: 1px solid #545b623b; */
+    max-width: 200px;
+    margin: auto;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0pt 0pt 3pt 1pt #00000030;
+}
+
+
+.editProfilePicsEditBtn{
+    position: absolute;
+    top: 0px;
+    right: 2px;
+    font-size: 1.25rem;
+    color: #d39e00;
+    cursor: pointer;
+    display: none;
+}
+.updateProfilePicPreview{
+    position: relative;
+}
+.updateProfilePicsEditBtn{
+    position: absolute;
+    top: 0px;
+    right: 2px;
+    font-size: 1.25rem;
+    color: #e9ecef;
+    cursor: pointer;
+    display: none;
+}
+.adminCreateBtn {
+    outline: none!important;
+    border: 1px solid #545b6282;
+    border-radius: 4px;
+    color: #6c757d;
+}
+
+
 @media (max-width: 576px){
 
     .user_card>h5{

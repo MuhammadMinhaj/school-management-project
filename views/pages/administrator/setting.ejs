@@ -31,21 +31,17 @@
                                  <form action="/administrator/setting/web_name" method="POST" >
                                     <div class="form-row pb-3">
                                        <div class="col-sm-4">
-                                          <select class="custom-select mr-sm-2 <%=webNameError.language?'is-invalid':''%>" id="inlineFormCustomSelect" name="language">
-                                             <option selected>Choose...</option>
+                                          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="language">
+                                             <option value="" selected>Choose...</option>
                                              <option value="arabic">Arabic</option>
                                              <option value="bangla">Bangla</option>
                                              <option value="english">English</option>
                                           </select>
-                                          <div class="invalid-feedback">
-                                             <%=webNameError.language%>
-                                          </div>
+                                    
                                        </div>
                                        <div class="col-sm-6">
-                                          <input type="text" name="webname" class="form-control <%=webNameError.webname?'is-invalid':''%>" placeholder="Enter a website name...">
-                                          <div class="invalid-feedback">
-                                             <%=webNameError.webname%>
-                                          </div>
+                                          <input type="text" name="webname" class="form-control" placeholder="Enter a website name...">
+                                       
                                        </div>
                                        <div class="col-sm-2">
                                           <input type="submit" value="Add" class="btn btn-primary">
@@ -125,8 +121,7 @@
                                                 <div class="custom-file">
                                                    <input type="file"  accept="image/*" id="webLogoUploadField" class="custom-file-input" name="logo-img">
                                                    <label class="custom-file-label" for="customFile">Choose file</label>
-                                                   <div class="invalid-feedback">
-                                                   </div>
+                                             
                                                 </div>
                                              </div>
                                              <div class="col-sm-1">
@@ -194,11 +189,9 @@
                                     <div class="form-row">
                                        <div class="col-sm-10">
                                           <div class="custom-file">
-                                             <input type="file" class="custom-file-input <%=upSliderImgErr.message?'is-invalid':''%>" name="slider-img" id="customFile">
+                                             <input type="file" class="custom-file-input" name="slider-img" id="customFile">
                                              <label class="custom-file-label" for="customFile">Choose file</label>
-                                             <div class="invalid-feedback">
-                                                <%=upSliderImgErr.message%>
-                                             </div>
+                                            
                                              <small class="ml-1 form-text text-muted">
                                              You can upload max 8 slider images on your website.    
                                              </small>

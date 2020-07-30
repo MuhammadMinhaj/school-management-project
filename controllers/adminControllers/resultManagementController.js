@@ -8,8 +8,6 @@ const ExaminationType = require('../../models/ExaminationType')
 const Class = require('../../models/Class')
 const Category = require('../../models/Category')
 
-
-
 async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb,requestModel,results,examinationType){
     try{    
         let pages = await Page.find()
@@ -35,7 +33,6 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb,requestM
         console.log(e)
     }
 }
-
 exports.createResultsExaminationTypeGetController = async(req,res,next)=>{
     try{
         let examinationType = await ExaminationType.find()
@@ -75,7 +72,7 @@ exports.createResultsExaminationTypePostController = async(req,res,next)=>{
             return res.redirect('back')
         }
         req.flash('success','Successfully Created Examination Type')
-        return res.redirect('back')
+        res.redirect('back')
     }catch(e){
         next(e)
     }
@@ -105,7 +102,7 @@ exports.updateResultsExaminationTypePostController = async(req,res,next)=>{
             return res.redirect('back')
         }
         req.flash('success','Successfully Created Examination Type')
-        return res.redirect('back')
+        res.redirect('back')
     }catch(e){
         next(e)
     }
@@ -125,19 +122,14 @@ exports.deleteResultsExaminationTypePostController = async(req,res,next)=>{
         next(e)
     }
 }
-
-
-
 exports.resultsManagementGetController = async(req,res,next)=>{
     try{
         let request = await Request.find()
-        console.log(request)
         renderPageHandler(req,res,'resultsManagement',null,null,null,request)
     }catch(e){
         next(e)
     }
 }
-
 exports.showAllResultsGetController = async(req,res,next)=>{
     try{    
         let { id } = req.params
@@ -151,9 +143,6 @@ exports.showAllResultsGetController = async(req,res,next)=>{
         let exam = await Examination.findOne({_id:request.examination})
         let classes = await Class.findOne({_id:request.classes})
 
-        console.log(classes)
-        console.log('Test')
-
         for(let result of results){
             let student = await Student.findOne({_id:result.student})
             result.studentInfo = student
@@ -161,14 +150,11 @@ exports.showAllResultsGetController = async(req,res,next)=>{
             result.classes = classes
         }
        
-       
-
         renderPageHandler(req,res,'allResults',null,null,null,request,results)
     }catch(e){
         next(e)
     }
 }
-
 exports.resultsPublishedReqApproveGetController = async(req,res,next)=>{
     try{
 
@@ -196,7 +182,6 @@ exports.resultsPublishedReqApproveGetController = async(req,res,next)=>{
         next(e)
     }
 }
-
 exports.resultsPublishedReqRejectGetController = async(req,res,next)=>{
     try{
 
@@ -224,7 +209,6 @@ exports.resultsPublishedReqRejectGetController = async(req,res,next)=>{
         next(e)
     }
 }
-
 exports.resultPublishedReqDeleteGetController = async(req,res,next)=>{
     try{
      
@@ -266,7 +250,6 @@ exports.resultPublishedReqDeleteGetController = async(req,res,next)=>{
         next(e)
     }
 }
-
 exports.resultsPublishedAndUnPublishedPostController = async(req,res,next)=>{
     try{
         let { id } = req.params
@@ -305,7 +288,6 @@ exports.resultsPublishedAndUnPublishedPostController = async(req,res,next)=>{
                 return res.redirect('back')
             }
         }
-
         let msg = option==='published'?'Successfully Results Has Been Published On Website':option==='unpublished'?'Successfully  UnPublished Results From Website':'Some Went To Wrong'
         req.flash('success',msg)
         res.redirect('back')

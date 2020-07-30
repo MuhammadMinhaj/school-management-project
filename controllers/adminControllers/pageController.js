@@ -9,7 +9,7 @@ const { validationResult } = require('express-validator')
 const Teacher = require('../../models/Teacher')
 const Category = require('../../models/Category')
 
-async function pageRenderHandler(req,res,pagename,title){
+async function pageRenderHandler(req,res,pagename,title,model,error){
 	let menu = await Menu.find()
 	let webModel = await WebModel.findOne()
 	let pages = await Page.find()
@@ -24,9 +24,10 @@ async function pageRenderHandler(req,res,pagename,title){
 		pages,
 		webModel,
 		createdPage: {},
-		error: {},
+		error: error?error:{},
 		groupOfTeachers,
-		category 
+		category ,
+		updatePage:model?model.updatePage:{}
 	})
 }
 
@@ -41,61 +42,17 @@ function removeFilePathFromDirctory(path){
 	}
 }
 
-exports.pageCreateGetController = async (req, res, next) => {
-	try {
-		let hasAdminWithReq = await Admin.findOne({ _id: req.admin._id })
-		if (!hasAdminWithReq) {
-			return res.redirect('/auth/login')
-		}
-		let menu = await Menu.find()
-		let webModel = await WebModel.findOne()
-		let pages = await Page.find()
-		let category = await Category.find()
-		res.render('pages/administrator/createPage.ejs', {
-			title: 'Create Menu',
-			style: 'bg-light',
-			data: req.admin,
-			flashMessage: req.flash(),
-			menu,
-			pages,
-			webModel,
-			createdPage: {},
-			error: {},
-			category 
-		})
-	} catch (e) {
-		next(e)
-	}
+exports.pageCreateGetController = async (req, res, next) => {	
+		pageRenderHandler(req,res,'createPage','Create Page')
 }
 exports.pageCreatePostController = async (req, res, next) => {
 	let error = validationResult(req).formatWith(error => error.msg)
 	try {
-		let hasAdminWithReq = await Admin.findOne({ _id: req.admin._id })
-		if (!hasAdminWithReq) {
-			req.flash('fail', 'Please Login')
-			return res.redirect('/auth/login')
-		}
-		// Check Validation Result
-
-		let menu = await Menu.find()
-		let pages = await Page.find()
-		let webModel = await WebModel.findOne()
-	    let category = await Category.find()
-
+		
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Invalid Creadentials')
-			return res.render('pages/administrator/createPage.ejs', {
-				title: 'Create Menu',
-				style: 'bg-light',
-				data: req.admin,
-				flashMessage: req.flash(),
-				menu,
-				pages,
-				webModel,
-				createdPage: {},
-				error: error.mapped(),
-				category
-			})
+			pageRenderHandler(req,res,'createPage','Create Page',null,error.mapped())
+			return false
 		}
 		let { title, body, menuName } = req.body
 
@@ -103,72 +60,28 @@ exports.pageCreatePostController = async (req, res, next) => {
 			title,
 			body,
 			menu: menuName,
-			// image:req.file?`/uploads/${req.file.filename}`:''
 		})
 		let createdPage = await page.save()
 		if (!createdPage) {
 			req.flash('fail', 'Internal Server Error')
-			return res.render('pages/administrator/createPage.ejs', {
-				title: 'Create Menu',
-				style: 'bg-light',
-				data: req.admin,
-				flashMessage: req.flash(),
-				menu,
-				pages,
-				webModel,
-				createdPage: {},
-				error: {},
-				category
-			})
+			pageRenderHandler(req,res,'createPage','Create Page',null,error.mapped())
+			return false
 		}
 
-		req.flash('success', `Successfully Created ${menuName.toUpperCase()} Page`)
-		res.render('pages/administrator/createPage.ejs', {
-			title: 'Create Menu',
-			style: 'bg-light',
-			data: req.admin,
-			flashMessage: req.flash(),
-			menu,
-			pages,
-			webModel,
-			createdPage,
-			error: {},
-			category
-		})
+		req.flash('success', `Successfully Created ( ${menuName} ) Page`)
+		res.redirect('back')
 	} catch (e) {
 		next(e)
 	}
 }
 exports.pageUpdateGetController = async (req, res, next) => {
 	try {
-		let hasAdminWithReq = await Admin.findOne({ _id: req.admin._id })
-		if (!hasAdminWithReq) {
-			req.flash('fail', 'Please Login')
-			return res.redirect('/auth/login')
-		}
-		let menu = await Menu.find()
-		let pages = await Page.find()
-		let webModel = await WebModel.findOne()
-		let category = await Category.find()
 		let updatePage = await Page.findOne({ _id: req.params.pageId })
-
 		if (!updatePage) {
 			req.flash('fail', 'Not Found Menu')
 			return res.redirect('/administrator/page_create')
 		}
-		res.render('pages/administrator/updatePage.ejs', {
-			title: 'Update Menu',
-			style: 'bg-light',
-			data: req.admin,
-			flashMessage: req.flash(),
-			menu,
-			pages,
-			webModel,
-			updatePage,
-			createdPage: {},
-			error: {},
-			category
-		})
+		pageRenderHandler(req,res,'updatePage','Update Page',{updatePage},null)
 	} catch (e) {
 		next(e)
 	}
@@ -182,35 +95,22 @@ exports.pageUpdatePostController = async (req, res, next) => {
 		}
 		let { pageId } = req.params
 
-		let menu = await Menu.find()
-		let pages = await Page.find()
-		let category = await Category.find()
-		let webModel = await WebModel.findOne()
-		let updatePage = await Page.findOne({ _id: pageId })
+		let page = await Page.findOne({ _id: pageId })
 
 		let { title, menuName, body } = req.body
 
+		let updatePage = {
+			menu: menuName,
+			title,
+			body,
+			_id: page._id,
+		}
+
 		let error = validationResult(req).formatWith(err => err.msg)
 		if (!error.isEmpty()) {
-			req.flash('fail', 'Invalid Creadentials')
-			return res.render('pages/administrator/updatePage.ejs', {
-				title: 'Update Menu',
-				style: 'bg-light',
-				data: req.admin,
-				flashMessage: req.flash(),
-				menu,
-				pages,
-				webModel,
-				updatePage: {
-					menu: menuName,
-					title,
-					body,
-					_id: updatePage._id,
-				},
-				createdPage: {},
-				error: error.mapped(),
-				category
-			})
+			req.flash('fail', 'Invalid Creadentials 66')
+			pageRenderHandler(req,res,'updatePage','Update Page',{updatePage},error.mapped())
+			return false
 		}
 		// update page
 		let updatedPage = await Page.findOneAndUpdate(
@@ -226,50 +126,16 @@ exports.pageUpdatePostController = async (req, res, next) => {
 		)
 		if (!updatedPage) {
 			req.flash('fail', 'Internal Server Error')
-			return res.render('pages/administrator/updatePage.ejs', {
-				title: 'Update Menu',
-				style: 'bg-light',
-				data: req.admin,
-				flashMessage: req.flash(),
-				menu,
-				pages,
-				webModel,
-				updatePage: {
-					menu: menuName,
-					title,
-					body,
-					_id: updatePage._id,
-				},
-				createdPage: {},
-				error: {},
-				category
-			})
+			return res.redirect('back')
 		}
 		req.flash('success', 'Successfully Updated Page')
-		return res.render('pages/administrator/updatePage.ejs', {
-			title: 'Update Menu',
-			style: 'bg-light',
-			data: req.admin,
-			flashMessage: req.flash(),
-			menu,
-			pages,
-			webModel,
-			updatePage: updatedPage,
-			createdPage: {},
-			error: {},
-			category
-		})
+		return res.redirect('back')
 	} catch (e) {
 		next(e)
 	}
 }
 exports.pageDeleteGetController = async (req, res, next) => {
 	try {
-		let hasAdminWithReq = await Admin.findOne({ _id: req.admin._id })
-		if (!hasAdminWithReq) {
-			req.flash('fail', 'Please Login')
-			return res.redirect('/auth/login')
-		}
 		let { pageId } = req.params
 
 		let hasPage = await Page.findOne({ _id: pageId })
@@ -277,27 +143,11 @@ exports.pageDeleteGetController = async (req, res, next) => {
 			req.flash('fail', 'Page Not Found')
 			return res.redirect('/administrator/page_create')
 		}
-		let menu = await Menu.find()
-		let pages = await Page.find()
-		let webModel = await WebModel.findOne()
 		let deletedPage = await Page.findOneAndDelete({ _id: pageId })
-	    let category = await Category.find()
 
 		if (!deletedPage) {
 			req.flash('fail', 'Internal Server Error')
-			return res.render('pages/administrator/updatePage.ejs', {
-				title: 'Update Menu',
-				style: 'bg-light',
-				data: req.admin,
-				flashMessage: req.flash(),
-				menu,
-				pages,
-				webModel,
-				updatePage: hasPage,
-				createdPage: {},
-				error: {},
-				category
-			})
+			return res.redirect('back')
 		}
 		req.flash('success', 'Successfully Deleted Page')
 		res.redirect('/administrator/page_create')
@@ -350,10 +200,9 @@ exports.addTextAboutAdministratorPostController = async(req,res,next)=>{
 			return res.redirect('back')
 		}
 
-		req.flash('success','Successfully Added About Of Administrator')
+		req.flash('success','Successfully Added About Text Of Administrator')
 		res.redirect('back')
 
-		console.log(addedAboutAdmin)
 	}catch(e){
 		next(e)
 	}
@@ -388,7 +237,7 @@ exports.deleteTextAboutAdministratorGetController = async(req,res,next)=>{
 
 		path?removeFilePathFromDirctory(`public/${path}`):null
 
-		req.flash('success','Successfully Deleted About Administrator Info')
+		req.flash('success','Successfully Deleted About Text Of Administrator')
 		res.redirect('back')
 		
 	}catch(e){
@@ -440,12 +289,8 @@ exports.updateTextAboutAdministratorPostController = async(req,res,next)=>{
 	}
 }
 
-exports.addAboutTeacherInfoGetController = async(req,res,next)=>{
-	try{
-		pageRenderHandler(req,res,'aboutTeacher.ejs','About Teachers')
-	}catch(e){
-		next(e)
-	}
+exports.addAboutTeacherInfoGetController = (req,res,next)=>{
+	pageRenderHandler(req,res,'aboutTeacher.ejs','About Teachers')
 }
 exports.createTeacherGroupPostController = async(req,res,next)=>{
 	try{
@@ -465,10 +310,8 @@ exports.createTeacherGroupPostController = async(req,res,next)=>{
 			req.flash('fail','Internal Server Error')
 			return res.redirect('back')
 		}
-
 		req.flash('success','Successfully Created Teacher Group')
 		res.redirect('back')
-		console.log(createdGroup)
 	}catch(e){
 		next(e)
 	}
@@ -512,7 +355,6 @@ exports.updateTeacherGroupPostController = async(req,res,next)=>{
 
 		req.flash('success','Successfully Updated Teacher Group')
 		res.redirect('back')
-		console.log(updatedGroup)
 	}catch(e){
 		next(e)
 	}
@@ -554,7 +396,6 @@ exports.addTeacherInfoPostController = async(req,res,next)=>{
 
 		req.flash('success','Successfully Added Teacher Information')
 		res.redirect('back')
-		console.log(addedTeacherInfo)
 	}catch(e){
 		next(e)
 	}
@@ -562,7 +403,6 @@ exports.addTeacherInfoPostController = async(req,res,next)=>{
 
 exports.updateTeacherInfoPostController = async(req,res,next)=>{
 	try{
-
 		let { name,qualifications,bio,email,phone,website,group } = req.body
 		let file = req.file
 
@@ -599,9 +439,6 @@ exports.updateTeacherInfoPostController = async(req,res,next)=>{
 		
 		}
 
-	
-		// console.log(hasGroup)
-
 		let updatedTeacherInfo = await Teacher.findOneAndUpdate({_id:id},hasGroup,{new:true})
 
 
@@ -615,10 +452,7 @@ exports.updateTeacherInfoPostController = async(req,res,next)=>{
 
 		req.flash('success','Successfully Updated Teacher Information')
 		res.redirect('back')
-			console.log('updatedTeacherInfo')
-		console.log(updatedTeacherInfo)
-		console.log('updatedTeacherInfo')
-	
+
 	}catch(e){
 		next(e)
 	}
@@ -634,7 +468,6 @@ exports.deleteTeacherInfoGetController = async(req,res,next)=>{
 			return res.redirect('back')
 		}
 
-
 		let path 
 		for(let teacher of hasGroup.teachers){
 			path = teacher.image
@@ -647,7 +480,6 @@ exports.deleteTeacherInfoGetController = async(req,res,next)=>{
 			}
 		},{new:true})
 
-		console.log(deletedTeacher)
 		if(!deletedTeacher){
 			req.flash('fail','Internal Server Error')
 			return res.redirect('back')
@@ -663,16 +495,11 @@ exports.deleteTeacherInfoGetController = async(req,res,next)=>{
 }
 
 exports.addContentGetController = async(req,res,next)=>{
-	try{
-		pageRenderHandler(req,res,'addContent.ejs','Add Content')
-	}catch(e){
-		next(e)
-	}
+	pageRenderHandler(req,res,'addContent.ejs','Add Content')
 }
 exports.addMissionAndVissionPostController = async(req,res,next)=>{
 	try{
 		let { title,text } = req.body
-	
 
 		if(title.length===0&&text.length===0){
 			req.flash('fail','Please Filup Mission And Vission')
@@ -738,7 +565,7 @@ exports.clearAllAboutMissionAndVission= async(req,res,next)=>{
 			return res.redirect('back')
 		}
 		req.flash('success','Successfully Deleted Mission And Vission Info')
-		return res.redirect('back')
+		res.redirect('back')
 	}catch(e){
 		next(e)
 	}
@@ -758,7 +585,7 @@ exports.clearAllAboutLibray= async(req,res,next)=>{
 			return res.redirect('back')
 		}
 		req.flash('success','Successfully Deleted Libray Info')
-		return res.redirect('back')
+		res.redirect('back')
 	}catch(e){
 		next(e)
 	}
@@ -798,16 +625,10 @@ exports.aboutTextAddPostController = async(req,res,next)=>{
 	}
 }
 exports.galleryGetController = async(req,res,next)=>{
-	try{
-		pageRenderHandler(req,res,'gallery.ejs','Gallery')
-	}catch(e){
-		next(e)
-	}
+	pageRenderHandler(req,res,'gallery.ejs','Gallery')
 }
 exports.addGalleryPostController = async(req,res,next)=>{
 	try{
-
-
 		let { title } = req.body 
 		let file = req.file 
 
@@ -832,10 +653,8 @@ exports.addGalleryPostController = async(req,res,next)=>{
 			req.flash('fail','Internal Server Error')
 			return res.redirect('back')
 		}
-		console.log(addedGalleryImg)
 		req.flash('success','Successfully Added Image')
 		res.redirect('back')
-
 	}catch(e){
 		next(e)
 	}
@@ -846,9 +665,7 @@ exports.updatedGalleryPostController = async(req,res,next)=>{
 		let { id } = req.params
 		let { title } = req.body 
 		let file = req.file
-
 		let webModel = await WebModel.findOne()
-
 		let path;
 		for(let g of webModel.gallery){
 			
@@ -858,9 +675,7 @@ exports.updatedGalleryPostController = async(req,res,next)=>{
 				g.image = file?`/uploads/${file.filename}`:path 
 			}
 		}
-
 		let updatedGallery = await WebModel.findOneAndUpdate({_id:webModel._id},webModel,{new:true})
-		console.log(updatedGallery)
 		if(!updatedGallery){
 			req.flash('fail','Internal Server Error')
 			return res.redirect('back')
@@ -871,8 +686,6 @@ exports.updatedGalleryPostController = async(req,res,next)=>{
 		}
 		req.flash('success','Successfully Updated Gallery')
 		res.redirect('back')
-
-
 	}catch(e){
 		next(e)
 	}
@@ -881,7 +694,6 @@ exports.updatedGalleryPostController = async(req,res,next)=>{
 exports.deleteGalleryGetController = async(req,res,next)=>{
 	try{	
 		let { id } = req.params
-
 		let webModel = await WebModel.findOne()
 		let path;
 		

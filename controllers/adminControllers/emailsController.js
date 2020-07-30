@@ -24,12 +24,8 @@ async function pageRenderHandler(req,res,pagename,title){
 	})
 }
 
-exports.emailsManagementGetController = async(req,res,next)=>{
-	try{
+exports.emailsManagementGetController =(req,res,next)=>{
 		pageRenderHandler(req,res,'emailsManagement.ejs','Emails')
-	}catch(e){
-		next(e)
-	}
 }
 exports.emailsDeleteGetController = async(req,res,next)=>{
 	try{
@@ -41,7 +37,7 @@ exports.emailsDeleteGetController = async(req,res,next)=>{
             req.flash('fail','Internal Server Error')
             return res.redirect('back')
         }
-        req.flash('success','Successfully Deleted Mails')
+        req.flash('success','Successfully Deleted Email')
         res.redirect('back')
 	}catch(e){
 		next(e)
@@ -85,7 +81,7 @@ exports.sentMailsPostController = async(req,res,next)=>{
             text:message
         })
         if(!sendMailToClient.response){
-            req.flash('fail','Mail sent to failed! Please try to allow less secure apps from your mail account if not worked then contact with developer.')
+            req.flash('fail','Email sent to failed! Please try to allow less secure apps from your mail account if not worked then contact with developer.')
             res.redirect('back')
         }
 
@@ -107,7 +103,7 @@ exports.sentMailsPostController = async(req,res,next)=>{
             req.flash('fail','Internal Server Error')
             return res.redirect('back')
         }
-       req.flash('success','Successfully Sended Mail')
+       req.flash('success','Successfully Sended Email')
        res.redirect('back')
     }catch(e){
         next(e)

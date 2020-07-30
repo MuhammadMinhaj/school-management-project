@@ -111,7 +111,6 @@ exports.dashboradNoticePostController = async(req,res,next)=>{
 			req.flash('fail','Internal Server Error')
 			return res.redirect('back')
 		}
-		console.log(noticePublished)
 		req.flash('success',`Successfully ${msg} Notice To Every Users`)
 		res.redirect('back')
 	}catch(e){
@@ -132,7 +131,6 @@ exports.clearNoticeGetController = async(req,res,next)=>{
 		req.flash('success','Successfully Cleared Notice To Every Users')
 		return res.redirect('back')
 		
-
 	}catch(e){
 		next(e)
 	}

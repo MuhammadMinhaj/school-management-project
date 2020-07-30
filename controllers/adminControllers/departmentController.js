@@ -1,5 +1,4 @@
 const WebModel = require('../../models/WebModel')
-const Admin = require('../../models/Admin')
 const Page = require('../../models/Page')
 const fs = require('fs')
 const Category = require('../../models/Category')
@@ -93,28 +92,19 @@ exports.departmentCreateGetController = async(req,res,next)=>{
 }
 exports.departmentCreatePostController = async(req,res,next)=>{
     try{
-        let { name,title,text,url,date } = req.body
+        let { name,title,text,date } = req.body
         let file = req.file
         let webModel = await WebModel.findOne()
-        if(!file){
-            if(name.length===0||title.length===0||text.length===0||date.length===0||url.length===0){
-                return renderPageHandler(req,res,'department','fail','Cannot Be Empty Field',webModel)  
-            }
-        }
-        if(file){
-            if(text.length>=1){
-                if(name.length===0||title.length===0||text.length===0||date.length===0||url.length===0){
-                    removeFilePath(file.filename,next)
-                    return renderPageHandler(req,res,'department','fail','1 test Cannot Be Empty Field',webModel)
-                }
-            }else{
-                if(name.length===0||url.length===0||date.length===0){
-                    removeFilePath(file.filename,next)
-                    return renderPageHandler(req,res,'department','fail','Please Select Date',webModel)
 
-                }
+        if(name.length===0||title.length===0||date.length===0){
+            if(file){
+                removeFilePath(file.filename,next)
             }
+            
+            req.flash('fail','Please Provied Minmum Required Fields')
+            return res.redirect('back')
         }
+
         
         let hasAlreadyFoundDepartment;
         for(let d of webModel.departments){
@@ -124,7 +114,7 @@ exports.departmentCreatePostController = async(req,res,next)=>{
         }
 
         if(hasAlreadyFoundDepartment){
-            req.flash('fail',`This department has been created by  the name Of ( ${hasAlreadyFoundDepartment} )`)
+            req.flash('fail',`This department has been created by the name Of ( ${hasAlreadyFoundDepartment} )`)
             return res.redirect('back')
         }
 
@@ -132,7 +122,6 @@ exports.departmentCreatePostController = async(req,res,next)=>{
             $push:{
                 departments:{
                     name,
-                    url,
                     title,
                     text,
                     date:makeDateHandler(date),
@@ -142,14 +131,15 @@ exports.departmentCreatePostController = async(req,res,next)=>{
                 }
             }
         },{new:true})
-        console.log(createdDepartmentInfo)
         if(!createdDepartmentInfo){
             if(file){
                 removeFilePath(file.filename,next)
             }
-            return renderPageHandler(req,res,'department','fail','Internal Server Error',webModel)
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
-        renderPageHandler(req,res,'department','success','Successfully Created Department Info',createdDepartmentInfo)
+        req.flash('success','Successfully Created Department')
+        res.redirect('back')
     }catch(e){
         next(e)
     }
@@ -183,7 +173,7 @@ exports.departmentUpdateGetController = async(req,res,next)=>{
 exports.departmentUpdatePostController = async(req,res,next)=>{
     try{
        
-        let { name,title,text,url,date } = req.body
+        let { name,title,text,date } = req.body
         let file = req.file
         let { id } = req.params
         let webModel = await WebModel.findOne()
@@ -208,24 +198,13 @@ exports.departmentUpdatePostController = async(req,res,next)=>{
             return res.redirect('/administrator/department')
         }
 
-        if(!file){
-            if(name.length===0||title.length===0||text.length===0||date.length===0||url.length===0){
-                return renderPageHandler(req,res,'departmentUpdate','fail','Cannot Be Empty Field',webModel,foundedDepartment)  
+        if(name.length===0||title.length===0||date.length===0){
+            if(file){
+                removeFilePath(file.filename,next)
             }
-        }
-        if(file){
-            if(text.length>=1){
-                if(name.length===0||title.length===0||text.length===0||date.length===0||url.length===0){
-                    removeFilePath(file.filename,next)
-                    return renderPageHandler(req,res,'departmentUpdate','fail','1 test Cannot Be Empty Field',webModel,foundedDepartment)
-                }
-            }else{
-                if(date.length===0||name.length===0||url.length===0){
-                    removeFilePath(file.filename,next)
-                    return renderPageHandler(req,res,'departmentUpdate','fail','Please Select Date',webModel,foundedDepartment)
-
-                }
-            }
+            
+            req.flash('fail','Please Provied Minmum Required Fields')
+            return res.redirect('back')
         }
         
 
@@ -247,10 +226,7 @@ exports.departmentUpdatePostController = async(req,res,next)=>{
             return res.redirect('back')
         }
 
-        
-
         foundedDepartment.name = name 
-        foundedDepartment.url = url 
         foundedDepartment.title = title 
         foundedDepartment.text = text?text:'' 
         foundedDepartment.date = makeDateHandler(date);
@@ -259,19 +235,19 @@ exports.departmentUpdatePostController = async(req,res,next)=>{
 
         let updatedDepartment = await WebModel.findOneAndUpdate({_id:webModel._id},webModel,{new:true})
 
-         console.log(updatedDepartment)
-
         if(!updatedDepartment){
             if(file){
                 removeFilePath(file.filename,next)
             }
-            return renderPageHandler(req,res,'departmentUpdate','fail','Internal Server Error',webModel,foundedDepartment)
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
 
         if(file){
             removeFilePath(hasImage,next)
         }
-        renderPageHandler(req,res,'departmentUpdate','success','Successfully Updated Department Info',updatedDepartment,foundedDepartment)
+        req.flash('success','Successfully Updated Department')
+        res.redirect('back')
     }catch(e){
         next(e)
     }
@@ -304,7 +280,8 @@ exports.departmnetDeleteGetController = async(req,res,next)=>{
         },{new:true})
         
         if(!deletedDepartment){
-            return renderPageHandler(req,res,'departmentUpdate','fail','Internal Server Error',webModel,singleDepartment)
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
         if(singleDepartment.image){
             removeFilePath(singleDepartment.image,next)

@@ -1,5 +1,4 @@
 const Class = require('../../models/Class')
-const User = require('../../models/User')
 const Student = require('../../models/Student')
 const Result = require('../../models/Result')
 const WebModel = require('../../models/WebModel')
@@ -58,8 +57,6 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,singleClass,subject
     }
 }
 
-
-
 function resultDiviededHandler(queryname,results){
 
     let finalResult = []
@@ -85,11 +82,9 @@ function resultDiviededHandler(queryname,results){
 
 exports.createResultGetController = async (req,res,next)=>{
     try{
-
         let { classid } = req.params
 
         let hasClass = await Class.findOne({_id:classid})
-
         if(!hasClass){
             return res.redirect('back')
         }
@@ -138,10 +133,6 @@ exports.createResultPostController = async(req,res,next)=>{
            return renderPageHandler(req,res,'createResults','fail','Please Provied Full Info About Student For Make A Result',hasClass,subjectFieldError,fieldError,studentid,valueOfField)
         }
 
-
-
-        
-        
          let createResult = new Result({
             totalStudents:hasClass.student.length,
             workingDays:workingdays,
@@ -222,7 +213,7 @@ exports.createResultPostController = async(req,res,next)=>{
 
        if(!createdResult){
            req.flash('fail','Internal Server Error')
-        return res.redirect('back')
+            return res.redirect('back')
        }
 
         let updatedStudent = await Student.findOneAndUpdate({_id:studentid},{
@@ -316,7 +307,8 @@ exports.getAllResultsOfOneStudentGetController = async(req,res,next)=>{
 
         let classes = await Class.find({user:req.user._id})
         let hasStudent = await Student.findOne({_id:id})
-       
+        let webModel = await WebModel.findOne()
+
         let classOfStudent = await Class.findOne({_id:hasStudent.classId})
         hasStudent.classed = classOfStudent
         let results = await Result.find({student:hasStudent._id})
@@ -325,14 +317,14 @@ exports.getAllResultsOfOneStudentGetController = async(req,res,next)=>{
             let examination = await Examination.findOne({_id:result.examination})
             result.examInfo = examination
         }
-      console.log(results)
         res.render('pages/user/resultsOfStudent.ejs',{
-            title:'All Results Of One Student',
+            title:'All Results',
             user:req.user,
             classes:classes?classes:{},
             student:hasStudent,
             flashMessage:req.flash(),
-            results
+            results,
+            webModel 
         })
     }catch(e){
         next(e)
@@ -344,9 +336,6 @@ exports.editResultGetController = async(req,res,next)=>{
 
         let result = await Result.findOne({_id:id})
 
-     
-        
-        // console.log(result)
         if(!result){
             return res.redirect('back')
         }
@@ -469,12 +458,13 @@ exports.editResultPostController = async(req,res,next)=>{
 
         if(!updatedSubjectOfResult){
             req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
 
         let hasClass = await Class.findOne({_id:updatedSubjectOfResult.classid})
         let hasStudent = await Student.findOne({_id:updatedSubjectOfResult.student})
 
-        let fifinalRe = await Result.findOneAndUpdate({_id:updatedResults._id},{
+        await Result.findOneAndUpdate({_id:updatedResults._id},{
             examination:exam._id,
             examinationType,
             studentInformation:{
@@ -485,14 +475,10 @@ exports.editResultPostController = async(req,res,next)=>{
                 id:hasStudent.studentId
             }
          
-           },{new:true})
+        },{new:true})
     
         req.flash('success','Successfully Updated Result')
         res.redirect('back')
-
-        console.log('Done')
-        console.log(fifinalRe)
-        console.log('Done')
     }catch(e){
         next(e)
     }
@@ -502,8 +488,6 @@ exports.deleteResultGetController = async(req,res,next)=>{
         let { id } = req.params
         
         let result = await Result.findOneAndDelete({_id:id})
-        
-        console.log(result)
 
         let hasStudent = await Student.findOne({_id:result.student})
 
@@ -524,9 +508,6 @@ exports.deleteResultGetController = async(req,res,next)=>{
             },{new:true})
         }
         
-        console.log('Break')
-        console.log(student)
-
         if(!result||!student){
             req.flash('fail','Internal Server Error')
             return res.redirect('back')
@@ -607,9 +588,7 @@ exports.allCreateResultsController = async(req,res,next)=>{
     try{    
         let { id } = req.params
         let { option,typeOfcalculate } = req.query
-        // console.log(req.params)
-        // console.log(req.query)
-       
+
         let hasClass = await Class.findOne({_id:id})
         if(!hasClass){
             return res.redirect('back')
@@ -658,12 +637,6 @@ exports.allCreateResultsController = async(req,res,next)=>{
         let gpaSubjectHandler = (obtainedMarks1,subject)=>{
 
             let obtainedMarks = parseInt(obtainedMarks1)
-            console.log('Testing 501')
-            console.log(obtainedMarks)
-            console.log('Testing 502')
-            
-
-
 
             switch (true){
                 case obtainedMarks>=80&&obtainedMarks<=100:
@@ -698,9 +671,6 @@ exports.allCreateResultsController = async(req,res,next)=>{
                     subject.grade = null
                     subject.gradePoint = null
             }
-            console.log('Testing 503')
-            console.log(subject)
-            console.log('Done This')
             return true
         }
 
@@ -924,11 +894,7 @@ exports.allCreateResultsController = async(req,res,next)=>{
                 subjectsTow.push(result.subjectAandSubjectB[i*2-1])
                 
             }
-            // console.log('Break33')
-            // console.log(subjectsOne)
-            // console.log('Break33')
-            // console.log(subjectsTow)
-            
+
             subjectsOne.forEach((subjectOne,indOne)=>{
                 subjectsTow.forEach((subjectTow,indTow)=>{
                     if(indOne===indTow){
@@ -997,9 +963,6 @@ exports.allCreateResultsController = async(req,res,next)=>{
 
             // Subject Gread And Gread Point Set With Subject Ended
 
-           
-
-
             let resultGradePoint = (totalSubjectGreadPoint/totalSubject).toFixed(2)
             result.totalSubject = totalSubject
             result.targetTotalSubjectNumber = targetTotalNumberOfPerSubject
@@ -1017,25 +980,17 @@ exports.allCreateResultsController = async(req,res,next)=>{
                 cGpaResultsHandler(resultGradePoint,result)
             }
             
-
-            // for(let subject of result.subjects){
-            //     let gradePoint = Number(subject.gradePoint)
-            //     if(gradePoint===0){
-                     // Null For Use That
-            //     }
-            // }
             let makingResults = await Result.findOneAndUpdate({_id:result._id},result,{new:true})
             
             if(!makingResults){
                 req.flash('fail','Internal Server Error')
                 return res.redirect('back')
             }
-            // console.log(makingResults)
-            // console.log('Test')
+
            }
         }
         req.flash('success','Successfully Created All Result')
-        return res.redirect('back')
+        res.redirect('back')
         
     }catch(e){
         next(e)
@@ -1088,8 +1043,7 @@ exports.updateAllResultsGetController = async(req,res,next)=>{
                 req.flash('fail','Internal Server Error')
                 return res.redirect('back')
             }
-            console.log(updatedResult)
-            
+
         }
         req.flash('success','Successfully Updated Result Passed Marks')
         res.redirect('back')
@@ -1124,9 +1078,6 @@ exports.resultsRankController = async(req,res,next)=>{
 
         let allPassedResults = resultDiviededHandler('passedresults',results)
 
-        console.log(allPassedResults)
-        console.log(allPassedResults.length)
-        
         allPassedResults.sort((a,b)=>{
             if(a.gradePoint===b.gradePoint){
                 return Number(b.totalSubjectObtainedNumber)-Number(a.totalSubjectObtainedNumber)
@@ -1151,10 +1102,6 @@ exports.resultsRankController = async(req,res,next)=>{
         }
         req.flash('success','Successfully Added Rank On Result')
         res.redirect('back')
-            console.log(allPassedResults)
-        
-        
-        // totalSubjectObtainedNumber
     }catch(e){
         next(e)
     }
@@ -1165,7 +1112,6 @@ exports.allPassedResultsGetController = async(req,res,next)=>{
         let { id } = req.params
 
         let { option,roll } = req.query 
-        console.log(req.query)
 
         let hasClass = await Class.findOne({_id:id})
 
@@ -1176,7 +1122,7 @@ exports.allPassedResultsGetController = async(req,res,next)=>{
         let results = await Result.find({classid:hasClass._id})
 
         if(!results){
-            req.flash('fail','Please At First Create To Result')
+            req.flash('fail','Please At First Create Result')
             return res.redirect('back')
         }
         
@@ -1216,13 +1162,12 @@ exports.allPassedResultsGetController = async(req,res,next)=>{
             result.exam = findExamination
 
         })
-        console.log(allExamBasedPassedResults)
 
         let searchValue = {
             option,
             roll
         }
-        // console.log(hasClass)
+
         renderPageHandler(req,res,'passedResult',null,null,hasClass,null,null,null,null,null,allExamBasedPassedResults,null,searchValue)
 
     }catch(e){
@@ -1234,7 +1179,6 @@ exports.allFailedResultsGetController = async(req,res,next)=>{
     try{
         let { id } = req.params
         let { option,roll } = req.query 
-        console.log(req.query)
 
         let hasClass = await Class.findOne({_id:id})
 
@@ -1285,7 +1229,6 @@ exports.allFailedResultsGetController = async(req,res,next)=>{
             result.exam = findExamination
 
         })
-        console.log(allExamBasedFailedResults)
 
         let searchValue = {
             option,
@@ -1293,7 +1236,6 @@ exports.allFailedResultsGetController = async(req,res,next)=>{
         }
         renderPageHandler(req,res,'failedResults',null,null,hasClass,null,null,null,null,null,allExamBasedFailedResults,null,searchValue)
 
-        
     }catch(e){
         next(e)
     }
@@ -1329,11 +1271,7 @@ exports.resultsSubmitToAdminGetController = async(req,res,next)=>{
             }
             
         }
-        console.log('Final')
-        console.log(hasClass.group)
-        console.log(hasClass)
-        console.log('Final')
-          
+
         let createSubmitReq = new Request({
             username:user.name,
             classname:hasClass.name,
@@ -1374,13 +1312,9 @@ exports.resultsSubmitToAdminGetController = async(req,res,next)=>{
             }
 
         }
-
-        console.log(createdSubmitReq)
         
         req.flash('success','Successfully Submited Results')
         res.redirect('back')
-        console.log('Done')
-
     }catch(e){
         next(e)
     }
@@ -1389,20 +1323,19 @@ exports.resultsSubmitToAdminGetController = async(req,res,next)=>{
 exports.resultsPublishedStatusGetController = async(req,res,next)=>{
     try{
         let user = req.user
-
+        let webModel = await WebModel.findOne()
         let classes = await Class.find({user:req.user._id})
 
         let getAllSubmitedRequest = await Request.find({user:user._id})
         
-
         res.render('pages/user/publishedResult',{
             title:'Submited Status',
             flashMessage:req.flash(),
             getAllSubmitedRequest,
             user,
-            classes
+            classes,
+            webModel
         })
-        // console.log(getAllRequest)
     }catch(e){
         next(e)
     }

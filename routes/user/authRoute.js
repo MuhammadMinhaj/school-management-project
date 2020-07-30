@@ -8,12 +8,15 @@ const {
 // All Imported Controllers
 const {
     userLoginGetController,
-    userLoginPostController
+    userLoginPostController,
+    userLogoutGetController
 } = require('../../controllers/users/authController')
 
 
 router.get('/auth/login',isUnAuthenticatedUser,userLoginGetController)
 
 router.post('/auth/login',userLoginPostController)
+
+router.get('/auth/logout',userLogoutGetController)
 
 module.exports = router 
