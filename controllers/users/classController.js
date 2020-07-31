@@ -32,7 +32,7 @@ async function renderPageHandler(req,res,pagename,singleClass,examination){
                 if(totalSearchStudent.length!==0){
                     totalSearchStudent.forEach(s=>{
                         if(s.roll.toString()===term.toString()||parseInt(s.roll).toString()===term.toString()||s.phone.toString()===term.toString()){
-                            console.log('0'+s.roll.toString())
+                          
                             searchResult = s
                             return false
                         }

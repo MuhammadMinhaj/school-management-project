@@ -4,12 +4,14 @@ const WebModel = require('../../models/WebModel')
 const Page = require('../../models/Page')
 const Contact = require('../../models/Contact')
 const Category = require('../../models/Category')
+const Controls = require('../../models/Controls')
+
 async function pageRenderHandler(req,res,pagename,title){
 	let webModel = await WebModel.findOne()
 	let pages = await Page.find()
 	let contact = await Contact.find()
 	let category = await Category.find()
-
+    let control =  await Controls.findOne()
 	res.render(`pages/administrator/${pagename}`, {
 		title: title,
 		style: 'bg-light',
@@ -20,10 +22,10 @@ async function pageRenderHandler(req,res,pagename,title){
 		createdPage: {},
         error: {},
         contacts:contact,
-        category
+        category,
+        control
 	})
 }
-
 exports.emailsManagementGetController =(req,res,next)=>{
 		pageRenderHandler(req,res,'emailsManagement.ejs','Emails')
 }
@@ -54,9 +56,9 @@ exports.sentMailsPostController = async(req,res,next)=>{
             return res.redirect('back')
         }
 
-        let webModel = await WebModel.findOne()
+        let control = await Controls.findOne()
 
-        if(!webModel.publicEmail.email||!webModel.publicEmail.password){
+        if(!control.publicMail.email||!control.publicMail.password){
             req.flash('fail','Please Add Public Mail From Setting Pannel')
             return res.redirect('back')
         }
@@ -70,8 +72,8 @@ exports.sentMailsPostController = async(req,res,next)=>{
         let transporter = nodemailer.createTransport({
             service:'gmail',
             auth:{
-                user:webModel.publicEmail.email,
-                pass:webModel.publicEmail.password
+                user:control.publicMail.email,
+                pass:control.publicMail.password
             }
         })
         let sendMailToClient = await transporter.sendMail({
@@ -91,7 +93,7 @@ exports.sentMailsPostController = async(req,res,next)=>{
             $push:{
                 history:{
                     name:req.admin.name,
-                    emailFrom:webModel.publicEmail?webModel.publicEmail.email:'',
+                    emailFrom:control.publicMail.email?control.publicMail.email:'',
                     subject,
                     message,
                     date:`${d.getDate()+1}/${correntMonth}/${d.getFullYear()}`
@@ -113,22 +115,18 @@ exports.contactStatusGetController = async(req,res,next)=>{
     try{
         let { status } = req.query
 
-        let webModel = await WebModel.findOne()
+        let control = await Controls.findOne()
         let info;
         let msg ;
         
         if(status==='active'){
-            info = await WebModel.findOneAndUpdate({_id:webModel._id},{
-                contact:{
-                    status:true
-                },
+            info = await Controls.findOneAndUpdate({_id:control._id},{
+                contactSentMail:true,
             },{new:true})
             msg = 'Successfully Activated Contact'
         }else{
-            info = await WebModel.findOneAndUpdate({_id:webModel._id},{
-                contact:{
-                    status:false
-                },
+            info = await Controls.findOneAndUpdate({_id:control._id},{
+                contactSentMail:false,
             },{new:true})
             msg = 'Successfully Deactivated Contact'
         }
@@ -136,7 +134,6 @@ exports.contactStatusGetController = async(req,res,next)=>{
             req.flash('fail','Internal Server Error')
             return res.redirect('back')
         }
-        
         req.flash('success',msg)
         res.redirect('back')
     }catch(e){

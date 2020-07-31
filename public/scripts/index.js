@@ -1,6 +1,9 @@
 import result from './result';
 import contact from './contact'
 
+
+
+
 let btns = document.querySelectorAll('.dropDownToggler')
 let dropMenus = document.querySelectorAll('.dropDown-style')
 
@@ -42,4 +45,9 @@ if(showText){
 		text.innerHTML = text.dataset.content
 	})
 }
+
+$(function () {
+	$('[data-toggle="popover"]').popover()
+})
+
 

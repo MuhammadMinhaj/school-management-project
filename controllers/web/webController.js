@@ -6,7 +6,7 @@ const Page = require('../../models/Page')
 const Contact = require('../../models/Contact')
 const Category = require('../../models/Category')
 const Notice = require('../../models/Notice')
-
+const Controls = require('../../models/Controls')
 
 async function renderPageHandler(req,res,pagename,title,page,department,searchContent,singleNotice){
     let menu  = await Menu.find()
@@ -15,7 +15,8 @@ async function renderPageHandler(req,res,pagename,title,page,department,searchCo
     let teachers = await Teacher.find()
     let category = await Category.find()
     let notice = await Notice.find()
-
+    const control = await Controls.findOne()
+    let { contactSentMail } = control
     res.render(`pages/${pagename}`,{
         title,
         menu,
@@ -28,10 +29,10 @@ async function renderPageHandler(req,res,pagename,title,page,department,searchCo
         notice,
         searchContent,
         searchValue:req.query,
-        singleNotice
+        singleNotice,
+        contactSentMail
     })
 }
-
 exports.indexPageGetController = async(req,res,next)=>{
     try{
         let webModel = await WebModel.findOne()
@@ -100,20 +101,17 @@ exports.contactPageGetController = async(req,res,next)=>{
 exports.contactPagePostController = async(req,res,next)=>{
     try{
         let { name,email,subject,message } = req.body
-        let webModel = await WebModel.findOne()
-
-        if(!webModel.contact.status){
+        let control = await Controls.findOne()
+        if(!control.contactSentMail){
             res.json({error:'Contact Has Been Deactivated!'})
             return false
         }
-
+        
         if(name.length===0||email.length===0||subject.length===0||message.length===0){
             res.json({error:'Invalid Credentials'})
             return false
         }
        
-
-
         let d = new Date()
         let correntMonth = d.getMonth()+1
         
@@ -130,7 +128,6 @@ exports.contactPagePostController = async(req,res,next)=>{
             res.json({error:'Internal Server Error'})
             return false
         }
-        console.log(sendInfo)
         res.json({message:'We Have Received Your Email,Please Wait For Our Feedback.'})
     }catch(e){
         next(e)
@@ -191,7 +188,6 @@ exports.galleryGetController = async(req,res,next)=>{
         next(e)
     }
 }
-
 exports.noticeCategoryGetController = async(req,res,next)=>{
     try{    
         let { search } = req.query 
@@ -200,13 +196,11 @@ exports.noticeCategoryGetController = async(req,res,next)=>{
             let notice = await Notice.find({ "title": { "$regex": search, "$options": "i" }})
             searchFor = notice 
         }
-        console.log(searchFor)
         renderPageHandler(req,res,'web/noticeCategory.ejs','Notice',null,null,searchFor)
     }catch(e){
         next(e)
     }
 }
-
 exports.noticeGetController = async(req,res,next)=>{
     try{    
         let { id } = req.params

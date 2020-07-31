@@ -401,3 +401,9 @@ html {
 	transform: scale(0.98);
 	text-decoration: none;
 }
+/* .breadcrumb__container {
+
+} */
+.breadcrumb__item>a{
+	color:#ea5f07
+}

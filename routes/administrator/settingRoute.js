@@ -24,7 +24,10 @@ const {
     futuredLinksDeleteGetController,
     futuredLinksUpdatePostController,
     addPublicMailPostController,
-    removePublicMailGetController
+    removePublicMailGetController,
+    developerInfoGetController,
+    forgottenPasswordStatusGetController,
+    userForgottenPasswordStatusGetController
 }   = require('../../controllers/adminControllers/settingController')
 
 
@@ -55,4 +58,9 @@ router.get('/setting/futured/links/delete/:id',isAuthenticatedAdmin,futuredLinks
 router.post('/setting/futured/links/update/:id',isAuthenticatedAdmin,futuredLinksUpdatePostController)
 router.post('/setting/add/public/mail',isAuthenticatedAdmin,addPublicMailPostController)
 router.get('/setting/remove/public/mail',isAuthenticatedAdmin,removePublicMailGetController)
+
+router.get('/developer/info',isAuthenticatedAdmin,developerInfoGetController)
+
+router.get('/password-recover',isAuthenticatedAdmin,forgottenPasswordStatusGetController)
+router.get('/user-password/recover',isAuthenticatedAdmin,userForgottenPasswordStatusGetController)
 module.exports = router

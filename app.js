@@ -15,8 +15,6 @@ const setMiddlewares = require('./middlewares/middlewares')
 
 const BASE_URL = process.env.MONGO_URL||`mongodb+srv://${config.get('db-username')}:${config.get('db-password')}@dream-softwares-dyvoa.mongodb.net/jasa-edu?retryWrites=true&w=majority`
 
-
-
 const app = express()
 
 // Set Views Engine
@@ -38,21 +36,17 @@ app.use(
     publicLibrayPath
 )
 
-
 // Set All Middlewares
 setMiddlewares(app)
 // Set All Routese
 setRoutes(app)
 
-// All Error Handleling
+// All Error Handler
 // app.use((error,req,res,next)=>{
 //     if(error){
-//         res.send('Ops! Something went to wrong')
+//         res.send('<h1 style="text-align:center;margin-top:1.5rem">Ops! Something went to wrong</h1>')
 //     }
 // })
-
-
-
 
 app.get('*',async(req,res,next)=>{
 
@@ -65,7 +59,6 @@ app.get('*',async(req,res,next)=>{
     })
 
 })
-
 
 mongoose.connect(BASE_URL,{
     useNewUrlParser:true,

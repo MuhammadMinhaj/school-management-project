@@ -31,7 +31,14 @@
 							<input type="password" name="password" id="input-password" class="custom-login-field-style " placeholder="**********">
 						</div>
 						
+						<%if(control.userForgotPassword){%>
 							<a href="/user/auth/forgot_password">Forgotten Password</a>
+							<%}else{%>
+								<span  style="cursor:pointer" class="text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="Please Contact With Administrator!">
+									Forgotten Password?
+									</span>
+							<%}%>
+							
 				</div>
 			</div>
 			<div class="custom-login-footer">

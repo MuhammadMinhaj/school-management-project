@@ -5,36 +5,28 @@ const WebModel = require('../../models/WebModel')
 const Category = require('../../models/Category')
 const Notice = require('../../models/Notice')
 
-async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb,categoryItem,items){
+async function renderPageHandler(req,res,pagename,categoryItem,items){
     try{    
         let pages = await Page.find()
         let webModel = await WebModel.findOne()
         let category =await Category.find()
         
-        if(msg) req.flash(msgOpt,msg)
-        return res.render(`pages/administrator/${pagename}`, {
-                title: 'Notice',
-                style: 'bg-light',
-                error: {},
-                data: req.admin,
-                pages,
-                createdPage:{},
-                flashMessage: req.flash(),
-                webModel:modelOfWeb?modelOfWeb:webModel,
-                category,
-                categoryItem,
-                items
-        })
+    return res.render(`pages/administrator/${pagename}`, {
+        title: 'Notice',
+        style: 'bg-light',
+        error: {},
+        data: req.admin,
+        pages,
+        createdPage:{},
+        flashMessage: req.flash(),
+        webModel,
+        category,
+        categoryItem,
+        items
+    })
     }catch(e){
         console.log(e)
     }
-}
-function removeFilePath(path,next){
-    fs.unlink(`public/uploads/${path}`,error=>{
-        if(error){
-            return next(error)
-        }
-    })
 }
 function makeDateHandler(d){
     let splitDate = d.slice(8)
@@ -85,18 +77,15 @@ function makeDateHandler(d){
     }
     return correctDate
 }
-exports.newsPageGetController = async(req,res,next)=>{
-    try{
-        renderPageHandler(req,res,'news')
-    }catch(e){
-        next(e)
-    }
+exports.newsPageGetController = (req,res,next)=>{
+    renderPageHandler(req,res,'news')
 }
 exports.latestNewsCreateAndUpdatePostController = async(req,res,next)=>{
     try{
         let { title,text,date } = req.body
         if(title.length===0||text.length===0||date.length===0){
-            return renderPageHandler(req,res,'news','fail','Cannot Be Empty Field')
+            req.flash('fail','Please Provied Full Info')
+            return res.redirect('back') 
         }
         let webModel = await WebModel.findOne()
         let hasNews = false;
@@ -112,9 +101,12 @@ exports.latestNewsCreateAndUpdatePostController = async(req,res,next)=>{
                 new:true
             })
             if(!publishedLatestNews){
-                return renderPageHandler(req,res,'news','fail','Internal Server Error')
+                req.flash('fail','Internal Server Error')
+                return res.redirect('back')    
+          
             }
-        renderPageHandler(req,res,'news','success',`${hasNews?'Updated':'Published'} Latest News`)
+            req.flash('success',`${hasNews?'Updated':'Published'} Latest News`)
+            res.redirect('back')
     }catch(e){
         next(e)
     }
@@ -133,9 +125,11 @@ exports.latestNewsDeleteGetController = async(req,res,next)=>{
                 new:true
             })
             if(!clearLatestNews){
-                return renderPageHandler(req,res,'news','fail','Internal Server Error')
+                req.flash('fail','Internal Server Error')
+                return res.redirect('back') 
             }
-            renderPageHandler(req,res,'news','success',`Clear Latest News`)
+            req.flash('success',`Clear Latest News`)
+            res.redirect('back') 
     }catch(e){
         next(e)
     }
@@ -143,12 +137,11 @@ exports.latestNewsDeleteGetController = async(req,res,next)=>{
 exports.breakingNewsPostController = async(req,res,next)=>{
     try{
         let { title,url } = req.body
-        if(title.length===0){
-            return renderPageHandler(req,res,'news','fail','Cannot Be Empty Field')
-        }
+            if(title.length===0){
+                req.flash('fail','Please Provied Title')
+                res.redirect('back') 
+            }
             let webModel = await WebModel.findOne()
-
-
             let publishedBreakingNews = await WebModel.findOneAndUpdate({_id:webModel._id},{
                 $push:{
                     breakingNews:{
@@ -159,10 +152,13 @@ exports.breakingNewsPostController = async(req,res,next)=>{
             },{
                 new:true
             })
+
             if(!publishedBreakingNews){
-                return renderPageHandler(req,res,'news','fail','Internal Server Error')
+                req.flash('fail','Internal Server Error')
+                return res.redirect('back') 
             }
-        renderPageHandler(req,res,'news','success',`Published Breaking News`,publishedBreakingNews)
+            req.flash('success','Published Breaking News')
+            res.redirect('back') 
     }catch(e){
         next(e)
     }
@@ -188,9 +184,12 @@ exports.breakingNewsDeleteGetController = async(req,res,next)=>{
         },{new:true})
        
         if(!deletedBreakingNews){
-            return renderPageHandler(req,res,'news','fail','Internal Server Error')
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
+
         }
-        res.redirect('/administrator/news')
+        req.flash('success','Successfully Deleted Breaking News')
+        res.redirect('back')
     }catch(e){
         next(e)
     }
@@ -200,7 +199,8 @@ exports.breakingNewsUpdatePostController = async(req,res,next)=>{
         let { id } = req.params
         let { title,url } = req.body
         if(title.length===0){
-            return renderPageHandler(req,res,'news','fail','Cannot Be Empty Field')
+            req.flash('fail','Please Provied Title')
+            return res.redirect('back')
         }
         let webModel = await WebModel.findOne()
 
@@ -213,191 +213,28 @@ exports.breakingNewsUpdatePostController = async(req,res,next)=>{
         let updatedBreakingNews = await WebModel.findOneAndUpdate({_id:webModel._id},webModel,{new:true})
 
         if(!updatedBreakingNews){
-            return renderPageHandler(req,res,'news','fail','Internal Server Error')
+            req.flash('fail','Internal Server Error')
+            return res.redirect('back')
         }
-         renderPageHandler(req,res,'news','success','Successfully Updated Breaking News',updatedBreakingNews)
+        req.flash('success','Successfully Updated Breaking News')
+        res.redirect('back')
     }catch(e){
         next(e)
     }
 }
-exports.noticeGetController = async(req,res,next)=>{
-    try{
-        renderPageHandler(req,res,'notice')
-    }catch(e){
-        next(e)
-    }
-}
-exports.noticePostController = async(req,res,next)=>{
-    try{
-        let { title,text,date,action } = req.body
-        if(!req.file){
-            if(title.length===0||text.length===0||date.length===0||action.length===0){
-                return renderPageHandler(req,res,'notice','fail','Cannot Be Empty Field')  
-            }
-        }
-        if(req.file){
-            if(title.length>=1||text.length>=1||action.length>=1){
-                if(title.length===0||text.length===0||date.length===0||action.length===0){
-                    removeFilePath(req.file.filename,next)
-                    return renderPageHandler(req,res,'notice','fail','1 test Cannot Be Empty Field')
-                }
-            }else{
-                if(date.length===0){
-                    removeFilePath(req.file.filename,next)
-                    return renderPageHandler(req,res,'notice','fail','Please Select Date')
-
-                }
-            }
-        }
-        let webModel = await WebModel.findOne()
-
-        let publishedNotice = await WebModel.findOneAndUpdate({_id:webModel._id},{
-            $push:{
-                notice:{
-                    title,
-                    text,
-                    date:makeDateHandler(date),
-                    numberDate:date,
-                    image:req.file?req.file.filename:'',
-                    action
-                }
-            }
-        },{new:true})
-        console.log(publishedNotice)
-        if(!publishedNotice){
-            removeFilePath(req.file.filename,next)
-            return renderPageHandler(req,res,'notice','fail','Internal Server Error')
-        }
-        renderPageHandler(req,res,'notice','success','Successfully Published Notice')
-
-    }catch(e){
-        next(e)
-    }
-}
-exports.noticeDeleteGetController = async(req,res,next)=>{
-    try{
-        let webModel = await WebModel.findOne()
-        let { id } = req.params
-
-        let notice;
-        webModel.notice.forEach((n,ind)=>{
-            if(ind.toString()===id.toString()){
-                notice = n
-            }
-        })
-        
-        let deletedNotice = await WebModel.findOneAndUpdate({_id:webModel._id},{
-            $pull:{
-                notice:{
-                    _id:notice._id
-                }
-            }
-        },{new:true})
-       
-        if(!deletedNotice){
-            return renderPageHandler(req,res,'notice','fail','Internal Server Error')
-        }
-        if(notice.image.length!==0){
-            removeFilePath(notice.image,error=>{
-                if(error){
-                    return next(error)
-                }
-                res.redirect('/administrator/notice')
-            })
-        }
-        res.redirect('/administrator/notice')
-    }catch(e){
-
-    }
-}
-exports.noticeUpdatePostController = async(req,res,next)=>{
-    try{    
-        let { title,text,date,action } = req.body
-        let { id } = req.params
-       
-        let webModel = await WebModel.findOne()
-
-        if(!req.file){
-            let hasImg = false
-            webModel.notice.forEach((n,ind)=>{
-                if(ind.toString()===id.toString()){
-                    hasImg = n.image?true:false
-                }
-            })
-            if(title.length===0||text.length===0||date.length===0||action.length===0){
-                let msg = hasImg?'Already Exist Image':'Cannot Be Empty Field'
-                return renderPageHandler(req,res,'notice','fail',msg)  
-            }
-        }
-        if(req.file){
-            if(title.length>=1||text.length>=1||action.length>=1){
-                if(title.length===0||text.length===0||date.length===0||action.length===0){
-                    removeFilePath(req.file.filename,next)
-                    return renderPageHandler(req,res,'notice','fail','1 test Cannot Be Empty Field')
-                }
-            }else{
-                if(date.length===0){
-                    removeFilePath(req.file.filename,next)
-                    return renderPageHandler(req,res,'notice','fail','Please Select Date')
-
-                }
-            }
-        }
-        
-
-        let imgPath;
-
-        webModel.notice.forEach((n,ind)=>{
-            if(ind.toString()===id.toString()){
-                imgPath = n.image
-                n.title = title
-                n.text = text 
-                n.date = makeDateHandler(date)
-                n.numberDate = date
-                n.image = req.file?req.file.filename:imgPath?imgPath:''
-                n.action = action                
-            }
-        })
-        console.log(imgPath)
-        console.log('Not Found')
-        let updatedNotice = await WebModel.findOneAndUpdate({_id:webModel._id},webModel,{new:true})
-
-        if(!updatedNotice){
-                removeFilePath(req.file.filename,next)
-            return renderPageHandler(req,res,'notice','fail','Internal Server Error')
-        }
-        if(req.file){
-            if(imgPath){
-                removeFilePath(imgPath,next)
-            }
-        }
-        renderPageHandler(req,res,'notice','success','Successfully Updated Notice')
-    }catch(e){
-        next(e)
-    }
-}
-
-
 // Category Controllers 
-exports.createCategoryGetController = async(req,res,next)=>{
-    try{
-        renderPageHandler(req,res,'category.ejs')
-    }catch(e){
-        next(e)
-    }
+exports.createCategoryGetController = (req,res,next)=>{
+    renderPageHandler(req,res,'category.ejs')
 }
 
 exports.createCategoryPostController = async(req,res,next)=>{
     try{
         let { name } = req.body
-        
-      
         if(!name){
             req.flash('fail',`Please provied category name.`)
             return res.redirect('back')
         }
         let category = await Category.findOne({name})
-        console.log(category)
         if(category){
             req.flash('fail',`This category already created by the name of ( ${name} )`)
             return res.redirect('back')
@@ -408,10 +245,8 @@ exports.createCategoryPostController = async(req,res,next)=>{
             req.flash('fail','Internal Server Error')
             return res.redirect('back')
         }
-
         req.flash('success',`Successfully created category by the name of ( ${name} )`)
         res.redirect('back')
-        console.log(createdCategory)
     }catch(e){
         next(e)
     }
@@ -421,7 +256,6 @@ exports.updateCategoryPostController = async(req,res,next)=>{
     try{ 
         let { id } = req.params
         let { name } = req.body 
-
         if(!name){
             req.flash('fail',`Please provied category name.`)
             return res.redirect('back')
@@ -496,7 +330,7 @@ exports.categoryItemGetController = async(req,res,next)=>{
             return res.redirect('back')
         }
         let items = await Notice.find({category:id})
-        renderPageHandler(req,res,'itemOfCategory.ejs',null,null,null,category,items)
+        renderPageHandler(req,res,'itemOfCategory.ejs',category,items)
     }catch(e){
         next(e)
     }
@@ -506,11 +340,7 @@ exports.createNoticePostController = async(req,res,next)=>{
     try{
         let { id } = req.params
         let { title,text,date } = req.body
-        let file = req.file 
-        console.log(req.body)
-        console.log(req.params)
-        console.log(req.file)        
-        
+        let file = req.file       
         if(title.length===0||text.length===0||date.length===0){
             if(file){
                 fs.unlink(`public/uploads/${file.filename}`,error=>{
@@ -552,11 +382,8 @@ exports.createNoticePostController = async(req,res,next)=>{
             return res.redirect('back')
         }
 
-        // await Notice.findOneAndUpdate({_id:createdNotice._id},{$inc:{id:1}},{new:true})
-
         req.flash('success','Successfully created notice')
-        res.redirect('back')
-        console.log(createdNotice)   
+        res.redirect('back') 
     }catch(e){
         next(e)
     }

@@ -149,6 +149,7 @@ exports.dropDownCreateGetController = async (req, res, next) => {
 		let menu = await Menu.findOne({ _id: req.params.id })
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
+		let category  = await Category.find()
 		if (!menu) {
 			req.flash('fail', 'Please Create New Menu')
 			return res.redirect('/administrator/menu-create')
@@ -165,6 +166,7 @@ exports.dropDownCreateGetController = async (req, res, next) => {
 			webModel,
 			createdPage:{},
 			id: menu._id,
+			category
 		})
 	} catch (e) {
 		next(e)

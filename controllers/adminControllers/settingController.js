@@ -1,24 +1,27 @@
-let WebModel = require('../../models/WebModel')
-let Page = require('../../models/Page')
+const WebModel = require('../../models/WebModel')
+const Page = require('../../models/Page')
 const Category = require('../../models/Category')
-let fs = require('fs')
+const Controls = require('../../models/Controls')
+const fs = require('fs')
 
-async function renderPageHandler(req,res,pagename){
+
+async function renderPageHandler(req,res,pagename,title){
     try{    
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
 		let category = await Category.find()
-
+		let control = await Controls.findOne()
 		res.render(`pages/administrator/${pagename}`, {
 			style: 'bg-light',
-			title: 'Settings',
+			title: title||'Settings',
 			data: req.admin,
 			flashMessage: req.flash(),
 			pages,
 			createdPage: {},
 			webNameList: webModel.name,
 			webModel,
-			category
+			category,
+			control 
 		})
     }catch(e){
         console.log(e)
@@ -488,7 +491,6 @@ exports.socialLinksUpdatePostController = async(req,res,next)=>{
 		})
 
 		let updatedLinks = await WebModel.findOneAndUpdate({_id:webModel._id},webModel,{new:true})
-		console.log(updatedLinks)
 		if(!updatedLinks){
 			req.flash('fail','Internal Server Error')
 			return res.redirect('back')
@@ -621,7 +623,6 @@ exports.futuredLinksUpdatePostController = async(req,res,next)=>{
 		})
 
 		let updatedLinks = await WebModel.findOneAndUpdate({_id:webModel._id},webModel,{new:true})
-		console.log(updatedLinks)
 		if(!updatedLinks){
 			req.flash('fail','Internal Server Error')
 			return res.redirect('back')
@@ -643,20 +644,29 @@ exports.addPublicMailPostController = async(req,res,next)=>{
 			return res.redirect('back')
 		}
 
-		let webModel = await WebModel.findOne()
-
+		let controls = await Controls.findOne()
 		let msg 
-		if(webModel.publicEmail.email){
-			msg = 'Updated'
-		}else{
+		let addedPublicMail 
+		if(!controls){
+			let addPublicMail = new Controls({
+				publicMail:{
+					email,
+					password
+				}
+			})
+			addedPublicMail = await addPublicMail.save() 
 			msg = 'Added'
+
+		}else{
+			addedPublicMail = await Controls.findOneAndUpdate({_id:controls._id},{
+				publicMail:{
+					email,
+					password
+				}
+			},{new:true})	
+			msg = controls.publicMail.email?'Updated':'Added'
+
 		}
-		let addedPublicMail = await WebModel.findOneAndUpdate({_id:webModel._id},{
-			publicEmail:{
-				email,
-				password
-			}
-		},{new:true})
 
 		if(!addedPublicMail){
 			req.flash('fail','Internal Server Error')
@@ -672,10 +682,10 @@ exports.addPublicMailPostController = async(req,res,next)=>{
 exports.removePublicMailGetController = async(req,res,next)=>{
 	try{
 
-		let webModel = await WebModel.findOne()
+		let control = await Controls.findOne()
 
-		let removedPublicMail = await WebModel.findOneAndUpdate({_id:webModel._id},{
-			publicEmail:{
+		let removedPublicMail = await Controls.findOneAndUpdate({_id:control._id},{
+			publicMail:{
 				email:'',
 				password:''
 			}
@@ -688,6 +698,59 @@ exports.removePublicMailGetController = async(req,res,next)=>{
 
 		req.flash('success',`Successfully Remove Public Mail`)
 		res.redirect('back')
+	}catch(e){
+		next(e)
+	}
+}
+exports.developerInfoGetController = (req,res,next)=>{
+	renderPageHandler(req,res,'developerInfo.ejs','Developer Info')
+}
+
+exports.forgottenPasswordStatusGetController = async(req,res,next)=>{
+	try{
+		let control = await Controls.findOne()
+		let updatedControl
+		let msg;
+
+		if(req.query.status.toLowerCase()==='active'){
+			updatedControl = await Controls.findOneAndUpdate({_id:control._id},{forgotPassword:true},{new:true})
+			msg = 'Activited'
+		}else{
+			 updatedControl = await Controls.findOneAndUpdate({_id:control._id},{forgotPassword:false},{new:true})
+			msg = 'Deactivited'
+		}
+		if(!updatedControl){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+		req.flash('success',`Successfully ${msg} Out Of Admin Control Pannel Password Recover System`)
+		return res.redirect('back')
+	}catch(e){
+		next(e)
+	}
+}
+exports.userForgottenPasswordStatusGetController = async(req,res,next)=>{
+	try{
+		let control = await Controls.findOne()
+		let updatedControl
+		let msg;
+		if(!control){
+			req.flash('fail','Please Add Publich Mail')
+			return res.redirect('back')
+		}
+		if(req.query.status.toLowerCase()==='active'){
+			updatedControl = await Controls.findOneAndUpdate({_id:control._id},{userForgotPassword:true},{new:true})
+			msg = 'Activited'
+		}else{
+			 updatedControl = await Controls.findOneAndUpdate({_id:control._id},{userForgotPassword:false},{new:true})
+			msg = 'Deactivited'
+		}
+		if(!updatedControl){
+			req.flash('fail','Internal Server Error')
+			return res.redirect('back')
+		}
+		req.flash('success',`Successfully ${msg} Out Of Admin Control User Password Recovery System`)
+		return res.redirect('back')
 	}catch(e){
 		next(e)
 	}

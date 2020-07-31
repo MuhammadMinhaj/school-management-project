@@ -1,13 +1,45 @@
 const bcrypt = require('bcrypt')
 
 const User = require('../../models/User')
-const Menu = require('../../models/Menu')
 const WebModel = require('../../models/WebModel')
 const Class  = require('../../models/Class')
 const ExaminationType = require('../../models/ExaminationType')
 const Student  = require('../../models/Student')
+
+let searchForItems = [
+    {
+		name:'Create Class',
+		url:'/user/class/create',
+		search:'create class'
+    },
+    {
+        name:'Status',
+        url:'/user/results/published/status',
+        search:'status results published'
+    },
+    {
+        name:'Profile',
+        url:'/user/profile',
+        search:'change password profile'
+    },
+    {
+        name:'Logout',
+        url:'/user/auth/logout',
+        search:'logout singout'
+    },
+    {
+        name:'Website',
+        url:'/',
+        search:'website home'
+    },
+    {
+        name:'Dashboard',
+        url:'/user/dashboard',
+        search:'dashboard home'
+    },
+]
 // Render Handler
-async function renderPageHandler(req,res,pagename,msgOpt,msg,error){
+async function renderPageHandler(req,res,pagename,searchItems){
     try{    
         let classes = await Class.find({user:req.user._id})
         let webModel = await WebModel.findOne()
@@ -21,19 +53,71 @@ async function renderPageHandler(req,res,pagename,msgOpt,msg,error){
             for(let s of students){
                 totalResults += s.result.length
             }
+            let hasClass = false
+            for(let s of searchForItems){
+                if(c._id.toString()===s.id){
+                    hasClass = true 
+                }
+            } 
+            // Start
+            if(!hasClass){
+
+                searchForItems.push({
+                name:`Class ${c.name}`,
+                id:c._id.toString(),
+                uniq:c.name,
+                url:`/user/class/update/${c._id}`,
+                search:`class ${c.name.toLowerCase()} ${c.nameOfNumeric}`
+                })  
+
+                searchForItems.push({
+                name:`Add Student In Class ${c.name}`,
+                id:c._id.toString(),
+                url:`/user/student/create/${c._id}`,
+                search:`add student class ${c.name.toLowerCase()} ${c.nameOfNumeric}`
+                })
+
+                searchForItems.push({
+                    name:`Create Exam In Class ${c.name}`,
+                    id:c._id.toString(),
+                    url:`/user/class/exam/create/${c._id}`,
+                    search:`create exam in class ${c.name.toLowerCase()} ${c.nameOfNumeric}`
+                })
+
+                searchForItems.push({
+                    name:`Create Results In Class ${c.name}`,
+                    id:c._id.toString(),
+                    url:`/user/results/create/${c._id}`,
+                    search:`create results in class ${c.name.toLowerCase()} ${c.nameOfNumeric}`
+                })
+
+                searchForItems.push({
+                    name:`Passed Result In Class ${c.name}`,
+                    id:c._id.toString(),
+                    url:`/user/results/all/passed/${c._id}`,
+                    search:`passed results in class ${c.name.toLowerCase()} ${c.nameOfNumeric}`
+                })      
+                searchForItems.push({
+                    name:`Failed Result In Class ${c.name}`,
+                    id:c._id.toString(),
+                    url:`/user/results/all/failed/${c._id}`,
+                    search:`failed results in class ${c.name.toLowerCase()} ${c.nameOfNumeric}`
+                })
+            }
+            // End
         }
 
-        if(msg) req.flash(msgOpt,msg)
         return res.render(`pages/user/${pagename}`, {
             title: 'User Login',
-			error: error?error:{},
+			error:{},
             user:req.user?req.user:{},
 			flashMessage: req.flash(),
             classes,
             webModel,
             ExaminationCount,
             totalStudents,
-            totalResults
+            totalResults,
+            searchItems
         })
     
     }catch(e){
@@ -47,13 +131,23 @@ function removeFilePath(path,next){
         }
     })
 }
+
 exports.userDashboardGetController = (req,res,next)=>{
-    renderPageHandler(req,res,'dashboard')
+    let { search } = req.query
+    let searchItems = []
+    if(search){
+        for(let s of searchForItems){
+            if(s.search.includes(search.toString().toLowerCase())){
+                searchItems.push(s)
+            }
+        }
+    }
+    renderPageHandler(req,res,'dashboard',searchItems)  
+  
 }
 exports.userProfileGetController = (req,res,next)=>{ 
     renderPageHandler(req,res,'profile')
 }
-
 exports.userProfileUpdatePostController = async(req,res,next)=>{
     try{
         let { name,username,email,phone,radio } = req.body 
@@ -98,7 +192,6 @@ exports.userProfileUpdatePostController = async(req,res,next)=>{
         next(e)
     }
 }
-
 exports.userChangePasswordPostController = async(req,res,next)=>{
     try{
         let { oldPassword,password,confirmPassword } = req.body 

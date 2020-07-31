@@ -25,30 +25,34 @@
             </div>
             <div class="row py-2">
                <div class="col-sm-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb__container">
+                    <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
+               
+                    <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/emails">Emails</a></li>
+                    
+                    </ol>
+                 </nav>
                   <div class="custom-card p-3">
                      <div class="row">
                         <div class="col-sm-12">
                      
                             <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
                       
-                                        <div  class="btn btn-secondary <%=webModel.contact.status?'active':''%>">
-                                           <a href="/administrator/contact?status=active" class="status__btn">
-                                            Active
-                                           </a>
-                                        </div>
-                                        
-                                        <div  class="btn btn-secondary <%=webModel.contact.status?'':'active'%>">
-                                            <a href="/administrator/contact?status=deactive" class="status__btn">
-                                             Deactive
-                                            </a>
-                                         </div>
-                                   
-                               
-                        
+                            <div  class="btn btn-secondary <%=control.contactSentMail?'active':''%>">
+                                <a href="/administrator/contact?status=active" class="status__btn">
+                                Active
+                                </a>
                             </div>
                             
-                           
-
+                            <div  class="btn btn-secondary <%=control.contactSentMail?'':'active'%>">
+                                <a href="/administrator/contact?status=deactive" class="status__btn">
+                                    Deactive
+                                </a>
+                            </div>
+                                
+                            </div>
+                            
                             <div class="card">
                                 <table class="table text-center">
                                     <thead class="thead-dark">

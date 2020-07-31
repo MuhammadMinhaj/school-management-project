@@ -8,38 +8,35 @@ const ExaminationType = require('../../models/ExaminationType')
 const Class = require('../../models/Class')
 const Category = require('../../models/Category')
 
-async function renderPageHandler(req,res,pagename,msgOpt,msg,modelOfWeb,requestModel,results,examinationType){
+async function renderPageHandler(req,res,pagename,results,requestModel){
     try{    
         let pages = await Page.find()
         let webModel = await WebModel.findOne()
         let category = await Category.find()
-        if(msg) req.flash(msgOpt,msg)
+        let examinationType = await ExaminationType.find()
+        let request = await Request.find()
         return res.render(`pages/administrator/${pagename}`, {
-                title: 'Links',
+                title: 'Results Management',
                 style: 'bg-light',
                 error: {},
                 data: req.admin,
                 pages,
                 createdPage:{},
                 flashMessage: req.flash(),
-                webModel:modelOfWeb?modelOfWeb:webModel,
+                webModel,
                 department:null,
-                requestModel:requestModel?requestModel:{},
+                requestModel:request,
+                singleRequest:requestModel,
                 results:results?results:{},
-                examinationType:examinationType?examinationType:{},
+                examinationType,
                 category
         })
     }catch(e){
         console.log(e)
     }
 }
-exports.createResultsExaminationTypeGetController = async(req,res,next)=>{
-    try{
-        let examinationType = await ExaminationType.find()
-        renderPageHandler(req,res,'examinationType',null,null,null,null,null,examinationType)
-    }catch(e){
-        next(e)
-    }
+exports.createResultsExaminationTypeGetController =(req,res,next)=>{
+    renderPageHandler(req,res,'examinationType')
 }
 exports.createResultsExaminationTypePostController = async(req,res,next)=>{
     try{
@@ -122,24 +119,15 @@ exports.deleteResultsExaminationTypePostController = async(req,res,next)=>{
         next(e)
     }
 }
-exports.resultsManagementGetController = async(req,res,next)=>{
-    try{
-        let request = await Request.find()
-        renderPageHandler(req,res,'resultsManagement',null,null,null,request)
-    }catch(e){
-        next(e)
-    }
+exports.resultsManagementGetController = (req,res,next)=>{
+    renderPageHandler(req,res,'resultsManagement')
 }
 exports.showAllResultsGetController = async(req,res,next)=>{
     try{    
         let { id } = req.params
-        
         let request = await Request.findOne({_id:id})
-
-
         let results = await Result.find({classid:request.classes,examination:request.examination,request:request._id})
 
-      
         let exam = await Examination.findOne({_id:request.examination})
         let classes = await Class.findOne({_id:request.classes})
 
@@ -149,8 +137,18 @@ exports.showAllResultsGetController = async(req,res,next)=>{
             result.exam = exam
             result.classes = classes
         }
-       
-        renderPageHandler(req,res,'allResults',null,null,null,request,results)
+        // Search Student 
+        let searchResults = []
+        let { search } = req.query
+        if(search){
+            for(let r of results){
+                if(r.studentInformation.roll.toString()===search.toString()||r.studentInformation.id.toString()===search.toString()){
+                    searchResults.push(r)
+                }
+            }            
+        }
+        if(searchResults.length!==0) results = searchResults
+        renderPageHandler(req,res,'allResults',results,request)
     }catch(e){
         next(e)
     }

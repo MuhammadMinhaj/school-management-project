@@ -5,11 +5,12 @@ const bcrypt = require('bcrypt')
 const { validationResult } = require('express-validator')
 const Page = require('../../models/Page')
 const Category = require('../../models/Category')
+const Controls = require('../../models/Controls')
 
 async function pageRenderHandler(req,res,pagename,title,error,model){
 		let menu = await Menu.find()
 		let webModel = await WebModel.findOne()
-
+		let { forgotPassword } = await Controls.findOne() 
 		return res.render(`pages/administrator/${pagename}`, {
 			title:title,
 			style: 'bg-dark',
@@ -17,15 +18,14 @@ async function pageRenderHandler(req,res,pagename,title,error,model){
 			menu,
 			flashMessage: req.flash(),
 			webModel,
-
 			createdPage: {},
 			category:model?model.category:{},
 			pages:model?model.pages:{},
 			data: model?model.admin:{},
+			forgotPassword
 		})
 	
 }
-
 exports.adminLoginGetController = async (req, res, next) => {
 		pageRenderHandler(req,res,'login','Login')
 }

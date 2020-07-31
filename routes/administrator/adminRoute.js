@@ -60,4 +60,6 @@ router.get('/delete/:id', isAuthenticatedAdmin, createdAdminDeleteController)
 router.post('/create', isAuthenticatedAdmin, adminCreateValidator, createAdminPostController)
 router.get('/update/:id',isAuthenticatedAdmin,createdAdminUpdateGetController)
 router.post('/update/:id',isAuthenticatedAdmin,createdAdminUpdateValidator,createdAdminUpdateController)
+
+
 module.exports = router

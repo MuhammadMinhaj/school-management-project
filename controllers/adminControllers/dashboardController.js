@@ -60,8 +60,93 @@ let routingInfo =  [
 	},
 	
 ]
-
-
+let searchForItem = [
+	{
+		name:'Create Page',
+		url:'/administrator/page_create',
+		search:'page pages'
+	},
+	{
+		name:'Create Category',
+		url:'/administrator/news/category',
+		search:'category categorys'
+	},
+	{
+		name:'Create Department',
+		url:'/administrator/department',
+		search:'department departments'
+	},
+	{
+		name:'Create Links',
+		url:'/administrator/links',
+		search:'links link'
+	},
+	{
+		name:'Email Management',
+		url:'/administrator/emails',
+		search:'email emails'
+	},
+	{
+		name:'Create Examination',
+		url:'/administrator/results/create/examination',
+		search:'examination exam examinations'
+	},
+	{
+		name:'Request',
+		url:'/administrator/results/management',
+		search:'request requests'
+	},
+	{
+		name:'Create Teachers',
+		url:'/administrator/user/create',
+		search:'teachers teacher'
+	},
+	{
+		name:'Settings',
+		url:'/administrator/setting',
+		search:'settings setting'
+	},
+	{
+		name:'Developer Info',
+		url:'/administrator/developer/info',
+		search:'developer info'
+	},
+	{
+		name:'Logout',
+		url:'/auth/logout',
+		search:'logout singout'
+	},
+	{
+		name:'Create Menu',
+		url:'/administrator/menu-create',
+		search:'menu menus'
+	},
+	{
+		name:'News',
+		url:'/administrator/news',
+		search:'news'
+	},
+	{
+		name:'Change Password',
+		url:'/administrator/account',
+		search:'change password'
+	},
+	{
+		name:'Profile',
+		url:'/administrator/account',
+		search:'profile account'
+	},
+	{
+		name:'Add Content',
+		url:'/administrator/add_content',
+		search:'add content'
+	},
+	{
+		name:'Gallery',
+		url:'/administrator/gallery',
+		search:'gallery gallerys'
+	}
+]
 // Administrator Dashboard
 exports.adminDashboardGetController = async (req, res, next) => {
 	try {
@@ -69,16 +154,74 @@ exports.adminDashboardGetController = async (req, res, next) => {
 		let pages = await Page.find()
 		let webModel = await WebModel.findOne()
 		let category = await Category.find()
-
-		let d = new Date()
+	
 		
-
+		for(let page of pages){
+			let hasPageItem = false
+            for(let s of searchForItem){
+                if(page._id.toString()===s.id){
+                    hasPageItem = true 
+                }
+			}
+			if(!hasPageItem){
+				searchForItem.push({
+					name:`${page.menu} Page`,
+					url:`/administrator/page_update/${page._id}`,
+					id:page._id.toString(),
+					search:`${page.menu.toLowerCase()} page pages`
+				})
+			} 
+			
+		}
+		for(let c of category){
+			let hasCategoryItem = false
+            for(let s of searchForItem){
+                if(c._id.toString()===s.id){
+                    hasCategoryItem = true 
+                }
+			}
+			if(!hasCategoryItem){
+				searchForItem.push({
+					name:`${c.name} Category`,
+					url:`/administrator/news/category/item/${c._id}`,
+					id:c._id.toString(),
+					search:`${c.name.toLowerCase()} category categorys`
+				})
+			} 
+			
+		}
+		for(let d of webModel.departments){
+			let hasDepartmentItem = false
+            for(let s of searchForItem){
+                if(d._id.toString()===s.id){
+                    hasDepartmentItem = true 
+                }
+			}
+			if(!hasDepartmentItem){
+				searchForItem.push({
+					name:`${d.name} Department`,
+					url:`/administrator/department/update/${d._id}`,
+					id:d._id.toString(),
+					search:`${d.name.toLowerCase()} department departments`
+				})
+			} 
+			
+		}
+		let d = new Date()
 		let teachers = await User.countDocuments()
 		let students = await Student.countDocuments()
 		let results = await Result.find({submited:true,session:d.getFullYear().toString(),published:true}).countDocuments()
-		
-		
-		res.render('pages/administrator/dashboard.ejs', {
+		let { search } = req.query
+		let searchItems = []
+
+		if(search){
+			for(let s of searchForItem){
+				if(s.search.includes(search.toString().toLowerCase())){
+					searchItems.push(s)
+				}
+			}
+		}
+		res.render('pages/administrator/dashboard', {
 			style: 'bg-light',
 			title: 'Administrator Dashboard',
 			data: admin,
@@ -90,7 +233,8 @@ exports.adminDashboardGetController = async (req, res, next) => {
 			teachers,
 			students,
 			results,
-			routingInfo
+			routingInfo,
+			searchItems
 		})
 	} catch (e) {
 		next(e)
@@ -117,7 +261,6 @@ exports.dashboradNoticePostController = async(req,res,next)=>{
 		next(e)
 	}
 }
-
 exports.clearNoticeGetController = async(req,res,next)=>{
 	try{
 		let webModel = await WebModel.findOne()

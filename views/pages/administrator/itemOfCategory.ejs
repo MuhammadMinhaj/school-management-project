@@ -30,7 +30,14 @@
                       
                         <!-- Listed Notice -->
                         <div class="col-sm-12">
-
+                           <nav aria-label="breadcrumb">
+                              <ol class="breadcrumb breadcrumb__container">
+                              <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
+                         
+                              <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/news/category/item/<%=categoryItem._id%>"><%=categoryItem.name%> </a></li>
+                              
+                              </ol>
+                           </nav>
                          <!-- Notice Create Modal -->
                          <div class="modal fade" id="eventCreateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
@@ -182,7 +189,9 @@
                                              <%=notice.image?'Available':'N/A'%>
                                           </td>
                                           <td style="vertical-align:middle" class="text-muted">
-                                             <%=notice.date%>
+                                             <%=notice.date.date%>
+                                             <%=notice.date.month%>
+                                             <%=notice.date.year%>
                                           </td>
                                           <td style="vertical-align:middle" class="text-muted">
                                                 

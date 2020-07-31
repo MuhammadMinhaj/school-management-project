@@ -33,15 +33,17 @@
 								<%=error.password%>
 							</div>
 						</div>
-						
-							<a href="/auth/forgot_password">Forgotten Password</a>
-						
-					
+						<%if(forgotPassword){%>
+							<a href="/auth/forgot_password">Forgotten Password?</a>
+						<%}else{%>
+						<span  style="cursor:pointer" class="text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="Please Contact With Developer!">
+							Forgotten Password?
+							</span>
+						<%}%>
 				</div>
 			</div>
 			<div class="custom-login-footer">
 				<input type="submit" class="login-btn-style" value="LOGIN">
-				
 			</div>
 		</form>
 	</div>

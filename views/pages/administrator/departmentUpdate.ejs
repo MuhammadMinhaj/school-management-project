@@ -31,6 +31,13 @@
                         <div class="row">
                            <!-- Notice -->
                            <div class="col-sm-12">
+                              <nav aria-label="breadcrumb">
+                                 <ol class="breadcrumb breadcrumb__container">
+                                 <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
+                                 <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/department">Department</a></li>
+                                 <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/department/update/<%=department._id%>"><%=department.name%></a></li>
+                                 </ol>
+                              </nav> 
                               <div class="px-4 py-3 h-100" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
                                  <!-- <h5 class="text-center text-danger" style="font-weight:bold;">Notice</h5> -->
                                  <div class="latestNewsBody">

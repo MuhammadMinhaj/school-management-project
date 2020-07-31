@@ -6,17 +6,24 @@ const bcrypt = require('bcrypt')
 const Admin = require('../../models/Admin')
 const Menu = require('../../models/Menu')
 const WebModel = require('../../models/WebModel')
+const Controls = require('../../models/Controls')
 exports.forgotPasswordGetController = async (req, res, next) => {
 	try {
 		let menu = await Menu.find()
 		let webModel = await WebModel.findOne()
+		let control = await Controls.findOne()
+		if(!control.forgotPassword){
+			return res.redirect('/')
+		}
 		res.render('pages/administrator/forgotPassword.ejs', {
 			title: 'Forgot-Password',
 			style: 'bg-light',
 			error: {},
 			menu,
 			flashMessage: {},
-			webModel
+			webModel,
+			data:'',
+			loginURI:'/auth/login'
 		})
 	} catch (e) {
 		next(e)
@@ -26,8 +33,13 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 	try {
 		let menu = await Menu.find()
 		let webModel = await WebModel.findOne()
+		let control = await Controls.findOne()
+		
+		if(!control.forgotPassword){
+			return res.redirect('/')
+		}
 
-		if(!webModel.publicEmail.email||!webModel.publicEmail.password){
+		if(!control.publicMail.email||!control.publicMail.password){
 			req.flash('fail','Sorry! Change password system is not available')
 			return res.redirect('back')
 		}
@@ -43,7 +55,8 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 				data: email,
 				menu,
 				flashMessage: req.flash(),
-				webModel
+				webModel,
+				loginURI:'/auth/login'
 			})
 		}
 		// Cheked Is Email Found Or Not
@@ -67,12 +80,12 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 		let transporter = nodemailer.createTransport({
 			service: 'gmail',
 			auth: {
-				user: webModel.publicEmail.email,
-				pass: webModel.publicEmail.password,
+				user: control.publicMail.email,
+				pass: control.publicMail.password,
 			},
 		})
 		let sendMailToClint = await transporter.sendMail({
-			from: webModel.publicEmail.email,
+			from: control.publicMail.email,
 			to: email,
 			subject: '[JASA] Confirmation Link Of Reset Password',
 
@@ -94,13 +107,14 @@ exports.forgotPasswordPostController = async (req, res, next) => {
 			req.flash('fail','Invalid Creadentials')
 			return res.redirect('back')
 		} 
-		res.render('pages/administrator/confirmationEmail.ejs', {
+		res.render('pages/web/confirmationEmail.ejs', {
 			title: 'Confirmation Email',
 			style: 'bg-light',
 			error: {},
 			menu,
 			webModel,
 			flashMessage: {},
+			loginURI:'/auth/login'
 		})
 	} catch (e) {
 		next(e)
@@ -110,6 +124,17 @@ exports.resetPasswordGetController = async (req, res, next) => {
 	try {
 		let menu = await Menu.find()
 		let webModel = await WebModel.findOne()
+		var validationToken = jwt.decode(req.params.resetId);
+
+		let control = await Controls.findOne()
+		if(!control.forgotPassword){
+			return res.redirect('/')
+		}
+
+		if(!validationToken){
+			res.redirect('/')
+			return false 
+		}
 		res.render('pages/administrator/resetPassword.ejs', {
 			title: 'Reset Password',
 			style: 'bg-light',
@@ -118,6 +143,7 @@ exports.resetPasswordGetController = async (req, res, next) => {
 			webModel,
 			flashMessage: {},
 			url: req.originalURL,
+			loginURI:'/auth/login'
 		})
 	} catch (e) {
 		next(e)
@@ -128,6 +154,18 @@ exports.resetPasswordPostController = async (req, res, next) => {
 		let menu = await Menu.find()
 		let webModel = await WebModel.findOne()
 		let error = validationResult(req).formatWith(err => err.msg)
+	
+		let control = await Controls.findOne()
+		if(!control.forgotPassword){
+			return res.redirect('/')
+		}
+
+		var validationToken = jwt.decode(req.params.resetId);
+		if(!validationToken){
+			res.redirect('/')
+			return false 
+		}
+
 		if (!error.isEmpty()) {
 			req.flash('fail', 'Invalid Creadentials')
 			return res.render('pages/administrator/resetPassword.ejs', {
@@ -138,6 +176,7 @@ exports.resetPasswordPostController = async (req, res, next) => {
 				webModel,
 				flashMessage: req.flash(),
 				url: req.originalURL,
+				loginURI:'/auth/login'
 			})
 		}
 

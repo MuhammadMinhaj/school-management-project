@@ -416,8 +416,6 @@ exports.editResultPostController = async(req,res,next)=>{
             types:type,
 
         },{new:true})
-        console.log('Test',exam)
-
 
         if(!updatedResults){
             req.flash('fail','Internal Server Error')
@@ -541,7 +539,6 @@ exports.dividedPassedAndFailedResultController = async(req,res,next)=>{
         
         for(let result of results){
             if(result.examination.toString()===option.toString()){
-                console.log('Mached')
             let failedSubject = false
             let combinationFailedSubject = false
             for(let subject of result.subjects){

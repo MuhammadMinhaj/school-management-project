@@ -21,6 +21,14 @@
             <h4 class="text-center setting-title">Settings</h4>
             <div class="row mt-2">
                <div class="col-sm-12">
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb breadcrumb__container">
+                     <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
+                 
+                     <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/setting">Settings</a></li>
+                     
+                     </ol>
+                 </nav> 
                   <div class="card mb-2" style="background:#495057;">
                      <div class="row p-3">
                         <!-- Website Name -->
@@ -561,12 +569,12 @@
                                     <div class="card px-3 pt-3">
                                           <p>
                                              <strong>Email: </strong>
-                                             <%=webModel.publicEmail.email||'example@example.com'%>
+                                             <%=control.publicMail.email||'example@example.com'%>
                                           </p>
                                           
                                           <p>
                                              <strong>Password: </strong>
-                                             <%=webModel.publicEmail.password?'xxxxxxxx':'*******'%>
+                                             <%=control.publicMail.password?'xxxxxxxx':'*******'%>
                                           </p>
                                     </div>
 
@@ -583,6 +591,45 @@
                                        </div>
 
                                     </div>
+
+                                    <div class="for">
+                                       <footer class="blockquote-footer">Password Recovery Option Out Of Admin Control Pannel <cite title="Source Title">Button Enabled Or Disabled For Click On Down Button</cite>
+                                       </footer>
+                                    </div>
+                                    <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+                      
+                                       <div  class="btn btn-secondary <%=control.forgotPassword?'active':''%>">
+                                          <a href="/administrator/password-recover?status=active" class="status__btn">
+                                           Active
+                                          </a>
+                                       </div>
+                                       
+                                       <div  class="btn btn-secondary <%=control.forgotPassword?'':'active'%>">
+                                           <a href="/administrator/password-recover?status=deactive" class="status__btn">
+                                            Deactive
+                                           </a>
+                                        </div>
+                                    </div>  
+
+                                    <div class="for">
+                                       <footer class="blockquote-footer">User Password Recovery Option Out Of Admin Control Pannel <cite title="Source Title">Button Enabled Or Disabled For Click On Down Button</cite>
+                                       </footer>
+                                    </div>
+                                    <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+                      
+                                       <div  class="btn btn-secondary <%=control.userForgotPassword?'active':''%>">
+                                          <a href="/administrator/user-password/recover?status=active" class="status__btn">
+                                           Active
+                                          </a>
+                                       </div>
+                                       
+                                       <div  class="btn btn-secondary <%=control.userForgotPassword?'':'active'%>">
+                                           <a href="/administrator/user-password/recover?status=deactive" class="status__btn">
+                                            Deactive
+                                           </a>
+                                        </div>
+                                    </div>
+                           
                               </div>
                            </div>
                         </div>
@@ -601,7 +648,6 @@
    function logoEditBtnHandler(){
        let parentElem = document.getElementById('webLogoControlParent')
       
-   
        let cssParenElem = getComputedStyle(parentElem)
        if(cssParenElem.display==='none'){
            parentElem.style.display = 'block'    
