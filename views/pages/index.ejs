@@ -7,6 +7,7 @@
          <div class="swiper-container">
             <!--     -->
             <div class="swiper-wrapper">
+               <%if(webModel){%>
                <%if(webModel.slider.length===0){%>
                <%for(let i = 0;i<3;i++){%>
                <div class="swiper-slide" style="background-color: transparent;" style="width:100%!important">
@@ -19,7 +20,7 @@
                   <div class="sliderOpacityStyleContainer">
                      <div class="sliderOpacityStyle"></div>
                      <div class="defaultSliderImage">
-                        <h1>Slider Image</h1>
+                        <img src="/uploads/defaults/default-slider.svg" width='100%' height='100%' alt="Slider Image">
                      </div>
                   </div>
                </div>
@@ -36,11 +37,12 @@
                   </div>
                   <div class="sliderOpacityStyleContainer">
                      <div class="sliderOpacityStyle"></div>
-                     <img src="<%=slider.image%>" width='100%' height='100%' alt="">
+                     <img src="<%=slider.image%>" width='100%' height='100%' alt="Slider Image">
                   </div>
                </div>
                <%}%>
                <%}%>
+            <%}%>
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
@@ -129,19 +131,19 @@
          <div class="swiper-wrapper">
             <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
                <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Syed Muhammad Taher Shah(MJA)</h6>
-               <img src="/uploads/syad-taher-sha-hozor.jpg" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
+               <img src="/uploads/defaults/syad-taher-sha-hozor.jpg" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
             </div>
             <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
                <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Syed Muhammad Tayyab Shah(RH)</h6>
-               <img src="/uploads/creator-2.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
+               <img src="/uploads/defaults/creator-2.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
             </div>
             <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
                <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Syed Muhammad Ahmad Shah(RH)</h6>
-               <img src="/uploads/creator-3.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
+               <img src="/uploads/defaults/creator-3.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
             </div>
             <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
                <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Sayed Muhammad Sabir Shah(MJA)</h6>
-               <img src="/uploads/creator-4.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
+               <img src="/uploads/defaults/creator-4.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
             </div>
          </div>
          <!-- Add Pagination -->
@@ -173,6 +175,7 @@
    </div>
 </div>
 <!-- Notice Board -->
+
 <div style="margin:0px!important" class="row backgroundImage px-5 py-2 clearXPadding">
    <div class="col-sm-12">
       <div class="row">
@@ -183,16 +186,19 @@
                </div>
                <div class="p-2 maxHeightSet"  style="border-radius: 0px!important;">
                   <div class="card-body">
-                     <h6 class="card-title" style="color:#495057"> <%=webModel.latestNews.title?webModel.latestNews.title:''%></h6>
-                     <p style="color:#545b62;">
-                        <%=webModel.latestNews.text?webModel.latestNews.text:''%>
-                     </p>
+                     <%if(webModel){%>
+                        <h6 class="card-title" style="color:#495057"> <%=webModel.latestNews.title?webModel.latestNews.title:''%></h6>
+                        <p style="color:#545b62;">
+                           <%=webModel.latestNews.text?webModel.latestNews.text:''%>
+                        </p>
+                     <%}%>
+
                   </div>
                </div>
             </div>
          </div>
          <div class="col-sm-7 addMargin">
-            <div class="noticeMainContainer">
+            <div class="noticeMainContainer h-100">
                <div class="noticeTitle">
                   <h5>
                      Notice Board
@@ -270,7 +276,7 @@
    </div>
 </div>
 <div style="margin:0px!important" class="row px-5 pb-2 clearXPadding backgroundImage">
-   <%if(webModel.departments){%>
+   <%if(webModel&&webModel.departments){%>
    <%webModel.departments.forEach((d,ind)=>{%>
    <div class="col-sm-3 mb-3">
       <a href="/web/department/<%=d.name%>" class="departmentLink">
@@ -299,7 +305,7 @@
             <div class="importanceLinkContainer h-100">
                <h5>Referance Links</h5>
                <ul class="p-2">
-                  <%if(webModel.referenceLinks.length!==0){%>
+                  <%if(webModel&&webModel.referenceLinks.length!==0){%>
                   <%webModel.referenceLinks.forEach((link,ind)=>{%>
                   <%if(ind===0){%>
                   <li style="border-top:none">
@@ -353,7 +359,7 @@
             <div class="importanceLinkContainer h-100">
                <h5>Downloads</h5>
                <ul class="p-2">
-                  <%if(webModel.documentsLinks.length!==0){%>
+                  <%if(webModel&&webModel.documentsLinks.length!==0){%>
                   <%webModel.documentsLinks.forEach((document,ind)=>{%>
                   <%if(ind===0){%>
                   <li style="border-top:none">

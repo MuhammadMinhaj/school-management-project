@@ -20,11 +20,13 @@
       <link rel="stylesheet" type="text/css" media="print" href="/styles/print.css">
    </head>
    <body>
+      <%if(webModel){%>
+         
       <div style="margin:0px!important" class="row bg-dark printForRemove main-head-container">
          <div class="container bg-light head-container">
             <div class="row">
                <div class="col-md-2 text-center text-dark">
-                  <img src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" style="max-width: 90px;"
+                  <img src="<%=webModel.logo?webModel.logo:'/uploads/defaults/jasa-logo.svg'%>" style="max-width: 90px;"
                      alt="" />
                </div>
                <div class="col-md-8 head-name" style="padding:0px!important">
@@ -68,4 +70,5 @@
          </div>
       </div>
       <!-- Navigation -->
+      <%}%>
       <%-include('./navigation.ejs')%>

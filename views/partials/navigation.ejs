@@ -12,12 +12,35 @@
 		  </button>
 		  <div class="collapse navbar-collapse navigation" id="navbarNavAltMarkup">
 			 <ul class="navbar-nav mr-auto">
+				<li class="nav-item left-Animation">
+					<a class="nav-link" href="/">Home</a>
+				 </li>
+				 <li class="nav-item left-Animation">
+					<a class="nav-link" href="/web/about">About</a>
+				 </li>		 
+				 <li class="nav-item left-Animation">
+					<a class="nav-link" href="/web/teachers">Teachers</a>
+				 </li>
+				 <li class="nav-item left-Animation">
+					<a class="nav-link" href="/web/libray">Libray</a>
+				 </li>
+				 <li class="nav-item left-Animation">
+					<a class="nav-link" href="/web/notice">Notice</a>
+				 </li>
+
+				 <li class="nav-item left-Animation">
+					<a class="nav-link" href="/web/result">Results</a>
+				 </li>	
+				 <li class="nav-item left-Animation">
+					<a class="nav-link" href="/web/gallery">Gallery</a>
+				 </li>
 				<%if(menu){%>
 				<%menu.forEach((m,ind)=>{%>
 				<%if(ind+1===menu.length){%>
 				<%if(m.dropDown.length===0){%>
 				<li class="nav-item left-Animation">
-				   <a class="nav-link" style="border-right:none!important" href="<%=m.href%>"><%=m.name%></a>
+				   <a class="nav-link" href="<%=m.href%>"><%=m.name%></a>
+				   <!-- style="border-right:none!important"  -->
 				</li>
 				<%}else{%>
 				<li class="nav-item">
@@ -49,10 +72,18 @@
 					  <%}%>
 				   </ul>
 				</li>
+
 				<%}%>
 				<%}%>
 				<%})%>
 				<%}%>
+				 <li class="nav-item left-Animation" >
+					<a class="nav-link" href="/web/contact" >Contact</a>
+				 </li>
+				<li class="nav-item left-Animation" >
+					<a class="nav-link" href="/user/auth/login" style="border-right:none!important"">Login</a>
+				 </li>
+
 			 </ul>
 		  </div>
 	   </nav>

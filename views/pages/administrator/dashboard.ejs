@@ -28,7 +28,7 @@
                            visitors
                         </div>
                         <div class="dashboard-card-body">
-                           <%=webModel.countDailyVisitors||'00'%>
+                           <%=webModel&&webModel.countDailyVisitors||'00'%>
                         </div>
                      </div>
                   </div>
@@ -236,10 +236,10 @@
                         </div>
                         <form action="/administrator/dashboard/notice" method="POST">
                            <div class="dashboard-notice-body">
-                              <textarea name="notice" cols="30" rows="8"><%=webModel.notice?webModel.notice:''%></textarea>                                
+                              <textarea name="notice" cols="30" rows="8"><%=webModel&&webModel.notice?webModel.notice:''%></textarea>                                
                            </div>
                            <div class="dashboard-notice-footer">
-                              <%if(webModel.notice){%>
+                              <%if(webModel&&webModel.notice){%>
                               <button type="submit">Update</button>
                               <a href="/administrator/dashboard/notice/clear">Clear</a>
                               <%}else{%>

@@ -100,7 +100,7 @@
                                        <div class="col-sm-6">
                                           <div class="card mb-2" style="display:block" id="web-logo-img-parent">
                                              <div id="card-body" class="text-center">
-                                                <img width="<%=webModel.logo?'180px':'130px'%>" src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" height="120px" id="web-logo-preview" class="p-2" style="border-radius:20px">
+                                                <img width="<%=webModel&&webModel.logo?'180px':'130px'%>" src="<%=webModel&&webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" height="120px" id="web-logo-preview" class="p-2" style="border-radius:20px">
                                              </div>
                                           </div>
                                        </div>
@@ -112,11 +112,11 @@
                                           <a href="/administrator/setting/web_logo/delete" class="btn btn-upload"><i class="fas fa-trash-alt text-danger"></i></a>
                                        </div>
                                        <div class="col-sm-2">
-                                          <button type="button" <%=webModel.logo?'':'disabled'%> onclick="logoEditBtnHandler()" class="btn btn-upload"><i class="fas fa-edit text-info"></i></button>
+                                          <button type="button" <%=webModel&&webModel.logo?'':'disabled'%> onclick="logoEditBtnHandler()" class="btn btn-upload"><i class="fas fa-edit text-info"></i></button>
                                        </div>
                                        <div class="col-sm-4"></div>
                                     </div>
-                                    <div class="row" id="webLogoControlParent" style=<%=webModel.logo?'display:none':'display:block'%>>
+                                    <div class="row" id="webLogoControlParent" style=<%=webModel&&webModel.logo?'display:none':'display:block'%>>
                                        <div class="col-sm-12">
                                           <div class="form-row pb-3">
                                              <div class="col-sm-11">
@@ -148,21 +148,21 @@
                                     <div class="col-sm-12">
                                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                           <ol class="carousel-indicators">
-                                             <%if(webModel.slider.length===0){%>
+                                             <%if(webModel&&webModel.slider.length===0){%>
                                              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                                              <%}else{%>
-                                             <%webModel.slider.forEach((slider,index)=>{%>
+                                             <%webModel&&webModel.slider.forEach((slider,index)=>{%>
                                              <li data-target="#carouselExampleIndicators" data-slide-to="<%=index%>" class="active"></li>
                                              <%})%>
                                              <%}%>
                                           </ol>
                                           <div class="carousel-inner" style="border-radius:10px">
-                                             <%if(webModel.slider.length===0){%>
+                                             <%if(webModel&&webModel.slider.length===0){%>
                                              <div class="carousel-item active">
                                                 <img src="/uploads/default-slider.png" height="300px" class="d-block w-100" alt="...">
                                              </div>
                                              <%}else{%>
-                                             <%webModel.slider.forEach((slider,index)=>{%>
+                                             <%webModel&&webModel.slider.forEach((slider,index)=>{%>
                                              <%if(index===0){%>
                                              <div class="carousel-item active">
                                                 <img src="<%=slider.image%>" height="300px" class="d-block w-100" alt="...">
@@ -213,14 +213,14 @@
                                              </tr>
                                           </thead>
                                           <tbody>
-                                             <%if(webModel.slider.length===0){%>
+                                             <%if(webModel&&webModel.slider.length===0){%>
                                              <tr>
                                                 <td class="colspan='3'>
                                                    <h6 class="text-muted text-center">There is nothing to show</h6>
                                                 </td>
                                              </tr>
                                              <%}else{%>
-                                             <%webModel.slider.forEach((s,i)=>{%>
+                                             <%webModel&&webModel.slider.forEach((s,i)=>{%>
                                              <!-- Modal -->
                                              <div class="modal fade" id="settingSliderModal<%=i%>" tabindex="-1" role="dialog" aria-labelledby="settingSliderModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -321,7 +321,7 @@
                                  </form>
                                  <div class="row mt-2">
                                     <div class="col-sm-12">
-                                       <%if(webModel.socialLinks){%>
+                                       <%if(webModel&&webModel.socialLinks){%>
                                        <%if(webModel.socialLinks.length===0){%>
                                        <h6 class="text-muted text-center">There is nothing to show</h6>
                                        <%}else{%>
@@ -388,7 +388,7 @@
                                                 <td class="td-custom-style"><%=link.name%></td>
                                                 <td class="td-custom-style"><%=link.icon%></td>
                                                 <td class="td-custom-style text-muted">
-                                                   <%if(link.action.length>15){%>
+                                                   <%if(link&&link.action.length>15){%>
                                                    <%=link.action.slice(0,16)+'...'%>
                                                    <%}else{%>
                                                    <%=link.action%>
@@ -450,7 +450,7 @@
                                                 <th scope="col">CONTROLLING</th>
                                              </tr>
                                           </thead>
-                                          <%if(webModel.futuredLinks){%>
+                                          <%if(webModel&&webModel.futuredLinks){%>
                                           <%if(webModel.futuredLinks.length===0){%>
                                           <h6>There is nothig to show</h6>
                                           <%}else{%>
@@ -536,11 +536,11 @@
                                  <div class="card px-3 pt-3">
                                     <p>
                                        <strong>Email: </strong>
-                                       <%=control.publicMail.email||'example@example.com'%>
+                                       <%=control&&control.publicMail.email||'example@example.com'%>
                                     </p>
                                     <p>
                                        <strong>Password: </strong>
-                                       <%=control.publicMail.password?'xxxxxxxx':'*******'%>
+                                       <%=control&&control.publicMail.password?'xxxxxxxx':'*******'%>
                                     </p>
                                  </div>
                                  <div class="border p-2 rounded form-group mt-3">
@@ -558,12 +558,12 @@
                                     </footer>
                                  </div>
                                  <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-                                    <div  class="btn btn-secondary <%=control.forgotPassword?'active':''%>">
+                                    <div  class="btn btn-secondary <%=control&&control.forgotPassword?'active':''%>">
                                        <a href="/administrator/password-recover?status=active" class="status__btn">
                                        Active
                                        </a>
                                     </div>
-                                    <div  class="btn btn-secondary <%=control.forgotPassword?'':'active'%>">
+                                    <div  class="btn btn-secondary <%=control&&control.forgotPassword?'':'active'%>">
                                        <a href="/administrator/password-recover?status=deactive" class="status__btn">
                                        Deactive
                                        </a>
@@ -574,12 +574,12 @@
                                     </footer>
                                  </div>
                                  <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-                                    <div  class="btn btn-secondary <%=control.userForgotPassword?'active':''%>">
+                                    <div  class="btn btn-secondary <%=control&&control.userForgotPassword?'active':''%>">
                                        <a href="/administrator/user-password/recover?status=active" class="status__btn">
                                        Active
                                        </a>
                                     </div>
-                                    <div  class="btn btn-secondary <%=control.userForgotPassword?'':'active'%>">
+                                    <div  class="btn btn-secondary <%=control&&control.userForgotPassword?'':'active'%>">
                                        <a href="/administrator/user-password/recover?status=deactive" class="status__btn">
                                        Deactive
                                        </a>

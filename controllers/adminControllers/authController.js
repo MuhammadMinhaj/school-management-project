@@ -10,7 +10,8 @@ const Controls = require('../../models/Controls')
 async function pageRenderHandler(req,res,pagename,title,error,model){
 		let menu = await Menu.find()
 		let webModel = await WebModel.findOne()
-		let { forgotPassword } = await Controls.findOne() 
+		let control = await Controls.findOne() 
+		let forgotPassword = control&&control.forgotPassword
 		return res.render(`pages/administrator/${pagename}`, {
 			title:title,
 			style: 'bg-dark',

@@ -11,22 +11,22 @@
 			 </span>
 		  </h2>
 		  <div class="footer-brand-bottom-border m-auto"></div>
-		  <img src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" style="max-width: 120px;"
+		  <img src="<%=webModel&&webModel.logo?webModel.logo:'/uploads/defaults/jasa-logo.svg'%>" style="max-width: 120px;"
 			 alt="JASA" class="jasa-logo mt-1" />
 	   </div>
 	</div>
 	<div class="addMargin__top addPadding__5 col-md-4">
 	   <div class="styleCustomCard__footer py-4 px-3">
 		  <h3 class="footer-title">
-			 <%=webModel.about.title?webModel.about.title:'No Title'%>
+			 <%=webModel&&webModel.about.title?webModel.about.title:'No Title'%>
 		  </h3>
 		  <div class="footer-border mt-4"></div>
 		  <p class="footer-about-text mt-1">
-			 <%let text = webModel.about.body.split('।') %>
+			 <%let text = webModel&&webModel.about&&webModel.about.body?webModel.about.body.split('।'):'' %>
 			 <%for(let i = 0;i<5;i++){%>
 			 <%=text[i]+'।'%>
 			 <%}%>
-			 <%if(webModel.about.body.split('।').length>5){%>
+			 <%if(webModel&&webModel.about&&webModel.about.body&&webModel.about.body.split('।').length>5){%>
 			 ...<a href="/web/about" style="color: #007bff;font-family: arial">read more</a>
 			 <%}%>
 		  </p>
@@ -37,7 +37,7 @@
 		  <h3 class="footer-title">FEATURED LINKS</h3>
 		  <div class="footer-border mt-4"></div>
 		  <ul class="footer-link-container">
-			 <%if(webModel.futuredLinks){%>
+			 <%if(webModel&&webModel.futuredLinks){%>
 			 <%for(let link of webModel.futuredLinks){%>
 			 <li class="mt-1">
 				<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-play-fill" fill="currentColor"
@@ -68,7 +68,7 @@
 		  <h3 class="footer-title">SOCIAL LINKS</h3>
 		  <div class="footer-border mt-4"></div>
 		  <div class="social-links mt-2">
-			 <%if(webModel.socialLinks){%>
+			 <%if(webModel&&webModel.socialLinks){%>
 			 <%webModel.socialLinks.forEach((link,ind)=>{%>
 			 <a href="<%=link.action%>">
 			 <i style=<%='color:'+link.color%> class="<%=link.icon%> m-1"></i>

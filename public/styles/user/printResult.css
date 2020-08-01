@@ -2,7 +2,7 @@
     font-family:Arial, Helvetica, sans-serif;
     border-width: 30px;
     border-style: solid;
-    border-image: url('/uploads/myfreame.svg') 4% round;
+    border-image: url('/uploads/defaults/resultsframe.svg') 4% round;
 }
 @page {
     size: A4;

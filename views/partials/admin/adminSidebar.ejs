@@ -99,7 +99,7 @@
                         <div class="col-sm-12">
                             <ul class="mt-2 pages-menu">
 
-                                <%webModel.departments.forEach((department,ind)=>{%>
+                                <%webModel&&webModel.departments.forEach((department,ind)=>{%>
                                 <li>
                                     <a
                                         href="/administrator/department/update/<%=department._id%>"><%=department.name%></a>

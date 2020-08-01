@@ -1,7 +1,7 @@
 .result-content{
     border-width: 30px;
     border-style: solid;
-    border-image: url('/uploads/myfreame.svg') 6% round;
+    border-image: url('/uploads/defaults/resultsframe.svg') 6% round;
 }
 html{
     font-size:1em!important;

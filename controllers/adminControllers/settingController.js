@@ -18,7 +18,7 @@ async function renderPageHandler(req,res,pagename,title){
 			flashMessage: req.flash(),
 			pages,
 			createdPage: {},
-			webNameList: webModel.name,
+			webNameList:webModel?webModel.name:'',
 			webModel,
 			category,
 			control 
@@ -45,7 +45,7 @@ exports.webNameSetPostController = async (req, res, next) => {
 
 		let uniqNameError
 
-		webModel.name.forEach(n => {
+		webModel&&webModel.name.forEach(n => {
 			if (n.lang === language) {
 				uniqNameError = `${language.charAt(0).toUpperCase() + language.slice(1)} is Already Used`
 			}

@@ -16,7 +16,7 @@ async function renderPageHandler(req,res,pagename,title,page,department,searchCo
     let category = await Category.find()
     let notice = await Notice.find()
     const control = await Controls.findOne()
-    let { contactSentMail } = control
+    let  contactSentMail  = control&&control.contactSentMail
     res.render(`pages/${pagename}`,{
         title,
         menu,
