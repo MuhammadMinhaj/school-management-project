@@ -44,11 +44,11 @@ setMiddlewares(app)
 setRoutes(app)
 
 // All Error Handler
-// app.use((error,req,res,next)=>{
-//     if(error){
-//         res.send('<h1 style="text-align:center;margin-top:1.5rem">Ops! Something went to wrong</h1>')
-//     }
-// })
+app.use((error,req,res,next)=>{
+    if(error){
+        res.send('<h1 style="text-align:center;margin-top:1.5rem">Ops! Something went to wrong</h1>')
+    }
+})
 
 app.get('*',async(req,res,next)=>{
 
