@@ -10,7 +10,7 @@ function alertMessage(option, message, time, classNames) {
 	return alerts
 }
 
-const HOST_URL = `http://localhost:8080`
+// const HOST_URL = `http://localhost:8080`
 
 let emptyMessageContainer = document.getElementById('dropDown-empty-message-container')
 let textContainer = document.createElement('h5')
@@ -26,10 +26,15 @@ loadingMessage.innerText = 'Loading...'
 loadingMessage.className = 'text-center text-muted'
 loadingMessage.style.fontWeight = 'bold'
 
-let GET_ALL_DROPDOWN_URI = `${HOST_URL}/administrator/dropdown-all`
-let CREATE_DROPDOWN_URI = `${HOST_URL}/administrator/dropdown-create`
-let DELETE_DROPDOWN_URI = `${HOST_URL}/administrator/dropdown-delete`
-let UPDATE_DROPDOWN_URI = `${HOST_URL}/administrator/dropdown-update`
+// let GET_ALL_DROPDOWN_URI = `${HOST_URL}/administrator/dropdown-all`
+// let CREATE_DROPDOWN_URI = `${HOST_URL}/administrator/dropdown-create`
+// let DELETE_DROPDOWN_URI = `${HOST_URL}/administrator/dropdown-delete`
+// let UPDATE_DROPDOWN_URI = `${HOST_URL}/administrator/dropdown-update`
+
+let GET_ALL_DROPDOWN_URI = '/administrator/dropdown-all'
+let CREATE_DROPDOWN_URI = '/administrator/dropdown-create'
+let DELETE_DROPDOWN_URI = '/administrator/dropdown-delete'
+let UPDATE_DROPDOWN_URI = '/administrator/dropdown-update'
 let tbody = document.getElementById('dropDownBody')
 
 let id = undefined

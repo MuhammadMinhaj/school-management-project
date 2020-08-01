@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const HOST_URL = `http://localhost:8080`
+// const HOST_URL = `http://localhost:8080`
 
 let feedback = document.getElementById('contactFeedBack')
 
@@ -65,7 +65,8 @@ submit.addEventListener('click',(event)=>{
         subject:valueOfSubject,
         message:valueOfMessage
     }
-    axios.post(`${HOST_URL}/web/contact`,data)
+    // axios.post(`${HOST_URL}/web/contact`,data)
+    axios.post('/web/contact',data)
         .then(res=>{
             if(res.data.error){
                 feedback.innerHTML = res.data.error 

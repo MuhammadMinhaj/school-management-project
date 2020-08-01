@@ -13,7 +13,7 @@ function alertMessage(option, message, time, classNames) {
 }
 //End Alert Message
 
-const HOST_URL = `http://localhost:8080`
+// const HOST_URL = `http://localhost:8080`
 
 // Multiple Page Collapse
 let pageBtns = document.querySelectorAll('.pageBtn')
@@ -55,11 +55,16 @@ if(pageBtns){
 // Multiple Page Collapse End
 
 
-// ANCHOR Menu Start
-let MENU_CREATE_URL = `${HOST_URL}/administrator/menu-create`
-let GET_ALL_MENU_URIL =`${HOST_URL}/administrator/menus`
-let DELETE_MENU_URL = `${HOST_URL}/administrator/menu-delete`
-let UPDATE_MENU_URL = `${HOST_URL}/administrator/menu-update`
+// Menu Start
+// let MENU_CREATE_URL = `${HOST_URL}/administrator/menu-create`
+// let GET_ALL_MENU_URIL =`${HOST_URL}/administrator/menus`
+// let DELETE_MENU_URL = `${HOST_URL}/administrator/menu-delete`
+// let UPDATE_MENU_URL = `${HOST_URL}/administrator/menu-update`
+
+let MENU_CREATE_URL = '/administrator/menu-create'
+let GET_ALL_MENU_URIL ='/administrator/menus'
+let DELETE_MENU_URL = '/administrator/menu-delete'
+let UPDATE_MENU_URL = '/administrator/menu-update'
 
 let alertMenuBox = document.getElementById('alert-menu-box')
 let parentMenuElement = document.getElementById('menu_tbody')
@@ -80,7 +85,7 @@ let loadingMessage = document.createElement('h5')
 loadingMessage.innerText = 'Loading...'
 loadingMessage.className = 'text-center text-muted'
 loadingMessage.style.fontWeight = 'bold'
-// ANCHOR Start Show All Menu
+// Start Show All Menu
 let everyData
 axios
 	.get(GET_ALL_MENU_URIL)
@@ -109,7 +114,7 @@ if (!everyData) {
 		emptyMenuMessageContainer.appendChild(loadingMessage)
 	}
 }
-// ANCHOR Start Create Menu Request
+// Start Create Menu Request
 let menuName = document.getElementById('menu_name')
 let menuAction = document.getElementById('menu_action')
 let menuCreateBtn = document.getElementById('menu_create')
@@ -219,7 +224,7 @@ function updateBtnHandler(editBtn, updateBtn, nameField, actionField, data, name
 			console.log(error)
 		})
 }
-// ANCHOR Start Delete Menu Handler
+// Start Delete Menu Handler
 function deleteMenuHandler(data, TR) {
 	allDataLength--
 
@@ -239,7 +244,7 @@ function deleteMenuHandler(data, TR) {
 		})
 }
 
-// ANCHOR Sart Create Menu Element
+// Sart Create Menu Element
 function createMenuTable(parentElement, data, index) {
 	let TR = document.createElement('tr')
 	TR.className = 'text-center'
@@ -294,7 +299,7 @@ function createMenuTable(parentElement, data, index) {
 
 // End Create Menu Element
 
-// ANCHOR Start Menu Controlling Element
+// Start Menu Controlling Element
 function menuControlling(data, TR, name, action) {
 	let TD = document.createElement('td')
 	TD.className = 'd-flex'
@@ -323,8 +328,9 @@ function menuControlling(data, TR, name, action) {
 }
 // End Menu Controlling Element
 
-// ANCHOR Start DropDown Controlling Element
-let GET_ALL_DROP_MENU_URI = `${HOST_URL}/administrator/dropdown-create`
+// Start DropDown Controlling Element
+// let GET_ALL_DROP_MENU_URI = `${HOST_URL}/administrator/dropdown-create`
+let GET_ALL_DROP_MENU_URI = '/administrator/dropdown-create'
 
 function dropDownControlling(data) {
 	let TD = document.createElement('td')
@@ -338,4 +344,4 @@ function dropDownControlling(data) {
 }
 // End DropDown Controlling Element
 
-//ANCHOR Menu End
+// Menu End

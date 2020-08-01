@@ -2,7 +2,7 @@ import axios from 'axios'
 import jquery from 'jquery'
 
 
-let HOST_URI = 'http://localhost:8080'
+// let HOST_URI = 'http://localhost:8080'
 
 // Catch Every Input Field And Form Element 
 let selectClass = document.getElementById('class')
@@ -112,7 +112,8 @@ function formSubmitHandler(){
     getResultRequestHandler(classValue,sectionValue,groupValue,examinationValue,yearValue,rollValue,idValue)
 }
 
-let GET_RESULT_URI = `${HOST_URI}/api/result/get`
+// let GET_RESULT_URI = `${HOST_URI}/api/result/get`
+let GET_RESULT_URI = '/api/result/get'
 // let downloadBtn = document.getElementById('downloadResult')
  let printBtnContainer = document.getElementById('printBtnContainer')
  
