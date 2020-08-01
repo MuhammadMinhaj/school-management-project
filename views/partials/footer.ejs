@@ -1,100 +1,94 @@
-
-
 <div style="margin:0px!important" class="row px-2 py-3 bg-dark printForRemove">
 	<div class="addMargin__top addPadding__5 col-md-2">
-		<div class="styleCustomCard__footer text-center py-4">
-			<h2 class="footer-brand-title">
-				<span style="text-shadow: 2pt 1pt 1pt #0a0a0a;color:green;font-size:2.25rem;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
-					<span style="color:#575e64">J</span>
-					<span style="color:#28a745">A</span>
-					<span style="color:#575e64">S</span>
-					<span style="color:#28a745">A</span>
-				  </span>
-			</h2>
-			<div class="footer-brand-bottom-border m-auto"></div>
-			<img src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" style="max-width: 120px;" alt="JASA" class="jasa-logo mt-1" />
-		</div>
+	   <div class="styleCustomCard__footer text-center py-4">
+		  <h2 class="footer-brand-title">
+			 <span
+				style="text-shadow: 2pt 1pt 1pt #0a0a0a;color:green;font-size:2.25rem;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+			 <span style="color:#575e64">J</span>
+			 <span style="color:#28a745">A</span>
+			 <span style="color:#575e64">S</span>
+			 <span style="color:#28a745">A</span>
+			 </span>
+		  </h2>
+		  <div class="footer-brand-bottom-border m-auto"></div>
+		  <img src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" style="max-width: 120px;"
+			 alt="JASA" class="jasa-logo mt-1" />
+	   </div>
 	</div>
 	<div class="addMargin__top addPadding__5 col-md-4">
-		<div class="styleCustomCard__footer py-4 px-3">
-			<h3 class="footer-title">
-				<%=webModel.about.title?webModel.about.title:'No Title'%>
-			</h3>
-			<div class="footer-border mt-4"></div>
-			<p class="footer-about-text mt-1">
-				<%let text = webModel.about.body.split('।') %>
-				<%for(let i = 0;i<5;i++){%>
-					<%=text[i]+'।'%>
-				<%}%>
-				<%if(webModel.about.body.split('।').length>5){%>
-					...<a href="/web/about" style="color: #007bff;font-family: arial">read more</a>
-					<%}%>
-			</p>
-		</div>
+	   <div class="styleCustomCard__footer py-4 px-3">
+		  <h3 class="footer-title">
+			 <%=webModel.about.title?webModel.about.title:'No Title'%>
+		  </h3>
+		  <div class="footer-border mt-4"></div>
+		  <p class="footer-about-text mt-1">
+			 <%let text = webModel.about.body.split('।') %>
+			 <%for(let i = 0;i<5;i++){%>
+			 <%=text[i]+'।'%>
+			 <%}%>
+			 <%if(webModel.about.body.split('।').length>5){%>
+			 ...<a href="/web/about" style="color: #007bff;font-family: arial">read more</a>
+			 <%}%>
+		  </p>
+	   </div>
 	</div>
 	<div class="addMargin__top addPadding__5 col-md-4">
-		<div class="styleCustomCard__footer py-4 px-3">
-			<h3 class="footer-title">FEATURED LINKS</h3>
-			<div class="footer-border mt-4"></div>
-			<ul class="footer-link-container">
-				<%if(webModel.futuredLinks){%>
-					<%for(let link of webModel.futuredLinks){%>
-						<li class="mt-1">
-							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-play-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-								<path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
-							  </svg><a href="<%=link.url%>"><%=link.name%></a>
-						</li>
-					<%}%>
-					<%}else{%>
-						<%for(let i = 1;i<=5;i++){%>
-							<li class="mt-1">
-								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-play-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-									<path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
-								  </svg><a href="#"><%=i%> Link</a>
-							</li>
-						<%}%>
-					<%}%>
-					
-			</ul>
-		</div>
+	   <div class="styleCustomCard__footer py-4 px-3">
+		  <h3 class="footer-title">FEATURED LINKS</h3>
+		  <div class="footer-border mt-4"></div>
+		  <ul class="footer-link-container">
+			 <%if(webModel.futuredLinks){%>
+			 <%for(let link of webModel.futuredLinks){%>
+			 <li class="mt-1">
+				<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-play-fill" fill="currentColor"
+				   xmlns="http://www.w3.org/2000/svg">
+				   <path
+					  d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+				</svg>
+				<a href="<%=link.url%>"><%=link.name%></a>
+			 </li>
+			 <%}%>
+			 <%}else{%>
+			 <%for(let i = 1;i<=5;i++){%>
+			 <li class="mt-1">
+				<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-play-fill" fill="currentColor"
+				   xmlns="http://www.w3.org/2000/svg">
+				   <path
+					  d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+				</svg>
+				<a href="#"><%=i%> Link</a>
+			 </li>
+			 <%}%>
+			 <%}%>
+		  </ul>
+	   </div>
 	</div>
 	<div class="addMargin__top addPadding__5 col-md-2">
-		<div class="styleCustomCard__footer py-4 social-container">
-			<h3 class="footer-title">SOCIAL LINKS</h3>
-			<div class="footer-border mt-4"></div>
-			<div class="social-links mt-2">
-				<%if(webModel.socialLinks){%>
-				<%webModel.socialLinks.forEach((link,ind)=>{%>
-				<a href="<%=link.action%>">
-					<i style=<%='color:'+link.color%> class="<%=link.icon%> m-1"></i>
-				</a>
-				<%})%>
-				<%}%>
-			</div>
-		</div>
+	   <div class="styleCustomCard__footer py-4 social-container">
+		  <h3 class="footer-title">SOCIAL LINKS</h3>
+		  <div class="footer-border mt-4"></div>
+		  <div class="social-links mt-2">
+			 <%if(webModel.socialLinks){%>
+			 <%webModel.socialLinks.forEach((link,ind)=>{%>
+			 <a href="<%=link.action%>">
+			 <i style=<%='color:'+link.color%> class="<%=link.icon%> m-1"></i>
+			 </a>
+			 <%})%>
+			 <%}%>
+		  </div>
+	   </div>
 	</div>
-</div>
-<!-- Copyright -->
-<div style="margin:0px!important" class="row copyright text-light printForRemove">
+ </div>
+ <!-- Copyright -->
+ <div style="margin:0px!important" class="row copyright text-light printForRemove">
 	<p class="pt-3 pl-4 copy">Copyright &copy;2020 <span>JASA</span> All Rights Reserved</p>
 	<p class="pt-3 pr-4">Developed By Muhammad Minhaj</p>
-</div>
-
-<!-- Bootstrap JS Links -->
-<script
-	src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-	crossorigin="anonymous"
-></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"
-></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-	crossorigin="anonymous"
-></script>
+ </div>
+ <!-- Bootstrap JS Links -->
+<script src="/jquery.slim.min.js"></script>
+<script src="/dist/umd/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>	
 <script src="/js/swiper.min.js"></script>
 <script src="/web.bundle.js"></script>
+</body>
+</html>

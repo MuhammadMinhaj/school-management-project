@@ -1,64 +1,61 @@
 <%-include('../../partials/head.ejs')%>
 <div class="row" style="margin:0px!important">
-    <div class="col-sm-12 clearXPadding">
-        <h3 class="text-center my-3 addMarginTop" style="color:#545b62">Gallery</h3>
-        <div class="custom__container__card p-2">
-            <div class="swiper__height" style="background:#dae0e5 ;">
-                <div class="swiper-container gallery-top">
+   <div class="col-sm-12 clearXPadding">
+      <h3 class="text-center my-3 addMarginTop" style="color:#545b62">Gallery</h3>
+      <div class="custom__container__card p-2">
+         <div class="swiper__height" style="background:#dae0e5 ;">
+            <div class="swiper-container gallery-top">
                <div class="swiper-wrapper">
-                <%if(webModel.gallery){%>
-                    <%for(let g of webModel.gallery){%>
-                        <div class="swiper-slide" style="background-image:url(<%=g.image%>)">
-                            <%if(g.title){%>
-                            <h4 class="swiper__subtitle"><%=g.title%></h4>
-                            <%}%>
-                        </div>
-                        <%}%>
-                    <%}%>
+                  <%if(webModel.gallery){%>
+                  <%for(let g of webModel.gallery){%>
+                  <div class="swiper-slide" style="background-image:url(<%=g.image%>)">
+                     <%if(g.title){%>
+                     <h4 class="swiper__subtitle"><%=g.title%></h4>
+                     <%}%>
+                  </div>
+                  <%}%>
+                  <%}%>
                </div>
                <!-- Add Arrows -->
                <div class="swiper-button-next swiper-button-white"></div>
                <div class="swiper-button-prev swiper-button-white"></div>
-           </div>
-           <div class="swiper-container gallery-thumbs">
-           <div class="swiper-wrapper">
-               <%if(webModel.gallery){%>
-                <%for(let g of webModel.gallery){%>
-                        <div class="swiper-slide" style="background-image:url(<%=g.image%>)"></div>
-                    <%}%>
-                <%}%>
-           </div>
-           </div>
-           </div>
-        </div>
-    </div>
+            </div>
+            <div class="swiper-container gallery-thumbs">
+               <div class="swiper-wrapper">
+                  <%if(webModel.gallery){%>
+                  <%for(let g of webModel.gallery){%>
+                  <div class="swiper-slide" style="background-image:url(<%=g.image%>)"></div>
+                  <%}%>
+                  <%}%>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 <%-include('../../partials/footer.ejs')%>
-
 <script>
-    var galleryThumbs = new Swiper('.gallery-thumbs', {
-      spaceBetween: 10,
-      slidesPerView: 4,
-      loop: true,
-      freeMode: true,
-      loopedSlides: 5, //looped slides should be the same
-      watchSlidesVisibility: true,
-      watchSlidesProgress: true,
-    });
-    var galleryTop = new Swiper('.gallery-top', {
-      spaceBetween: 10,
-      loop: true,
-      loopedSlides: 5, //looped slides should be the same
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      thumbs: {
-        swiper: galleryThumbs,
-      },
-    });
+   var galleryThumbs = new Swiper('.gallery-thumbs', {
+     spaceBetween: 10,
+     slidesPerView: 4,
+     loop: true,
+     freeMode: true,
+     loopedSlides: 5, //looped slides should be the same
+     watchSlidesVisibility: true,
+     watchSlidesProgress: true,
+   });
+   var galleryTop = new Swiper('.gallery-top', {
+     spaceBetween: 10,
+     loop: true,
+     loopedSlides: 5, //looped slides should be the same
+     navigation: {
+       nextEl: '.swiper-button-next',
+       prevEl: '.swiper-button-prev',
+     },
+     thumbs: {
+       swiper: galleryThumbs,
+     },
+   });
 </script>
-
-
-  </body>
-  </html>
+</body>
+</html>

@@ -1,92 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title><%=title%></title>
-		<!-- Required meta tags -->
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-		<link rel="icon"  type="image/png" href="/uploads/logo.png">
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="/css/bootstrap.css" />
-		<!-- Font -->
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
-		<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet" />
-		<!-- Font-Awesome -->
-
-		<link rel="stylesheet" href="/css/all.css" />
-
-		<!-- Swifer JS -->
-		<link rel="stylesheet" href="/css/swiper.min.css">
-		<!-- CSS Links -->
-		<link rel="stylesheet" href="/styles/style.css" />
-		<!-- <script src="/scripts/style.bundle.js"></script> -->
-		<!-- <script src="/style.bundle.js"></script> -->
-		<!-- <link rel="stylesheet"src="/styles/results.css" type="text/css" media="print" /> -->
-		<link rel="stylesheet" type="text/css" media="print" href="/styles/print.css">
-	</head>
-	<body>
-		<div style="margin:0px!important" class="row bg-dark printForRemove main-head-container">
-			
-			<div class="container bg-light head-container">
-				<div class="row">
-					<div class="col-md-2 text-center text-dark">
-						<img src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" style="max-width: 90px;" alt="" />
-					</div>
-					<div class="col-md-8 head-name"  style="padding:0px!important">
-						<!-- <h4 class="text-center web-name">الجامعة الاحمدية السنية العالية (الكامل)</h4>
-						<h4 class="text-center web-name">JAMEA AHMADIA SUNNIA KAMIL MADRASAH</h4> -->
-						<%if(webModel.name.length===0){%>
-							<h4 class="text-center web-name text-muted">YOUR WEBSITE TITLE HERE</h4>
-						<%}else{%>
-						<%for(let webName of webModel.name){%>
-							<h4 class="text-center web-name"><%=webName.name.toUpperCase()%></h4>
-							<%}%>
-						<%}%>
-					</div>
-					<div class="col-md-2 head-social-links">
-						<%if(webModel.socialLinks){%>
-							
-								<%webModel.socialLinks.forEach((link,ind)=>{%>
-									<a href="<%=link.action%>">
-										<i style=<%='color:'+link.color%> class="<%=link.icon%> m-1"></i>
-									</a>
-								<%})%>
-							
-						<%}%>
-						
-						<!-- <a class="head-youtube">
-							<i class="fab fa-instagram"></i>
-						</a>
-						<a class="head-facebook">
-							<i class="fab fa-facebook m-1"></i>
-						</a> -->
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-12 braking-news pt-2"  style="padding-right:0px!important;padding-left: 0px!important;">
-				<marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();">
-					<div class="d-flex;" style="max-width:1300px">
-						<%if(webModel.breakingNews.length!==0){%>
-							<%for(let news of webModel.breakingNews){%>
-									<%if(news.url.length!==0){%>
-										<a class="mr-3" href="<%=news.url%>" style="font-family: arial;
-											font-weight: 600"><%=news.title%></a>
-									<%}else{%>
-										<span class="mr-3" style="font-family: arial;
-										font-weight: 600"><%=news.title%></span>
-										<%}%>
-								<%}%>
-						<%}else{%>
-							<span style="display: inline-block;">No have any kind of breaking News right now</span>
-						<%}%>
-					</div>
-				</marquee>
-				
-			</div>
-		</div>
-
-		<!-- Navigation -->
-		<%-include('./navigation.ejs')%>
-
-		
+   <head>
+      <title><%=title%></title>
+      <!-- Required meta tags -->
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <link rel="icon" type="image/png" href="/uploads/logo.png">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+      <!-- Font -->
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet" />
+      <!-- Font-Awesome -->
+      <link rel="stylesheet" href="/css/all.min.css" />
+      <!-- Swifer JS -->
+      <link rel="stylesheet" href="/css/swiper.min.css">
+      <!-- CSS Links -->
+      <script src="/style.bundle.js"></script>
+      <link rel="stylesheet" type="text/css" media="print" href="/styles/print.css">
+   </head>
+   <body>
+      <div style="margin:0px!important" class="row bg-dark printForRemove main-head-container">
+         <div class="container bg-light head-container">
+            <div class="row">
+               <div class="col-md-2 text-center text-dark">
+                  <img src="<%=webModel.logo?webModel.logo:'/uploads/default-web-logo.png'%>" style="max-width: 90px;"
+                     alt="" />
+               </div>
+               <div class="col-md-8 head-name" style="padding:0px!important">
+                  <%if(webModel.name.length===0){%>
+                  <h4 class="text-center web-name text-muted">YOUR WEBSITE TITLE HERE</h4>
+                  <%}else{%>
+                  <%for(let webName of webModel.name){%>
+                  <h4 class="text-center web-name"><%=webName.name.toUpperCase()%></h4>
+                  <%}%>
+                  <%}%>
+               </div>
+               <div class="col-md-2 head-social-links">
+                  <%if(webModel.socialLinks){%>
+                  <%webModel.socialLinks.forEach((link,ind)=>{%>
+                  <a href="<%=link.action%>">
+                  <i style=<%='color:'+link.color%> class="<%=link.icon%> m-1"></i>
+                  </a>
+                  <%})%>
+                  <%}%>
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-12 braking-news pt-2"  style="padding-right:0px!important;padding-left: 0px!important;">
+            <marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();">
+               <div class="d-flex;" style="max-width:1300px">
+                  <%if(webModel.breakingNews.length!==0){%>
+                  <%for(let news of webModel.breakingNews){%>
+                  <%if(news.url.length!==0){%>
+                  <a class="mr-3" href="<%=news.url%>" style="font-family: arial;
+                     font-weight: 600"><%=news.title%></a>
+                  <%}else{%>
+                  <span class="mr-3" style="font-family: arial;
+                     font-weight: 600"><%=news.title%></span>
+                  <%}%>
+                  <%}%>
+                  <%}else{%>
+                  <span style="display: inline-block;">Not Available News</span>
+                  <%}%>
+               </div>
+            </marquee>
+         </div>
+      </div>
+      <!-- Navigation -->
+      <%-include('./navigation.ejs')%>

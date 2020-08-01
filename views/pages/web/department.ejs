@@ -1,34 +1,29 @@
 <%-include('../../partials/head.ejs')%>
 <div class="row" style="margin:0px!important">
-    <div class="col-sm-12 p-5 responsiveModePadd">
-        <h3 class="text-center mb-4 addMarginTop" style="color:#545b62"><%=department.name%></h3>
-        <div class="custom__container__card px-5 py-3 responsiveModePadd">
-            <div class="row remove__margin">
-                <div class="col-sm-12">
-                        <%if(department.image){%>
-                            
-                            ​<div class="text-center mb-2">
-                                <picture>
-                                    <source srcset="/uploads/<%=department.image%>" type="image/svg+xml">
-                                    <img src="/uploads/<%=department.image%>" class="img-fluid img-thumbnail" alt="<%=department.name%>" style="max-height:350px!important">
-                                </picture>
-                                
-                            </div>
-                            <%}%>
-                             <h4 class="text-center text-dark"><%=department.title%></h4>
-                        <div style="max-width:1000px;margin:auto;font-size:16px;font-family: Arial, Helvetica, sans-serif;" id="showText" data-content="<%=department.text%>"></div>
-                    
-                
-                </div>
+   <div class="col-sm-12 p-5 responsiveModePadd">
+      <h3 class="text-center mb-4 addMarginTop" style="color:#545b62"><%=department.name%></h3>
+      <div class="custom__container__card px-5 py-3 responsiveModePadd">
+         <div class="row remove__margin">
+            <div class="col-sm-12">
+               <%if(department.image){%>
+               <div class="text-center mb-2">
+                  <picture>
+                     <source srcset="/uploads/<%=department.image%>" type="image/svg+xml">
+                     <img src="/uploads/<%=department.image%>" class="img-fluid img-thumbnail" alt="<%=department.name%>" style="max-height:350px!important">
+                  </picture>
+               </div>
+               <%}%>
+               <h4 class="text-center text-dark"><%=department.title%></h4>
+               <div style="max-width:1000px;margin:auto;font-size:16px;font-family: Arial, Helvetica, sans-serif;" id="showText" data-content="<%=department.text%>"></div>
             </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>
 <%-include('../../partials/footer.ejs')%>
 <script>
-    let showText = document.getElementById('showText')
-    showText.innerHTML = showText.dataset.content
+   let showText = document.getElementById('showText')
+   showText.innerHTML = showText.dataset.content
 </script>
-
 </body>
 </html>

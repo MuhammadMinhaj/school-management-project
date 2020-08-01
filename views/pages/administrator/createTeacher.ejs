@@ -1,59 +1,43 @@
-
 <%-include('../../partials/admin/adminHead.ejs')%>
-
 <div class="row">
-    <!-- Admin Brand and Dashboard Menu -->
-    <%- include('../../partials/admin/adminSidebar.ejs')%>
-    <!-- Dashboard Content -->
-    <div class="col-sm-10">
-        <!-- Admin Navbar Content -->
-        <%- include('../../partials/admin/adminNavbar.ejs')%>
-        <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
-        <div class="row scroll-style" style="background:#6c757d">
-            <div class="w-100">
-                <%-include('../../partials/Error/alert.ejs')%>
-            </div>
-            <div class="col-sm-12">
-                <!--  Title -->
-                
-                    
-                        <h4 class="text-center" style="font-weight:bold;color:#343a40;">Teacher Management</h4>
-                    
-                
-                <!--  Body -->
-                <div class="row px-5 py-2">
-                    <div class="col-sm-12 border rounded p-3" style="background:#495057">
-                        <!-- Middle Content Body -->
-                        
-
-                        <div class="row">
-                            
-                            <!-- User Create Modal -->
-                            <div class="modal fade" id="teacherCreateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content" style="background:#545b62;">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" style="color:#dee2e6ba;text-transform: uppercase;" id="exampleModalLabel">
-                                        <strong>Create Teacher</strong>
-                                        </h5>
-                                        <button type="button"  class="closeModalBtn" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-
-                                <form action="/administrator/user/create" enctype="multipart/form-data" method="POST">
-                                    <div class="modal-body">
-                                        <!--   Create Admin -->
-                            
-                                
+   <!-- Admin Brand and Dashboard Menu -->
+   <%- include('../../partials/admin/adminSidebar.ejs')%>
+   <!-- Dashboard Content -->
+   <div class="col-sm-10">
+      <!-- Admin Navbar Content -->
+      <%- include('../../partials/admin/adminNavbar.ejs')%>
+      <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+      <div class="row scroll-style" style="background:#6c757d">
+         <div class="w-100">
+            <%-include('../../partials/Error/alert.ejs')%>
+         </div>
+         <div class="col-sm-12">
+            <!--  Title -->
+            <h4 class="text-center" style="font-weight:bold;color:#343a40;">Teacher Management</h4>
+            <!--  Body -->
+            <div class="row px-5 py-2">
+               <div class="col-sm-12 border rounded p-3" style="background:#495057">
+                  <!-- Middle Content Body -->
+                  <div class="row">
+                     <!-- User Create Modal -->
+                     <div class="modal fade" id="teacherCreateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                           <div class="modal-content" style="background:#545b62;">
+                              <div class="modal-header">
+                                 <h5 class="modal-title" style="color:#dee2e6ba;text-transform: uppercase;" id="exampleModalLabel">
+                                    <strong>Create Teacher</strong>
+                                 </h5>
+                                 <button type="button"  class="closeModalBtn" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                                 </button>
+                              </div>
+                              <form action="/administrator/user/create" enctype="multipart/form-data" method="POST">
+                                 <div class="modal-body">
+                                    <!--   Create Admin -->
                                     <div class="card border-style" style="background:#6c757d;">
-                                        <!-- <h5 class="text-center mt-3 admin-create-sub-title pb-1 border-bottom">
-                                            Create Administrator
-                                        </h5>  -->
-                                        <div class="card-body">
-                                            
-                                            <div class="form-group">
-                                                <div id="parentProfilePicPreview" class="p-1 mb-2"
+                                       <div class="card-body">
+                                          <div class="form-group">
+                                             <div id="parentProfilePicPreview" class="p-1 mb-2"
                                                 style="
                                                 border: 1px solid #e9ecef59;
                                                 width: 40%;
@@ -63,453 +47,379 @@
                                                 "
                                                 >
                                                 <div class="editProfilePicsEditBtn" id="editProfilePicsEditBtn">
-                                                    <i class="fas fa-edit"></i>
+                                                   <i class="fas fa-edit"></i>
                                                 </div>
                                                 <i style="font-size:7rem;color:#343a40" id="defaultProfileIcon" class="fas fa-user-tie">
-                                                        </i>
-                                                        <img id="proflePicsPreviewer" style="border-radius:6px;display: none;width:100%" alt="">
-                                                    
-                                                    
-                                                </div>
-
-                                            </div>
-                                                
-
-                                            <div id="profilePicUploadField" class="form-group" style="display: none;">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" name="picture" id="customFile">
-                                                    <label class="custom-file-label fileBrowserStyle" for="customFile">Choose file</label>
-                                                </div>
-                                            </div>
-                                            
-
-
-                                            <div class="form-group">
-                                                <label style="font-weight:bold;" for="latestNewsTitle">Name</label>
-                                                <input type="text" value="<%=errorData.name?errorData.name:''%>" class="<%=error.name?'is-invalid':''%> inputGroupCustomStyle" name="name">
-                                                <div class="invalid-feedback">
-                                                    <%=error.name%>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label style="font-weight:bold;" for="latestNewsTitle">Uername</label>
-<input type="text"  class="<%=error.username?'is-invalid':''%> inputGroupCustomStyle" value="<%=errorData.username?errorData.username:''%>" name="username">
-                                                <div class="invalid-feedback">
-                                                    <%=error.username%>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label style="font-weight:bold;" for="latestNewsTitle">Email</label>
-                                                <input type="text"  value="<%=errorData.email?errorData.email:''%>" class=" <%=error.email?'is-invalid':''%> inputGroupCustomStyle" name="email">
-                                                <div class="invalid-feedback">
-                                                    <%=error.email%>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label style="font-weight:bold;" for="latestNewsTitle">Phone</label>
-                                                <input type="text"  value="<%=errorData.phone?errorData.phone:''%>" class=" <%=error.phone?'is-invalid':''%>  inputGroupCustomStyle" name="phone">
-                                                <div class="invalid-feedback">
-                                                    <%=error.phone%>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label style="font-weight:bold;" for="latestNewsTitle">Password</label>
-                                                <input type="text" class=" <%=error.password?'is-invalid':''%>  inputGroupCustomStyle" name="password">
-                                                <div class="invalid-feedback">
-                                                    <%=error.password%>
-                                                </div>
-                                            </div>
-                                            
-
-                                            <div class="row py-3">
-                                                <div class="col-sm-4">Gender: </div>
-                                                <div class="col-sm-8">
-                                                    <input type="radio" name="gender" class="<%=error.gender?'is-invalid':''%>" id="mail" value="mail" <%=errorData.gender==='mail'?'checked':''%> >
-                                                    <label for="mail" class="text-style">Mail</label>
-                                                    <input type="radio" class="<%=error.gender?'is-invalid':''%>" name="gender" id="femail" value="femail" <%=errorData.gender==='femail'?'checked':''%> >
-                                                    <label for="femail" class="text-style">Femail</label>
-                                                    <input type="radio" class="<%=error.gender?'is-invalid':''%>" name="gender" id="others" value="others" <%=errorData.gender==='others'?'checked':''%>>
-                                                    <label for="others" class="text-style">Others</label>
-                                                    <div class="invalid-feedback"><%=error.gender%></div>
-                                                </div>
-                    
-                                            </div>
-                                            
-                                        </div>
+                                                </i>
+                                                <img id="proflePicsPreviewer" style="border-radius:6px;display: none;width:100%" alt="">
+                                             </div>
+                                          </div>
+                                          <div id="profilePicUploadField" class="form-group" style="display: none;">
+                                             <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="picture" id="customFile">
+                                                <label class="custom-file-label fileBrowserStyle" for="customFile">Choose file</label>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label style="font-weight:bold;" for="latestNewsTitle">Name</label>
+                                             <input type="text" value="<%=errorData.name?errorData.name:''%>" class="<%=error.name?'is-invalid':''%> inputGroupCustomStyle" name="name">
+                                             <div class="invalid-feedback">
+                                                <%=error.name%>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label style="font-weight:bold;" for="latestNewsTitle">Uername</label>
+                                             <input type="text"  class="<%=error.username?'is-invalid':''%> inputGroupCustomStyle" value="<%=errorData.username?errorData.username:''%>" name="username">
+                                             <div class="invalid-feedback">
+                                                <%=error.username%>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label style="font-weight:bold;" for="latestNewsTitle">Email</label>
+                                             <input type="text"  value="<%=errorData.email?errorData.email:''%>" class=" <%=error.email?'is-invalid':''%> inputGroupCustomStyle" name="email">
+                                             <div class="invalid-feedback">
+                                                <%=error.email%>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label style="font-weight:bold;" for="latestNewsTitle">Phone</label>
+                                             <input type="text"  value="<%=errorData.phone?errorData.phone:''%>" class=" <%=error.phone?'is-invalid':''%>  inputGroupCustomStyle" name="phone">
+                                             <div class="invalid-feedback">
+                                                <%=error.phone%>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label style="font-weight:bold;" for="latestNewsTitle">Password</label>
+                                             <input type="text" class=" <%=error.password?'is-invalid':''%>  inputGroupCustomStyle" name="password">
+                                             <div class="invalid-feedback">
+                                                <%=error.password%>
+                                             </div>
+                                          </div>
+                                          <div class="row py-3">
+                                             <div class="col-sm-4">Gender: </div>
+                                             <div class="col-sm-8">
+                                                <input type="radio" name="gender" class="<%=error.gender?'is-invalid':''%>" id="mail" value="mail" <%=errorData.gender==='mail'?'checked':''%> >
+                                                <label for="mail" class="text-style">Mail</label>
+                                                <input type="radio" class="<%=error.gender?'is-invalid':''%>" name="gender" id="femail" value="femail" <%=errorData.gender==='femail'?'checked':''%> >
+                                                <label for="femail" class="text-style">Femail</label>
+                                                <input type="radio" class="<%=error.gender?'is-invalid':''%>" name="gender" id="others" value="others" <%=errorData.gender==='others'?'checked':''%>>
+                                                <label for="others" class="text-style">Others</label>
+                                                <div class="invalid-feedback"><%=error.gender%></div>
+                                             </div>
+                                          </div>
+                                       </div>
                                     </div>
-                                
-                            
-                                    </div>
-                                    <div class="modal-footer">
-                                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                                        <input type="submit" id="createAdminBtn" value="Create">
-                                    </div>
-                                </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- User Create Modal End -->
-                            
-                            <!--  Show All Admin List -->
-                            <div class="col-sm-12">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb breadcrumb__container">
-                                    <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
-                               
-                                    <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/user/create">Users</a></li>
-                                    
-                                    </ol>
-                                 </nav>
-                                <div class="card admin-show-card p-2">
-                                    <div class="card-body admin-show-scroll-style admin-show-card-body">
-                                        <table class="table">
-                                            <thead class="thead-dark">
-                                                <tr class="text-center">
-                                                    <th scope="col">ID</th>
-
-                                                    <th>
-                                                        <i style="color:#dee2e6" class="fas fa-exchange-alt"></i>
-                                                    </th>
-
-                                                    <th scope="col">Username</th>
-                                                    <th>
-                                                        <i style="color:#dee2e6" class="fas fa-exchange-alt"></i>
-                                                    </th>
-                                                    <th scope="col">Email</th>
-                                                    <th>
-                                                        <i style="color:#dee2e6" class="fas fa-exchange-alt"></i>
-                                                    </th>
-                                                    <th scope="col">Phone</th>
-                                                    <th>
-                                                        <i style="color:#dee2e6" class="fas fa-exchange-alt"></i>
-                                                    </th>
-                                                    <th scope="col">Gender</th>
-                                                    <th>
-                                                        <i style="color:#dee2e6" class="fas fa-exchange-alt"></i>
-                                                    </th>
-                                                    <th scope="col">Created_AT</th>
-                                                    <th>
-                                                        <i style="color:#dee2e6" class="fas fa-exchange-alt"></i>
-                                                    </th>
-                                                    <th scope="col">CONTROLLING</th>
-                                                </tr>
-                                            </thead>
-                                        
-                                                <tbody id="adminTable">
-                                                
-                                                    <%users.forEach((user,ind)=>{%>
-                                                        <!-- User Update Modal -->
-
-                                                        <div class="modal fade" id="updateUserModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content" style="background:#545b62;">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" style="color:#dee2e6ba;text-transform: uppercase;" id="exampleModalLabel">
-                                                                    <strong>Update User Profile</strong>
-                                                                    </h5>
-                                                                    <button type="button"  class="closeModalBtn" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                        
-                                                            <form action="/administrator/user/update/<%=user._id%>" enctype="multipart/form-data" method="POST">
-                                                                <div class="modal-body">
-                                                                    <!--   Create Admin -->
-                                                        
-                                                            
-                                                                <div class="card border-style" style="background:#6c757d;">
-                                                                    <!-- <h5 class="text-center mt-3 admin-create-sub-title pb-1 border-bottom">
-                                                                        Create Administrator
-                                                                    </h5>  -->
-                                                                    <div class="card-body">
-                                                                        
-                                                                        <div class="form-group">
-                                                                            <div class="updateProfilePicPreview p-1 mb-2"
-                                                                            style="
-                                                                            border: 1px solid #e9ecef59;
-                                                                            width: 40%;
-                                                                            margin: auto;
-                                                                            text-align: center;
-                                                                            border-radius: 10px;
-                                                                            "
-                                                                            >
-                                                                            <div class="updateProfilePicsEditBtn">
-                                                                                <i class="fas fa-edit"></i>
-                                                                            </div>
-                                                                            
-                                                                        
-                                                                
-                                                                <%if(user.picture){%>
-                                                                    <img style="border-radius:6px;display: block;width:100%" alt="" src="/uploads/images/<%=user.picture%>">
-                                                                <%}else{%>
-                                                                    <i style="font-size:7rem;color:#343a40;" class="fas fa-user-tie">
-                                                                    </i>
-                                                                    <%}%>
-
-                                                            
-
-                                                                    
-                                                                            
-                                                                                
-                                                                                
-                                                                            </div>
-                        
-                                                                        </div>
-                                                                            
-                        
-                                                                        <div class="form-group updateProfilePicUploadField" style="display: none;">
-                                                                            <div class="custom-file">
-                                                                                <input type="file" class="custom-file-input" name="picture" id="customFile">
-                                                                                <label class="custom-file-label fileBrowserStyle" for="customFile">Choose file</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        
-                                                                        
-                        
-                        
-                                                                        <div class="form-group">
-                                                                            <label style="font-weight:bold;" for="latestNewsTitle">Name</label>
-                                                                            <input type="text" value="<%=user.name%>" class="<%=error.name?'is-invalid':''%> inputGroupCustomStyle" name="name">
-                                                                            <div class="invalid-feedback">
-                                                                                <%=error.name%>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label style="font-weight:bold;" for="latestNewsTitle">Uername</label>
-                        <input type="text"  class="<%=error.username?'is-invalid':''%> inputGroupCustomStyle" value="<%=user.username%>" name="username">
-                                                                            <div class="invalid-feedback">
-                                                                                <%=error.username%>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label style="font-weight:bold;" for="latestNewsTitle">Email</label>
-                                                                            <input type="text"  value="<%=user.email%>" class=" <%=error.email?'is-invalid':''%> inputGroupCustomStyle" name="email">
-                                                                            <div class="invalid-feedback">
-                                                                                <%=error.email%>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label style="font-weight:bold;" for="latestNewsTitle">Phone</label>
-                                                                            <input type="text"  value="<%=user.phone%>" class=" <%=error.phone?'is-invalid':''%>  inputGroupCustomStyle" name="phone">
-                                                                            <div class="invalid-feedback">
-                                                                                <%=error.phone%>
-                                                                            </div>
-                                                                        </div>
-                                                                        
-                                                            <div class="row py-3">
-                                                                <div class="col-sm-4">Gender: </div>
-                                                                <div class="col-sm-8">
-                                                                    <input type="radio" name="gender" class="<%=error.gender?'is-invalid':''%>" id="mail" value="mail" <%=user.gender==='mail'?'checked':''%> >
-
-                                                                    <label for="mail" class="text-style">Mail</label>
-                                                                    <input type="radio" class="<%=error.gender?'is-invalid':''%>" name="gender" id="femail" value="femail" <%=user.gender==='femail'?'checked':''%> >
-                                                                    <label for="femail" class="text-style">Femail</label>
-                                                                    <input type="radio" class="<%=error.gender?'is-invalid':''%>" name="gender" id="others" value="others" <%=user.gender==='others'?'checked':''%>>
-                                                                    <label for="others" class="text-style">Others</label>
-                                                                    <div class="invalid-feedback"><%=error.gender%></div>
-                                                                </div>
-                                                            </div>
-                                                                        
-                                                        </div>
-                                                    </div>
-
-
-                                
-                                    <!--  Password Change -->
-
-                                    <button type="button" class="change-password-btn w-100 my-2 adminCreateBtn">Change-Password</button>
-
-                                    <div class="change-password-card card border-style" style="display: none;background:#6c757d;">
-                                                
-                                        <div class="card-body">
-
-                                            <div class="form-group">
-                                                <label style="font-weight:bold;" for="latestNewsTitle">Security Password</label>
-                                                <input type="text" class=" inputGroupCustomStyle" name="securityPassword">
-                                                
-                                            </div>
-                                            <div class="form-group">
-                                                <label style="font-weight:bold;" for="latestNewsTitle">New Password</label>
-                                                <input type="text" class="inputGroupCustomStyle" name="password">
-                                        
-                                            </div>
-                                            <div class="form-group">
-                                                <label style="font-weight:bold;" for="latestNewsTitle">Confirm Password</label>
-                                                <input type="text" class=" <%=error.confirmPassword?'is-invalid':''%>  inputGroupCustomStyle" name="confirmPassword">
-                                                <div class="invalid-feedback">
-                                                    <%=error.confirmPassword%>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Password Change End -->
-                                                            
-                                                        
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                                                                    <input type="submit" id="createAdminBtn" value="Update">
-                                                                </div>
-                                                            </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- User Update Modal End -->
-                                                        <tr class="text-center">
-                                                            <th scope="row" style="padding-right:0px!important;padding-left:0px!important;"><%=ind+1%></th>
-                                                            <th></th>
-                                                            <td style="padding-right:0px!important;padding-left:0px!important;"><%=user.username%></td>
-                                                            <td></td>
-                                                            <td style="padding-right:0px!important;padding-left:0px!important;"><%=user.email%></td>
-                                                            <td></td>
-                                                            <td style="padding-right:0px!important;padding-left:0px!important;"><%=user.phone%></td>
-                                                            <td></td>
-                                                            <td style="padding-right:0px!important;padding-left:0px!important;"><%=user.gender%></td>
-                                                            <td></td>
-                                                            <td style="padding-right:0px!important;padding-left:0px!important;" class="text-muted">
-                                                                <div style="text-align:center;">
-                                                                    <%=user.createdAt%>
-                                                                </div>
-                                                            </td>
-                                                            <td></td>
-                                                            <td style="padding-right:0px!important;padding-left:0px!important;">
-                                                                <a href="/administrator/user/delete/<%=user._id%>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                                                                
-                                                                    
-
-                                                                    <button data-toggle="modal" data-target="#updateUserModal<%=ind%>" class="btn btn-info btn-sm">
-                                                                        <i class="fas fa-user-edit"></i>
-                                                                    </button>
-                                                            </td>
-                                                        </tr>
-                                                        
-                                                    <%})%>
-                                                
-                                                    
-                                            </tbody>
-                                            
-                                            </table>                               
-                                    </div>
-                                </div>
-                            </div>
+                                 </div>
+                                 <div class="modal-footer">
+                                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                                    <input type="submit" id="createAdminBtn" value="Create">
+                                 </div>
+                              </form>
+                           </div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-sm-12">
-        <button data-toggle="modal" data-target="#teacherCreateModal" class="w-100 adminCreateBtn">Create</button>
-
-                            </div>
+                     </div>
+                     <!-- User Create Modal End -->
+                     <!--  Show All Admin List -->
+                     <div class="col-sm-12">
+                        <nav aria-label="breadcrumb">
+                           <ol class="breadcrumb breadcrumb__container">
+                              <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/user/create">Users</a></li>
+                           </ol>
+                        </nav>
+                        <div class="card admin-show-card p-2">
+                           <div class="card-body admin-show-scroll-style admin-show-card-body">
+                              <table class="table">
+                                 <thead class="thead-dark">
+                                    <tr class="text-center">
+                                       <th scope="col">ID</th>
+                                       <th>
+                                          <i style="color:#dee2e6" class="fas fa-exchange-alt"></i>
+                                       </th>
+                                       <th scope="col">Username</th>
+                                       <th>
+                                          <i style="color:#dee2e6" class="fas fa-exchange-alt"></i>
+                                       </th>
+                                       <th scope="col">Email</th>
+                                       <th>
+                                          <i style="color:#dee2e6" class="fas fa-exchange-alt"></i>
+                                       </th>
+                                       <th scope="col">Phone</th>
+                                       <th>
+                                          <i style="color:#dee2e6" class="fas fa-exchange-alt"></i>
+                                       </th>
+                                       <th scope="col">Gender</th>
+                                       <th>
+                                          <i style="color:#dee2e6" class="fas fa-exchange-alt"></i>
+                                       </th>
+                                       <th scope="col">Created_AT</th>
+                                       <th>
+                                          <i style="color:#dee2e6" class="fas fa-exchange-alt"></i>
+                                       </th>
+                                       <th scope="col">CONTROLLING</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody id="adminTable">
+                                    <%users.forEach((user,ind)=>{%>
+                                    <!-- User Update Modal -->
+                                    <div class="modal fade" id="updateUserModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                       <div class="modal-dialog">
+                                          <div class="modal-content" style="background:#545b62;">
+                                             <div class="modal-header">
+                                                <h5 class="modal-title" style="color:#dee2e6ba;text-transform: uppercase;" id="exampleModalLabel">
+                                                   <strong>Update User Profile</strong>
+                                                </h5>
+                                                <button type="button"  class="closeModalBtn" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                             </div>
+                                             <form action="/administrator/user/update/<%=user._id%>" enctype="multipart/form-data" method="POST">
+                                                <div class="modal-body">
+                                                   <!--   Create Admin -->
+                                                   <div class="card border-style" style="background:#6c757d;">
+                                                      <!-- <h5 class="text-center mt-3 admin-create-sub-title pb-1 border-bottom">
+                                                         Create Administrator
+                                                         </h5>  -->
+                                                      <div class="card-body">
+                                                         <div class="form-group">
+                                                            <div class="updateProfilePicPreview p-1 mb-2"
+                                                               style="
+                                                               border: 1px solid #e9ecef59;
+                                                               width: 40%;
+                                                               margin: auto;
+                                                               text-align: center;
+                                                               border-radius: 10px;
+                                                               "
+                                                               >
+                                                               <div class="updateProfilePicsEditBtn">
+                                                                  <i class="fas fa-edit"></i>
+                                                               </div>
+                                                               <%if(user.picture){%>
+                                                               <img style="border-radius:6px;display: block;width:100%" alt="" src="/uploads/images/<%=user.picture%>">
+                                                               <%}else{%>
+                                                               <i style="font-size:7rem;color:#343a40;" class="fas fa-user-tie">
+                                                               </i>
+                                                               <%}%>
+                                                            </div>
+                                                         </div>
+                                                         <div class="form-group updateProfilePicUploadField" style="display: none;">
+                                                            <div class="custom-file">
+                                                               <input type="file" class="custom-file-input" name="picture" id="customFile">
+                                                               <label class="custom-file-label fileBrowserStyle" for="customFile">Choose file</label>
+                                                            </div>
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsTitle">Name</label>
+                                                            <input type="text" value="<%=user.name%>" class="<%=error.name?'is-invalid':''%> inputGroupCustomStyle" name="name">
+                                                            <div class="invalid-feedback">
+                                                               <%=error.name%>
+                                                            </div>
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsTitle">Uername</label>
+                                                            <input type="text"  class="<%=error.username?'is-invalid':''%> inputGroupCustomStyle" value="<%=user.username%>" name="username">
+                                                            <div class="invalid-feedback">
+                                                               <%=error.username%>
+                                                            </div>
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsTitle">Email</label>
+                                                            <input type="text"  value="<%=user.email%>" class=" <%=error.email?'is-invalid':''%> inputGroupCustomStyle" name="email">
+                                                            <div class="invalid-feedback">
+                                                               <%=error.email%>
+                                                            </div>
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsTitle">Phone</label>
+                                                            <input type="text"  value="<%=user.phone%>" class=" <%=error.phone?'is-invalid':''%>  inputGroupCustomStyle" name="phone">
+                                                            <div class="invalid-feedback">
+                                                               <%=error.phone%>
+                                                            </div>
+                                                         </div>
+                                                         <div class="row py-3">
+                                                            <div class="col-sm-4">Gender: </div>
+                                                            <div class="col-sm-8">
+                                                               <input type="radio" name="gender" class="<%=error.gender?'is-invalid':''%>" id="mail" value="mail" <%=user.gender==='mail'?'checked':''%> >
+                                                               <label for="mail" class="text-style">Mail</label>
+                                                               <input type="radio" class="<%=error.gender?'is-invalid':''%>" name="gender" id="femail" value="femail" <%=user.gender==='femail'?'checked':''%> >
+                                                               <label for="femail" class="text-style">Femail</label>
+                                                               <input type="radio" class="<%=error.gender?'is-invalid':''%>" name="gender" id="others" value="others" <%=user.gender==='others'?'checked':''%>>
+                                                               <label for="others" class="text-style">Others</label>
+                                                               <div class="invalid-feedback"><%=error.gender%></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <!--  Password Change -->
+                                                   <button type="button" class="change-password-btn w-100 my-2 adminCreateBtn">Change-Password</button>
+                                                   <div class="change-password-card card border-style" style="display: none;background:#6c757d;">
+                                                      <div class="card-body">
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsTitle">Security Password</label>
+                                                            <input type="text" class=" inputGroupCustomStyle" name="securityPassword">
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsTitle">New Password</label>
+                                                            <input type="text" class="inputGroupCustomStyle" name="password">
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsTitle">Confirm Password</label>
+                                                            <input type="text" class=" <%=error.confirmPassword?'is-invalid':''%>  inputGroupCustomStyle" name="confirmPassword">
+                                                            <div class="invalid-feedback">
+                                                               <%=error.confirmPassword%>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <!-- Password Change End -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                   <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                                                   <input type="submit" id="createAdminBtn" value="Update">
+                                                </div>
+                                             </form>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <!-- User Update Modal End -->
+                                    <tr class="text-center">
+                                       <th scope="row" style="padding-right:0px!important;padding-left:0px!important;"><%=ind+1%></th>
+                                       <th></th>
+                                       <td style="padding-right:0px!important;padding-left:0px!important;"><%=user.username%></td>
+                                       <td></td>
+                                       <td style="padding-right:0px!important;padding-left:0px!important;"><%=user.email%></td>
+                                       <td></td>
+                                       <td style="padding-right:0px!important;padding-left:0px!important;"><%=user.phone%></td>
+                                       <td></td>
+                                       <td style="padding-right:0px!important;padding-left:0px!important;"><%=user.gender%></td>
+                                       <td></td>
+                                       <td style="padding-right:0px!important;padding-left:0px!important;" class="text-muted">
+                                          <div style="text-align:center;">
+                                             <%=user.createdAt%>
+                                          </div>
+                                       </td>
+                                       <td></td>
+                                       <td style="padding-right:0px!important;padding-left:0px!important;">
+                                          <a href="/administrator/user/delete/<%=user._id%>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                          <button data-toggle="modal" data-target="#updateUserModal<%=ind%>" class="btn btn-info btn-sm">
+                                          <i class="fas fa-user-edit"></i>
+                                          </button>
+                                       </td>
+                                    </tr>
+                                    <%})%>
+                                 </tbody>
+                              </table>
+                           </div>
                         </div>
-                    </div>  
-                </div>
+                     </div>
+                  </div>
+                  <div class="row mt-3">
+                     <div class="col-sm-12">
+                        <button data-toggle="modal" data-target="#teacherCreateModal" class="w-100 adminCreateBtn">Create</button>
+                     </div>
+                  </div>
+               </div>
             </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>
-
-
 <script>
-let parentPreview = document.getElementById('parentProfilePicPreview')
-let editBtn = document.getElementById('editProfilePicsEditBtn')
-
-let field = document.getElementById('profilePicUploadField')
-
-let previewer = document.getElementById('proflePicsPreviewer')
-let defaultIcon = document.getElementById('defaultProfileIcon') 
-
-
-
-// Change Password Modal
-let changePasswordBtn = document.querySelectorAll('.change-password-btn')
-let changePassswordCard = document.querySelectorAll('.change-password-card')
-
-
-parentPreview.addEventListener('mouseover',()=>{
-    editBtn.style.display = 'block'
-    editBtn.addEventListener('click',editHandler)
-    parentPreview.addEventListener('mouseout',()=>{
-        editBtn.style.display = 'none'
-    })
-
-})
-
-function editHandler(){
-    let fieldCssStyle = getComputedStyle(field)
-        if(fieldCssStyle.display==='none'){
-            field.style.display = 'block'
-            
-            field.addEventListener('change',uploadHandler)
-
-        }else{
-            field.style.display = 'none'
-        }
-}
-
-function uploadHandler(e){
-    let source = URL.createObjectURL(e.target.files[0])
-    previewer.src = source 
-    previewer.style.display = 'block'
-    defaultIcon.remove()
-}
-
-
-changePasswordBtn.forEach((cpBtn,cbInd)=>{
-    changePassswordCard.forEach((cpCard,cpInd)=>{
-
-        if(cbInd===cpInd){
-            cpBtn.addEventListener('click',()=>{
-
-            let cssCahngePasswordCard = getComputedStyle(cpCard)
-
-                if(cssCahngePasswordCard.display==='none'){
-                    cpCard.style.display = 'block'
-                }else{
-                    cpCard.style.display = 'none'
-                }
-
-            })
-        }
-
-    })
-})
-
-
-// Multiple User Profile Pics Upload Toggler
-let parentPreviews = document.querySelectorAll('.updateProfilePicPreview')
-let editBtns = document.querySelectorAll('.updateProfilePicsEditBtn')
-let fields = document.querySelectorAll('.updateProfilePicUploadField')
-
-parentPreviews.forEach((previewOfParent,i)=>{
-    previewOfParent.addEventListener('mouseover',()=>{
-        editBtns.forEach((btnOfEdit,ii)=>{
-            if(i===ii){
-                btnOfEdit.style.display = 'block'
-                btnOfEdit.addEventListener('click',()=>{
-                    fields.forEach((fieldOfFields,iii)=>{
-                        if(ii===iii){
-                            let cssOfFieldOfField = getComputedStyle(fieldOfFields)
-                            if(cssOfFieldOfField.display==='none'){
-                                fieldOfFields.style.display = 'block'
-                            }else{
-                                fieldOfFields.style.display = 'none'
-                            }
-                        }
-                    })
-                })
-                previewOfParent.addEventListener('mouseout',()=>{
-                    btnOfEdit.style.display = 'none'
-                })
-            }
-        })
-    })
-})
-
-
-
+   let parentPreview = document.getElementById('parentProfilePicPreview')
+   let editBtn = document.getElementById('editProfilePicsEditBtn')
+   
+   let field = document.getElementById('profilePicUploadField')
+   
+   let previewer = document.getElementById('proflePicsPreviewer')
+   let defaultIcon = document.getElementById('defaultProfileIcon') 
+   
+   
+   
+   // Change Password Modal
+   let changePasswordBtn = document.querySelectorAll('.change-password-btn')
+   let changePassswordCard = document.querySelectorAll('.change-password-card')
+   
+   
+   parentPreview.addEventListener('mouseover',()=>{
+       editBtn.style.display = 'block'
+       editBtn.addEventListener('click',editHandler)
+       parentPreview.addEventListener('mouseout',()=>{
+           editBtn.style.display = 'none'
+       })
+   
+   })
+   
+   function editHandler(){
+       let fieldCssStyle = getComputedStyle(field)
+           if(fieldCssStyle.display==='none'){
+               field.style.display = 'block'
+               
+               field.addEventListener('change',uploadHandler)
+   
+           }else{
+               field.style.display = 'none'
+           }
+   }
+   
+   function uploadHandler(e){
+       let source = URL.createObjectURL(e.target.files[0])
+       previewer.src = source 
+       previewer.style.display = 'block'
+       defaultIcon.remove()
+   }
+   
+   
+   changePasswordBtn.forEach((cpBtn,cbInd)=>{
+       changePassswordCard.forEach((cpCard,cpInd)=>{
+   
+           if(cbInd===cpInd){
+               cpBtn.addEventListener('click',()=>{
+   
+               let cssCahngePasswordCard = getComputedStyle(cpCard)
+   
+                   if(cssCahngePasswordCard.display==='none'){
+                       cpCard.style.display = 'block'
+                   }else{
+                       cpCard.style.display = 'none'
+                   }
+   
+               })
+           }
+   
+       })
+   })
+   
+   // Multiple User Profile Pics Upload Toggler
+   let parentPreviews = document.querySelectorAll('.updateProfilePicPreview')
+   let editBtns = document.querySelectorAll('.updateProfilePicsEditBtn')
+   let fields = document.querySelectorAll('.updateProfilePicUploadField')
+   
+   parentPreviews.forEach((previewOfParent,i)=>{
+       previewOfParent.addEventListener('mouseover',()=>{
+           editBtns.forEach((btnOfEdit,ii)=>{
+               if(i===ii){
+                   btnOfEdit.style.display = 'block'
+                   btnOfEdit.addEventListener('click',()=>{
+                       fields.forEach((fieldOfFields,iii)=>{
+                           if(ii===iii){
+                               let cssOfFieldOfField = getComputedStyle(fieldOfFields)
+                               if(cssOfFieldOfField.display==='none'){
+                                   fieldOfFields.style.display = 'block'
+                               }else{
+                                   fieldOfFields.style.display = 'none'
+                               }
+                           }
+                       })
+                   })
+                   previewOfParent.addEventListener('mouseout',()=>{
+                       btnOfEdit.style.display = 'none'
+                   })
+               }
+           })
+       })
+   })
+   
 </script>
-
-
 <%-include('../../partials/admin/adminFooter.ejs')%>
-
-
 </body>
 </html>

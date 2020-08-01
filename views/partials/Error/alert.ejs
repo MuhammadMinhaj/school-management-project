@@ -1,31 +1,28 @@
-
-    <% if (flashMessage.success) { %>
-        <div style="
+<% if (flashMessage.success) { %>
+<div style="
                 color: #f8f9fa;
                 background: #28a745;
                 border-radius: 0px;
         " class="alert text-center alert-dismissible fade show">
-            <%= flashMessage.success %>
-            <button class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true"> &times; </span>
-            </button>
-        </div>
-    <%}%>
+    <%= flashMessage.success %>
+    <button class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true"> &times; </span>
+    </button>
+</div>
+<%}%>
     <% if(flashMessage.fail) { %>
-        <div 
-            style="
+<div style="
                 color: #f8f9fa;
                 background: #ff000040;
                 border-radius: 0px;
               
-            "  
-            class="alert  text-center alert-dismissible fade show ">
-            <%= flashMessage.fail %>
-            <button class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true"> &times; </span>
-            </button>
-        </div>
-    <%}%>
+            " class="alert  text-center alert-dismissible fade show ">
+    <%= flashMessage.fail %>
+    <button class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true"> &times; </span>
+    </button>
+</div>
+<%}%>
     
     
     
@@ -40,29 +37,20 @@
   
   
   <!-- <% if (flashMessage.success) { %>
-    <div class="alert alert-success alert-dismissible fade show">
-        <%= flashMessage.success %>
-        <button class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true"> &times; </span>
-        </button>
-    </div>
+<div class="alert alert-success alert-dismissible fade show">
+    <%= flashMessage.success %>
+    <button class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true"> &times; </span>
+    </button>
+</div>
 <%}%>
 <% if(flashMessage.fail) { %>
-    <div class="alert alert-danger alert-dismissible fade show ">
-        <%= flashMessage.fail %>
-        <button class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true"> &times; </span>
-        </button>
-    </div>
+<div class="alert alert-danger alert-dismissible fade show ">
+    <%= flashMessage.fail %>
+    <button class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true"> &times; </span>
+    </button>
+</div>
 <%}%>
 
  -->
-
-
-
-
-
-
-
-
-

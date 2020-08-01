@@ -10,6 +10,8 @@ function alertMessage(option, message, time, classNames) {
 	return alerts
 }
 
+const HOST_URL = `http://localhost:8080`
+
 let emptyMessageContainer = document.getElementById('dropDown-empty-message-container')
 let textContainer = document.createElement('h5')
 textContainer.innerText = 'There is nothing to show'
@@ -24,10 +26,10 @@ loadingMessage.innerText = 'Loading...'
 loadingMessage.className = 'text-center text-muted'
 loadingMessage.style.fontWeight = 'bold'
 
-let GET_ALL_DROPDOWN_URI = 'http://localhost:8080/administrator/dropdown-all'
-let CREATE_DROPDOWN_URI = 'http://localhost:8080/administrator/dropdown-create'
-let DELETE_DROPDOWN_URI = 'http://localhost:8080/administrator/dropdown-delete'
-let UPDATE_DROPDOWN_URI = 'http://localhost:8080/administrator/dropdown-update'
+let GET_ALL_DROPDOWN_URI = `${HOST_URL}/administrator/dropdown-all`
+let CREATE_DROPDOWN_URI = `${HOST_URL}/administrator/dropdown-create`
+let DELETE_DROPDOWN_URI = `${HOST_URL}/administrator/dropdown-delete`
+let UPDATE_DROPDOWN_URI = `${HOST_URL}/administrator/dropdown-update`
 let tbody = document.getElementById('dropDownBody')
 
 let id = undefined

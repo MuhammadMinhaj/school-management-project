@@ -17,16 +17,16 @@
                 </div>
                 <div class="col-sm-11 paddingRemover py-2 sidebar-menu-item">
                     <div class="d-flex justify-content-around">
-                       
+
                         <a href="/administrator/menu-create" class="ml-3" id="menuBtn">Menus </a>
-                
+
                     </div>
                 </div>
-    
+
                 <div class="col-sm-11 paddingRemover py-2 pages sidebar-menu-item">
                     <div class="d-flex justify-content-around">
                         <a href="#" class="ml-3 pageBtn" id="pageBtn">Pages </a>
-                         <i class="fas fa-sort-down pageSort"></i>
+                        <i class="fas fa-sort-down pageSort"></i>
                     </div>
                     <div class="row mt-2 pages-menu-container">
 
@@ -42,16 +42,16 @@
                                     <a href="/administrator/add_content">Content
                                     </a>
                                 </li>
-                               <%for(let page of pages){%>
+                                <%for(let page of pages){%>
                                 <li>
                                     <a href="/administrator/page_update/<%=page._id%>"><%=page.menu%></a>
                                 </li>
                                 <%}%>
                                 <%if(Object.keys(createdPage).length!==0){%>
-                                    <li>
-                                        <a href="/administrator/page_update/<%=createdPage._id%>"><%=createdPage.menu%></a>
-                                    </li>
-                                    <%}%>
+                                <li>
+                                    <a href="/administrator/page_update/<%=createdPage._id%>"><%=createdPage.menu%></a>
+                                </li>
+                                <%}%>
                             </ul>
                           
                                     <a href="/administrator/page_create" class="page-create-btn">Create</a>
@@ -74,11 +74,11 @@
                                     <a href="/administrator/news">News</a>
                                 </li>
                                 <%if(category.length!==0){%>
-                                    <%for(let c of category){%>
-                                        <li>
-                                            <a href="/administrator/news/category/item/<%=c._id%>"><%=c.name%></a>
-                                        </li>
-                                        <%}%>
+                                <%for(let c of category){%>
+                                <li>
+                                    <a href="/administrator/news/category/item/<%=c._id%>"><%=c.name%></a>
+                                </li>
+                                <%}%>
                                 <%}%>
                             </ul>
                             <a href="/administrator/news/category" class="page-create-btn">Category</a>
@@ -86,13 +86,13 @@
                     </div>
                 </div>
                 <!-- Notice End-->
-              
+
                 <!-- Department -->
                 <div class="col-sm-11 paddingRemover py-2 pages sidebar-menu-item">
-                    
+
                     <div class="d-flex justify-content-around">
                         <a href="#" class="ml-3 pageBtn" id="pageBtn">Department </a>
-                         <i class="fas fa-sort-down pageSort"></i>
+                        <i class="fas fa-sort-down pageSort"></i>
                     </div>
                     <div class="row mt-2 pages-menu-container">
 
@@ -100,32 +100,28 @@
                             <ul class="mt-2 pages-menu">
 
                                 <%webModel.departments.forEach((department,ind)=>{%>
-                                    <li>
-                                        <a href="/administrator/department/update/<%=department._id%>"><%=department.name%></a>
-                                    </li>
+                                <li>
+                                    <a
+                                        href="/administrator/department/update/<%=department._id%>"><%=department.name%></a>
+                                </li>
                                 <%})%>
-                             
+
                             </ul>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <a href="/administrator/department" class="page-create-btn"><i class="mr-2 fas fa-calendar-plus"></i>Add</a>
+                                    <a href="/administrator/department" class="page-create-btn"><i
+                                            class="mr-2 fas fa-calendar-plus"></i>Add</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Department End-->
-                <!-- <div class="col-sm-11 paddingRemover py-2 sidebar-menu-item">
-                    <div class="row">
-                        <div class="col-sm-9"><a href="/administrator/results/management" class="ml-3">Results </a></div>
-                        <div class="col-sm-3"> <i class="fas fa-sort-down"></i></div>
-                    </div>
-                </div> -->
                 <div class="col-sm-11 paddingRemover py-2 pages sidebar-menu-item">
-                    
+
                     <div class="d-flex justify-content-around">
                         <a href="#" class="ml-3 pageBtn" id="pageBtn">Results</a>
-                         <i class="fas fa-sort-down pageSort"></i>
+                        <i class="fas fa-sort-down pageSort"></i>
                     </div>
                     <div class="row mt-2 pages-menu-container">
 
@@ -145,9 +141,9 @@
                 <div class="col-sm-11 paddingRemover py-2 sidebar-menu-item">
                     <div class="d-flex justify-content-around">
                         <a href="/administrator/user/create" class="ml-3">Teachers</a>
-                       <i class="fas fa-sort-down"></i>
+                        <i class="fas fa-sort-down"></i>
                     </div>
-                    
+
                 </div>
 
                 <div class="col-sm-11 paddingRemover py-2 sidebar-menu-item">
@@ -156,17 +152,17 @@
                         <i class="fas fa-sort-down"></i>
                     </div>
                 </div>
-                
+
                 <div class="col-sm-11 paddingRemover py-2 sidebar-menu-item">
                     <div class="d-flex justify-content-around">
-                       <a href="/administrator/emails" class="ml-3">Emails</a>
-                         <i class="fas fa-sort-down"></i>
+                        <a href="/administrator/emails" class="ml-3">Emails</a>
+                        <i class="fas fa-sort-down"></i>
                     </div>
                 </div>
                 <div class="col-sm-11 paddingRemover py-2 sidebar-menu-item">
                     <div class="d-flex justify-content-around">
-                       <a href="/administrator/gallery" class="ml-3">Gallery</a>
-                         <i class="fas fa-sort-down"></i>
+                        <a href="/administrator/gallery" class="ml-3">Gallery</a>
+                        <i class="fas fa-sort-down"></i>
                     </div>
                 </div>
                 <div class="col-sm-11 paddingRemover py-2 sidebar-menu-item">
@@ -178,8 +174,8 @@
 
                 <div class="col-sm-11 paddingRemover py-2 sidebar-menu-item">
                     <div class="d-flex justify-content-around">
-                         <a href="/administrator/create" class="ml-3">Administrator</a>
-                         <i class="fas fa-sort-down"></i>
+                        <a href="/administrator/create" class="ml-3">Administrator</a>
+                        <i class="fas fa-sort-down"></i>
                     </div>
                 </div>
                 <div class="col-sm-11 paddingRemover py-2 sidebar-menu-item">

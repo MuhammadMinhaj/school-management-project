@@ -1,641 +1,509 @@
 <!-- Header Section -->
 <%-include('../partials/head.ejs')%>
-
-
-
 <!-- Slider -->
 <div style="margin:0px!important" class="row backgroundImage">
-  <div class="col-sm-12" style="padding-right:0px!important;padding-left:0px!important">
-    <div class="slider-container" >
-  
-      <div class="swiper-container">
-          <!--     -->
-        <div class="swiper-wrapper">
-          <%if(webModel.slider.length===0){%>
-              <%for(let i = 0;i<3;i++){%>
-                <div class="swiper-slide" style="background-color: transparent;" style="width:100%!important">
-           
+   <div class="col-sm-12" style="padding-right:0px!important;padding-left:0px!important">
+      <div class="slider-container" >
+         <div class="swiper-container">
+            <!--     -->
+            <div class="swiper-wrapper">
+               <%if(webModel.slider.length===0){%>
+               <%for(let i = 0;i<3;i++){%>
+               <div class="swiper-slide" style="background-color: transparent;" style="width:100%!important">
                   <div class="slider-container-text">
-                      <div class="slider-wrapper-text">
-                          <h2 class="ml3">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
-                      </div>
-                      
-                      <a href="#" class="slider-text-button">Lorem ipsum</a>
+                     <div class="slider-wrapper-text">
+                        <h2 class="ml3">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
+                     </div>
+                     <a href="#" class="slider-text-button">Lorem ipsum</a>
                   </div>
                   <div class="sliderOpacityStyleContainer">
-                    <div class="sliderOpacityStyle"></div> 
-                    <!-- <img src="/uploads/default-slider.svg" width='100%' height='100%' alt=""> -->
-                    <div class="defaultSliderImage">
+                     <div class="sliderOpacityStyle"></div>
+                     <div class="defaultSliderImage">
                         <h1>Slider Image</h1>
-                    </div>
+                     </div>
                   </div>
-                    
-                </div>
-                <%}%>
-            <%}else{%>
-                <%for(let slider of webModel.slider){%>
-                  <div class="swiper-slide" style="background-color: transparent;">
-                    <div class="slider-container-text">
-                      <%if(slider.text){%>
-                        <div class="slider-wrapper-text">
-                          <h2 class="ml3"><%=slider.text%></h2>
-                      </div>
-                        <%}%>
-  
-                       
-                    </div>
-                    <div class="sliderOpacityStyleContainer">
-                      <div class="sliderOpacityStyle"></div> 
-                      <img src="<%=slider.image%>" width='100%' height='100%' alt="">
-                    </div>
+               </div>
+               <%}%>
+               <%}else{%>
+               <%for(let slider of webModel.slider){%>
+               <div class="swiper-slide" style="background-color: transparent;">
+                  <div class="slider-container-text">
+                     <%if(slider.text){%>
+                     <div class="slider-wrapper-text">
+                        <h2 class="ml3"><%=slider.text%></h2>
+                     </div>
+                     <%}%>
                   </div>
-                  <%}%>
-              <%}%>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-        <!-- Add Arrows -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+                  <div class="sliderOpacityStyleContainer">
+                     <div class="sliderOpacityStyle"></div>
+                     <img src="<%=slider.image%>" width='100%' height='100%' alt="">
+                  </div>
+               </div>
+               <%}%>
+               <%}%>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+         </div>
       </div>
-    
-    </div>
-  </div>
+   </div>
 </div>
 <!-- Slider End -->
-
 <!-- Links Card -->
 <div style="margin:0px!important" class="row backgroundImage px-5 pt-5">
-  <div class="col-sm-12 cardStyleMainContainer">
-    <div class="row mt-5 removeMargin">
-    <div class="col-sm-3 p-1">
-        <a href="/web/about"
-        class="cardLinkContainer">
-          <div class="extra"></div>
-          <div class="cardLinkIconContainer py-2">
-            <i class="fas fa-info"></i>
-          </div>
-          <div class="cardLinkText">
-            <h6>About JASA</h6>
-          </div>
-        </a>
-    </div>
-    <div class="col-sm-3 p-1">
-        <a href="/web/administration"
-        class="cardLinkContainer">
-          <div class="extra"></div>
-          <div class="cardLinkIconContainer py-2">
-            <i class="fas fa-users"></i>
-          </div>
-          <div class="cardLinkText">
-            <h6>Administration</h6>
-          </div>
-        </a>
-    </div>
-    <div class="col-sm-3 p-1">
-        <a href="/web/libray"
-        class="cardLinkContainer">
-          <div class="extra"></div>
-          <div class="cardLinkIconContainer py-2">
-            <i class="fas fa-book-open"></i>
-          </div>
-          <div class="cardLinkText">
-            <h6>Libray</h6>
-          </div>
-        </a>
-    </div>
-    <div class="col-sm-3 p-1">
-        <a href="/web/mission&vission"
-        class="cardLinkContainer">
-          <div class="extra"></div>
-          <div class="cardLinkIconContainer py-2">
-            <i class="fas fa-road"></i>
-          </div>
-          <div class="cardLinkText">
-            <h6>Mission & Vission</h6>
-          </div>
-        </a>
-    </div>
-    </div>
-  </div>
+   <div class="col-sm-12 cardStyleMainContainer">
+      <div class="row mt-5 removeMargin">
+         <div class="col-sm-3 p-1">
+            <a href="/web/about"
+               class="cardLinkContainer">
+               <div class="extra"></div>
+               <div class="cardLinkIconContainer py-2">
+                  <i class="fas fa-info"></i>
+               </div>
+               <div class="cardLinkText">
+                  <h6>About JASA</h6>
+               </div>
+            </a>
+         </div>
+         <div class="col-sm-3 p-1">
+            <a href="/web/administration"
+               class="cardLinkContainer">
+               <div class="extra"></div>
+               <div class="cardLinkIconContainer py-2">
+                  <i class="fas fa-users"></i>
+               </div>
+               <div class="cardLinkText">
+                  <h6>Administration</h6>
+               </div>
+            </a>
+         </div>
+         <div class="col-sm-3 p-1">
+            <a href="/web/libray"
+               class="cardLinkContainer">
+               <div class="extra"></div>
+               <div class="cardLinkIconContainer py-2">
+                  <i class="fas fa-book-open"></i>
+               </div>
+               <div class="cardLinkText">
+                  <h6>Libray</h6>
+               </div>
+            </a>
+         </div>
+         <div class="col-sm-3 p-1">
+            <a href="/web/mission&vission"
+               class="cardLinkContainer">
+               <div class="extra"></div>
+               <div class="cardLinkIconContainer py-2">
+                  <i class="fas fa-road"></i>
+               </div>
+               <div class="cardLinkText">
+                  <h6>Mission & Vission</h6>
+               </div>
+            </a>
+         </div>
+      </div>
+   </div>
 </div>
 <!-- Links Card End -->
-
 <!-- Creator Page Design -->
 <div style="margin:0px!important" class="row text-center backgroundImage">
-  <div class="col-sm-12">
-    <h3 class="addMargin sectionHeadTitle"> 
-      CREATOR OF 
-       <span class="sectionHeadSubSubTitle">
-        <span style="color:#575e64">J</span>
-        <span style="color:#28a745">A</span>
-        <span style="color:#575e64">S</span>
-        <span style="color:#28a745">A</span>
-      </span>
-    </h3>
-    <!-- <h3>Creator Of JASA</h3> -->
-  </div>
+   <div class="col-sm-12">
+      <h3 class="addMargin sectionHeadTitle"> 
+         CREATOR OF 
+         <span class="sectionHeadSubSubTitle">
+         <span style="color:#575e64">J</span>
+         <span style="color:#28a745">A</span>
+         <span style="color:#575e64">S</span>
+         <span style="color:#28a745">A</span>
+         </span>
+      </h3>
+      <!-- <h3>Creator Of JASA</h3> -->
+   </div>
 </div>
-
-
 <div style="margin:0px!important" class="row backgroundImage py-3 px-5 clearXPadding">
-  
-  <div class="col-sm-3">
-    <div class="swiper-container imageCustomStyle py-2">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
-          <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Syed Muhammad Taher Shah(MJA)</h6>
-          <img src="/uploads/syad-taher-sha-hozor.jpg" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
-          
-        </div>
-        <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
-          <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Syed Muhammad Tayyab Shah(RH)</h6>
-          <img src="/uploads/creator-2.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
-        </div>
-        <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
-          <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Syed Muhammad Ahmad Shah(RH)</h6>
-          <img src="/uploads/creator-3.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
-        </div>
-        <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
-          <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Sayed Muhammad Sabir Shah(MJA)</h6>
-          <img src="/uploads/creator-4.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
-        </div>
+   <div class="col-sm-3">
+      <div class="swiper-container imageCustomStyle py-2">
+         <div class="swiper-wrapper">
+            <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
+               <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Syed Muhammad Taher Shah(MJA)</h6>
+               <img src="/uploads/syad-taher-sha-hozor.jpg" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
+            </div>
+            <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
+               <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Syed Muhammad Tayyab Shah(RH)</h6>
+               <img src="/uploads/creator-2.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
+            </div>
+            <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
+               <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Syed Muhammad Ahmad Shah(RH)</h6>
+               <img src="/uploads/creator-3.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
+            </div>
+            <div class="swiper-slide" style="flex-direction:column;background-color: rgba(255, 255, 255, 0);">
+               <h6 style="text-transform: uppercase;color:#495057;font-size:14px">Sayed Muhammad Sabir Shah(MJA)</h6>
+               <img src="/uploads/creator-4.png" style="border-radius:10px;height:95%;" class="m-auto" width="90%"  alt="">
+            </div>
+         </div>
+         <!-- Add Pagination -->
+         <div class="swiper-pagination"></div>
+         <!-- Add Navigation -->
+         <div class="swiper-button-prev" style="color:#1e7e34"></div>
+         <div class="swiper-button-next" style="color:#1e7e34"></div>
       </div>
-      
-      <!-- Add Pagination -->
-      <div class="swiper-pagination"></div>
-      <!-- Add Navigation -->
-      <div class="swiper-button-prev" style="color:#1e7e34"></div>
-      <div class="swiper-button-next" style="color:#1e7e34"></div>
-    </div>
-     
-  </div>
-  <!-- <div class="col-sm-2"></div> -->
-  <!-- <div class="col-sm-9 addMargin">
-    <div class="creatorTextContainer">
-      <div class="swiper-container py-2">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" style="background-color: rgba(255, 255, 255, 0);">
-              <div class="text-center mb-3 ml-2">
-              <h5 class="text-size-title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h5>
-              <p class="text-size-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus modi dolor saepe, exercitationem placeat error ut qui pariatur perspiciatis omnis nostrum quos odit quibusdam at velit maxime mollitia cumque inventore.</p>
-              </div>  
-          </div>
-          <div class="swiper-slide" style="background-color: rgba(255, 255, 255, 0);">
-              <div class="text-center mb-2 ml-2">
-              <h5 class="text-size-title"><i class="fas fa-quote-left quoteIconStyle mr-1"></i>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h5>
-              <p class="text-size-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus modi dolor saepe, exercitationem placeat error ut qui pariatur perspiciatis omnis nostrum quos odit quibusdam at velit maxime mollitia cumque inventore.</p>
-              </div>  
-          </div>
-          <div class="swiper-slide" style="background-color: rgba(255, 255, 255, 0);">
-              <div class="text-center mb-2 ml-2">
-              <h5 class="text-size-title"><i class="fas fa-quote-left quoteIconStyle mr-1"></i>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h5>
-              <p class="text-size-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus modi dolor saepe, exercitationem placeat error ut qui pariatur perspiciatis omnis nostrum quos odit quibusdam at velit maxime mollitia cumque inventore.</p>
-              </div>  
-          </div>
-          <div class="swiper-slide" style="background-color: rgba(255, 255, 255, 0);">
-              <div class="text-center mb-2 ml-2">
-              <h5 class="text-size-title"><i class="fas fa-quote-left quoteIconStyle mr-1"></i>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h5>
-              <p class="text-size-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus modi dolor saepe, exercitationem placeat error ut qui pariatur perspiciatis omnis nostrum quos odit quibusdam at velit maxime mollitia cumque inventore.</p>
-              </div>  
-          </div>
-        </div>
-
-        <div class="swiper-pagination "></div>
+   </div>
+   <div class="col-sm-9 addMargin">
+      <div class="creatorTextContainer">
+         <div class="text-center mb-3 ml-2">
+            <h5>
+               <i class="h2 fas fa-quote-left"></i>
+               ১৯৫৪ সাল। বৃহত্তর চট্টগ্রামে নীরবে চলছিল নবী প্রেমিকদের কোনঠাসা করার পাঁয়তারা। অলি বিদ্বেষীদের অপতৎপরতা। এমনি এক ক্রান্তিকালে, সময়ের প্রয়োজনে কুত্ববুল আউলিয়া হযরতুল আল্লামা আলহাজ্ব হাফেয ক্বারী সৈয়্যদ আহমদ শাহ্ সিরিকোটি (রাহ্.) মাসলাকে আলা হযরতের উপর ভিত্তি করে চট্টগ্রামের ষোলশহরে প্রতিষ্ঠা করেন, জামেয়া আহমদিয়া সুন্নিয়া আলিয়া। প্রতিষ্ঠালগ্ন থেকে শুরু করে সুদীর্ঘ অর্ধ্ব শতাব্দীরও বেশি কাল এ দীনী শিক্ষা প্রতিষ্ঠান দেশের চৌহদ্দি অতিক্রম করে উপমহাদেশে দীন, মিল্লাত ও মাযহাবের খেদমতে রেখে আসছে ব্যাপক অবদান।
+               প্রতিষ্ঠাতার যোগ্য উত্তরসূরী আল্লামা সৈয়্যদ মুহাম্মদ তৈয়্যব শাহ্ (রাহ্.) এবং বর্তমান সাজ্জাদানাশীন হুযূর ক্বিবলাহ্ মাদ্দাযিলু­হুল আলীর পৃষ্ঠপোষকতায় জামেয়ার খ্যাতি আজ দুনিয়া ব্যাপী। যা সূর্যের আলোর ন্যায় সমুজ্জ্বল।
+               <i class="h2 fas fa-quote-right"></i>
+            </h5>
+         </div>
       </div>
-    </div>
-  </div> -->
-  <div class="col-sm-9 addMargin">
-    <div class="creatorTextContainer">
-      <div class="text-center mb-3 ml-2">
-        
-        <h5>
-          <i class="h2 fas fa-quote-left"></i>
-          ১৯৫৪ সাল। বৃহত্তর চট্টগ্রামে নীরবে চলছিল নবী প্রেমিকদের কোনঠাসা করার পাঁয়তারা। অলি বিদ্বেষীদের অপতৎপরতা। এমনি এক ক্রান্তিকালে, সময়ের প্রয়োজনে কুত্ববুল আউলিয়া হযরতুল আল্লামা আলহাজ্ব হাফেয ক্বারী সৈয়্যদ আহমদ শাহ্ সিরিকোটি (রাহ্.) মাসলাকে আলা হযরতের উপর ভিত্তি করে চট্টগ্রামের ষোলশহরে প্রতিষ্ঠা করেন, জামেয়া আহমদিয়া সুন্নিয়া আলিয়া। প্রতিষ্ঠালগ্ন থেকে শুরু করে সুদীর্ঘ অর্ধ্ব শতাব্দীরও বেশি কাল এ দীনী শিক্ষা প্রতিষ্ঠান দেশের চৌহদ্দি অতিক্রম করে উপমহাদেশে দীন, মিল্লাত ও মাযহাবের খেদমতে রেখে আসছে ব্যাপক অবদান।
-          প্রতিষ্ঠাতার যোগ্য উত্তরসূরী আল্লামা সৈয়্যদ মুহাম্মদ তৈয়্যব শাহ্ (রাহ্.) এবং বর্তমান সাজ্জাদানাশীন হুযূর ক্বিবলাহ্ মাদ্দাযিলু­হুল আলীর পৃষ্ঠপোষকতায় জামেয়ার খ্যাতি আজ দুনিয়া ব্যাপী। যা সূর্যের আলোর ন্যায় সমুজ্জ্বল।
-          <i class="h2 fas fa-quote-right"></i>
-        </h5>
-        
-        </div> 
-    </div>
-  </div>
-
+   </div>
 </div>
 <!-- Creator Page Design End-->
-
 <div style="margin:0px!important" class="row text-center backgroundImage">
-  <div class="col-sm-12">
-    <h3 class="addMargin sectionHeadTitle"> 
-      NOTICE
-    </h3>
-  </div>
+   <div class="col-sm-12">
+      <h3 class="addMargin sectionHeadTitle"> 
+         NOTICE
+      </h3>
+   </div>
 </div>
 <!-- Notice Board -->
 <div style="margin:0px!important" class="row backgroundImage px-5 py-2 clearXPadding">
-  <div class="col-sm-12">
-    <div class="row">
-
-      <div class="col-sm-5">
-    
-          <div class="newsMainContainer bg-light h-100">
-         
-            <div class="newsTitle">
-              <h5>Latest New's</h5>
-            </div>
-            
-             <div class="p-2 maxHeightSet"  style="border-radius: 0px!important;">
-               
-               <div class="card-body">
-                 <h6 class="card-title" style="color:#495057"> <%=webModel.latestNews.title?webModel.latestNews.title:''%></h6>
-                 <p style="color:#545b62;">
-                 
-                    <%=webModel.latestNews.text?webModel.latestNews.text:''%>
-                  
-                  </p>
+   <div class="col-sm-12">
+      <div class="row">
+         <div class="col-sm-5">
+            <div class="newsMainContainer bg-light h-100">
+               <div class="newsTitle">
+                  <h5>Latest New's</h5>
                </div>
-             </div>  
-          </div>
-        
-      </div>
-
-      <div class="col-sm-7 addMargin">
-        <div class="noticeMainContainer">
-          <div class="noticeTitle">
-              <h5>
-                Notice Board
-              </h5>
-          </div>
-          <div class="card p-2 maxHeightSet" style="border-radius: 0px!important;">
-              <ul class="wrapperNoticeContainer">
-                  <%notice.reverse().forEach((n,ind)=>{%>
-                    <%if(ind===0){%>
-                      <li style="border-top:none!important">
+               <div class="p-2 maxHeightSet"  style="border-radius: 0px!important;">
+                  <div class="card-body">
+                     <h6 class="card-title" style="color:#495057"> <%=webModel.latestNews.title?webModel.latestNews.title:''%></h6>
+                     <p style="color:#545b62;">
+                        <%=webModel.latestNews.text?webModel.latestNews.text:''%>
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-7 addMargin">
+            <div class="noticeMainContainer">
+               <div class="noticeTitle">
+                  <h5>
+                     Notice Board
+                  </h5>
+               </div>
+               <div class="card p-2 maxHeightSet" style="border-radius: 0px!important;">
+                  <ul class="wrapperNoticeContainer">
+                     <%notice.reverse().forEach((n,ind)=>{%>
+                     <%if(ind===0){%>
+                     <li style="border-top:none!important">
                         <a href="/web/notice/<%=n.id%>">
-                        <div class="noticeDateContainer" style="background:#ad1523;
-                        box-shadow:0pt 2pt 1pt #196129">
-                          <span><%=n.date.date%> <span><%=n.date.month%></span></span>
-                          <br>
-                          <span><%=n.date.year%></span>
-                        </div>
-                        <div class="noticeTextContainer">
-                          <h6 style="margin:0px!important;">
-                      
-                            <%=n.title%>
-                        
-                          </h6>
-                        
-                        </div>
-                      </a>
-                    </li>
-                    <%}else{%>
-
-                      <%if(ind<10){%>
-
-                     
-                    <li>
-                      <a href="/web/notice/<%=n.id%>">
-                      <div class="noticeDateContainer">
-                        <span><%=n.date.date%> <span><%=n.date.month%></span></span>
-                        <br>
-                        <span><%=n.date.year%></span>
-                      </div>
-                      <div class="noticeTextContainer">
-                        <h6 style="margin:0px!important;">
-                    
-                       
-                          <%if(n.title){%>
-                            <%if(n.title.length>150){%>
-                        <%=n.title.slice(0,151)+'...'%>
-                            <%}else{%>
-                            <%=n.title%>
-                            <%}%>
-                            <%}else{%>
-                            <span class="text-muted">N/A</span>
-                            <%}%>
-                      
-                        </h6>
-                      
-                      </div>
-                    </a>
-                    </li>
-                         <%}%>
-                      <%}%>
-
-              
-                  <%})%>
-            
-              </ul>
-              
-          </div>
-          <div class="text-center py-2">
-            <a href="/web/notice" class="noticeMoreBtn">See more</a>
-          </div>
-        </div>
-        
+                           <div class="noticeDateContainer" style="background:#ad1523;
+                              box-shadow:0pt 2pt 1pt #196129">
+                              <span><%=n.date.date%> <span><%=n.date.month%></span></span>
+                              <br>
+                              <span><%=n.date.year%></span>
+                           </div>
+                           <div class="noticeTextContainer">
+                              <h6 style="margin:0px!important;">
+                                 <%=n.title%>
+                              </h6>
+                           </div>
+                        </a>
+                     </li>
+                     <%}else{%>
+                     <%if(ind<10){%>
+                     <li>
+                        <a href="/web/notice/<%=n.id%>">
+                           <div class="noticeDateContainer">
+                              <span><%=n.date.date%> <span><%=n.date.month%></span></span>
+                              <br>
+                              <span><%=n.date.year%></span>
+                           </div>
+                           <div class="noticeTextContainer">
+                              <h6 style="margin:0px!important;">
+                                 <%if(n.title){%>
+                                 <%if(n.title.length>150){%>
+                                 <%=n.title.slice(0,151)+'...'%>
+                                 <%}else{%>
+                                 <%=n.title%>
+                                 <%}%>
+                                 <%}else{%>
+                                 <span class="text-muted">N/A</span>
+                                 <%}%>
+                              </h6>
+                           </div>
+                        </a>
+                     </li>
+                     <%}%>
+                     <%}%>
+                     <%})%>
+                  </ul>
+               </div>
+               <div class="text-center py-2">
+                  <a href="/web/notice" class="noticeMoreBtn">See more</a>
+               </div>
+            </div>
+         </div>
       </div>
-
-    </div>
-  </div>
+   </div>
 </div>
 <!-- Notice Board End -->
-
-
 <!-- Department Of Jasa -->
 <div style="margin:0px!important" class="row text-center clearXPadding backgroundImage">
-  <div class="col-sm-12">
-    <h3 class="sectionHeadTitle text-center">
-
-      DEPARTMENT OF
-       <span class="sectionHeadSubSubTitle">
-        <span style="color:#575e64">J</span>
-        <span style="color:#28a745">A</span>
-        <span style="color:#575e64">S</span>
-        <span style="color:#28a745">A</span>
-      </span>
-    </h3>
-  </div>
- 
+   <div class="col-sm-12">
+      <h3 class="sectionHeadTitle text-center">
+         DEPARTMENT OF
+         <span class="sectionHeadSubSubTitle">
+         <span style="color:#575e64">J</span>
+         <span style="color:#28a745">A</span>
+         <span style="color:#575e64">S</span>
+         <span style="color:#28a745">A</span>
+         </span>
+      </h3>
+   </div>
 </div>
-
 <div style="margin:0px!important" class="row px-5 pb-2 clearXPadding backgroundImage">
-  
-<%if(webModel.departments){%>
-  <%webModel.departments.forEach((d,ind)=>{%>
-      <div class="col-sm-3 mb-3">
-        <a href="/web/department/<%=d.name%>" class="departmentLink">
-        <div class="departmentContainer py-5">
-
+   <%if(webModel.departments){%>
+   <%webModel.departments.forEach((d,ind)=>{%>
+   <div class="col-sm-3 mb-3">
+      <a href="/web/department/<%=d.name%>" class="departmentLink">
+         <div class="departmentContainer py-5">
             <h5><%=d.name%></h5>
             <div class="tringleOfDepart">
-              <i class="fas fa-arrow-right"></i>
+               <i class="fas fa-arrow-right"></i>
             </div>
-            
-        </div>
-        </a>
-      </div>
-    <%})%>
-  <%}%>
-
+         </div>
+      </a>
+   </div>
+   <%})%>
+   <%}%>
 </div>
 <!-- Department Of Jasa End -->
-
 <!-- Important Links End -->
 <div style="margin:0px!important" class="row px-5  clearXPadding backgroundImage">
-  <div class="col-sm-12 pb-3 text-center">
-    <h3 class="sectionHeadTitle">
-      IMPORTANCE  <span style="color:green">LINKS</span> 
-    </h3>
-  </div>
-
-<div class="col-sm-12">
-  <div class="row">
-    <div class="col-sm-6 mb-2">
-        <div class="importanceLinkContainer h-100">
-          <h5>Referance Links</h5>
-          <ul class="p-2">
-            <%if(webModel.referenceLinks.length!==0){%>
-              <%webModel.referenceLinks.forEach((link,ind)=>{%>
-                <%if(ind===0){%>
+   <div class="col-sm-12 pb-3 text-center">
+      <h3 class="sectionHeadTitle">
+         IMPORTANCE  <span style="color:green">LINKS</span> 
+      </h3>
+   </div>
+   <div class="col-sm-12">
+      <div class="row">
+         <div class="col-sm-6 mb-2">
+            <div class="importanceLinkContainer h-100">
+               <h5>Referance Links</h5>
+               <ul class="p-2">
+                  <%if(webModel.referenceLinks.length!==0){%>
+                  <%webModel.referenceLinks.forEach((link,ind)=>{%>
+                  <%if(ind===0){%>
                   <li style="border-top:none">
-                    <a href="<%=link.url%>">
-                      <div class="linksIcon">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-                        </svg>
-                      </div>
-                      <div class="linksText">
-                        <h6><%=link.name%></h6>
-                      </div>
-                    </a>
+                     <a href="<%=link.url%>">
+                        <div class="linksIcon">
+                           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                           </svg>
+                        </div>
+                        <div class="linksText">
+                           <h6><%=link.name%></h6>
+                        </div>
+                     </a>
                   </li>
                   <%}else{%>
-                    <li>
-                      <a href="<%=link.url%>">
-                        <div class="linksIcon">
-                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-                          </svg>
-                        </div>
-                        <div class="linksText">
-                          <h6><%=link.name%></h6>
-                        </div>
-                      </a>
-                    </li>
-                    <%}%>
-              <%})%>
-             
-
-            <%}else{%>
-              <%for(let i = 0;i<=5;i++){%>
-                    <li>
-                      
-                        
-                      <a href="#">
-                        
-                        
-                        <span class="hiddenELement"></span>
-                        <div class="linksIcon">
-                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-                          </svg>
-                        </div>
-                        <div class="linksText">
-                            <h6>Link <%=i+1%></h6>
-                        </div>
-                      </a>
-                    </li>
-                <%}%>
-              <%}%>
-           
-          
-          </ul>
-        </div>
-    </div>
-    <div class="col-sm-6 mb-2">
-      <div class="importanceLinkContainer h-100">
-        <h5>Downloads</h5>
-        <ul class="p-2">
-
-         
-          <%if(webModel.documentsLinks.length!==0){%>
-            <%webModel.documentsLinks.forEach((document,ind)=>{%>
-              <%if(ind===0){%>
-                <li style="border-top:none">
-                  <a href="uploads/documents/<%=document.document%>" <%=document.option==='direct'?'download':''%>>
-                    <div class="linksIcon">
-                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cloud-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
-                        <path fill-rule="evenodd" d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
-                      </svg>
-                    </div>
-                    <div class="linksText">
-                        <h6><%=document.name%></h6>
-                    </div>
-                  </a>
-                </li>
-                <%}else{%>
                   <li>
-                    <a href="uploads/documents/<%=document.document%>" <%=document.option==='direct'?'download':''%>>
-                      <div class="linksIcon">
-
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cloud-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
-                          <path fill-rule="evenodd" d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
-                        </svg>
-
-                      </div>
-                      <div class="linksText">
-                          <h6><%=document.name%></h6>
-                      </div>
-                    </a>
+                     <a href="<%=link.url%>">
+                        <div class="linksIcon">
+                           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                           </svg>
+                        </div>
+                        <div class="linksText">
+                           <h6><%=link.name%></h6>
+                        </div>
+                     </a>
                   </li>
                   <%}%>
-            <%})%>
-           
-          <%}else{%>
-            <%for(let i = 0;i<=5;i++){%>
-            
+                  <%})%>
+                  <%}else{%>
+                  <%for(let i = 0;i<=5;i++){%>
                   <li>
-                    <a href="#">
-                      <div class="linksIcon">
-
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cloud-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
-                          <path fill-rule="evenodd" d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
-                        </svg>
-
-                      </div>
-                      <div class="linksText">
-                       <h6>Download <%=i+1%></h6>
-                      </div>
-                    </a>
+                     <a href="#">
+                        <span class="hiddenELement"></span>
+                        <div class="linksIcon">
+                           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                           </svg>
+                        </div>
+                        <div class="linksText">
+                           <h6>Link <%=i+1%></h6>
+                        </div>
+                     </a>
                   </li>
-            
-              <%}%>
-            <%}%>
-
-          
-      
-        </ul>
+                  <%}%>
+                  <%}%>
+               </ul>
+            </div>
+         </div>
+         <div class="col-sm-6 mb-2">
+            <div class="importanceLinkContainer h-100">
+               <h5>Downloads</h5>
+               <ul class="p-2">
+                  <%if(webModel.documentsLinks.length!==0){%>
+                  <%webModel.documentsLinks.forEach((document,ind)=>{%>
+                  <%if(ind===0){%>
+                  <li style="border-top:none">
+                     <a href="uploads/documents/<%=document.document%>" <%=document.option==='direct'?'download':''%>>
+                        <div class="linksIcon">
+                           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cloud-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+                              <path fill-rule="evenodd" d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+                           </svg>
+                        </div>
+                        <div class="linksText">
+                           <h6><%=document.name%></h6>
+                        </div>
+                     </a>
+                  </li>
+                  <%}else{%>
+                  <li>
+                     <a href="uploads/documents/<%=document.document%>" <%=document.option==='direct'?'download':''%>>
+                        <div class="linksIcon">
+                           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cloud-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+                              <path fill-rule="evenodd" d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+                           </svg>
+                        </div>
+                        <div class="linksText">
+                           <h6><%=document.name%></h6>
+                        </div>
+                     </a>
+                  </li>
+                  <%}%>
+                  <%})%>
+                  <%}else{%>
+                  <%for(let i = 0;i<=5;i++){%>
+                  <li>
+                     <a href="#">
+                        <div class="linksIcon">
+                           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cloud-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+                              <path fill-rule="evenodd" d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+                           </svg>
+                        </div>
+                        <div class="linksText">
+                           <h6>Download <%=i+1%></h6>
+                        </div>
+                     </a>
+                  </li>
+                  <%}%>
+                  <%}%>
+               </ul>
+            </div>
+         </div>
       </div>
-  </div>
-  </div>
-</div>
-
+   </div>
 </div>
 <!-- Important Links End -->
-
 <div style="margin:0px!important" class="row pb-5 clearXPadding backgroundImage">
-  <div class="col-sm-1"></div>
-  
-  <div class="col-sm-10 text-center removeXPadding">
+   <div class="col-sm-1"></div>
+   <div class="col-sm-10 text-center removeXPadding">
       <h3 class="addMargin sectionHeadTitle"> 
-        ASSEMBLY OF
+         ASSEMBLY OF
          <span class="sectionHeadSubSubTitle">
-          <span style="color:#575e64">J</span>
-          <span style="color:#28a745">A</span>
-          <span style="color:#575e64">S</span>
-          <span style="color:#28a745">A</span>
-        </span>
+         <span style="color:#575e64">J</span>
+         <span style="color:#28a745">A</span>
+         <span style="color:#575e64">S</span>
+         <span style="color:#28a745">A</span>
+         </span>
       </h3>
-
-        <iframe  class="videoFrame" width="99%" src="https://www.youtube-nocookie.com/embed/iEKcr94aD10" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-  <div class="col-sm-1"></div>
+      <iframe  class="videoFrame" width="99%" src="https://www.youtube-nocookie.com/embed/iEKcr94aD10" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   </div>
+   <div class="col-sm-1"></div>
 </div>
-
 <!-- Contact Us -->
 <div class="row px-5 py-5 clearXPadding" style="margin:0px!important;background:#343a40;border-bottom:5px solid #f8f9fa12">
-    
-     <!-- Contact Us -->
-     <div class="col-sm-5 custom__border__remove custom__border">
-
-          <div class="contact__page__title">
-              <h4>Contact US</h4>
-              <h5>Jamea Ahmadia Sunnia Kamil Madrasah</h5>
-          </div>
-          
-          <div class=" contact_page_item addMargin">
-              <i class="fas fa-map-marked-alt"></i>
-              <h6>Location</h6>
-              <p>
-                  Soloshor,Chandgaon-4212
-              </p>
-              <p>
-                  Panchlaish Chittagong
-              </p>
-          </div>
-          
-
-          <div class=" contact_page_item addMargin">
-              <i class="fas fa-blender-phone"></i>
-              <h6>Phone</h6>
-              <p>+88031655476</p>
-          </div>
-          
-          <div class=" contact_page_item addMargin">
-              <i class="fas fa-envelope"></i>
-               <h6>Email</h6>
-              <p>
-                   jasactg@gmail.com
-              </p>
-          </div>
-     </div>
-    <div class="col-sm-7">
-    <div class="contact_map addMargin">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d59030.94766746596!2d91.837064!3d22.374982!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcad5f4f134653769!2sJamia%20Ahmadia%20Sunnia%20Alia%20Madrasah!5e0!3m2!1sen!2sbd!4v1591810341900!5m2!1sen!2sbd" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-    </div>
-    </div>
-
+   <!-- Contact Us -->
+   <div class="col-sm-5 custom__border__remove custom__border">
+      <div class="contact__page__title">
+         <h4>Contact US</h4>
+         <h5>Jamea Ahmadia Sunnia Kamil Madrasah</h5>
+      </div>
+      <div class=" contact_page_item addMargin">
+         <i class="fas fa-map-marked-alt"></i>
+         <h6>Location</h6>
+         <p>
+            Soloshor,Chandgaon-4212
+         </p>
+         <p>
+            Panchlaish Chittagong
+         </p>
+      </div>
+      <div class=" contact_page_item addMargin">
+         <i class="fas fa-blender-phone"></i>
+         <h6>Phone</h6>
+         <p>+88031655476</p>
+      </div>
+      <div class=" contact_page_item addMargin">
+         <i class="fas fa-envelope"></i>
+         <h6>Email</h6>
+         <p>
+            jasactg@gmail.com
+         </p>
+      </div>
+   </div>
+   <div class="col-sm-7">
+      <div class="contact_map addMargin">
+         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d59030.94766746596!2d91.837064!3d22.374982!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcad5f4f134653769!2sJamia%20Ahmadia%20Sunnia%20Alia%20Madrasah!5e0!3m2!1sen!2sbd!4v1591810341900!5m2!1sen!2sbd" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+      </div>
+   </div>
 </div>
 <!-- Contact Us End -->
 
-
-<!-- <a href="/auth/login" class="nav-link py-5">Login Admin</a> -->
 <!-- Footer Section -->
 <%-include('../partials/footer.ejs')%>
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-
 <script>
-    var swiper = new Swiper('.swiper-container', {
-      spaceBetween: 30,
-      centeredSlides: true,
-      // autoplay: {
-      //   delay: 7000,
-      //   disableOnInteraction: false,
-      // },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-        renderBullet: function (index, className) {
-          return '<span class="' + className + '">' + (index + 1) + '</span>';
-        },
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-    var textWrapper = document.querySelector('.ml3');
-textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-
-anime.timeline({loop: true})
-  .add({
-    targets: '.ml3 .letter',
-    opacity: [0,1],
-    easing: "easeInOutQuad",
-    duration: 2250,
-    delay: (el, i) => 150 * (i+1)
-  }).add({
-    targets: '.ml3',
-    opacity: 0,
-    duration: 1000,
-    easing: "easeOutExpo",
-    delay: 1000
-  });
+   var swiper = new Swiper('.swiper-container', {
+     spaceBetween: 30,
+     centeredSlides: true,
+     // autoplay: {
+     //   delay: 7000,
+     //   disableOnInteraction: false,
+     // },
+     pagination: {
+       el: '.swiper-pagination',
+       clickable: true,
+       renderBullet: function (index, className) {
+         return '<span class="' + className + '">' + (index + 1) + '</span>';
+       },
+     },
+     navigation: {
+       nextEl: '.swiper-button-next',
+       prevEl: '.swiper-button-prev',
+     },
+   });
+   var textWrapper = document.querySelector('.ml3');
+   textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+   
+   anime.timeline({loop: true})
+   .add({
+   targets: '.ml3 .letter',
+   opacity: [0,1],
+   easing: "easeInOutQuad",
+   duration: 2250,
+   delay: (el, i) => 150 * (i+1)
+   }).add({
+   targets: '.ml3',
+   opacity: 0,
+   duration: 1000,
+   easing: "easeOutExpo",
+   delay: 1000
+   });
 </script>
-
 </body>
 </html>

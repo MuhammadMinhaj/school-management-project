@@ -30,7 +30,9 @@ const publicLibrayPath = [
     express.static(__dirname+'/node_modules/axios/dist'),
     express.static(__dirname+'/dist'),
     express.static(__dirname+'/node_modules/summernote/dist'),
-    express.static(__dirname+'/node_modules/swiper')
+    express.static(__dirname+'/node_modules/swiper'),
+    express.static(__dirname+'/node_modules/popper.js')
+    
 ]
 app.use(
     publicLibrayPath

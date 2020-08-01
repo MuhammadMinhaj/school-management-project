@@ -1,75 +1,69 @@
 <%-include('../../partials/head.ejs')%>
-
 <div class="container-fluid bg-secondary bg-image pb-5 <%=flashMessage.success||flashMessage.fail?'pt-4':'pt-5'%> login-container">
-	<!-- <h1 class="text-center admin-login-title"><span>J</span>ASA</h1> -->
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-3"></div>
-			<div class="col-sm-6">
-                <%-include('../../partials/Error/alert.ejs')%>
-			</div>
-			<div class="col-sm-3"></div>
-		</div>
-	</div>
-	<div class="custom-login-card">
-		<form action="/user/auth/login" method="POST">
-			<div class="custom-login-title">
-				<h4 class="pt-2">USER LOGIN</h4>
-			</div>
-			<div class="mx-4">
-				<div class="custom-login-body text-center">
-						<div class="form-group">
-							<button type="button" id="emailBtn" class="user-login-btn">Email</button>
-							<button type="button" id="usernameBtn" class="user-login-btn">Username</button>
-						</div>
-						<div class="form-group py-2">
-							<label for="input-email" id="textShow" class="text-left w-100">EMAIL</label>
-							<input type="text" id="inputField" autocomplete="off" name="email" id="input-email" class="custom-login-field-style" placeholder="example@example.com">
-						</div>
-						<div class="form-group py-2">
-							<label for="input-password" class="text-left w-100">PASSWORD</label>
-							<input type="password" name="password" id="input-password" class="custom-login-field-style " placeholder="**********">
-						</div>
-						
-						<%if(control.userForgotPassword){%>
-							<a href="/user/auth/forgot_password">Forgotten Password</a>
-							<%}else{%>
-								<span  style="cursor:pointer" class="text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="Please Contact With Administrator!">
-									Forgotten Password?
-									</span>
-							<%}%>
-							
-				</div>
-			</div>
-			<div class="custom-login-footer">
-				<input type="submit" class="login-btn-style" value="LOGIN">
-				
-			</div>
-		</form>
-	</div>
+   <!-- <h1 class="text-center admin-login-title"><span>J</span>ASA</h1> -->
+   <div class="container">
+      <div class="row">
+         <div class="col-sm-3"></div>
+         <div class="col-sm-6">
+            <%-include('../../partials/Error/alert.ejs')%>
+         </div>
+         <div class="col-sm-3"></div>
+      </div>
+   </div>
+   <div class="custom-login-card">
+      <form action="/user/auth/login" method="POST">
+         <div class="custom-login-title">
+            <h4 class="pt-2">USER LOGIN</h4>
+         </div>
+         <div class="mx-4">
+            <div class="custom-login-body text-center">
+               <div class="form-group">
+                  <button type="button" id="emailBtn" class="user-login-btn">Email</button>
+                  <button type="button" id="usernameBtn" class="user-login-btn">Username</button>
+               </div>
+               <div class="form-group py-2">
+                  <label for="input-email" id="textShow" class="text-left w-100">EMAIL</label>
+                  <input type="text" id="inputField" autocomplete="off" name="email" id="input-email" class="custom-login-field-style" placeholder="example@example.com">
+               </div>
+               <div class="form-group py-2">
+                  <label for="input-password" class="text-left w-100">PASSWORD</label>
+                  <input type="password" name="password" id="input-password" class="custom-login-field-style " placeholder="**********">
+               </div>
+               <%if(control.userForgotPassword){%>
+               <a href="/user/auth/forgot_password">Forgotten Password</a>
+               <%}else{%>
+               <span  style="cursor:pointer" class="text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="Please Contact With Administrator!">
+               Forgotten Password?
+               </span>
+               <%}%>
+            </div>
+         </div>
+         <div class="custom-login-footer">
+            <input type="submit" class="login-btn-style" value="LOGIN">
+         </div>
+      </form>
+   </div>
 </div>
-
 <%-include('../../partials/footer.ejs')%>
-
 <script>
-    let username = document.getElementById('usernameBtn')
-    let email = document.getElementById('emailBtn')
-    let text = document.getElementById('textShow')
-    let field = document.getElementById('inputField')
-
-    function clickHandler(name){
-        text.innerHTML = name.toUpperCase()
-        field.name = name
-        
-    }
-    
-    username.addEventListener('click',()=>{
-        clickHandler('username')
-    })
-    email.addEventListener('click',()=>{
-        clickHandler('email')
-    })
-
+   let username = document.getElementById('usernameBtn')
+   let email = document.getElementById('emailBtn')
+   let text = document.getElementById('textShow')
+   let field = document.getElementById('inputField')
+   
+   function clickHandler(name){
+       text.innerHTML = name.toUpperCase()
+       field.name = name
+       
+   }
+   
+   username.addEventListener('click',()=>{
+       clickHandler('username')
+   })
+   email.addEventListener('click',()=>{
+       clickHandler('email')
+   })
+   
 </script>
 </body>
 </html>

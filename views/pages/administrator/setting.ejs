@@ -1,5 +1,4 @@
 <%-include('../../partials/admin/adminHead.ejs')%>
-
 <div class="row">
    <!-- Admin Brand and Dashboard Menu -->
    <%-include('../../partials/admin/adminSidebar.ejs')%>
@@ -23,12 +22,10 @@
                <div class="col-sm-12">
                   <nav aria-label="breadcrumb">
                      <ol class="breadcrumb breadcrumb__container">
-                     <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
-                 
-                     <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/setting">Settings</a></li>
-                     
+                        <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/setting">Settings</a></li>
                      </ol>
-                 </nav> 
+                  </nav>
                   <div class="card mb-2" style="background:#495057;">
                      <div class="row p-3">
                         <!-- Website Name -->
@@ -45,11 +42,9 @@
                                              <option value="bangla">Bangla</option>
                                              <option value="english">English</option>
                                           </select>
-                                    
                                        </div>
                                        <div class="col-sm-6">
                                           <input type="text" name="webname" class="form-control" placeholder="Enter a website name...">
-                                       
                                        </div>
                                        <div class="col-sm-2">
                                           <input type="submit" value="Add" class="btn btn-primary">
@@ -94,7 +89,6 @@
                            </div>
                         </div>
                         <!-- Website Name End -->
-
                         <!-- Website Logo -->
                         <div class="col-sm-6">
                            <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
@@ -129,7 +123,6 @@
                                                 <div class="custom-file">
                                                    <input type="file"  accept="image/*" id="webLogoUploadField" class="custom-file-input" name="logo-img">
                                                    <label class="custom-file-label" for="customFile">Choose file</label>
-                                             
                                                 </div>
                                              </div>
                                              <div class="col-sm-1">
@@ -199,7 +192,6 @@
                                           <div class="custom-file">
                                              <input type="file" class="custom-file-input" name="slider-img" id="customFile">
                                              <label class="custom-file-label" for="customFile">Choose file</label>
-                                            
                                              <small class="ml-1 form-text text-muted">
                                              You can upload max 8 slider images on your website.    
                                              </small>
@@ -242,28 +234,26 @@
                                                       <form action="/administrator/setting/slider-update/<%=s._id%>" method="POST">
                                                          <div class="modal-body">
                                                             <div class="form-row">
-                                                                  <div class="col-sm-5">
-                                                                     <label for="message-text" class="col-form-label">Name(Optional)</label>
-                                                                     <input type="text" value="<%=s.btnName?s.btnName:''%>" name="name" placeholder="..." class="form-control">
-                                                                  </div>
-                                                                  <div class="col-sm-7">
-                                                                     <label for="message-text" class="col-form-label">Action</label>
-                                                                     <input type="text" value="<%=s.action?s.action:''%>" name="action" placeholder="https://" class="form-control">
-                                                                  </div>
-                                                                  <div class="col-sm-12">
-                                                                     <label for="message-text" class="col-form-label">Text</label>
-                                                                     <textarea class="form-control" name="text" id="message-text" placeholder="Enter slider text anything here..." ><%=s.text?s.text:''%></textarea>
-                                                                  </div>
-                                                                  <div class="col-sm-12 mt-2">
-                                                                     <a href="/administrator/setting/slider-text-delete/<%=s._id%>" style=<%=s.text?'display:block':'display:none'%> class="btn btn-danger btn-sm">Delete</a>
-                                                                  </div>
+                                                               <div class="col-sm-5">
+                                                                  <label  class="col-form-label">Name(Optional)</label>
+                                                                  <input  type="text" value="<%=s.btnName?s.btnName:''%>" name="name" placeholder="..." class="form-control">
+                                                               </div>
+                                                               <div class="col-sm-7">
+                                                                  <label for="message-text" class="col-form-label">Action</label>
+                                                                  <input type="text" value="<%=s.action?s.action:''%>" name="action" placeholder="https://" class="form-control">
+                                                               </div>
+                                                               <div class="col-sm-12">
+                                                                  <label class="col-form-label">Text</label>
+                                                                  <textarea class="form-control" name="text" placeholder="Enter slider text anything here..." ><%=s.text?s.text:''%></textarea>
+                                                               </div>
+                                                               <div class="col-sm-12 mt-2">
+                                                                  <a href="/administrator/setting/slider-text-delete/<%=s._id%>" style=<%=s.text?'display:block':'display:none'%> class="btn btn-danger btn-sm">Delete</a>
+                                                               </div>
                                                             </div>
                                                          </div>
                                                          <div class="modal-footer">
-                                                               
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                             <button type="submit" class="btn btn-primary">Update</button>
-                                                            
                                                          </div>
                                                       </form>
                                                    </div>
@@ -289,174 +279,162 @@
                                        </table>
                                     </div>
                                  </div>
-
                               </div>
                            </div>
                         </div>
                         <!-- Slider End -->
-
                         <!-- Website Social Links -->
                         <div class="col-sm-6">
                            <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
                               <h6 class="slider-title setting-title-radius">Social Links Setting</h6>
                               <div class="card-body">
-                              <form action="/administrator/setting/links/create" method="POST">
-                                 <div class="form-row">    
-                                    <div class="col-sm-1 socialIconsStyle">
-                                             <i class="fas fa-file-signature"></i>
-                                    </div>
-                                    <div class="col-sm-5">
+                                 <form action="/administrator/setting/links/create" method="POST">
+                                    <div class="form-row">
+                                       <div class="col-sm-1 socialIconsStyle">
+                                          <i class="fas fa-file-signature"></i>
+                                       </div>
+                                       <div class="col-sm-5">
                                           <input type="text" name="name" placeholder="Name" class="form-control">
-                                    </div>
-                                    <div class="col-sm-1 socialIconsStyle">
+                                       </div>
+                                       <div class="col-sm-1 socialIconsStyle">
                                           <i class="fas fa-icons"></i>
-                                    </div>
-                                    <div class="col-sm-5">
+                                       </div>
+                                       <div class="col-sm-5">
                                           <input type="text" name="icon" placeholder="Icon Name" class="form-control">
+                                       </div>
+                                       <div class="col-sm-1 mt-2 socialIconsStyle">
+                                          <i class="fas fa-link"></i>
+                                       </div>
+                                       <div class="col-sm-5 mt-2">
+                                          <input type="text" name="action" placeholder="https://" class="form-control">
+                                       </div>
+                                       <div class="col-sm-1 mt-2 socialIconsStyle">
+                                          <i class="fas fa-palette"></i>
+                                       </div>
+                                       <div class="col-sm-3 mt-2">
+                                          <input type="color" name="color" class="form-control">
+                                       </div>
+                                       <div class="col-sm-2 mt-2">
+                                          <input type="submit" value="Add" style="width:100%" class="btn btn-success">
+                                       </div>
                                     </div>
-                                    <div class="col-sm-1 mt-2 socialIconsStyle">
-                                       <i class="fas fa-link"></i>
-                                    </div>
-                                    <div class="col-sm-5 mt-2">
-                                       <input type="text" name="action" placeholder="https://" class="form-control">
-                                    </div>
-                                    <div class="col-sm-1 mt-2 socialIconsStyle">
-                                       <i class="fas fa-palette"></i>
-                                    </div>
-                                    <div class="col-sm-3 mt-2">
-                                       <input type="color" name="color" class="form-control">
-                                    </div>
-                                    <div class="col-sm-2 mt-2">
-                                       <input type="submit" value="Add" style="width:100%" class="btn btn-success">
-                                    </div>
-                                 </div>
-                              </form>
-
+                                 </form>
                                  <div class="row mt-2">
-                                 <div class="col-sm-12">
-                                    <%if(webModel.socialLinks){%>
+                                    <div class="col-sm-12">
+                                       <%if(webModel.socialLinks){%>
                                        <%if(webModel.socialLinks.length===0){%>
-                                          <h6 class="text-muted text-center">There is nothing to show</h6>
-                                          <%}else{%>
-                                          <table class="table table-sm table-custom-style">
-                                             <thead>
-                                                <tr class="text-center">
-                                                   <th scope="col">Name</th>
-                                                   <th scope="col">Icons</th>
-                                                   <th scope="col">Action</th>
-                                                   <th scope="col">Controlling</th>
-                                                </tr>
-                                             </thead>
-                                             <tbody>
-                                                
+                                       <h6 class="text-muted text-center">There is nothing to show</h6>
+                                       <%}else{%>
+                                       <table class="table table-sm table-custom-style">
+                                          <thead>
+                                             <tr class="text-center">
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Icons</th>
+                                                <th scope="col">Action</th>
+                                                <th scope="col">Controlling</th>
+                                             </tr>
+                                          </thead>
+                                          <tbody>
                                              <%webModel.socialLinks.forEach((link,ind)=>{%>
-                                                      <!-- Social Links Modal -->
-                                                
-
-
-                                       <div class="modal fade" id="socialLinksModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog" role="document">
-                                             <div class="modal-content">
-                                                <div class="modal-header">
-                                                <h5 class="modal-title text-muted" style="font-weight:bold;" id="exampleModalLabel"><%=link.name.toUpperCase()%></h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                   <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                </div>
-                                                <form action="/administrator/setting/links/update/<%=link._id%>" method="POST">
-                                                <div class="modal-body">
-                                                   
-                                                   <div class="form-row">
-                                                      <div class="col-sm-1 socialIconsStyle">
-                                                            <i class="fas fa-file-signature"></i>
+                                             <!-- Social Links Modal -->
+                                             <div class="modal fade" id="socialLinksModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                   <div class="modal-content">
+                                                      <div class="modal-header">
+                                                         <h5 class="modal-title text-muted" style="font-weight:bold;" id="exampleModalLabel"><%=link.name.toUpperCase()%></h5>
+                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                         <span aria-hidden="true">&times;</span>
+                                                         </button>
                                                       </div>
-                                                      <div class="col-sm-5">
-                                                         <input type="text" name="name" value="<%=link.name%>" placeholder="Name" class="form-control">
-                                                      </div>
-                                                      <div class="col-sm-1 socialIconsStyle">
-                                                         <i class="fas fa-icons"></i>
-                                                      </div>
-                                                      <div class="col-sm-5">
-                                                         <input type="text" name="icon" value="<%=link.icon%>" placeholder="Icon Name" class="form-control">
-                                                      </div>
-                                                         <dvi class="col-sm-1 mt-2 socialIconsStyle">
-                                                            <i class="fas fa-link"></i>
-                                                         </dvi>
-                                                         <div class="col-sm-7 mt-2">
-                                                            <input type="text" value="<%=link.action%>" name="action" placeholder="https://" class="form-control">
+                                                      <form action="/administrator/setting/links/update/<%=link._id%>" method="POST">
+                                                         <div class="modal-body">
+                                                            <div class="form-row">
+                                                               <div class="col-sm-1 socialIconsStyle">
+                                                                  <i class="fas fa-file-signature"></i>
+                                                               </div>
+                                                               <div class="col-sm-5">
+                                                                  <input type="text" name="name" value="<%=link.name%>" placeholder="Name" class="form-control">
+                                                               </div>
+                                                               <div class="col-sm-1 socialIconsStyle">
+                                                                  <i class="fas fa-icons"></i>
+                                                               </div>
+                                                               <div class="col-sm-5">
+                                                                  <input type="text" name="icon" value="<%=link.icon%>" placeholder="Icon Name" class="form-control">
+                                                               </div>
+                                                               <dvi class="col-sm-1 mt-2 socialIconsStyle">
+                                                                  <i class="fas fa-link"></i>
+                                                               </dvi>
+                                                               <div class="col-sm-7 mt-2">
+                                                                  <input type="text" value="<%=link.action%>" name="action" placeholder="https://" class="form-control">
+                                                               </div>
+                                                               <div class="col-sm-1 mt-2 socialIconsStyle">
+                                                                  <i class="fas fa-palette"></i>
+                                                               </div>
+                                                               <div class="col-sm-3 mt-2">
+                                                                  <input type="color" name="color" value="<%=link.color%>" class="form-control">
+                                                               </div>
+                                                            </div>
                                                          </div>
-                                                      <div class="col-sm-1 mt-2 socialIconsStyle">
-                                                         <i class="fas fa-palette"></i>
-                                                      </div>
-                                                      <div class="col-sm-3 mt-2">
-                                                         <input type="color" name="color" value="<%=link.color%>" class="form-control">
-                                                      </div>
+                                                         <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <input type="submit" value="Update" class="btn btn-primary">
+                                                         </div>
+                                                      </form>
                                                    </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <input type="submit" value="Update" class="btn btn-primary">
-                                                </div>
-                                             </form>
                                              </div>
-                                          </div>
-                                       </div>
-                                                   <!-- Social Links Modal End -->
-                                                      <tr class="text-center" style="line-height:250%;">
-                                                         <td class="td-custom-style"><%=link.name%></td>
-                                                         <td class="td-custom-style"><%=link.icon%></td>
-                                                         <td class="td-custom-style text-muted">
-                                                            <%if(link.action.length>15){%>
-                                                                  <%=link.action.slice(0,16)+'...'%>
-                                                            <%}else{%>
-                                                                  <%=link.action%>
-                                                            <%}%>
-                                                         </td>
-                                                         <td class="td-custom-style">
-                                                            <a href="/administrator/setting/links/delete/<%=link._id%>" class="btn btn-sm">
-                                                            <i class="fas fa-trash-alt text-danger"></i>
-                                                            </a>
-                                                            <button class="btn btn-sm" data-toggle="modal" data-target="#socialLinksModal<%=ind%>" data-whatever="@mdo">
-                                                            <i class="fas fa-edit text-info"></i>
-                                                            </button>
-                                                         </td>
-                                                      </tr>
+                                             <!-- Social Links Modal End -->
+                                             <tr class="text-center" style="line-height:250%;">
+                                                <td class="td-custom-style"><%=link.name%></td>
+                                                <td class="td-custom-style"><%=link.icon%></td>
+                                                <td class="td-custom-style text-muted">
+                                                   <%if(link.action.length>15){%>
+                                                   <%=link.action.slice(0,16)+'...'%>
+                                                   <%}else{%>
+                                                   <%=link.action%>
+                                                   <%}%>
+                                                </td>
+                                                <td class="td-custom-style">
+                                                   <a href="/administrator/setting/links/delete/<%=link._id%>" class="btn btn-sm">
+                                                   <i class="fas fa-trash-alt text-danger"></i>
+                                                   </a>
+                                                   <button class="btn btn-sm" data-toggle="modal" data-target="#socialLinksModal<%=ind%>" data-whatever="@mdo">
+                                                   <i class="fas fa-edit text-info"></i>
+                                                   </button>
+                                                </td>
+                                             </tr>
                                              <%})%>
-                                                <%}%>
-                                             </tbody>
-                                          </table>
+                                             <%}%>
+                                          </tbody>
+                                       </table>
                                        <%}%>
-                                 </div>
+                                    </div>
                                  </div>
                               </div>
                            </div>
                         </div>
                         <!-- Website Social Links End -->
                      </div>
-                     
                      <div class="row p-3">
-                       
                         <!-- Futured Links -->
                         <div class="col-sm-6">
                            <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
                               <h6 class="slider-title setting-title-radius">Futured Links Setting</h6>
                               <div class="card-body">
                                  <form action="/administrator/setting/futured/links/create" method="POST">
-                                    <div class="form-row">    
-                                          <div class="col-sm-12">
-                                             <strong>Name</strong> 
-                                          </div>
-                                          <div class="col-sm-12">
-                                                <input type="text" placeholder="..." name="name" class="form-control">
-                                          </div>
-                                       
-                                          <div class="col-sm-12 mt-2">
-                                             <strong>URL</strong> 
-                                          </div>
-                                          <div class="col-sm-12">
+                                    <div class="form-row">
+                                       <div class="col-sm-12">
+                                          <strong>Name</strong> 
+                                       </div>
+                                       <div class="col-sm-12">
+                                          <input type="text" placeholder="..." name="name" class="form-control">
+                                       </div>
+                                       <div class="col-sm-12 mt-2">
+                                          <strong>URL</strong> 
+                                       </div>
+                                       <div class="col-sm-12">
                                           <input type="text"  placeholder="https://example.com/" name="url" class="form-control">
                                        </div>
-                                       
                                        <div class="col-sm-2 mt-2">
                                           <input type="submit" value="Add" class="btn btn-success">
                                        </div>
@@ -464,7 +442,6 @@
                                  </form>
                                  <div class="row mt-2">
                                     <div class="col-sm-12">
-                                       
                                        <table class="table table-sm table-custom-style">
                                           <thead>
                                              <tr class="text-center">
@@ -473,71 +450,64 @@
                                                 <th scope="col">CONTROLLING</th>
                                              </tr>
                                           </thead>
-                                          
-                                             <%if(webModel.futuredLinks){%>
-                                                <%if(webModel.futuredLinks.length===0){%>
-                                                   <h6>There is nothig to show</h6>
-                                                   <%}else{%>
-                                                   <tbody>
-
-                                                   <%webModel.futuredLinks.forEach((link,ind)=>{%>
-                                                                                                <!-- Modal -->
-                                          <div class="modal fade" id="futuredLinks<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                             <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                   <div class="modal-header">
-                                                   <h5 class="modal-title text-muted" style="font-weight:bold;" id="exampleModalLabel"><%=link.name.toUpperCase()%></h5>
-                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                      <span aria-hidden="true">&times;</span>
-                                                   </button>
-                                                   </div>
-                                                   <form action="/administrator/setting/futured/links/update/<%=link._id%>" method="POST">
-                                                   <div class="modal-body">
-                                                         <div class="form-row">    
-                                                            <div class="col-sm-12">
-                                                               <strong>Name</strong> 
-                                                            </div>
-                                                            <div class="col-sm-12">
+                                          <%if(webModel.futuredLinks){%>
+                                          <%if(webModel.futuredLinks.length===0){%>
+                                          <h6>There is nothig to show</h6>
+                                          <%}else{%>
+                                          <tbody>
+                                             <%webModel.futuredLinks.forEach((link,ind)=>{%>
+                                             <!-- Modal -->
+                                             <div class="modal fade" id="futuredLinks<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                   <div class="modal-content">
+                                                      <div class="modal-header">
+                                                         <h5 class="modal-title text-muted" style="font-weight:bold;" id="exampleModalLabel"><%=link.name.toUpperCase()%></h5>
+                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                         <span aria-hidden="true">&times;</span>
+                                                         </button>
+                                                      </div>
+                                                      <form action="/administrator/setting/futured/links/update/<%=link._id%>" method="POST">
+                                                         <div class="modal-body">
+                                                            <div class="form-row">
+                                                               <div class="col-sm-12">
+                                                                  <strong>Name</strong> 
+                                                               </div>
+                                                               <div class="col-sm-12">
                                                                   <input type="text" placeholder="..." value="<%=link.name%>" name="name" class="form-control">
-                                                            </div>
-                                                         
-                                                            <div class="col-sm-12 mt-2">
-                                                               <strong>URL</strong> 
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                               <input type="text"  placeholder="https://example.com" value="<%=link.url%>" name="url" class="form-control">
+                                                               </div>
+                                                               <div class="col-sm-12 mt-2">
+                                                                  <strong>URL</strong> 
+                                                               </div>
+                                                               <div class="col-sm-12">
+                                                                  <input type="text"  placeholder="https://example.com" value="<%=link.url%>" name="url" class="form-control">
+                                                               </div>
                                                             </div>
                                                          </div>
+                                                         <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <input type="submit" value="Update" class="btn btn-primary">
+                                                         </div>
+                                                      </form>
                                                    </div>
-                                                   <div class="modal-footer">
-                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                   <input type="submit" value="Update" class="btn btn-primary">
-                                                   </div>
-                                                </form>
                                                 </div>
                                              </div>
-                                          </div>
-
-                  
-                                                         <!-- Modal End -->
-                                                         <tr class="text-center" style="line-height:250%">
-                                                            <td class="td-custom-style"><%=link.name%></td>
-                                                            <td class="td-custom-style text-muted"><%=link.url%></td>
-                                                            <td class="td-custom-style">
-                                                               <a href="/administrator/setting/futured/links/delete/<%=link._id%>">
-                                                                  <i class="fas fa-trash-alt text-danger"></i>
-                                                               </a>
-                                                               <button class="btn btn-sm" data-toggle="modal" data-target="#futuredLinks<%=ind%>" data-whatever="@mdo">
-                                                                  <i class="fas fa-edit text-info"></i>
-                                                                  </button>
-                                                            </td>
-                                                         </tr>
-                                                      <%})%>
-                                                   </tbody>
-                                                   <%}%>
-                                                <%}%>
-                                             
-                                          
+                                             <!-- Modal End -->
+                                             <tr class="text-center" style="line-height:250%">
+                                                <td class="td-custom-style"><%=link.name%></td>
+                                                <td class="td-custom-style text-muted"><%=link.url%></td>
+                                                <td class="td-custom-style">
+                                                   <a href="/administrator/setting/futured/links/delete/<%=link._id%>">
+                                                   <i class="fas fa-trash-alt text-danger"></i>
+                                                   </a>
+                                                   <button class="btn btn-sm" data-toggle="modal" data-target="#futuredLinks<%=ind%>" data-whatever="@mdo">
+                                                   <i class="fas fa-edit text-info"></i>
+                                                   </button>
+                                                </td>
+                                             </tr>
+                                             <%})%>
+                                          </tbody>
+                                          <%}%>
+                                          <%}%>
                                        </table>
                                     </div>
                                  </div>
@@ -549,92 +519,76 @@
                            <div class="card setting-title-radius" style="background:#adb5bd;border:1px solid #adb5bd;height:100%">
                               <h6 class="slider-title setting-title-radius">Public Email Setting</h6>
                               <div class="card-body">
-                                    
-                                    <form action="/administrator/setting/add/public/mail" method="POST">
-                                       <div class="form-group">
-                                          <label for=""><strong>Email</strong></label>
-                                          <input type="text" name="email" placeholder="example@example.com" class="form-control">
-                                       </div>
-                                       <div class="form-group">
-                                          <label for=""><strong>Password</strong></label>
-                                          <input type="password" name="password" placeholder="Password" class="form-control">
-                                       </div>
-                                       <div class="form-group"> 
-                                          <button type="submit" class="btn btn-sm btn-light text-primary w-50">Add</button>
-
-                                          <a href="/administrator/setting/remove/public/mail" style="width:49%" class="btn btn-sm btn-light text-danger">Remove</a>
-                                       </div>
-                                    </form>
-
-                                    <div class="card px-3 pt-3">
-                                          <p>
-                                             <strong>Email: </strong>
-                                             <%=control.publicMail.email||'example@example.com'%>
-                                          </p>
-                                          
-                                          <p>
-                                             <strong>Password: </strong>
-                                             <%=control.publicMail.password?'xxxxxxxx':'*******'%>
-                                          </p>
+                                 <form action="/administrator/setting/add/public/mail" method="POST">
+                                    <div class="form-group">
+                                       <label for=""><strong>Email</strong></label>
+                                       <input type="text" name="email" placeholder="example@example.com" class="form-control">
                                     </div>
-
-                                    <div class="border p-2 rounded form-group mt-3">
-                                       <h5 class="text-center text-danger" >ATTENTION!</h5>
-                                       <p><strong>Step-1: </strong> 2-Step Verification disabled from your google account
-                                      </p>
-                                       <p><strong>Step-2: </strong> Allow less secure apps from your google account</p>
-                                          
-                                       <div class="form-group">
-                                          <a href="https://myaccount.google.com/lesssecureapps" style="width:49%" class="btn btn-sm btn-secondary">Allow less secure </a>
-
-                                          <a href="https://myaccount.google.com/lesssecureapps" style="width:49%" class="btn btn-sm btn-secondary">2-Step Verification</a>
-                                       </div>
-
+                                    <div class="form-group">
+                                       <label for=""><strong>Password</strong></label>
+                                       <input type="password" name="password" placeholder="Password" class="form-control">
                                     </div>
-
-                                    <div class="for">
-                                       <footer class="blockquote-footer">Password Recovery Option Out Of Admin Control Pannel <cite title="Source Title">Button Enabled Or Disabled For Click On Down Button</cite>
-                                       </footer>
+                                    <div class="form-group"> 
+                                       <button type="submit" class="btn btn-sm btn-light text-primary w-50">Add</button>
+                                       <a href="/administrator/setting/remove/public/mail" style="width:49%" class="btn btn-sm btn-light text-danger">Remove</a>
                                     </div>
-                                    <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-                      
-                                       <div  class="btn btn-secondary <%=control.forgotPassword?'active':''%>">
-                                          <a href="/administrator/password-recover?status=active" class="status__btn">
-                                           Active
-                                          </a>
-                                       </div>
-                                       
-                                       <div  class="btn btn-secondary <%=control.forgotPassword?'':'active'%>">
-                                           <a href="/administrator/password-recover?status=deactive" class="status__btn">
-                                            Deactive
-                                           </a>
-                                        </div>
-                                    </div>  
-
-                                    <div class="for">
-                                       <footer class="blockquote-footer">User Password Recovery Option Out Of Admin Control Pannel <cite title="Source Title">Button Enabled Or Disabled For Click On Down Button</cite>
-                                       </footer>
+                                 </form>
+                                 <div class="card px-3 pt-3">
+                                    <p>
+                                       <strong>Email: </strong>
+                                       <%=control.publicMail.email||'example@example.com'%>
+                                    </p>
+                                    <p>
+                                       <strong>Password: </strong>
+                                       <%=control.publicMail.password?'xxxxxxxx':'*******'%>
+                                    </p>
+                                 </div>
+                                 <div class="border p-2 rounded form-group mt-3">
+                                    <h5 class="text-center text-danger" >ATTENTION!</h5>
+                                    <p><strong>Step-1: </strong> 2-Step Verification disabled from your google account
+                                    </p>
+                                    <p><strong>Step-2: </strong> Allow less secure apps from your google account</p>
+                                    <div class="form-group">
+                                       <a href="https://myaccount.google.com/lesssecureapps" style="width:49%" class="btn btn-sm btn-secondary">Allow less secure </a>
+                                       <a href="https://myaccount.google.com/lesssecureapps" style="width:49%" class="btn btn-sm btn-secondary">2-Step Verification</a>
                                     </div>
-                                    <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-                      
-                                       <div  class="btn btn-secondary <%=control.userForgotPassword?'active':''%>">
-                                          <a href="/administrator/user-password/recover?status=active" class="status__btn">
-                                           Active
-                                          </a>
-                                       </div>
-                                       
-                                       <div  class="btn btn-secondary <%=control.userForgotPassword?'':'active'%>">
-                                           <a href="/administrator/user-password/recover?status=deactive" class="status__btn">
-                                            Deactive
-                                           </a>
-                                        </div>
+                                 </div>
+                                 <div class="for">
+                                    <footer class="blockquote-footer">Password Recovery Option Out Of Admin Control Pannel <cite title="Source Title">Button Enabled Or Disabled For Click On Down Button</cite>
+                                    </footer>
+                                 </div>
+                                 <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+                                    <div  class="btn btn-secondary <%=control.forgotPassword?'active':''%>">
+                                       <a href="/administrator/password-recover?status=active" class="status__btn">
+                                       Active
+                                       </a>
                                     </div>
-                           
+                                    <div  class="btn btn-secondary <%=control.forgotPassword?'':'active'%>">
+                                       <a href="/administrator/password-recover?status=deactive" class="status__btn">
+                                       Deactive
+                                       </a>
+                                    </div>
+                                 </div>
+                                 <div class="for">
+                                    <footer class="blockquote-footer">User Password Recovery Option Out Of Admin Control Pannel <cite title="Source Title">Button Enabled Or Disabled For Click On Down Button</cite>
+                                    </footer>
+                                 </div>
+                                 <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+                                    <div  class="btn btn-secondary <%=control.userForgotPassword?'active':''%>">
+                                       <a href="/administrator/user-password/recover?status=active" class="status__btn">
+                                       Active
+                                       </a>
+                                    </div>
+                                    <div  class="btn btn-secondary <%=control.userForgotPassword?'':'active'%>">
+                                       <a href="/administrator/user-password/recover?status=deactive" class="status__btn">
+                                       Deactive
+                                       </a>
+                                    </div>
+                                 </div>
                               </div>
                            </div>
                         </div>
-                     </div>   
-
+                     </div>
                   </div>
                </div>
             </div>
@@ -642,7 +596,6 @@
       </div>
    </div>
 </div>
-
 <%-include('../../partials/admin/adminFooter.ejs')%>
 <script>
    function logoEditBtnHandler(){

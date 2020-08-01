@@ -1,6 +1,4 @@
-
 <%-include('../../partials/admin/adminHead.ejs')%>
-
 <div class="row">
    <!-- Admin Brand and Dashboard Menu -->
    <%- include('../../partials/admin/adminSidebar.ejs')%>
@@ -9,130 +7,121 @@
       <!-- Admin Navbar Content -->
       <%- include('../../partials/admin/adminNavbar.ejs')%>
       <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
-
-      
-
-      
-
       <div class="row scroll-style" style="background:#6c757d;">
          <div class="w-100">
             <%-include('../../partials/Error/alert.ejs')%>
          </div>
-            <div class="col-sm-12">
-               <div class="row mt-2">
-                  <div class="col-sm-12">
-                        <h4 class="menu-title p-1 text-center">Department Of ( <%=department.name%> )</h4>
-                  </div>
+         <div class="col-sm-12">
+            <div class="row mt-2">
+               <div class="col-sm-12">
+                  <h4 class="menu-title p-1 text-center">Department Of ( <%=department.name%> )</h4>
                </div>
-         
-               <div class="row py-2">
-                  <div class="col-sm-12">
-                     <div class="custom-card p-3 px-5">
-                        <div class="row">
-                           <!-- Notice -->
-                           <div class="col-sm-12">
-                              <nav aria-label="breadcrumb">
-                                 <ol class="breadcrumb breadcrumb__container">
+            </div>
+            <div class="row py-2">
+               <div class="col-sm-12">
+                  <div class="custom-card p-3 px-5">
+                     <div class="row">
+                        <!-- Notice -->
+                        <div class="col-sm-12">
+                           <nav aria-label="breadcrumb">
+                              <ol class="breadcrumb breadcrumb__container">
                                  <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
                                  <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/department">Department</a></li>
                                  <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/department/update/<%=department._id%>"><%=department.name%></a></li>
-                                 </ol>
-                              </nav> 
-                              <div class="px-4 py-3 h-100" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
-                                 <!-- <h5 class="text-center text-danger" style="font-weight:bold;">Notice</h5> -->
-                                 <div class="latestNewsBody">
-                           <form action="/administrator/department/update/<%=department._id%>" enctype="multipart/form-data" method="POST">
-                                    
-                                       <div class="form-group">
-                                          <label for="latestNewsText"><h6>Name ( Required )</h6></label>
-                                          <input type="text" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" value="<%=department.name?department.name:''%>" name="name">
-                                       </div>
-
-                                       <div class="form-group mt-4">
-                                          <label for="latestNewsText"><h6>Title ( Required )</h6></label>
-                                          <textarea type="text" style="border:none;height:50px;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="title"><%=department.title?department.title:''%></textarea>
-                                       </div>
-
-                                       <div class="form-group">
-                                          <label for="exampleInputPassword1"><h6>Text</h6></label>
-                                          <textarea class="summerNoteTextEditor" name="text"><%=department.text?department.text:''%></textarea>
-                                       </div>
-
-
-                                     <div class="form-group">
+                              </ol>
+                           </nav>
+                           <div class="px-4 py-3 h-100" style="border:1px solid #0000001c;border-radius:8px;background:#f8f9fa;">
+                              <!-- <h5 class="text-center text-danger" style="font-weight:bold;">Notice</h5> -->
+                              <div class="latestNewsBody">
+                                 <form action="/administrator/department/update/<%=department._id%>" enctype="multipart/form-data" method="POST">
+                                    <div class="form-group">
+                                       <label for="latestNewsText">
+                                          <h6>Name ( Required )</h6>
+                                       </label>
+                                       <input type="text" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" value="<%=department.name?department.name:''%>" name="name">
+                                    </div>
+                                    <div class="form-group mt-4">
+                                       <label for="latestNewsText">
+                                          <h6>Title ( Required )</h6>
+                                       </label>
+                                       <textarea type="text" style="border:none;height:50px;border-bottom:1px solid #00000059;border-radius:0px;" class="dateCustomStyle form-control" name="title"><%=department.title?department.title:''%></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="exampleInputPassword1">
+                                          <h6>Text</h6>
+                                       </label>
+                                       <textarea class="summerNoteTextEditor" name="text"><%=department.text?department.text:''%></textarea>
+                                    </div>
+                                    <div class="form-group">
                                        <%if(department.image){%>
-                                             <img class="noticeImagePreview" src="/uploads/<%=department.image%>" alt="Image" style="width:100%;max-height:350px;">
-                                       
-                                          
-                                             <label for="latestNewsText"><h6>Upload Image</h6></label>
-                                             <div class="custom-file">
-                                                <input type="file"  name="image" class="noticeImageUploadField custom-file-input" id="customFile">
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
-                                             </div>
-                                          
-                                          <%}else{%>
-                                       
-                                             <img class="noticeImagePreview" style="width:100%;max-height:350px;">
-                                         
-                                             <label for="latestNewsText"><h6>Upload Image</h6></label>
-                                             <div class="custom-file">
-                                                <input type="file" name="image" class="custom-file-input noticeImageUploadField" id="customFile">
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
-                                             </div>
-                                         
-                                          <%}%>
+                                       <img class="noticeImagePreview" src="/uploads/<%=department.image%>" alt="Image" style="width:100%;max-height:350px;">
+                                       <label for="latestNewsText">
+                                          <h6>Upload Image</h6>
+                                       </label>
+                                       <div class="custom-file">
+                                          <input type="file"  name="image" class="noticeImageUploadField custom-file-input" id="customFile">
+                                          <label class="custom-file-label" for="customFile">Choose file</label>
                                        </div>
-                                       <div class="form-group">
-                                          <label for="latestNewsText"><h6>Date ( Required )</h6></label>
-                                          <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" value="<%=department.numberDate?department.numberDate:''%>" class="dateCustomStyle form-control" name="date">
+                                       <%}else{%>
+                                       <img class="noticeImagePreview" style="width:100%;max-height:350px;">
+                                       <label for="latestNewsText">
+                                          <h6>Upload Image</h6>
+                                       </label>
+                                       <div class="custom-file">
+                                          <input type="file" name="image" class="custom-file-input noticeImageUploadField" id="customFile">
+                                          <label class="custom-file-label" for="customFile">Choose file</label>
                                        </div>
-                                       <a href="/administrator/department/delete/<%=department._id%>" class="btn btn-danger btn-sm" style="width:49%;">Delete</a>
-                                       <button class="btn btn-primary btn-sm" style="width:49%;">Update</button>
-                                    </form>
-                                 </div>
+                                       <%}%>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="latestNewsText">
+                                          <h6>Date ( Required )</h6>
+                                       </label>
+                                       <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:0px;" value="<%=department.numberDate?department.numberDate:''%>" class="dateCustomStyle form-control" name="date">
+                                    </div>
+                                    <a href="/administrator/department/delete/<%=department._id%>" class="btn btn-danger btn-sm" style="width:49%;">Delete</a>
+                                    <button class="btn btn-primary btn-sm" style="width:49%;">Update</button>
+                                 </form>
                               </div>
                            </div>
-                           <!-- Notice End -->
                         </div>
+                        <!-- Notice End -->
                      </div>
                   </div>
                </div>
-
             </div>
+         </div>
       </div>
    </div>
 </div>
-
 <%-include('../../partials/admin/adminFooter.ejs')%>
-
-
 <script>
-    let noticeImagePreview = document.querySelectorAll('.noticeImagePreview')
-    let noticeImageUploadField = document.querySelectorAll('.noticeImageUploadField')
-    
-    noticeImageUploadField.forEach((field,fIndex)=>{
-        field.addEventListener('change',(e)=>{
-            noticeImagePreview.forEach((preview,pIndex)=>{
-                if(fIndex===pIndex){
-                    preview.src=URL.createObjectURL(e.target.files[0])
-                }
-            })
-        })	
-    })
-    
-    let noticeImgPreviewParent = document.getElementById('noticeImgPreviewParent')
-    // let singleNoticeImagePreview = document.getElementById('singleNoticeImagePreview')
-    let singleNoticeImgUploadFiled = document.getElementById('singleNoticeImgUploadFiled')
-    
-    singleNoticeImgUploadFiled.addEventListener('change',(e)=>{
-        let preview = document.createElement('img')
-        preview.style.width = '100%'
-        preview.style.maxHeight = '350px'
-        preview.src = URL.createObjectURL(e.target.files[0])
-    
-        noticeImgPreviewParent.appendChild(preview)
-    
-    })
- </script>
+   let noticeImagePreview = document.querySelectorAll('.noticeImagePreview')
+   let noticeImageUploadField = document.querySelectorAll('.noticeImageUploadField')
+   
+   noticeImageUploadField.forEach((field,fIndex)=>{
+       field.addEventListener('change',(e)=>{
+           noticeImagePreview.forEach((preview,pIndex)=>{
+               if(fIndex===pIndex){
+                   preview.src=URL.createObjectURL(e.target.files[0])
+               }
+           })
+       })	
+   })
+   
+   let noticeImgPreviewParent = document.getElementById('noticeImgPreviewParent')
+   // let singleNoticeImagePreview = document.getElementById('singleNoticeImagePreview')
+   let singleNoticeImgUploadFiled = document.getElementById('singleNoticeImgUploadFiled')
+   
+   singleNoticeImgUploadFiled.addEventListener('change',(e)=>{
+       let preview = document.createElement('img')
+       preview.style.width = '100%'
+       preview.style.maxHeight = '350px'
+       preview.src = URL.createObjectURL(e.target.files[0])
+   
+       noticeImgPreviewParent.appendChild(preview)
+   
+   })
+</script>
 </body>
 </html>

@@ -63,9 +63,6 @@ function webNameupdateReqSentToServer(parentElem, updateField, updateBtn, editBt
 		})
 }
 
-
-
-
 let webLogoParent = document.getElementById('web-logo-img-parent')
 let webLogoUploadField = document.getElementById('webLogoUploadField')
 let webLogoPreview = document.getElementById('web-logo-preview')
@@ -77,22 +74,6 @@ if(webLogoUploadField){
 		
 	})	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Web Name Logo
 // let testImgUpload = document.getElementById('testImgUpload')

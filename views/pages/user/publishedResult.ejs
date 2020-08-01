@@ -1,62 +1,46 @@
 <%-include('../../partials/user/head.ejs')%>
-
-
 <div class="page-wrapper chiller-theme toggled">
-  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-    <i class="fas fa-bars"></i>
-  </a>
-
-  <!-- Navbar -->
-  <%-include('../../partials/user/navbar.ejs')%>
-  <!-- Navbar End -->
-
-  <!-- sidebar-wrapper  -->
-<main class="page-content">
-  <div class="container-fluid" style="padding:5px 40px!important;">
-      <h4 style="color: #545b62;font-weight: 600;text-align:center">STATUS</h4>
-      <hr>
-    <div>
-        <%-include('../../partials/Error/alert.ejs')%>
-    </div>
-  </div>
-
-  <div class="row" style="padding:5px 40px!important;">
-    
-
-    <%if(getAllSubmitedRequest){%>
-      <%for(let submited of getAllSubmitedRequest){%>
-        <div class="col-sm-3">
-          <div class="card <%=submited.approved&&'border-success'%> <%=submited.reject&&'border-warning'%> <%=!submited.approved&&!submited.reject?'border-primary':''%> mb-3">
-            <div class="card-header bg-transparent <%=submited.approved&&'text-success'%> <%=submited.reject&&'text-warning'%> <%=!submited.approved&&!submited.reject?'text-primary':''%> text-center border-muted"><h5><%=submited.status%></h5></div>
-            <div class="card-body">
-              <h6 class="card-title text-secondary"><strong><%=submited.examTitle%></strong></h6>
-            
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item" style="padding:0.25rem!important"><strong>Class : </strong> <span><%=submited.classname%></span> </li>
-                <li class="list-group-item" style="padding:0.25rem!important"><strong>Section : </strong> <span><%=submited.classSection%></span> </li>
-                <li class="list-group-item" style="padding:0.25rem!important"><strong>Group : </strong> <span><%=submited.classgroup?submited.classgroup:'N/A'%></span> </li>
-              </ul>
+   <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+   <i class="fas fa-bars"></i>
+   </a>
+   <!-- Navbar -->
+   <%-include('../../partials/user/navbar.ejs')%>
+   <!-- Navbar End -->
+   <!-- sidebar-wrapper  -->
+   <main class="page-content">
+      <div class="container-fluid" style="padding:5px 40px!important;">
+         <h4 style="color: #545b62;font-weight: 600;text-align:center">STATUS</h4>
+         <hr>
+         <div>
+            <%-include('../../partials/Error/alert.ejs')%>
+         </div>
+      </div>
+      <div class="row" style="padding:5px 40px!important;">
+         <%if(getAllSubmitedRequest){%>
+         <%for(let submited of getAllSubmitedRequest){%>
+         <div class="col-sm-3">
+            <div class="card <%=submited.approved&&'border-success'%> <%=submited.reject&&'border-warning'%> <%=!submited.approved&&!submited.reject?'border-primary':''%> mb-3">
+               <div class="card-header bg-transparent <%=submited.approved&&'text-success'%> <%=submited.reject&&'text-warning'%> <%=!submited.approved&&!submited.reject?'text-primary':''%> text-center border-muted">
+                  <h5><%=submited.status%></h5>
+               </div>
+               <div class="card-body">
+                  <h6 class="card-title text-secondary"><strong><%=submited.examTitle%></strong></h6>
+                  <ul class="list-group list-group-flush">
+                     <li class="list-group-item" style="padding:0.25rem!important"><strong>Class : </strong> <span><%=submited.classname%></span> </li>
+                     <li class="list-group-item" style="padding:0.25rem!important"><strong>Section : </strong> <span><%=submited.classSection%></span> </li>
+                     <li class="list-group-item" style="padding:0.25rem!important"><strong>Group : </strong> <span><%=submited.classgroup?submited.classgroup:'N/A'%></span> </li>
+                  </ul>
+               </div>
+               <div class="card-footer bg-transparent text-center border-muted">
+                  <a href="/user/results/published/request/delete/<%=submited._id%>" class="btn btn-danger btn-sm w-100  <%=submited.approved&&'disabled'%>">Delete</a>
+               </div>
             </div>
-            <div class="card-footer bg-transparent text-center border-muted">
-              <a href="/user/results/published/request/delete/<%=submited._id%>" class="btn btn-danger btn-sm w-100  <%=submited.approved&&'disabled'%>">Delete</a>
-            </div>
-          </div>
-        </div>
-        <%}%>
-      <%}%>
-   
-    
-  </div>
-
-
-</main>
+         </div>
+         <%}%>
+         <%}%>
+      </div>
+   </main>
 </div>
-
-
-
-
 <%-include('../../partials/user/footer.ejs')%>
-
 </body>
-
 </html>

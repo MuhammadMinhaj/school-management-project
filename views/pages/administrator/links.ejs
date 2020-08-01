@@ -1,5 +1,4 @@
 <%-include('../../partials/admin/adminHead.ejs')%>
-
 <div class="row">
    <!-- Admin Brand and Dashboard Menu -->
    <%- include('../../partials/admin/adminSidebar.ejs')%>
@@ -23,10 +22,8 @@
                   <div class="custom-card p-2">
                      <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb__container">
-                        <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
-                   
-                        <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/links">Links</a></li>
-                        
+                           <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
+                           <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/links">Links</a></li>
                         </ol>
                      </nav>
                      <div class="row">
@@ -107,19 +104,18 @@
                                           <td class="text-muted">
                                              <%if(referenceLink.url){%>
                                              <%if(referenceLink.url.length>20){%>
-                                                   <%=referenceLink.url.slice(0,21)+'...'%>
+                                             <%=referenceLink.url.slice(0,21)+'...'%>
                                              <%}else{%>
-                                                   <%=referenceLink.url%>
+                                             <%=referenceLink.url%>
                                              <%}%>
-
-                                          <%}else{%>
-                                          N/A
-                                          <%}%>
+                                             <%}else{%>
+                                             N/A
+                                             <%}%>
                                           </td>
                                           <td class="webNameControllParent">
-                                          <a class="btn btn-sm" href="/administrator/links/reference/delete/<%=referenceLink._id%>">
+                                             <a class="btn btn-sm" href="/administrator/links/reference/delete/<%=referenceLink._id%>">
                                              <i class="fas fa-trash-alt text-danger"></i>
-                                          </a>
+                                             </a>
                                              <button data-toggle="modal" data-target="#referenceLinkModal<%=ind%>" data-whatever="@mdo"  class="btn btn-sm">
                                              <i class="fas fa-edit text-info"></i>
                                              </button>
@@ -170,22 +166,20 @@
                                                             <textarea name="name" placeholder="Title..." class="form-control"><%=dLink.name%></textarea>
                                                          </div>
                                                          <div class="form-group documentPreviewParent">
-                                                               <label style="font-weight:bold;" for="latestNewsText">Documents Name</label>
-                                                               <p><%=dLink.document.slice(24)%></p>
+                                                            <label style="font-weight:bold;" for="latestNewsText">Documents Name</label>
+                                                            <p><%=dLink.document.slice(24)%></p>
                                                          </div>
-
-                                                            <div class="form-group">
-                                                               <label style="font-weight:bold;" for="latestNewsText">Upload Documents</label>
-                                                               <div class="custom-file">
-                                                                  <input type="file" name="documents" class="custom-file-input documentInputField" id="customFile">
-                                                                  <label class="custom-file-label" for="customFile">Choose file</label>
-                                                               </div>
+                                                         <div class="form-group">
+                                                            <label style="font-weight:bold;" for="latestNewsText">Upload Documents</label>
+                                                            <div class="custom-file">
+                                                               <input type="file" name="documents" class="custom-file-input documentInputField" id="customFile">
+                                                               <label class="custom-file-label" for="customFile">Choose file</label>
                                                             </div>
-                                                            <select name="option" class="custom-select">
+                                                         </div>
+                                                         <select name="option" class="custom-select">
                                                             <option value="direct" <%=dLink.option==='direct'?'selected':''%>>Direct</option>
                                                             <option value="manual" <%=dLink.option==='manual'?'selected':''%>>Manual</option>
                                                          </select>
-
                                                       </div>
                                                       <div class="modal-footer">
                                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -208,7 +202,7 @@
                                                 <%=dLink.option?dLink.option.toUpperCase():'N/A'%>
                                              </td>
                                              <td>
-                                                   <%=dLink.document?'Available':'N/A'%>
+                                                <%=dLink.document?'Available':'N/A'%>
                                              </td>
                                              <td class="webNameControllParent">
                                                 <a class="btn btn-sm" href="/administrator/links/documents/delete/<%=dLink._id%>">
@@ -257,18 +251,16 @@
                                                    </div>
                                                    <div class="form-group">
                                                       <!-- <label style="font-weight:bold;">URL</label>
-                                                      <input type="text" placeholder="https://www.example.com" style="border:none;border-bottom:1px solid #00000059;border-radius:6px;" class="dateCustomStyle form-control" name="url"> -->
-
+                                                         <input type="text" placeholder="https://www.example.com" style="border:none;border-bottom:1px solid #00000059;border-radius:6px;" class="dateCustomStyle form-control" name="url"> -->
                                                       <select name="option" class="custom-select">
                                                          <option value="direct">Direct</option>
                                                          <option value="manual">Manual</option>
                                                       </select>
-
                                                    </div>
                                                    <!-- <div class="form-group">
                                                       <label style="font-weight:bold;" for="latestNewsText">DATE</label>
                                                       <input type="date" style="border:none;border-bottom:1px solid #00000059;border-radius:6px;" class="dateCustomStyle form-control" name="date">
-                                                   </div> -->
+                                                      </div> -->
                                                 </div>
                                              </div>
                                           </div>
@@ -292,22 +284,21 @@
       </div>
    </div>
 </div>
-
 <%-include('../../partials/admin/adminFooter.ejs')%>
 <script>
-    let previews = document.querySelectorAll('.documentPreviewParent')
-    let fields = document.querySelectorAll('.documentInputField')
-
-    fields.forEach((field,ind)=>{
-        previews.forEach((preview,index)=>{
-            if(ind===index){
-                field.addEventListener('change',(e)=>{
-                    preview.childNodes[1].innerText = e.target.files[0].name                   
-                })
-            }
-        })
-    })
- 
+   let previews = document.querySelectorAll('.documentPreviewParent')
+   let fields = document.querySelectorAll('.documentInputField')
+   
+   fields.forEach((field,ind)=>{
+       previews.forEach((preview,index)=>{
+           if(ind===index){
+               field.addEventListener('change',(e)=>{
+                   preview.childNodes[1].innerText = e.target.files[0].name                   
+               })
+           }
+       })
+   })
+   
 </script>
 </body>
 </html>

@@ -1,122 +1,100 @@
-
-
-
 <%-include('../../partials/admin/adminHead.ejs')%>
 <div class="container-luid">
-    <div class="row">
-        <!-- Admin Brand and Dashboard Menu -->
-        <%- include('../../partials/admin/adminSidebar.ejs')%>
-        <!-- Dashboard Content -->
-        <div class="col-sm-10 ">
-            <!-- Admin Navbar Content -->
-            <%- include('../../partials/admin/adminNavbar.ejs')%>
-            <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
-
-            
-
-            <div class="row <%=flashMessage.success||flashMessage.fail?'mt-1':'mt-0'%>">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8">
-                    <%-include('../../partials/Error/alert.ejs')%>
-                </div>
-                <div class="col-sm-2"></div>
+   <div class="row">
+      <!-- Admin Brand and Dashboard Menu -->
+      <%- include('../../partials/admin/adminSidebar.ejs')%>
+      <!-- Dashboard Content -->
+      <div class="col-sm-10 ">
+         <!-- Admin Navbar Content -->
+         <%- include('../../partials/admin/adminNavbar.ejs')%>
+         <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
+         <div class="row <%=flashMessage.success||flashMessage.fail?'mt-1':'mt-0'%>">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+               <%-include('../../partials/Error/alert.ejs')%>
             </div>
-
-            <div class="row scroll-style" style="background:#6c757d">
-                <div class="col-sm-12">
-                    <h5 class="mt-1" style="text-transform: uppercase;color:#dee2e6;font-weight:bold;text-align:center;">Dropdown Menu</h5>
-                    
-                    <div id="alert-drop-menu-box" class="mt-1">
-
-                    </div>
-                    
-                    <div class="row py-2 px-5">
-                        <div class="col-sm-12">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb breadcrumb__container">
-                                  <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
-                                  <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/menu-create">Menu</a></li>
-                                  <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/menu-create">Dropdown</a></li>
-                                </ol>
-                            </nav>
-                            <div class="card p-3" style="background: #495057;">
-                               <div class="row">
-                                   <div class="col-sm-12">
-                                       <!-- Header -->
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="card py-1 px-3 dropHeader">
-                                                <div class="row">
-                                                    <div class="col-sm-2">
-                                                        <h5 style="font-weight:bold;"> <%=menuName.toUpperCase()%> </h5>
-                                                    </div>
-                                                    <div class="col-sm-4 d-flex justify-content-around">
-                                                        <h6 class="mt-1 droptitle">Name:</h6>
-                                                        <input type="text" placeholder="..." id="dropDownNameField" class="dropInputStyle">
-                                                    </div>
-                                                    <div class="col-sm-4 d-flex justify-content-around">
-                                                        <h6 class="mt-1 droptitle">Action:</h6>
-                                                        <input type="text" placeholder="https://" id="dropDownActionField"  class="dropInputStyle">
-                                                    </div>
-                                                    <div class="col-sm-2 text-right">
-                                                       
-                                                        <button type="button" id="createDropDownBtn" class="btn btn-success btn-sm">Add</button>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+            <div class="col-sm-2"></div>
+         </div>
+         <div class="row scroll-style" style="background:#6c757d">
+            <div class="col-sm-12">
+               <h5 class="mt-1" style="text-transform: uppercase;color:#dee2e6;font-weight:bold;text-align:center;">Dropdown Menu</h5>
+               <div id="alert-drop-menu-box" class="mt-1">
+               </div>
+               <div class="row py-2 px-5">
+                  <div class="col-sm-12">
+                     <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb breadcrumb__container">
+                           <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
+                           <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/menu-create">Menu</a></li>
+                           <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/menu-create">Dropdown</a></li>
+                        </ol>
+                     </nav>
+                     <div class="card p-3" style="background: #495057;">
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <!-- Header -->
+                              <div class="row">
+                                 <div class="col-sm-12">
+                                    <div class="card py-1 px-3 dropHeader">
+                                       <div class="row">
+                                          <div class="col-sm-2">
+                                             <h5 style="font-weight:bold;"> <%=menuName.toUpperCase()%> </h5>
+                                          </div>
+                                          <div class="col-sm-4 d-flex justify-content-around">
+                                             <h6 class="mt-1 droptitle">Name:</h6>
+                                             <input type="text" placeholder="..." id="dropDownNameField" class="dropInputStyle">
+                                          </div>
+                                          <div class="col-sm-4 d-flex justify-content-around">
+                                             <h6 class="mt-1 droptitle">Action:</h6>
+                                             <input type="text" placeholder="https://" id="dropDownActionField"  class="dropInputStyle">
+                                          </div>
+                                          <div class="col-sm-2 text-right">
+                                             <button type="button" id="createDropDownBtn" class="btn btn-success btn-sm">Add</button>
+                                          </div>
+                                       </div>
                                     </div>
-                                    
-                                    <!-- End -->
-
-                                    <!-- Body -->
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="card" id="dropDown-empty-message-container">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr class="text-center">
-                                                            <th scope="col">ID</th>
-    
-                                                            <th>
-                                                                <i class="fas fa-exchange-alt"></i>
-                                                            </th>
-    
-                                                            <th scope="col">TITLE</th>
-                                                            <th>
-                                                                <i class="fas fa-exchange-alt"></i>
-                                                            </th>
-                                                            <th scope="col">ACTION</th>
-                                                            <th>
-                                                                <i class="fas fa-exchange-alt"></i>
-                                                            </th>
-                                                            <th scope="col">CONTROLLING</th>
-                                                           
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody data-id="<%=id%>" id="dropDownBody">
-                                                      
-                                                    
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                                 </div>
+                              </div>
+                              <!-- End -->
+                              <!-- Body -->
+                              <div class="row">
+                                 <div class="col-sm-12">
+                                    <div class="card" id="dropDown-empty-message-container">
+                                       <table class="table">
+                                          <thead>
+                                             <tr class="text-center">
+                                                <th scope="col">ID</th>
+                                                <th>
+                                                   <i class="fas fa-exchange-alt"></i>
+                                                </th>
+                                                <th scope="col">TITLE</th>
+                                                <th>
+                                                   <i class="fas fa-exchange-alt"></i>
+                                                </th>
+                                                <th scope="col">ACTION</th>
+                                                <th>
+                                                   <i class="fas fa-exchange-alt"></i>
+                                                </th>
+                                                <th scope="col">CONTROLLING</th>
+                                             </tr>
+                                          </thead>
+                                          <tbody data-id="<%=id%>" id="dropDownBody">
+                                          </tbody>
+                                       </table>
                                     </div>
-                                    <!-- End -->
-                                   </div>
-                               </div>
-                            </div>
+                                 </div>
+                              </div>
+                              <!-- End -->
+                           </div>
                         </div>
-                    </div>
-
-
-                </div>
+                     </div>
+                  </div>
+               </div>
             </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>
 <%-include('../../partials/admin/adminFooter.ejs')%>
-
 </body>
 </html>

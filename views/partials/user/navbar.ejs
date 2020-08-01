@@ -1,36 +1,36 @@
 <nav id="sidebar" class="sidebar-wrapper">
-    <div class="sidebar-content">
-      <div class="sidebar-brand">
-        <a href="#" style="font-size:2rem">JASA</a>
-        <div id="close-sidebar">
-          <i class="fas fa-times"></i>
-        </div>
+  <div class="sidebar-content">
+    <div class="sidebar-brand">
+      <a href="#" style="font-size:2rem">JASA</a>
+      <div id="close-sidebar">
+        <i class="fas fa-times"></i>
       </div>
-      <div class="sidebar-header">
-        <div class="user-pic">
+    </div>
+    <div class="sidebar-header">
+      <div class="user-pic">
 
-            <%if(user.picture){%>
-              <img class="img-responsive img-rounded" src="/uploads/images/<%=user.picture%>"
-            alt="User picture">
-              <%}else{%>
-                <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
-                alt="User picture">
-                <%}%>
+        <%if(user.picture){%>
+        <img class="img-responsive img-rounded" src="/uploads/images/<%=user.picture%>" alt="User picture">
+        <%}else{%>
+        <img class="img-responsive img-rounded"
+          src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+          alt="User picture">
+        <%}%>
         </div>
         <div class="user-info">
           <span class="user-name"><strong><%=user.name%></strong>
-            <!-- <strong>Using Your Wish</strong> -->
-          </span>
-          <span class="user-role">Teacher Profile</span>
-          <span class="user-status">
-            <i class="fa fa-circle"></i>
-            <span>Online</span>
-          </span>
-        </div>
+        <!-- <strong>Using Your Wish</strong> -->
+        </span>
+        <span class="user-role">Teacher Profile</span>
+        <span class="user-status">
+          <i class="fa fa-circle"></i>
+          <span>Online</span>
+        </span>
       </div>
-      <!-- sidebar-header  -->
-      <div class="sidebar-search">
-        <div>
+    </div>
+    <!-- sidebar-header  -->
+    <div class="sidebar-search">
+      <div>
         <form action="/user/dashboard" method="GET">
           <div class="input-group">
             <input type="search" name="search" class="form-control search-menu" placeholder="Search...">
@@ -40,44 +40,45 @@
               </span>
             </div>
           </div>
-        </form>          
-        </div>
-
+        </form>
       </div>
-      <!-- sidebar-search  -->
-      <div class="sidebar-menu">
-        <ul>
-          <li class="header-menu">
-            <span>SETTING</span>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="/user/dashboard">
-              <i class="fa fa-tachometer-alt"></i>
-              Dashboard
-            </a>
-          </li>
 
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fas fa-house-user"></i>
-              <span>Class Management</span>
-             
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li style="border-bottom:1px solid #ffffff1c;">
-                  <a href="/user/class/create" style="color:white">Create Class
+    </div>
+    <!-- sidebar-search  -->
+    <div class="sidebar-menu">
+      <ul>
+        <li class="header-menu">
+          <span>SETTING</span>
+        </li>
+        <li class="sidebar-dropdown">
+          <a href="/user/dashboard">
+            <i class="fa fa-tachometer-alt"></i>
+            Dashboard
+          </a>
+        </li>
 
-                  </a>
-                </li>
+        <li class="sidebar-dropdown">
+          <a href="#">
+            <i class="fas fa-house-user"></i>
+            <span>Class Management</span>
 
-                <%if(classes){%>
-                  <%classes.forEach((c,ind)=>{%>
-                    <li>
-                      <a href="/user/class/update/<%=c._id%>"><%='Class '+c.nameOfNumeric+' '+c.section%> <%=c.group?c.group:''%></a>
-                    </li>
-                  <%})%>
-                  <%}%>
+          </a>
+          <div class="sidebar-submenu">
+            <ul>
+              <li style="border-bottom:1px solid #ffffff1c;">
+                <a href="/user/class/create" style="color:white">Create Class
+
+                </a>
+              </li>
+
+              <%if(classes){%>
+              <%classes.forEach((c,ind)=>{%>
+              <li>
+                <a href="/user/class/update/<%=c._id%>"><%='Class '+c.nameOfNumeric+' '+c.section%>
+                  <%=c.group?c.group:''%></a>
+              </li>
+              <%})%>
+              <%}%>
               </ul>
             </div>
           </li>
@@ -91,34 +92,37 @@
               <ul>
 
                 <%if(classes){%>
-                  <%if(classes.length!==0){%>
-                    <%classes.forEach((c,ind)=>{%>
-                      <li>
-                        <a href="/user/student/create/<%=c._id%>">Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
-                      </li>
-                    <%})%>
-                    <%}%>
+              <%if(classes.length!==0){%>
+              <%classes.forEach((c,ind)=>{%>
+              <li>
+                <a href="/user/student/create/<%=c._id%>">Class
+                  <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%>
+                  <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+              </li>
+              <%})%>
+              <%}%>
                   <%}%>
-               
 
-              </ul>
-            </div>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fas fa-tasks"></i>
-              <span>Exam Management</span>
-             
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <%if(classes){%>
-                  <%classes.forEach((c,ind)=>{%>
-                    <li>
-                      <a href="/user/class/exam/create/<%=c._id%>"><%='Class '+c.nameOfNumeric+' '+c.section%> <%=c.group?c.group:''%></a>
-                    </li>
-                  <%})%>
-                  <%}%>
+
+            </ul>
+          </div>
+        </li>
+        <li class="sidebar-dropdown">
+          <a href="#">
+            <i class="fas fa-tasks"></i>
+            <span>Exam Management</span>
+
+          </a>
+          <div class="sidebar-submenu">
+            <ul>
+              <%if(classes){%>
+              <%classes.forEach((c,ind)=>{%>
+              <li>
+                <a href="/user/class/exam/create/<%=c._id%>"><%='Class '+c.nameOfNumeric+' '+c.section%>
+                  <%=c.group?c.group:''%></a>
+              </li>
+              <%})%>
+              <%}%>
               </ul>
             </div>
           </li>
@@ -131,90 +135,96 @@
               <ul>
 
                 <%if(classes){%>
-                  <%if(classes.length!==0){%>
-                    <%classes.forEach((c,ind)=>{%>
-                      <li>
-                        <a href="/user/results/create/<%=c._id%>">Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
-                      </li>
-                    <%})%>
-                    <%}%>
+              <%if(classes.length!==0){%>
+              <%classes.forEach((c,ind)=>{%>
+              <li>
+                <a href="/user/results/create/<%=c._id%>">Class
+                  <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%>
+                  <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+              </li>
+              <%})%>
+              <%}%>
                   <%}%>
-               
 
-              </ul>
-            </div>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="/user/results/published/status">
-              <i class="fas fa-eye-slash"></i>
-              <span>Status</span>
-            </a>
-          </li>
-          
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fas fa-check text-success"></i>
-              <span>Passed Results</span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
 
-                <%if(classes){%>
-                  <%if(classes.length!==0){%>
-                    <%classes.forEach((c,ind)=>{%>
-                      <li>
-                        <a href="/user/results/all/passed/<%=c._id%>">Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
-                      </li>
-                    <%})%>
-                    <%}%>
+            </ul>
+          </div>
+        </li>
+        <li class="sidebar-dropdown">
+          <a href="/user/results/published/status">
+            <i class="fas fa-eye-slash"></i>
+            <span>Status</span>
+          </a>
+        </li>
+
+        <li class="sidebar-dropdown">
+          <a href="#">
+            <i class="fas fa-check text-success"></i>
+            <span>Passed Results</span>
+          </a>
+          <div class="sidebar-submenu">
+            <ul>
+
+              <%if(classes){%>
+              <%if(classes.length!==0){%>
+              <%classes.forEach((c,ind)=>{%>
+              <li>
+                <a href="/user/results/all/passed/<%=c._id%>">Class
+                  <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%>
+                  <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+              </li>
+              <%})%>
+              <%}%>
                   <%}%>
-               
 
-              </ul>
-            </div>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fas fa-times text-danger "></i>
-              <span>Failed Results</span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
 
-                <%if(classes){%>
-                  <%if(classes.length!==0){%>
-                    <%classes.forEach((c,ind)=>{%>
-                      <li>
-                        <a href="/user/results/all/failed/<%=c._id%>">Class <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%> <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
-                      </li>
-                    <%})%>
-                    <%}%>
+            </ul>
+          </div>
+        </li>
+        <li class="sidebar-dropdown">
+          <a href="#">
+            <i class="fas fa-times text-danger "></i>
+            <span>Failed Results</span>
+          </a>
+          <div class="sidebar-submenu">
+            <ul>
+
+              <%if(classes){%>
+              <%if(classes.length!==0){%>
+              <%classes.forEach((c,ind)=>{%>
+              <li>
+                <a href="/user/results/all/failed/<%=c._id%>">Class
+                  <%=c.nameOfNumeric<=9?'0'+c.nameOfNumeric:c.nameOfNumeric%>
+                  <%=c.section%><%=c.group?'-':''%><%=c.group%></a>
+              </li>
+              <%})%>
+              <%}%>
                   <%}%>
-               
 
-              </ul>
-            </div>
-          </li>
-     
-          
-        </ul>
-      </div>
-      <!-- sidebar-menu  -->
+
+            </ul>
+          </div>
+        </li>
+
+
+      </ul>
     </div>
+    <!-- sidebar-menu  -->
+  </div>
 
-    <!-- sidebar-content  -->
-    <div class="sidebar-footer">
-      
-      <div class="btn-group">
-        <div class="dropdown-menu px-1 text-muted text-center" style="width: 250px;">
-         <%=webModel.notice?webModel.notice:'Welcome'%>
-        </div>
-      </div>      
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-bell"></i>
-        <%if(webModel.notice){%>
-          <span class="badge badge-pill badge-warning notification">1</span>
-          <%}%>
+  <!-- sidebar-content  -->
+  <div class="sidebar-footer">
+
+    <div class="btn-group">
+      <div class="dropdown-menu px-1 text-muted text-center" style="width: 250px;">
+        <%=webModel.notice?webModel.notice:'Welcome'%>
+      </div>
+    </div>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-bell"></i>
+      <%if(webModel.notice){%>
+      <span class="badge badge-pill badge-warning notification">1</span>
+      <%}%>
       </a>
 
       <a href="/user/profile">

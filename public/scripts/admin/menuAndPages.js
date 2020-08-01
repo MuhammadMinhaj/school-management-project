@@ -13,6 +13,8 @@ function alertMessage(option, message, time, classNames) {
 }
 //End Alert Message
 
+const HOST_URL = `http://localhost:8080`
+
 // Multiple Page Collapse
 let pageBtns = document.querySelectorAll('.pageBtn')
 let pageContainers = document.querySelectorAll('.pages-menu-container')
@@ -54,10 +56,10 @@ if(pageBtns){
 
 
 // ANCHOR Menu Start
-let MENU_CREATE_URL = 'http://localhost:8080/administrator/menu-create'
-let GET_ALL_MENU_URIL = 'http://localhost:8080/administrator/menus'
-let DELETE_MENU_URL = 'http://localhost:8080/administrator/menu-delete'
-let UPDATE_MENU_URL = 'http://localhost:8080/administrator/menu-update'
+let MENU_CREATE_URL = `${HOST_URL}/administrator/menu-create`
+let GET_ALL_MENU_URIL =`${HOST_URL}/administrator/menus`
+let DELETE_MENU_URL = `${HOST_URL}/administrator/menu-delete`
+let UPDATE_MENU_URL = `${HOST_URL}/administrator/menu-update`
 
 let alertMenuBox = document.getElementById('alert-menu-box')
 let parentMenuElement = document.getElementById('menu_tbody')
@@ -322,7 +324,7 @@ function menuControlling(data, TR, name, action) {
 // End Menu Controlling Element
 
 // ANCHOR Start DropDown Controlling Element
-let GET_ALL_DROP_MENU_URI = 'http://localhost:8080/administrator/dropdown-create'
+let GET_ALL_DROP_MENU_URI = `${HOST_URL}/administrator/dropdown-create`
 
 function dropDownControlling(data) {
 	let TD = document.createElement('td')

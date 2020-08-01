@@ -1,62 +1,53 @@
 <%-include('../../partials/head.ejs')%>
 <div class="row" style="margin:0px!important">
-    <div class="col-sm-12 clearXPadding">
-        <h3 class="text-center my-3 addMarginTop" style="color:#545b62">Notice</h3>
-        <div class="custom__container__card px-4 addYPadding clearXPadding py-5">
-            <div class="notice">
-
-                <div class="noticeHeader ">
-                    <h5>
-                        <%if(singleNotice.title){%>
-                            <%if(singleNotice.title.length>110){%>
-                                <marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();"><%=singleNotice.title%></marquee>
-                            <%}else{%>
-                                <%=singleNotice.title%>
-                            <%}%>
-                        <%}%>
-                    </h5>
-                </div>
-                <div class="noticeBody clearXPadding px-5 py-4">
-                    <!-- This  Title Only Show When Print The Notice From Website -->
-                  
-                    <%if(singleNotice.file){%>
-                        <div class="noticeBodyImg printForDisplaynone">
-                            <img src="<%=singleNotice.file%>" alt="">
-                        </div>
-                    <%}%>
-                    <%if(singleNotice.text){%>
-                        <div class="noticeBodyText">
-
-                            
-                              <h1 class="university__title d-none">Jamea Ahmadia Sunnia Kamil Madrasah</h1>
-
-                              <p class="d-none printForShow"><strong>Date: </strong><%=singleNotice.date.date%>-<%=singleNotice.date.month%>-<%=singleNotice.date.year%></p>
-                            <h5><%=singleNotice.title%> :</h5>
-                              
-                              <div class="showText" data-content="<%=singleNotice.text%>"></div>
-                        </div>
-                    <%}%>
-                        <div class="text-center printForDisplaynone">
-                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <%if(singleNotice.text){%>
-                                    <a href="javascript:window.print()"  class="btn btn-light border text-primary">Print</a>
-                                    <%}%>
-                                <%if(singleNotice.file){%>
-                                    <a href="<%=singleNotice.file%>" download class="btn btn-light border text-info">Download</a>
-                                <%}%>
-                             
-                            </div>
-                        </div>
-                    
-                </div>
-                <div class="noticeFooter">
-                    <h5><%=singleNotice.date.date%>-<%=singleNotice.date.month%>-<%=singleNotice.date.year%></h5>
-                </div>
+   <div class="col-sm-12 clearXPadding">
+      <h3 class="text-center my-3 addMarginTop" style="color:#545b62">Notice</h3>
+      <div class="custom__container__card px-4 addYPadding clearXPadding py-5">
+         <div class="notice">
+            <div class="noticeHeader ">
+               <h5>
+                  <%if(singleNotice.title){%>
+                  <%if(singleNotice.title.length>110){%>
+                  <marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();"><%=singleNotice.title%></marquee>
+                  <%}else{%>
+                  <%=singleNotice.title%>
+                  <%}%>
+                  <%}%>
+               </h5>
             </div>
-        </div>
-    </div>
+            <div class="noticeBody clearXPadding px-5 py-4">
+               <!-- This  Title Only Show When Print The Notice From Website -->
+               <%if(singleNotice.file){%>
+               <div class="noticeBodyImg printForDisplaynone">
+                  <img src="<%=singleNotice.file%>" alt="">
+               </div>
+               <%}%>
+               <%if(singleNotice.text){%>
+               <div class="noticeBodyText">
+                  <h1 class="university__title d-none">Jamea Ahmadia Sunnia Kamil Madrasah</h1>
+                  <p class="d-none printForShow"><strong>Date: </strong><%=singleNotice.date.date%>-<%=singleNotice.date.month%>-<%=singleNotice.date.year%></p>
+                  <h5><%=singleNotice.title%> :</h5>
+                  <div class="showText" data-content="<%=singleNotice.text%>"></div>
+               </div>
+               <%}%>
+               <div class="text-center printForDisplaynone">
+                  <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                     <%if(singleNotice.text){%>
+                     <a href="javascript:window.print()"  class="btn btn-light border text-primary">Print</a>
+                     <%}%>
+                     <%if(singleNotice.file){%>
+                     <a href="<%=singleNotice.file%>" download class="btn btn-light border text-info">Download</a>
+                     <%}%>
+                  </div>
+               </div>
+            </div>
+            <div class="noticeFooter">
+               <h5><%=singleNotice.date.date%>-<%=singleNotice.date.month%>-<%=singleNotice.date.year%></h5>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 <%-include('../../partials/footer.ejs')%>
-
 </body>
 </html>

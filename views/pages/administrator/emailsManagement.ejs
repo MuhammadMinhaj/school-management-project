@@ -1,6 +1,4 @@
 <%-include('../../partials/admin/adminHead.ejs')%>
-
-   
 <div class="row">
    <!-- Admin Brand and Dashboard Menu -->
    <%- include('../../partials/admin/adminSidebar.ejs')%>
@@ -9,12 +7,8 @@
       <!-- Admin Navbar Content -->
       <%- include('../../partials/admin/adminNavbar.ejs')%>
       <!-- Included Here Admin Dashboard Controlling Systems Using as a row-->
-      
-      
       <div class="row scroll-style">
-         
          <div class="col-sm-12" style="background:#6c757d;">
-            
             <div class="row">
                <div class="w-100">
                   <%-include('../../partials/Error/alert.ejs')%>
@@ -25,224 +19,183 @@
             </div>
             <div class="row py-2">
                <div class="col-sm-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb breadcrumb__container">
-                    <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
-               
-                    <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/emails">Emails</a></li>
-                    
-                    </ol>
-                 </nav>
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb breadcrumb__container">
+                        <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item breadcrumb__item active" aria-current="page"><a href="/administrator/emails">Emails</a></li>
+                     </ol>
+                  </nav>
                   <div class="custom-card p-3">
                      <div class="row">
                         <div class="col-sm-12">
-                     
-                            <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-                      
-                            <div  class="btn btn-secondary <%=control.contactSentMail?'active':''%>">
-                                <a href="/administrator/contact?status=active" class="status__btn">
-                                Active
-                                </a>
-                            </div>
-                            
-                            <div  class="btn btn-secondary <%=control.contactSentMail?'':'active'%>">
-                                <a href="/administrator/contact?status=deactive" class="status__btn">
-                                    Deactive
-                                </a>
-                            </div>
-                                
-                            </div>
-                            
-                            <div class="card">
-                                <table class="table text-center">
-                                    <thead class="thead-dark">
-                                      <tr>
-                                        <th scope="col">1</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Subject</th>
-                                        <th scope="col">History</th>
-                                        <th scope="col">Controlling</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                       
-                                     <%if(contacts){%>
-                                        <%contacts.reverse().forEach((contact,ind)=>{%>
-                                            <!-- Show Email -->
-                                            <div class="modal fade" id="showEmailModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Received Mail</h5>
-                                                    <button type="button" class="crossBtn" data-dismiss="modal">
-                                                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                                                            <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                                                          </svg>
-                                                    </button>
+                           <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+                              <div  class="btn btn-secondary <%=control.contactSentMail?'active':''%>">
+                                 <a href="/administrator/contact?status=active" class="status__btn">
+                                 Active
+                                 </a>
+                              </div>
+                              <div  class="btn btn-secondary <%=control.contactSentMail?'':'active'%>">
+                                 <a href="/administrator/contact?status=deactive" class="status__btn">
+                                 Deactive
+                                 </a>
+                              </div>
+                           </div>
+                           <div class="card">
+                              <table class="table text-center">
+                                 <thead class="thead-dark">
+                                    <tr>
+                                       <th scope="col">1</th>
+                                       <th scope="col">Name</th>
+                                       <th scope="col">Email</th>
+                                       <th scope="col">Subject</th>
+                                       <th scope="col">History</th>
+                                       <th scope="col">Controlling</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <%if(contacts){%>
+                                    <%contacts.reverse().forEach((contact,ind)=>{%>
+                                    <!-- Show Email -->
+                                    <div class="modal fade" id="showEmailModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                       <div class="modal-dialog modal-lg">
+                                          <div class="modal-content">
+                                             <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Received Mail</h5>
+                                                <button type="button" class="crossBtn" data-dismiss="modal">
+                                                   <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                      <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                                                      <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                                                   </svg>
+                                                </button>
+                                             </div>
+                                             <div class="modal-body px-3">
+                                                <div class="card p-4">
+                                                   <p><strong class="bold__text__style">DATE : </strong> 02/20/2002</p>
+                                                   <p><strong class="bold__text__style">NAME : </strong> <%=contact.name%></p>
+                                                   <p><strong class="bold__text__style">FROM : </strong><%=contact.email%></p>
+                                                   <p><strong class="bold__text__style">SUBJECT : </strong><%=contact.subject%></p>
+                                                   <strong class="bold__text__style">MESSAGE : </strong>
+                                                   <p>
+                                                   <pre class="pre__custom__style"><%=contact.message%></pre>
+                                                   </p>
                                                 </div>
-                                                <div class="modal-body px-3">
-
-                                                  <div class="card p-4">
-
-                                                    <p><strong class="bold__text__style">DATE : </strong> 02/20/2002</p>
-                                                    <p><strong class="bold__text__style">NAME : </strong> <%=contact.name%></p>
-                                                    
-                                                    <p><strong class="bold__text__style">FROM : </strong><%=contact.email%></p>
-
-                                                    <p><strong class="bold__text__style">SUBJECT : </strong><%=contact.subject%></p>
-                                                    
-                                  
-                                               
-                                              <strong class="bold__text__style">MESSAGE : </strong>
-                                                    <p>
-                                                    <pre class="pre__custom__style"><%=contact.message%></pre>
-                                                    </p>
-                                                  </div>
-                                              
-                                                    
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <!-- Show Email End -->
+                                    <!-- Sent Email -->
+                                    <div class="modal fade" id="sentEmailModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                       <div class="modal-dialog modal-lg">
+                                          <div class="modal-content">
+                                             <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Sent to : </h5>
+                                                <p class="ml-1" style="margin-top:3px;"><%=contact.email%></p>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                             </div>
+                                             <form action="/administrator/email/sent/<%=contact._id%>" method="POST">
+                                                <div class="modal-body">
+                                                   <div class="form-group">
+                                                      <label for="recipient-name" class="col-form-label">
+                                                         <h6>Subject</h6>
+                                                      </label>
+                                                      <textarea name="subject" class="custom__input__style" id="message-text" rows="2"></textarea>
+                                                   </div>
+                                                   <div class="form-group">
+                                                      <label for="message-text" class="col-form-label">
+                                                         <h6>Message</h6>
+                                                      </label>
+                                                      <textarea name="message" class="custom__input__style" id="message-text" rows="8"></textarea>
+                                                   </div>
                                                 </div>
-                                                
+                                                <div class="modal-footer">
+                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                   <button type="submit" class="btn btn-primary">Send</button>
                                                 </div>
-                                            </div>
-                                            </div>
-                                            <!-- Show Email End -->
-
-                                           <!-- Sent Email -->
-                                            <div class="modal fade" id="sentEmailModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Sent to : </h5>
-                                                    <p class="ml-1" style="margin-top:3px;"><%=contact.email%></p>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
+                                             </form>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <!-- Sent Email End -->
+                                    <!-- Show All Send Email -->
+                                    <div class="modal fade" id="sentToAdminMailModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                       <div class="modal-dialog modal-lg">
+                                          <div class="modal-content">
+                                             <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Sent Mail History</h5>
+                                                <button type="button" class="crossBtn" data-dismiss="modal">
+                                                   <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                      <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                                                      <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                                                   </svg>
+                                                </button>
+                                             </div>
+                                             <div class="modal-body px-3">
+                                                <%if(contact.history){%>
+                                                <%contact.history.forEach((h,indOfHis)=>{%>
+                                                <div class="text-center">
+                                                   <h6 class="text-center circulerStyle <%=indOfHis!==0?'my-2':''%>"><%=indOfHis+1%></h6>
                                                 </div>
-                                                <form action="/administrator/email/sent/<%=contact._id%>" method="POST">
-                                                    <div class="modal-body">
-                                                     
-                                                            <div class="form-group">
-                                                                <label for="recipient-name" class="col-form-label"><h6>Subject</h6></label>
-                                                                <textarea name="subject" class="custom__input__style" id="message-text" rows="2"></textarea>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="message-text" class="col-form-label"><h6>Message</h6></label>
-                                                                <textarea name="message" class="custom__input__style" id="message-text" rows="8"></textarea>
-                                                            </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Send</button>
-                                                    </div>
-                                                </form>
+                                                <div class="card p-4">
+                                                   <p><strong class="bold__text__style">DATE : </strong> <%=h.date%></p>
+                                                   <p><strong class="bold__text__style">NAME : </strong> <%=h.name%></p>
+                                                   <p>
+                                                      <strong class="bold__text__style">FROM :</strong>
+                                                      <%=h.emailFrom%>
+                                                   </p>
+                                                   <p><strong class="bold__text__style">TO : </strong><%=contact.email%></p>
+                                                   <p><strong class="bold__text__style">SUBJECT : </strong><%=h.subject%></p>
+                                                   <strong class="bold__text__style">MESSAGE : </strong>
+                                                   <p>
+                                                   <pre class="pre__custom__style"><%=h.message%></pre>
+                                                   </p>
                                                 </div>
-                                            </div>
-                                            </div>
-                                            <!-- Sent Email End -->
-                                        <!-- Show All Send Email -->
-                                            <div class="modal fade" id="sentToAdminMailModal<%=ind%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Sent Mail History</h5>
-                                                        <button type="button" class="crossBtn" data-dismiss="modal">
-                                                            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                                                                <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                                                                </svg>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body px-3">
-
-                                                    <%if(contact.history){%>
-                                                    <%contact.history.forEach((h,indOfHis)=>{%>
-                                                        <div class="text-center">
-                                                            <h6 class="text-center circulerStyle <%=indOfHis!==0?'my-2':''%>"><%=indOfHis+1%></h6>
-                                                        </div>
-                                                        <div class="card p-4">
-
-                                                            <p><strong class="bold__text__style">DATE : </strong> <%=h.date%></p>
-                                                            <p><strong class="bold__text__style">NAME : </strong> <%=h.name%></p>
-                                                    <p>
-                                                        <strong class="bold__text__style">FROM :</strong>
-                                                        <%=h.emailFrom%>
-                                                    </p>
-
-                                                                <p><strong class="bold__text__style">TO : </strong><%=contact.email%></p>
-                                                    
-                                                            
-                                                            
-
-                                                            <p><strong class="bold__text__style">SUBJECT : </strong><%=h.subject%></p>
-                                                            
-                                            
-                                                        
-                                                        <strong class="bold__text__style">MESSAGE : </strong>
-                                                            <p>
-                                                            <pre class="pre__custom__style"><%=h.message%></pre>
-                                                            </p>
-                                                        </div>
-
-                                                        <%})%>
-                                                    <%}%>
-                                                        
-                                                    </div>
-                                                    
-                                                    </div>
-                                                </div>
-                                            </div>
-                                          <!-- Show All Send Email End -->
-
-
-                                            <tr>
-                                          
-                                                <td><%=ind+1%></td>
-                                                <td><%=contact.name%></td>
-                                                <td><%=contact.email%></td>
-                                                <td><%=contact.subject%></td>
-                                                <td>
-                                                    ( <span class="text-success"><strong><%=contact.history.length%></strong></span> )
-                                                    <button type="button"  data-toggle="modal" data-target="#sentToAdminMailModal<%=ind%>" data-whatever="@mdo"  class="btn border text-secondary btn-sm">
-                                                        <i class="fas fa-history"></i>
-                                                    </button>
-                                                </td>
-                                                <td>
-                                                    
-                                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                                        
-                                                        <button type="button"  data-toggle="modal" data-target="#showEmailModal<%=ind%>" data-whatever="@mdo"  class="btn border text-secondary">
-                                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                                                            <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-                                                          </svg>
-                                                        </button>
-                                                         
-                                                        <button  data-toggle="modal" data-target="#sentEmailModal<%=ind%>" data-whatever="@mdo"  class="btn border text-primary">
-
-                                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cursor-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>
-                                                          </svg>
-
-                                                        </button>
-
-                                                    <a href="/administrator/email/delete/<%=contact._id%>" class="btn border text-danger">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
-                                                          </svg>
-                                                    </a>
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-                                        <%})%>
+                                                <%})%>
+                                                <%}%>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <!-- Show All Send Email End -->
+                                    <tr>
+                                       <td><%=ind+1%></td>
+                                       <td><%=contact.name%></td>
+                                       <td><%=contact.email%></td>
+                                       <td><%=contact.subject%></td>
+                                       <td>
+                                          ( <span class="text-success"><strong><%=contact.history.length%></strong></span> )
+                                          <button type="button"  data-toggle="modal" data-target="#sentToAdminMailModal<%=ind%>" data-whatever="@mdo"  class="btn border text-secondary btn-sm">
+                                          <i class="fas fa-history"></i>
+                                          </button>
+                                       </td>
+                                       <td>
+                                          <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                             <button type="button"  data-toggle="modal" data-target="#showEmailModal<%=ind%>" data-whatever="@mdo"  class="btn border text-secondary">
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                   <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                   <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                </svg>
+                                             </button>
+                                             <button  data-toggle="modal" data-target="#sentEmailModal<%=ind%>" data-whatever="@mdo"  class="btn border text-primary">
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cursor-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                   <path fill-rule="evenodd" d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>
+                                                </svg>
+                                             </button>
+                                             <a href="/administrator/email/delete/<%=contact._id%>" class="btn border text-danger">
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                   <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                                                </svg>
+                                             </a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <%})%>
                                     <%}%>
-                                     
-                                    </tbody>
-                                </table>
-                                  
-                            </div>
+                                 </tbody>
+                              </table>
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -252,7 +205,6 @@
       </div>
    </div>
 </div>
-
 <%-include('../../partials/admin/adminFooter.ejs')%>
 </body>
 </html>
