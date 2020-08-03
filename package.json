@@ -4,9 +4,11 @@
   "description": "This is my first website for JASA.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "startdev": "webpack-dev-server ./public/scripts/index.js",
+    "start": "set NODE_ENV=development&& nodemon app.js",
+    "start-prod":"set NODE_ENV=production&& node app.js",
     "dev": "nodemon app.js",
+    "startdev": "webpack-dev-server ./public/scripts/index.js",
+  
     "build": "webpack --mode production",
     "starts": "webpack --mode development"
   },

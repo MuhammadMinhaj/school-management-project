@@ -477,10 +477,10 @@
    var swiper = new Swiper('.swiper-container', {
      spaceBetween: 30,
      centeredSlides: true,
-     // autoplay: {
-     //   delay: 7000,
-     //   disableOnInteraction: false,
-     // },
+     autoplay: {
+       delay: 3000,
+       disableOnInteraction: false,
+     },
      pagination: {
        el: '.swiper-pagination',
        clickable: true,
@@ -494,8 +494,10 @@
      },
    });
    var textWrapper = document.querySelector('.ml3');
-   textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-   
+   if(textWrapper){
+      textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+   }
+
    anime.timeline({loop: true})
    .add({
    targets: '.ml3 .letter',

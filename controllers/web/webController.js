@@ -79,7 +79,7 @@ exports.aboutPageGetController = async(req,res,next)=>{
 }
 exports.librayPageGetController = (req,res,next)=>{
     try{
-        renderPageHandler(req,res,'web/libray','Mission & Vission')
+        renderPageHandler(req,res,'web/libray','Libray')
     }catch(e){
         next(e)
     }

@@ -141,6 +141,7 @@
 }
 .small__img__card>svg{
     max-height:10rem;
+    width: 10rem;
     color:#adb5bda8;
 }
 .small__img__card>img{
