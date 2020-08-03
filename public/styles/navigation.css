@@ -13,8 +13,10 @@
 	color: #dae0e5 !important;
 	border-right: 1px dashed green;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 14px;
+	/* font-size: 14px; */
+	font-size: min(14px,1vw);
 	font-weight: 600;
+
 }
 /* Hover Effect Of Navigation  */
 .navigation > ul > li:hover {
@@ -29,8 +31,9 @@
 .navigation > ul > div > li > a {
 	color: white !important;
 	border-right: 1px dashed green;
-	font-family: Georgia;
-	font-family: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	/* font-family: 14px; */
+	font-family: min(14px,1vw);
 }
 /* Hover Effect Of Navigation  */
 .navigation > ul > div > li:hover {
@@ -90,6 +93,12 @@
 	border: 2px solid #ffffff21;
 }
 @media (max-width: 768px) {
+	.navigation > ul > li > a {
+		font-size: 14px!important;
+	}
+	.navigation > ul > div > li > a {
+		font-size: 14px!important;
+	}
 	.dropDown-style {
 		position: relative;
 		top:0px;
@@ -112,7 +121,7 @@
 	text-decoration: none;
 	color: #ffffffc7;
 	display: block;
-	font-family: Georgia;
+	font-family: Arial, Helvetica, sans-serif;
 }
 .dropDown-style > li > a:hover {
 	text-decoration: none;
