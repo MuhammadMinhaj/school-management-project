@@ -1,92 +1,68 @@
-<div style="margin:0px!important" class="printForRemove row bg-dark mani-navigation-container">
-	<div class="container">
-	   <nav class="navbar navbar-expand-md navigation-container">
-		  <button class="navbar-toggler ml-auto nav-btn" type="button" data-toggle="collapse"
-			 data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-			 aria-label="Toggle navigation">
-			 <div class="nav-toggler">
-				<div class="nav-toggle-line"></div>
-				<div class="nav-toggle-line"></div>
-				<div class="nav-toggle-line"></div>
-			 </div>
-		  </button>
-		  <div class="collapse navbar-collapse navigation" id="navbarNavAltMarkup">
-			 <ul class="navbar-nav mr-auto">
-				<li class="nav-item left-Animation">
-					<a class="nav-link" href="/">Home</a>
-				 </li>
-				 <li class="nav-item left-Animation">
-					<a class="nav-link" href="/web/about">About</a>
-				 </li>		 
-				 <li class="nav-item left-Animation">
-					<a class="nav-link" href="/web/teachers">Teachers</a>
-				 </li>
-				 <li class="nav-item left-Animation">
-					<a class="nav-link" href="/web/libray">Libray</a>
-				 </li>
-				 <li class="nav-item left-Animation">
-					<a class="nav-link" href="/web/notice">Notice</a>
-				 </li>
-
-				 <li class="nav-item left-Animation">
-					<a class="nav-link" href="/web/result">Results</a>
-				 </li>	
-				 <li class="nav-item left-Animation">
-					<a class="nav-link" href="/web/gallery">Gallery</a>
-				 </li>
-				<%if(menu){%>
-				<%menu.forEach((m,ind)=>{%>
-				<%if(ind+1===menu.length){%>
-				<%if(m.dropDown.length===0){%>
-				<li class="nav-item left-Animation">
-				   <a class="nav-link" href="<%=m.href%>"><%=m.name%></a>
-				   <!-- style="border-right:none!important"  -->
-				</li>
-				<%}else{%>
-				<li class="nav-item">
-				   <a style="cursor:pointer"
-					  class="nav-link dropDownToggler dropdown-toggle"><%=m.name%></a>
-					  <!-- ;border-right:none!important -->
-				   <ul class="dropDown-style drop-hide">
-					  <%for(let d of m.dropDown){%>
-					  <li>
-						 <a href="<%=d.href%>"><%=d.name%></a>
-					  </li>
-					  <%}%>
-				   </ul>
-				</li>
-				<%}%>
-				<%}else{%>
-				<%if(m.dropDown.length===0){%>
-				<li class="nav-item left-Animation">
-				   <a class="nav-link" href="<%=m.href%>"><%=m.name%></a>
-				</li>
-				<%}else{%>
-				<li class="nav-item">
-				   <a style="cursor:pointer"
-					  class="nav-link dropDownToggler dropdown-toggle"><%=m.name%></a>
-				   <ul class="dropDown-style drop-hide">
-					  <%for(let d of m.dropDown){%>
-					  <li>
-						 <a href="<%=d.href%>"><%=d.name%></a>
-					  </li>
-					  <%}%>
-				   </ul>
-				</li>
-
-				<%}%>
-				<%}%>
-				<%})%>
-				<%}%>
-				 <li class="nav-item left-Animation" >
-					<a class="nav-link" href="/web/contact" >Contact</a>
-				 </li>
-				<li class="nav-item left-Animation" >
-					<a class="nav-link" href="/user/auth/login" style="border-right:none!important"">Login</a>
-				 </li>
-
-			 </ul>
-		  </div>
-	   </nav>
+<div class="__navbar">
+	<div id="toggle" class="toggle">
+		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+		</svg>
+		<svg width="1em" style="display: none;" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+			<path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+		  </svg>
 	</div>
- </div>
+	<nav id="__navbar" class="custom_navbar">
+		<ul>
+			<li>
+				<a href="/">Home</a>
+			 </li>
+			 <li>
+				<a href="/web/about">About</a>
+			 </li>		 
+			 <li>
+				<a href="/web/teachers">Teachers</a>
+			 </li>
+			 <li>
+				<a href="/web/libray">Libray</a>
+			 </li>
+			 <li>
+				<a href="/web/notice">Notice</a>
+			 </li>
+
+			 <li>
+				<a href="/web/result">Results</a>
+			 </li>	
+			 <li>
+				<a href="/web/gallery">Gallery</a>
+			 </li>
+			 <%if(menu){%>
+				<%menu.forEach((m,ind1)=>{%>
+
+				<%if(m.dropDown.length===0){%>
+					<li>
+						<a href="<%=m.href%>"><%=m.name%></a>
+					</li>
+				<%}else{%>
+					<li class="drop__toggle">
+						<a class="d-flex justify-content-center px-1">
+							<%=m.name%> 
+							<svg class="drop-toggle-icon mt-1" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								<path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+							</svg>
+						</a>
+						<ul class="__dropdown">
+							<%m.dropDown.forEach((d,ind2)=> {%>
+								<li>
+									<a href="<%=d.href%>" style=<%=ind2===m.dropDown.length-1?'border-bottom:none':''%>><%=d.name%></a>
+								</li>
+							<%})%>
+
+						</ul>
+					</li>	
+				<%}%>
+
+				<%})%>
+			<%}%>
+			<li >
+				<a href="user/auth/login" style="border-right:none!important">Login</a>
+			 </li>
+		</ul>
+	</nav>	
+</div>
