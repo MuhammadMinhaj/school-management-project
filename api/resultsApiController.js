@@ -68,10 +68,7 @@ exports.resultsFindApiGetController = async(req,res,next)=>{
             examtitle:examination.title,
             examyear:examination.year
         }
-        // console.log(result)
         res.status(200).json({msg:'Congratulations! Result Founded!',result})
-    
-        console.log('done')
     }catch(e){
        next(e)
     }

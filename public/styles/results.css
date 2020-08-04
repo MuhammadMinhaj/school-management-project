@@ -92,10 +92,18 @@
 }
 
 @media (max-width:576px){
-
+    .logo{
+        max-width: 60px!important;
+        max-height: 60px!important;
+    }
+    .logo>img{
+        margin: auto;
+    }
     .pedding__margin__zero{
         padding:0px!important;
-        margin:0px!important;
+        margin-right:0px!important;
+        margin-left:0px!important;
+        margin-bottom:0px!important;
     }
     .addResultPadding{
         padding:10px!important;
@@ -118,6 +126,8 @@
     }
     table>tbody>tr>td{
         font-size: 2vw!important;
+        padding:0px!important;
+
     }
     .resultElementModileView{
         padding:0px!important;
