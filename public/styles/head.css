@@ -22,6 +22,7 @@
 	/* letter-spacing: 3px; */
 	font-weight: bolder;
 }
+
 .braking-news {
 	color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
@@ -29,6 +30,9 @@
     max-width: 1100px;
     margin: auto;
 	
+}
+.braking-news>marquee{
+	white-space: nowrap;
 }
 .head-social-links {
 	display: flex;
