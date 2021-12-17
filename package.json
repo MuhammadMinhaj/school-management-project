@@ -27,7 +27,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
-    "bcrypt": "^4.0.1",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^4.4.1",
     "config": "^3.3.1",
     "connect-flash": "^0.1.1",
@@ -59,6 +59,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "engines": {
-    "node": "12.18.2"
+    "node": "16.13.1"
   }
 }
