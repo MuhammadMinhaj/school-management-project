@@ -5,10 +5,10 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "startdev": "webpack-dev-server ./public/scripts/index.js",
-    "dev": "nodemon app.js",
-    "build": "webpack --mode production",
-    "starts": "webpack --mode development"
+    "start:dev": "nodemon app.js",
+    "wp:build": "webpack --mode production",
+    "wp:dev": "webpack --mode development",
+    "wp:watch": "webpack-dev-server ./public/scripts/index.js"
   },
   "repository": {
     "type": "git",
